@@ -302,6 +302,7 @@
             pictureBox2.Size = new Size(822, 84);
             pictureBox2.TabIndex = 24;
             pictureBox2.TabStop = false;
+            pictureBox2.Click += pictureBox2_Click;
             // 
             // Area_LocationManagement
             // 

@@ -11,7 +11,7 @@ using Logic.Interfaces;
 
 namespace DataAccess
 {
-    public class LocationRepository : Connection,ILocation
+    public class LocationRepository : Connection, ILocation
     {
         public bool CreateLocation(LocationDTO locationDTO)
         {

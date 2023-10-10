@@ -236,5 +236,10 @@ namespace Desktop
                 MessageBox.Show("You have to introduce all the details for the location");
             }
         }
+
+        private void pictureBox2_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

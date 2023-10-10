@@ -28,12 +28,81 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Text = "Login";
+            pictureBox1 = new PictureBox();
+            tbxEmail = new TextBox();
+            tbxPassword = new TextBox();
+            btnLogin = new Button();
+            btnSignUp = new Button();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
+            SuspendLayout();
+            // 
+            // pictureBox1
+            // 
+            pictureBox1.BackgroundImage = Properties.Resources.Screenshot_15;
+            pictureBox1.BackgroundImageLayout = ImageLayout.Stretch;
+            pictureBox1.Location = new Point(0, -2);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(826, 450);
+            pictureBox1.TabIndex = 0;
+            pictureBox1.TabStop = false;
+            // 
+            // tbxEmail
+            // 
+            tbxEmail.Location = new Point(374, 168);
+            tbxEmail.Name = "tbxEmail";
+            tbxEmail.Size = new Size(100, 23);
+            tbxEmail.TabIndex = 1;
+            // 
+            // tbxPassword
+            // 
+            tbxPassword.Location = new Point(323, 235);
+            tbxPassword.Name = "tbxPassword";
+            tbxPassword.Size = new Size(100, 23);
+            tbxPassword.TabIndex = 2;
+            // 
+            // btnLogin
+            // 
+            btnLogin.Location = new Point(323, 277);
+            btnLogin.Name = "btnLogin";
+            btnLogin.Size = new Size(75, 23);
+            btnLogin.TabIndex = 3;
+            btnLogin.Text = "Login";
+            btnLogin.UseVisualStyleBackColor = true;
+            btnLogin.Click += btnLogin_Click;
+            // 
+            // btnSignUp
+            // 
+            btnSignUp.Location = new Point(323, 306);
+            btnSignUp.Name = "btnSignUp";
+            btnSignUp.Size = new Size(75, 23);
+            btnSignUp.TabIndex = 4;
+            btnSignUp.Text = "sign up";
+            btnSignUp.UseVisualStyleBackColor = true;
+            // 
+            // Login
+            // 
+            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(826, 450);
+            Controls.Add(btnSignUp);
+            Controls.Add(btnLogin);
+            Controls.Add(tbxPassword);
+            Controls.Add(tbxEmail);
+            Controls.Add(pictureBox1);
+            Name = "Login";
+            Text = "Login";
+            Load += Login_Load;
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
+            ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
+
+        private PictureBox pictureBox1;
+        private TextBox tbxEmail;
+        private TextBox tbxPassword;
+        private Button btnLogin;
+        private Button btnSignUp;
     }
 }
