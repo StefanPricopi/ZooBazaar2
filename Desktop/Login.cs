@@ -10,8 +10,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Animals;
+using Logic.Interfaces;
 using Employees;
 using Microsoft.Data.SqlClient;
+using DataAccess;
+using Logic.DTO;
 
 namespace Desktop
 {
@@ -23,11 +26,11 @@ namespace Desktop
         public Login()
         {
             InitializeComponent();
-            
-             
+
+
         }
 
-    
+
 
         private void Login_Load(object sender, EventArgs e)
         {
@@ -36,28 +39,66 @@ namespace Desktop
 
         private void btnLogin_Click(object sender, EventArgs e)
         {
+            IUser userRepository = new UserRepository();
             string email = tbxEmail.Text;
             string password = tbxPassword.Text;
-            
-            User currentUser = userManager.Login(email, password);
+
+            User currentUser = userRepository.Login(email, password);
+
             if (currentUser != null)
             {
-                if(currentUser.ClearanceLevel == 0)
+
+                if (currentUser.ClearanceLevel == 0)
                 {
                     Form openfrom = new Form1();
+                    openfrom.ShowDialog();
                 }
-                if(currentUser.ClearanceLevel == 1)
+                if (currentUser.ClearanceLevel == 1)
                 {
-                    AddAnimal addAnimalForm = new AddAnimal(animalManager);
+                    Form addAnimalForm = new CaretakerOverview();
+                    addAnimalForm.ShowDialog();
                 }
-                if(currentUser.ClearanceLevel == 2)
+                if (currentUser.ClearanceLevel == 2)
                 {
-                    AddEmployee addEmployeeForm = new AddEmployee(employeeManager);
+                    Form addEmployeeForm = new HrOverview();
+                    addEmployeeForm.ShowDialog();
                 }
                 if (currentUser.ClearanceLevel == 3)
                 {
-                    Form formtoopen = new Area_LocationManagement();
+                    Form formtoopen = new ManagerOverview();
+                    formtoopen.ShowDialog();
                 }
+                if (currentUser.ClearanceLevel == 4)
+                {
+                    Form openfrom = new Form1();
+                    openfrom.ShowDialog();
+                }
+            }
+        }
+
+        private void btnSignUp_Click(object sender, EventArgs e)
+        {
+            // Create an instance of UserRepository (assuming it implements IUser)
+            IUser userRepository = new UserRepository();
+
+            UserDTO dummyUser = new UserDTO
+            {
+                Email = "test@example.com",
+                Password = "password",
+                Name = "Test User",
+                ClearanceLevel = 1
+            };
+
+            // Call the InsertDummyUser method on the userRepository instance
+            bool insertionResult = userRepository.InsertDummyUser(dummyUser);
+
+            if (insertionResult)
+            {
+                Console.WriteLine("Dummy user inserted successfully.");
+            }
+            else
+            {
+                Console.WriteLine("Failed to insert dummy user.");
             }
         }
     }

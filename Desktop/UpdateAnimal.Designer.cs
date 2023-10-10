@@ -28,167 +28,182 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.btnUpdate = new System.Windows.Forms.Button();
-            this.comboSpecies = new System.Windows.Forms.ComboBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.tbxLocation = new System.Windows.Forms.TextBox();
-            this.tbxAge = new System.Windows.Forms.TextBox();
-            this.tbxSpecies = new System.Windows.Forms.TextBox();
-            this.comboAnimal = new System.Windows.Forms.ComboBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.SuspendLayout();
+            btnUpdate = new Button();
+            comboSpecies = new ComboBox();
+            label4 = new Label();
+            label5 = new Label();
+            label6 = new Label();
+            tbxLocation = new TextBox();
+            tbxAge = new TextBox();
+            tbxSpecies = new TextBox();
+            comboAnimal = new ComboBox();
+            label1 = new Label();
+            label2 = new Label();
+            label3 = new Label();
+            pictureBox1 = new PictureBox();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
+            SuspendLayout();
             // 
             // btnUpdate
             // 
-            this.btnUpdate.Font = new System.Drawing.Font("Garamond", 10F);
-            this.btnUpdate.Location = new System.Drawing.Point(15, 265);
-            this.btnUpdate.Name = "btnUpdate";
-            this.btnUpdate.Size = new System.Drawing.Size(132, 38);
-            this.btnUpdate.TabIndex = 5;
-            this.btnUpdate.Text = "Update";
-            this.btnUpdate.UseVisualStyleBackColor = true;
-            this.btnUpdate.Click += new System.EventHandler(this.btnUpdate_Click);
+            btnUpdate.Font = new Font("Garamond", 10F, FontStyle.Regular, GraphicsUnit.Point);
+            btnUpdate.Location = new Point(13, 248);
+            btnUpdate.Name = "btnUpdate";
+            btnUpdate.Size = new Size(116, 36);
+            btnUpdate.TabIndex = 5;
+            btnUpdate.Text = "Update";
+            btnUpdate.UseVisualStyleBackColor = true;
+            btnUpdate.Click += btnUpdate_Click;
             // 
             // comboSpecies
             // 
-            this.comboSpecies.FormattingEnabled = true;
-            this.comboSpecies.Location = new System.Drawing.Point(73, 21);
-            this.comboSpecies.Name = "comboSpecies";
-            this.comboSpecies.Size = new System.Drawing.Size(121, 24);
-            this.comboSpecies.TabIndex = 3;
-            this.comboSpecies.SelectedIndexChanged += new System.EventHandler(this.comboSpecies_SelectedIndexChanged);
+            comboSpecies.FormattingEnabled = true;
+            comboSpecies.Location = new Point(78, 19);
+            comboSpecies.Name = "comboSpecies";
+            comboSpecies.Size = new Size(106, 23);
+            comboSpecies.TabIndex = 3;
+            comboSpecies.SelectedIndexChanged += comboSpecies_SelectedIndexChanged;
             // 
             // label4
             // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Garamond", 10F);
-            this.label4.Location = new System.Drawing.Point(13, 235);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(72, 19);
-            this.label4.TabIndex = 14;
-            this.label4.Text = "Location:";
+            label4.AutoSize = true;
+            label4.Font = new Font("Garamond", 10F, FontStyle.Regular, GraphicsUnit.Point);
+            label4.Location = new Point(11, 220);
+            label4.Name = "label4";
+            label4.Size = new Size(58, 16);
+            label4.TabIndex = 14;
+            label4.Text = "Location:";
             // 
             // label5
             // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Garamond", 10F);
-            this.label5.Location = new System.Drawing.Point(13, 195);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(40, 19);
-            this.label5.TabIndex = 13;
-            this.label5.Text = "Age:";
+            label5.AutoSize = true;
+            label5.Font = new Font("Garamond", 10F, FontStyle.Regular, GraphicsUnit.Point);
+            label5.Location = new Point(11, 183);
+            label5.Name = "label5";
+            label5.Size = new Size(31, 16);
+            label5.TabIndex = 13;
+            label5.Text = "Age:";
             // 
             // label6
             // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Garamond", 10F);
-            this.label6.Location = new System.Drawing.Point(12, 154);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(61, 19);
-            this.label6.TabIndex = 12;
-            this.label6.Text = "Species:";
+            label6.AutoSize = true;
+            label6.Font = new Font("Garamond", 10F, FontStyle.Regular, GraphicsUnit.Point);
+            label6.Location = new Point(10, 144);
+            label6.Name = "label6";
+            label6.Size = new Size(50, 16);
+            label6.TabIndex = 12;
+            label6.Text = "Species:";
             // 
             // tbxLocation
             // 
-            this.tbxLocation.Location = new System.Drawing.Point(89, 232);
-            this.tbxLocation.Name = "tbxLocation";
-            this.tbxLocation.Size = new System.Drawing.Size(182, 22);
-            this.tbxLocation.TabIndex = 11;
+            tbxLocation.Location = new Point(78, 218);
+            tbxLocation.Name = "tbxLocation";
+            tbxLocation.Size = new Size(160, 23);
+            tbxLocation.TabIndex = 11;
             // 
             // tbxAge
             // 
-            this.tbxAge.Location = new System.Drawing.Point(89, 189);
-            this.tbxAge.Name = "tbxAge";
-            this.tbxAge.Size = new System.Drawing.Size(44, 22);
-            this.tbxAge.TabIndex = 10;
+            tbxAge.Location = new Point(78, 177);
+            tbxAge.Name = "tbxAge";
+            tbxAge.Size = new Size(39, 23);
+            tbxAge.TabIndex = 10;
             // 
             // tbxSpecies
             // 
-            this.tbxSpecies.Location = new System.Drawing.Point(89, 148);
-            this.tbxSpecies.Name = "tbxSpecies";
-            this.tbxSpecies.Size = new System.Drawing.Size(182, 22);
-            this.tbxSpecies.TabIndex = 9;
+            tbxSpecies.Location = new Point(78, 139);
+            tbxSpecies.Name = "tbxSpecies";
+            tbxSpecies.Size = new Size(160, 23);
+            tbxSpecies.TabIndex = 9;
             // 
             // comboAnimal
             // 
-            this.comboAnimal.FormattingEnabled = true;
-            this.comboAnimal.Location = new System.Drawing.Point(73, 51);
-            this.comboAnimal.Name = "comboAnimal";
-            this.comboAnimal.Size = new System.Drawing.Size(121, 24);
-            this.comboAnimal.TabIndex = 15;
+            comboAnimal.FormattingEnabled = true;
+            comboAnimal.Location = new Point(78, 48);
+            comboAnimal.Name = "comboAnimal";
+            comboAnimal.Size = new Size(106, 23);
+            comboAnimal.TabIndex = 15;
             // 
             // label1
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Garamond", 15F);
-            this.label1.Location = new System.Drawing.Point(11, 104);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(161, 29);
-            this.label1.TabIndex = 16;
-            this.label1.Text = "Update Animal";
+            label1.AutoSize = true;
+            label1.Font = new Font("Garamond", 15F, FontStyle.Regular, GraphicsUnit.Point);
+            label1.Location = new Point(10, 98);
+            label1.Name = "label1";
+            label1.Size = new Size(128, 22);
+            label1.TabIndex = 16;
+            label1.Text = "Update Animal";
             // 
             // label2
             // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Garamond", 10F);
-            this.label2.Location = new System.Drawing.Point(12, 29);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(61, 19);
-            this.label2.TabIndex = 17;
-            this.label2.Text = "Species:";
+            label2.AutoSize = true;
+            label2.BackColor = Color.MediumSlateBlue;
+            label2.Font = new Font("Garamond", 10F, FontStyle.Regular, GraphicsUnit.Point);
+            label2.Location = new Point(13, 23);
+            label2.Name = "label2";
+            label2.Size = new Size(50, 16);
+            label2.TabIndex = 17;
+            label2.Text = "Species:";
             // 
             // label3
             // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Garamond", 10F);
-            this.label3.Location = new System.Drawing.Point(12, 54);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(53, 19);
-            this.label3.TabIndex = 18;
-            this.label3.Text = "Name:";
+            label3.AutoSize = true;
+            label3.BackColor = Color.MediumSlateBlue;
+            label3.Font = new Font("Garamond", 10F, FontStyle.Regular, GraphicsUnit.Point);
+            label3.Location = new Point(13, 52);
+            label3.Name = "label3";
+            label3.Size = new Size(44, 16);
+            label3.TabIndex = 18;
+            label3.Text = "Name:";
+            // 
+            // pictureBox1
+            // 
+            pictureBox1.Image = Desktop.Properties.Resources.Screenshot_12;
+            pictureBox1.Location = new Point(0, -5);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(269, 87);
+            pictureBox1.TabIndex = 19;
+            pictureBox1.TabStop = false;
             // 
             // UpdateAnimal
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(295, 331);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.comboAnimal);
-            this.Controls.Add(this.label4);
-            this.Controls.Add(this.label5);
-            this.Controls.Add(this.label6);
-            this.Controls.Add(this.tbxLocation);
-            this.Controls.Add(this.tbxAge);
-            this.Controls.Add(this.tbxSpecies);
-            this.Controls.Add(this.btnUpdate);
-            this.Controls.Add(this.comboSpecies);
-            this.Name = "UpdateAnimal";
-            this.Text = "UpdateAnimal";
-            this.Load += new System.EventHandler(this.UpdateAnimal_Load);
-            this.ResumeLayout(false);
-            this.PerformLayout();
-
+            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(258, 310);
+            Controls.Add(comboAnimal);
+            Controls.Add(comboSpecies);
+            Controls.Add(label2);
+            Controls.Add(label3);
+            Controls.Add(pictureBox1);
+            Controls.Add(label1);
+            Controls.Add(label4);
+            Controls.Add(label5);
+            Controls.Add(label6);
+            Controls.Add(tbxLocation);
+            Controls.Add(tbxAge);
+            Controls.Add(tbxSpecies);
+            Controls.Add(btnUpdate);
+            Name = "UpdateAnimal";
+            Text = "UpdateAnimal";
+            Load += UpdateAnimal_Load;
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
+            ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
 
-        private System.Windows.Forms.Button btnUpdate;
-        private System.Windows.Forms.ComboBox comboSpecies;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.TextBox tbxLocation;
-        private System.Windows.Forms.TextBox tbxAge;
-        private System.Windows.Forms.TextBox tbxSpecies;
-        private System.Windows.Forms.ComboBox comboAnimal;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label3;
+        private Button btnUpdate;
+        private ComboBox comboSpecies;
+        private Label label4;
+        private Label label5;
+        private Label label6;
+        private TextBox tbxLocation;
+        private TextBox tbxAge;
+        private TextBox tbxSpecies;
+        private ComboBox comboAnimal;
+        private Label label1;
+        private Label label2;
+        private Label label3;
+        private PictureBox pictureBox1;
     }
 }

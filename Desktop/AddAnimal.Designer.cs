@@ -28,141 +28,173 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.tbxName = new System.Windows.Forms.TextBox();
-            this.tbxSpecies = new System.Windows.Forms.TextBox();
-            this.tbxAge = new System.Windows.Forms.TextBox();
-            this.tbxLocation = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.btnAddAnimal = new System.Windows.Forms.Button();
-            this.SuspendLayout();
+            tbxName = new TextBox();
+            tbxSpecies = new TextBox();
+            tbxAge = new TextBox();
+            tbxLocation = new TextBox();
+            label1 = new Label();
+            label2 = new Label();
+            label3 = new Label();
+            label4 = new Label();
+            label5 = new Label();
+            btnAddAnimal = new Button();
+            pictureBox1 = new PictureBox();
+            pictureBox2 = new PictureBox();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
+            SuspendLayout();
             // 
             // tbxName
             // 
-            this.tbxName.Location = new System.Drawing.Point(88, 73);
-            this.tbxName.Name = "tbxName";
-            this.tbxName.Size = new System.Drawing.Size(182, 22);
-            this.tbxName.TabIndex = 0;
+            tbxName.Location = new Point(84, 68);
+            tbxName.Name = "tbxName";
+            tbxName.Size = new Size(160, 23);
+            tbxName.TabIndex = 0;
             // 
             // tbxSpecies
             // 
-            this.tbxSpecies.Location = new System.Drawing.Point(88, 112);
-            this.tbxSpecies.Name = "tbxSpecies";
-            this.tbxSpecies.Size = new System.Drawing.Size(182, 22);
-            this.tbxSpecies.TabIndex = 1;
+            tbxSpecies.Location = new Point(84, 105);
+            tbxSpecies.Name = "tbxSpecies";
+            tbxSpecies.Size = new Size(160, 23);
+            tbxSpecies.TabIndex = 1;
             // 
             // tbxAge
             // 
-            this.tbxAge.Location = new System.Drawing.Point(88, 153);
-            this.tbxAge.Name = "tbxAge";
-            this.tbxAge.Size = new System.Drawing.Size(44, 22);
-            this.tbxAge.TabIndex = 2;
+            tbxAge.Location = new Point(84, 143);
+            tbxAge.Name = "tbxAge";
+            tbxAge.Size = new Size(39, 23);
+            tbxAge.TabIndex = 2;
             // 
             // tbxLocation
             // 
-            this.tbxLocation.Location = new System.Drawing.Point(88, 196);
-            this.tbxLocation.Name = "tbxLocation";
-            this.tbxLocation.Size = new System.Drawing.Size(182, 22);
-            this.tbxLocation.TabIndex = 3;
+            tbxLocation.Location = new Point(84, 184);
+            tbxLocation.Name = "tbxLocation";
+            tbxLocation.Size = new Size(160, 23);
+            tbxLocation.TabIndex = 3;
             // 
             // label1
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Garamond", 10F);
-            this.label1.Location = new System.Drawing.Point(12, 73);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(53, 19);
-            this.label1.TabIndex = 4;
-            this.label1.Text = "Name:";
+            label1.AutoSize = true;
+            label1.BackColor = Color.MediumSlateBlue;
+            label1.Font = new Font("Garamond", 10F, FontStyle.Regular, GraphicsUnit.Point);
+            label1.Location = new Point(10, 75);
+            label1.Name = "label1";
+            label1.Size = new Size(44, 16);
+            label1.TabIndex = 4;
+            label1.Text = "Name:";
             // 
             // label2
             // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Garamond", 10F);
-            this.label2.Location = new System.Drawing.Point(11, 118);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(61, 19);
-            this.label2.TabIndex = 5;
-            this.label2.Text = "Species:";
+            label2.AutoSize = true;
+            label2.BackColor = Color.MediumSlateBlue;
+            label2.Font = new Font("Garamond", 10F, FontStyle.Regular, GraphicsUnit.Point);
+            label2.Location = new Point(10, 112);
+            label2.Name = "label2";
+            label2.Size = new Size(50, 16);
+            label2.TabIndex = 5;
+            label2.Text = "Species:";
             // 
             // label3
             // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Garamond", 10F);
-            this.label3.Location = new System.Drawing.Point(12, 159);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(40, 19);
-            this.label3.TabIndex = 6;
-            this.label3.Text = "Age:";
+            label3.AutoSize = true;
+            label3.BackColor = Color.MediumSlateBlue;
+            label3.Font = new Font("Garamond", 10F, FontStyle.Regular, GraphicsUnit.Point);
+            label3.Location = new Point(16, 150);
+            label3.Name = "label3";
+            label3.Size = new Size(31, 16);
+            label3.TabIndex = 6;
+            label3.Text = "Age:";
             // 
             // label4
             // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Garamond", 10F);
-            this.label4.Location = new System.Drawing.Point(12, 199);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(72, 19);
-            this.label4.TabIndex = 7;
-            this.label4.Text = "Location:";
+            label4.AutoSize = true;
+            label4.BackColor = Color.MediumSlateBlue;
+            label4.Font = new Font("Garamond", 10F, FontStyle.Regular, GraphicsUnit.Point);
+            label4.Location = new Point(13, 191);
+            label4.Name = "label4";
+            label4.Size = new Size(58, 16);
+            label4.TabIndex = 7;
+            label4.Text = "Location:";
             // 
             // label5
             // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Garamond", 15F);
-            this.label5.Location = new System.Drawing.Point(12, 22);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(133, 29);
-            this.label5.TabIndex = 8;
-            this.label5.Text = "Add Animal";
+            label5.AutoSize = true;
+            label5.BackColor = Color.MediumSlateBlue;
+            label5.Font = new Font("Garamond", 15F, FontStyle.Regular, GraphicsUnit.Point);
+            label5.Location = new Point(77, 18);
+            label5.Name = "label5";
+            label5.Size = new Size(106, 22);
+            label5.TabIndex = 8;
+            label5.Text = "Add Animal";
             // 
             // btnAddAnimal
             // 
-            this.btnAddAnimal.Font = new System.Drawing.Font("Garamond", 10F);
-            this.btnAddAnimal.Location = new System.Drawing.Point(13, 234);
-            this.btnAddAnimal.Name = "btnAddAnimal";
-            this.btnAddAnimal.Size = new System.Drawing.Size(257, 30);
-            this.btnAddAnimal.TabIndex = 9;
-            this.btnAddAnimal.Text = "Add animal";
-            this.btnAddAnimal.UseVisualStyleBackColor = true;
-            this.btnAddAnimal.Click += new System.EventHandler(this.btnAddAnimal_Click);
+            btnAddAnimal.Font = new Font("Garamond", 10F, FontStyle.Regular, GraphicsUnit.Point);
+            btnAddAnimal.Location = new Point(84, 219);
+            btnAddAnimal.Name = "btnAddAnimal";
+            btnAddAnimal.Size = new Size(152, 28);
+            btnAddAnimal.TabIndex = 9;
+            btnAddAnimal.Text = "Add animal";
+            btnAddAnimal.UseVisualStyleBackColor = true;
+            btnAddAnimal.Click += btnAddAnimal_Click;
+            // 
+            // pictureBox1
+            // 
+            pictureBox1.Image = Desktop.Properties.Resources.Screenshot_12;
+            pictureBox1.Location = new Point(-8, -18);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(266, 80);
+            pictureBox1.TabIndex = 10;
+            pictureBox1.TabStop = false;
+            // 
+            // pictureBox2
+            // 
+            pictureBox2.Image = Desktop.Properties.Resources.Screenshot_14;
+            pictureBox2.Location = new Point(-8, 57);
+            pictureBox2.Name = "pictureBox2";
+            pictureBox2.Size = new Size(86, 203);
+            pictureBox2.TabIndex = 11;
+            pictureBox2.TabStop = false;
             // 
             // AddAnimal
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(292, 276);
-            this.Controls.Add(this.btnAddAnimal);
-            this.Controls.Add(this.label5);
-            this.Controls.Add(this.label4);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.tbxLocation);
-            this.Controls.Add(this.tbxAge);
-            this.Controls.Add(this.tbxSpecies);
-            this.Controls.Add(this.tbxName);
-            this.Name = "AddAnimal";
-            this.Text = "Form1";
-            this.ResumeLayout(false);
-            this.PerformLayout();
-
+            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(256, 259);
+            Controls.Add(label4);
+            Controls.Add(label3);
+            Controls.Add(label2);
+            Controls.Add(label1);
+            Controls.Add(pictureBox2);
+            Controls.Add(label5);
+            Controls.Add(pictureBox1);
+            Controls.Add(btnAddAnimal);
+            Controls.Add(tbxLocation);
+            Controls.Add(tbxAge);
+            Controls.Add(tbxSpecies);
+            Controls.Add(tbxName);
+            Name = "AddAnimal";
+            Text = "Form1";
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
+            ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
 
-        private System.Windows.Forms.TextBox tbxName;
-        private System.Windows.Forms.TextBox tbxSpecies;
-        private System.Windows.Forms.TextBox tbxAge;
-        private System.Windows.Forms.TextBox tbxLocation;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Button btnAddAnimal;
+        private TextBox tbxName;
+        private TextBox tbxSpecies;
+        private TextBox tbxAge;
+        private TextBox tbxLocation;
+        private Label label1;
+        private Label label2;
+        private Label label3;
+        private Label label4;
+        private Label label5;
+        private Button btnAddAnimal;
+        private PictureBox pictureBox1;
+        private PictureBox pictureBox2;
     }
 }
 

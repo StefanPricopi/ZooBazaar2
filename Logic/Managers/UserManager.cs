@@ -10,6 +10,11 @@ namespace Logic.Managers
     public class UserManager
     {
         private readonly IUser user;
+        public bool InsertDummyUser(UserDTO userDTO)
+        {
+            // Call the repository method to insert the dummy user
+            return user.InsertDummyUser(userDTO);
+        }
 
         public User Login(string username, string password)
         {

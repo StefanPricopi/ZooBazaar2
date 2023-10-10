@@ -10,9 +10,11 @@ namespace Logic.Interfaces
 {
     public interface IUser
     {
-        public bool CreateAccount(UserDTO accountDTO);
-        public List<UserDTO> GetAllAccounts();
-        public bool UpdateAccount(UserDTO accountDTO);
-        User GetCurrentUserByEmail(string userEmail); 
+        bool CreateAccount(UserDTO accountDTO);
+        List<UserDTO> GetAllAccounts();
+        bool UpdateAccount(UserDTO accountDTO);
+        User GetCurrentUserByEmail(string userEmail);
+        bool InsertDummyUser(UserDTO userDTO);
+        User Login(string email, string password);
     }
 }

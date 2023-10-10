@@ -15,8 +15,23 @@ namespace DataAccess
 {
     public class UserRepository : Connection, IUser
     {
-        public User GetCurrentUserByEmail(string userEmail)
+        public User Login(string username, string password)
         {
+            User currentUser = GetCurrentUserByEmail(username); // Call the method via IUser
+
+            if (username == currentUser.Email && currentUser.Password == password)
+            {
+                return currentUser;
+
+            }
+
+            return null;
+        }
+        
+        public User GetCurrentUserByEmail(string userEmail)
+
+        {
+
             try
             {
                 using (SqlConnection conn = InitializeConection())
@@ -45,8 +60,31 @@ namespace DataAccess
             {
                 // Handle the exception (e.g., log the error)
             }
-
+            
             return null; // Return null if no user with the specified email is found
+        }
+        public bool InsertDummyUser(UserDTO userDTO)
+        {
+            try
+            {
+                using (SqlConnection conn = InitializeConection())
+                {
+                    string sql = "INSERT INTO users (Email, Password, Name, ClearanceLevel) VALUES (@Email, @Password, @Name, @ClearanceLevel)";
+                    SqlCommand cmd = new SqlCommand(sql, conn);
+                    cmd.Parameters.AddWithValue("@Email", userDTO.Email);
+                    cmd.Parameters.AddWithValue("@Password", userDTO.Password);
+                    cmd.Parameters.AddWithValue("@Name", userDTO.Name);
+                    cmd.Parameters.AddWithValue("@ClearanceLevel", userDTO.ClearanceLevel);
+                    conn.Open();
+                    cmd.ExecuteNonQuery();
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                // Handle the exception (e.g., log the error)
+                return false;
+            }
         }
         public bool CreateAccount(UserDTO userDTO)
         {
