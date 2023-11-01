@@ -33,12 +33,15 @@
             tbxName = new TextBox();
             label2 = new Label();
             label3 = new Label();
-            dateTimePicker1 = new DateTimePicker();
+            dateBirth = new DateTimePicker();
             label4 = new Label();
             label5 = new Label();
             comboClassis = new ComboBox();
             label6 = new Label();
             comboOrdo = new ComboBox();
+            btnAddAnimal = new Button();
+            label7 = new Label();
+            tbxSearch = new TextBox();
             SuspendLayout();
             // 
             // label1
@@ -88,12 +91,12 @@
             label3.TabIndex = 4;
             label3.Text = "Date of Birth:";
             // 
-            // dateTimePicker1
+            // dateBirth
             // 
-            dateTimePicker1.Location = new Point(118, 112);
-            dateTimePicker1.Name = "dateTimePicker1";
-            dateTimePicker1.Size = new Size(250, 27);
-            dateTimePicker1.TabIndex = 5;
+            dateBirth.Location = new Point(118, 112);
+            dateBirth.Name = "dateBirth";
+            dateBirth.Size = new Size(253, 27);
+            dateBirth.TabIndex = 5;
             // 
             // label4
             // 
@@ -144,17 +147,49 @@
             comboOrdo.Size = new Size(151, 28);
             comboOrdo.TabIndex = 9;
             // 
+            // btnAddAnimal
+            // 
+            btnAddAnimal.Location = new Point(21, 334);
+            btnAddAnimal.Name = "btnAddAnimal";
+            btnAddAnimal.Size = new Size(248, 45);
+            btnAddAnimal.TabIndex = 11;
+            btnAddAnimal.Text = "Add";
+            btnAddAnimal.UseVisualStyleBackColor = true;
+            btnAddAnimal.Click += btnAddAnimal_Click;
+            // 
+            // label7
+            // 
+            label7.AutoSize = true;
+            label7.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Regular, GraphicsUnit.Point);
+            label7.Location = new Point(21, 286);
+            label7.Name = "label7";
+            label7.Size = new Size(53, 17);
+            label7.TabIndex = 22;
+            label7.Text = "Search";
+            // 
+            // tbxSearch
+            // 
+            tbxSearch.Font = new Font("Georgia", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
+            tbxSearch.Location = new Point(80, 281);
+            tbxSearch.Name = "tbxSearch";
+            tbxSearch.Size = new Size(151, 27);
+            tbxSearch.TabIndex = 21;
+            tbxSearch.TextChanged += tbxSearch_TextChanged;
+            // 
             // AddAnimal
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(426, 476);
+            ClientSize = new Size(392, 391);
+            Controls.Add(label7);
+            Controls.Add(tbxSearch);
+            Controls.Add(btnAddAnimal);
             Controls.Add(label6);
             Controls.Add(comboOrdo);
             Controls.Add(label5);
             Controls.Add(comboClassis);
             Controls.Add(label4);
-            Controls.Add(dateTimePicker1);
+            Controls.Add(dateBirth);
             Controls.Add(label3);
             Controls.Add(label2);
             Controls.Add(tbxName);
@@ -174,12 +209,15 @@
         private TextBox tbxName;
         private Label label2;
         private Label label3;
-        private DateTimePicker dateTimePicker1;
+        private DateTimePicker dateBirth;
         private Label label4;
         private Label label5;
         private ComboBox comboClassis;
         private Label label6;
         private ComboBox comboOrdo;
+        private Button btnAddAnimal;
+        private Label label7;
+        private TextBox tbxSearch;
     }
 }
 

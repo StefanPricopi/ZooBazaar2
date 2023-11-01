@@ -34,9 +34,9 @@
             // 
             // btnAdd
             // 
-            btnAdd.Location = new Point(7, 59);
+            btnAdd.Location = new Point(12, 22);
             btnAdd.Name = "btnAdd";
-            btnAdd.Size = new Size(94, 29);
+            btnAdd.Size = new Size(139, 57);
             btnAdd.TabIndex = 0;
             btnAdd.Text = "Add";
             btnAdd.UseVisualStyleBackColor = true;
@@ -44,9 +44,9 @@
             // 
             // btnView
             // 
-            btnView.Location = new Point(148, 51);
+            btnView.Location = new Point(169, 22);
             btnView.Name = "btnView";
-            btnView.Size = new Size(94, 29);
+            btnView.Size = new Size(142, 57);
             btnView.TabIndex = 1;
             btnView.Text = "View";
             btnView.UseVisualStyleBackColor = true;
@@ -56,7 +56,7 @@
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(344, 92);
             Controls.Add(btnView);
             Controls.Add(btnAdd);
             Name = "CaretakerForm";

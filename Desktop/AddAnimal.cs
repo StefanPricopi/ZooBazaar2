@@ -13,18 +13,45 @@ namespace Animals
     public partial class AddAnimal : Form
     {
         private AnimalManager animalManager;
+        private List<string> phylumList;
+        private List<string> classisList;
+        private List<string> ordoList;
+
         public AddAnimal(AnimalManager animalManager)
         {
             InitializeComponent();
             this.animalManager = animalManager;
-            comboPhylum.Items.AddRange(new string[] { "Worms", "Arthropods", "Chordates", "Echinoderms", "Mollusks" });
-            comboClassis.Items.AddRange(new string[] { "Polychaeta", "Oligochaeta", "Hirudinea", "Insecta", "Arachnida", "Crustacea", "Myriapoda", "Chilopoda", "Diplopoda", "Malacostraca", "Maxillopoda", "Merostomata", "Mammals", "Birds", "Reptiles", "Amphibians", "Fish", "Sea Stars", "Sea Urchins", "Sea Cucumbers", "Snails", "Clams", "Squid", "Chitons" });
-            comboOrdo.Items.AddRange(new string[] { "Spionida", "Sabellida", "Terebellida", "Eunicida", "Phyllodocida", "Lumbriculida", "Haplotaxida", "Moniligastrida", "Microchaetida", "Lumbricida", "Arhynchobdellida", "Rhynchobdellida", "Gnatobdellida", "Hirudinida", "Coleoptera", "Diptera", "Lepidoptera", "Hymenoptera", "Hemiptera", "Araneae", "Scorpiones", "Opiliones", "Decapoda", "Isopoda", "Amphipoda", "Euphausiacea", "Chilognatha", "Scolopendromorpha", "Lithobiomorpha", "Polydesmida", "Chordeumatida", "Siphonocryptida", "Spirobolida", "Decapoda", "Amphipoda", "Isopoda", "Euphausiacea", "Calanoida", "Cyclopoida", "Harpacticoida", "Xiphosura", "Carnivora", "Rodentia", "Cetacea", "Primates", "Artiodactyla", "Passeriformes", "Falconiformes", "Columbiformes", "Struthioniformes", "Squamata", "Testudines", "Crocodylia", "Anura", "Caudata", "Gymnophiona", "Salmoniformes", "Perciformes", "Cypriniformes", "Siluriformes", "Paxillosida", "Valvatida", "Spinulosida", "Forcipulatida", "Echinoidea", "Cidaroida", "Holothuriida", "Elasipodida", "Apodida", "Pulmonata", "Gastropoda", "Stylommatophora", "Bivalvia", "Protobranchia", "Palaeoheterodonta", "Teuthida", "Vampyromorpha", "Octopoda", "Chitonida", "Lepidopleurida" });
+
+            InitializeComboBoxes();
         }
 
-        private void btnAddAnimal_Click(object sender, EventArgs e)
+        private void InitializeComboBoxes()
         {
+            phylumList = GetPhylumList();
+            classisList = GetClassisList();
+            ordoList = GetOrdoList();
 
+            comboPhylum.Items.AddRange(phylumList.ToArray());
+            comboClassis.Items.AddRange(classisList.ToArray());
+            comboOrdo.Items.AddRange(ordoList.ToArray());
+        }
+
+        private List<string> GetPhylumList()
+        {
+            List<string> list = new List<string> { "Worms", "Arthropods", "Chordates", "Echinoderms", "Mollusks" };
+            return list;
+        }
+
+        private List<string> GetClassisList()
+        {
+            List<string> list = new List<string> { "Polychaeta", "Oligochaeta", "Hirudinea", "Insecta", "Arachnida", "Crustacea", "Myriapoda", "Chilopoda", "Diplopoda", "Malacostraca", "Maxillopoda", "Merostomata", "Mammals", "Birds", "Reptiles", "Amphibians", "Fish", "Sea Stars", "Sea Urchins", "Sea Cucumbers", "Snails", "Clams", "Squid", "Chitons" };
+            return list;
+        }
+
+        private List<string> GetOrdoList()
+        {
+            List<string> list = new List<string> { "Spionida", "Sabellida", "Terebellida", "Eunicida", "Phyllodocida", "Lumbriculida", "Haplotaxida", "Moniligastrida", "Microchaetida", "Lumbricida", "Arhynchobdellida", "Rhynchobdellida", "Gnatobdellida", "Hirudinida", "Coleoptera", "Diptera", "Lepidoptera", "Hymenoptera", "Hemiptera", "Araneae", "Scorpiones", "Opiliones", "Decapoda", "Isopoda", "Amphipoda", "Euphausiacea", "Chilognatha", "Scolopendromorpha", "Lithobiomorpha", "Polydesmida", "Chordeumatida", "Siphonocryptida", "Spirobolida", "Decapoda", "Amphipoda", "Isopoda", "Euphausiacea", "Calanoida", "Cyclopoida", "Harpacticoida", "Xiphosura", "Carnivora", "Rodentia", "Cetacea", "Primates", "Artiodactyla", "Passeriformes", "Falconiformes", "Columbiformes", "Struthioniformes", "Squamata", "Testudines", "Crocodylia", "Anura", "Caudata", "Gymnophiona", "Salmoniformes", "Perciformes", "Cypriniformes", "Siluriformes", "Paxillosida", "Valvatida", "Spinulosida", "Forcipulatida", "Echinoidea", "Cidaroida", "Holothuriida", "Elasipodida", "Apodida", "Pulmonata", "Gastropoda", "Stylommatophora", "Bivalvia", "Protobranchia", "Palaeoheterodonta", "Teuthida", "Vampyromorpha", "Octopoda", "Chitonida", "Lepidopleurida" };
+            return list;
         }
 
         private void comboPhylum_SelectedIndexChanged(object sender, EventArgs e)
@@ -52,7 +79,7 @@ namespace Animals
             {
                 comboClassis.Items.AddRange(new string[] { "Snails", "Clams", "Squid", "Chitons" });
             }
-       }
+        }
 
         private void comboClassis_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -161,6 +188,71 @@ namespace Animals
                 {
                     comboOrdo.Items.AddRange(new string[] { "Chitonida", "Lepidopleurida" });
                 }
+            }
+        }
+
+        private void btnAddAnimal_Click(object sender, EventArgs e)
+        {
+            string name = tbxName.Text;
+            DateTime dateofbirth = dateBirth.Value;
+            string phylum = comboPhylum.SelectedItem.ToString();
+            string classis = comboClassis.SelectedItem.ToString();
+            string ordo = comboOrdo.SelectedItem.ToString();
+
+
+            Animal animal = new Animal(0, name, dateofbirth, phylum, classis, ordo);
+            animalManager.AddAnimal(animal);
+
+            MessageBox.Show("Animal added succesfully!");
+        }
+
+        private void FilterComboBoxItems(ComboBox comboBox, string searchText)
+        {
+            List<string> originalItems = new List<string>();
+            foreach (string item in comboBox.Items)
+            {
+                originalItems.Add(item);
+            }
+
+            comboBox.DataSource = null;
+            comboBox.Items.Clear();
+
+            foreach (string item in originalItems)
+            {
+                if (item.ToLower().StartsWith(searchText))
+                {
+                    comboBox.Items.Add(item);
+                }
+            }
+        }
+        private void ResetComboBoxItems(ComboBox comboBox, List<string> items)
+        {
+            comboBox.DataSource = null;
+            comboBox.Items.Clear();
+
+            foreach (var item in items)
+            {
+                comboBox.Items.Add(item);
+            }
+        }
+
+        private void tbxSearch_TextChanged(object sender, EventArgs e)
+        {
+            string searchText = tbxSearch.Text.Trim().ToLower();
+
+            if (string.IsNullOrEmpty(searchText))
+            {
+                ResetComboBoxItems(comboPhylum, GetPhylumList());
+                ResetComboBoxItems(comboClassis, GetClassisList());
+                ResetComboBoxItems(comboOrdo, GetOrdoList());
+            }
+            else
+            {
+                FilterComboBoxItems(comboPhylum, searchText);
+
+                FilterComboBoxItems(comboClassis, searchText);
+
+                FilterComboBoxItems(comboOrdo, searchText);
             }
         }
     }

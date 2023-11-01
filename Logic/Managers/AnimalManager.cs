@@ -43,6 +43,27 @@ namespace Animals
             return null;
         }
 
+        public List<Animal> GetAnimalsByPhylumClassisOrdo(string phylum, string classis, string ordo)
+        {
+            List<Animal> filteredAnimals = new List<Animal>();
+
+            foreach (Animal animal in GetAllAnimals())
+            {
+                if (string.IsNullOrEmpty(phylum) || animal.Phylum == phylum)
+                {
+                    if (string.IsNullOrEmpty(classis) || animal.Classis == classis)
+                    {
+                        if (string.IsNullOrEmpty(ordo) || animal.Ordo == ordo)
+                        {
+                            filteredAnimals.Add(animal);
+                        }
+                    }
+                }
+            }
+
+            return filteredAnimals;
+        }
+
         public void UpdateAnimal(Animal updatedAnimal)
         {
             foreach (Animal animal in animals)
