@@ -108,7 +108,7 @@ namespace Employees
                 {
                     connection.Open();
 
-                    string updateQuery = "UPDATE Employees SET FirstName = @FirstName, LastName = @LastName, PhoneNumber = @PhoneNumber, DateOfBirth = @DateOfBirth, BSN = @BSN, Position = @Position WHERE ID = @EmployeeID";
+                    string updateQuery = "UPDATE Employees SET FirstName = @FirstName, LastName = @LastName, PhoneNumber = @PhoneNumber, DateOfBirth = @DateOfBirth, BSN = @BSN, Position = @Position WHERE EmployeeID = @EmployeeID";
 
                     using (SqlCommand command = new SqlCommand(updateQuery, connection))
                     {
@@ -117,7 +117,7 @@ namespace Employees
                         command.Parameters.AddWithValue("@PhoneNumber", editedPhone);
                         command.Parameters.AddWithValue("@DateOfBirth", editedBirthDate);
                         command.Parameters.AddWithValue("@BSN", editedBSN);
-                        command.Parameters.AddWithValue("@Postion", editedPosition);
+                        command.Parameters.AddWithValue("@Position", editedPosition);
                         command.Parameters.AddWithValue("@EmployeeID", employeeId);
 
                         int rowsAffected = command.ExecuteNonQuery();
