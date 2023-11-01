@@ -31,8 +31,6 @@
             btnSearch = new Button();
             label1 = new Label();
             listAnimals = new ListBox();
-            tbxSearch = new TextBox();
-            label2 = new Label();
             pictureBox1 = new PictureBox();
             pictureBox2 = new PictureBox();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
@@ -42,9 +40,10 @@
             // btnSearch
             // 
             btnSearch.Font = new Font("Garamond", 10F, FontStyle.Regular, GraphicsUnit.Point);
-            btnSearch.Location = new Point(19, 107);
+            btnSearch.Location = new Point(22, 143);
+            btnSearch.Margin = new Padding(3, 4, 3, 4);
             btnSearch.Name = "btnSearch";
-            btnSearch.Size = new Size(134, 40);
+            btnSearch.Size = new Size(153, 53);
             btnSearch.TabIndex = 0;
             btnSearch.Text = "Search";
             btnSearch.UseVisualStyleBackColor = true;
@@ -55,9 +54,9 @@
             label1.AutoSize = true;
             label1.BackColor = Color.MediumSlateBlue;
             label1.Font = new Font("Garamond", 15F, FontStyle.Regular, GraphicsUnit.Point);
-            label1.Location = new Point(30, 18);
+            label1.Location = new Point(34, 24);
             label1.Name = "label1";
-            label1.Size = new Size(123, 22);
+            label1.Size = new Size(153, 29);
             label1.TabIndex = 2;
             label1.Text = "Search Animal";
             // 
@@ -65,58 +64,44 @@
             // 
             listAnimals.Font = new Font("Garamond", 10F, FontStyle.Regular, GraphicsUnit.Point);
             listAnimals.FormattingEnabled = true;
-            listAnimals.ItemHeight = 14;
-            listAnimals.Location = new Point(19, 153);
+            listAnimals.ItemHeight = 19;
+            listAnimals.Location = new Point(22, 204);
+            listAnimals.Margin = new Padding(3, 4, 3, 4);
             listAnimals.Name = "listAnimals";
-            listAnimals.Size = new Size(351, 102);
+            listAnimals.Size = new Size(401, 118);
             listAnimals.TabIndex = 3;
-            // 
-            // tbxSearch
-            // 
-            tbxSearch.Location = new Point(71, 69);
-            tbxSearch.Name = "tbxSearch";
-            tbxSearch.Size = new Size(134, 23);
-            tbxSearch.TabIndex = 4;
-            // 
-            // label2
-            // 
-            label2.AutoSize = true;
-            label2.Location = new Point(19, 72);
-            label2.Name = "label2";
-            label2.Size = new Size(45, 15);
-            label2.TabIndex = 5;
-            label2.Text = "Search:";
             // 
             // pictureBox1
             // 
             pictureBox1.Image = Desktop.Properties.Resources.Screenshot_12;
-            pictureBox1.Location = new Point(-5, -7);
+            pictureBox1.Location = new Point(-6, -9);
+            pictureBox1.Margin = new Padding(3, 4, 3, 4);
             pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(419, 70);
+            pictureBox1.Size = new Size(479, 93);
             pictureBox1.TabIndex = 6;
             pictureBox1.TabStop = false;
             // 
             // pictureBox2
             // 
             pictureBox2.Image = Desktop.Properties.Resources.Screenshot_12;
-            pictureBox2.Location = new Point(-5, 261);
+            pictureBox2.Location = new Point(-6, 348);
+            pictureBox2.Margin = new Padding(3, 4, 3, 4);
             pictureBox2.Name = "pictureBox2";
-            pictureBox2.Size = new Size(419, 51);
+            pictureBox2.Size = new Size(479, 68);
             pictureBox2.TabIndex = 7;
             pictureBox2.TabStop = false;
             // 
             // SearchAnimal
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(407, 302);
+            ClientSize = new Size(465, 403);
             Controls.Add(pictureBox2);
             Controls.Add(label1);
             Controls.Add(pictureBox1);
-            Controls.Add(label2);
-            Controls.Add(tbxSearch);
             Controls.Add(listAnimals);
             Controls.Add(btnSearch);
+            Margin = new Padding(3, 4, 3, 4);
             Name = "SearchAnimal";
             Text = "SearchAnimal";
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
@@ -130,8 +115,6 @@
         private Button btnSearch;
         private Label label1;
         private ListBox listAnimals;
-        private TextBox tbxSearch;
-        private Label label2;
         private PictureBox pictureBox1;
         private PictureBox pictureBox2;
     }

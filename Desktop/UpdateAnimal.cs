@@ -64,8 +64,6 @@ namespace Animals
                         MessageBox.Show("Age must be a valid number.");
                         return;
                     }
-                    selectedAnimal.Age = newAge;
-                    selectedAnimal.Location = tbxLocation.Text;
 
                     animalManager.UpdateAnimal(selectedAnimal);
                     MessageBox.Show("Animal information updated successfully!");

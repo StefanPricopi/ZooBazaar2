@@ -8,17 +8,39 @@ namespace Animals
 {
     public class Animal
     {
-        public string Name {  get; set; }
-        public string Species { get; set; }
-        public int Age { get; set; }
-        public string Location { get; set; }
+        public int AnimalID {  get; set; }
+        public string Name { get; set; }
+        public string Regio {  get; set; }
+        public DateOnly DateOfBirth { get; set; }
+        public string Regnum { get; set; }
+        public string Phylum { get; set; }
+        public string Classis {  get; set; }
+        public string Ordo { get; set; }
+        public string Familia {  get; set; }
+        public string Genus {  get; set; }
+        public string Species {  get; set; }
+        public string History { get; set; }
+        public string Status {  get; set; }
+        public string Diet {  get; set; }
+        public string SpecialDiet {  get; set; }
 
-        public Animal(string name, string species, int age, string location)
+        public Animal(int animalID, string name, DateOnly dateofbirth, string phylum, string classis, string ordo, string familia, string genus, string species, string history, string status, string diet, string specialdiet)
         {
+            AnimalID = animalID;
             Name = name;
+            Regio = "Animal";
+            DateOfBirth = dateofbirth;
+            Regnum = "Animalia";
+            Phylum = phylum;
+            Classis = classis;
+            Ordo = ordo;
+            Familia = familia;
+            Genus = genus;
             Species = species;
-            Age = age;
-            Location = location;
+            History = history;
+            Status = status;
+            Diet = diet;
+            SpecialDiet = specialdiet;
         }
     }
 }

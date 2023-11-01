@@ -65,5 +65,45 @@ namespace Animals
                 }
             }
         }
+
+        private void LoadAnimalsToListBox(List<Animal> animals = null)
+        {
+            listAnimals.Items.Clear();
+
+            if (animals == null)
+            {
+                animals = animalManager.GetAllAnimals();
+            }
+
+            foreach (Animal animal in animals)
+            {
+                listAnimals.Items.Add(animal.Name);
+            }
+        }
+
+
+        private void tbxSearch_TextChanged_1(object sender, EventArgs e)
+        {
+            listAnimals.Items.Clear();
+
+            string searchText = tbxSearch.Text.Trim().ToLower();
+
+            List<Animal> filteredAnimals = new List<Animal>();
+
+            foreach (Animal animal in animalManager.GetAllAnimals())
+            {
+                if (animal.Name.ToLower().StartsWith(searchText))
+                {
+                    filteredAnimals.Add(animal);
+                }
+            }
+
+            LoadAnimalsToListBox(filteredAnimals);
+        }
+
+        private void ViewAnimalDetails_Load(object sender, EventArgs e)
+        {
+            LoadAnimalsToListBox();
+        }
     }
 }
