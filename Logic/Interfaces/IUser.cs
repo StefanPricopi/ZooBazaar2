@@ -16,5 +16,6 @@ namespace Logic.Interfaces
         User GetCurrentUserByUsername(string userEmail);
         bool InsertDummyUser(UserDTO userDTO);
         User Login(string email, string password);
+        public string RetrievePositionInformation(string username);
     }
 }

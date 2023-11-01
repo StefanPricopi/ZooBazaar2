@@ -23,6 +23,7 @@ namespace Desktop
         UserManager userManager = new UserManager();
         private AnimalManager animalManager;
         private EmployeeManager employeeManager;
+        
         public Login()
         {
             InitializeComponent();
@@ -43,32 +44,34 @@ namespace Desktop
             string email = tbxEmail.Text;
             string password = tbxPassword.Text;
 
-            User currentUser = userRepository.Login(email, password);
+            User currentUser = userRepository.Login(email, password);   
+
 
             if (currentUser != null)
             {
+               string position = userManager.RetrievePositionInformation(email);
 
-                if (currentUser.Salt == "somdsdething")
+                if (position == "Admin")
                 {
                     Form openfrom = new Form1();
                     openfrom.ShowDialog();
                 }
-                if (currentUser.Salt == "sometdsdhing")
+                if (position == "Caretaker")
                 {
                     Form addAnimalForm = new CaretakerOverview();
                     addAnimalForm.ShowDialog();
                 }
-                if (currentUser.Salt == "somssething")
+                if (position == "HR")
                 {
                     Form addEmployeeForm = new HrOverview();
                     addEmployeeForm.ShowDialog();
                 }
-                if (currentUser.Salt == "something")
+                if (position == "Manager")
                 {
                     Form formtoopen = new ManagerOverview();
                     formtoopen.ShowDialog();
                 }
-                if (currentUser.Salt == "sss")
+                if (position == "sss")
                 {
                     Form openfrom = new Form1();
                     openfrom.ShowDialog();

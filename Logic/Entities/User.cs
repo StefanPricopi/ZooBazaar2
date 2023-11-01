@@ -10,11 +10,17 @@ namespace Logic.Entities
 {
     public class User
     {
+        private int userID;
         private string username;
         private string password;
         private string email;
         private string salt;
 
+        public int UserID
+        {
+            get => userID;
+            set => userID = value;
+        }
         public string Username
         {
             get => username;
@@ -45,8 +51,9 @@ namespace Logic.Entities
             // Default constructor
         }
 
-        public User(string username, string password, string email, string salt)
+        public User(int userID,string username, string password, string email, string salt)
         {
+            this.userID = userID;
             this.username = username;
             this.password = password;
             this.email = email;
@@ -54,6 +61,7 @@ namespace Logic.Entities
         }
         public User(UserDTO userDTO)
         {
+            this.userID = userDTO.UserID;
             this.username = userDTO.Username;
             this.password = userDTO.Password;
             this.email = userDTO.Email;
@@ -64,6 +72,7 @@ namespace Logic.Entities
         {
             return new UserDTO()
             {
+                UserID = this.userID,
                 Username = this.Username,
                 Password = this.Password,
                 Email = this.Email,
@@ -75,6 +84,7 @@ namespace Logic.Entities
         {
             return new User()
             {
+                UserID = userDTO.UserID,
                 Username = userDTO.Username,
                 Password = userDTO.Password,
                 Email = userDTO.Email,

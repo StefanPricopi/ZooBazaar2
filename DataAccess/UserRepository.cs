@@ -19,7 +19,8 @@ namespace DataAccess
         public User Login(string username, string password)
         {
             User currentUser = GetCurrentUserByUsername(username); // Call the method via IUser
-
+            var userhashedpass = UserManager.HashedPassword($"{password}{currentUser.Salt.Trim()}");
+            
             if (username == currentUser.Username && currentUser.Password == password)
             {
                 return currentUser;
@@ -28,7 +29,36 @@ namespace DataAccess
 
             return null;
         }
-        
+
+        public string RetrievePositionInformation(string username)
+        {
+            User currentUser = GetCurrentUserByUsername(username);
+            try
+            {
+                using (SqlConnection conn = InitializeConection())
+                {
+                    conn.Open();
+                    string sql = "SELECT * FROM Employees WHERE UserID = @UserID";
+                    SqlCommand cmd = new SqlCommand(sql, conn);
+                    cmd.Parameters.AddWithValue("@UserID", currentUser.UserID);
+
+                    SqlDataReader dr = cmd.ExecuteReader();
+
+                    if (dr.Read())
+                    {
+                        string userDTO = dr["Position"].ToString();
+                        
+                        return userDTO; 
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                // Handle the exception (e.g., log the error)
+            }
+            
+            return null; // Return null if no user with the specified email is found
+        }
         public User GetCurrentUserByUsername(string username)
 
         {
@@ -48,6 +78,7 @@ namespace DataAccess
                     {
                         var userDTO = new UserDTO
                         {
+                            UserID = Convert.ToInt32(dr["UserID"]),
                             Username = dr["Username"].ToString(),
                             Password = dr["Password"].ToString(),
                             Email = dr["Email"].ToString(),
@@ -133,6 +164,7 @@ namespace DataAccess
                     {
                         var userDTO = new UserDTO
                         {
+                            UserID = Convert.ToInt32(dr["UserID"]),
                             Username = dr["Username"].ToString(),
                             Password = dr["Password"].ToString(),
                             Email = dr["Email"].ToString(),
