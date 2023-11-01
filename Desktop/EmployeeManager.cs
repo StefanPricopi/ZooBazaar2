@@ -21,40 +21,16 @@ namespace Employees
         {
             foreach (Employee employee in employees)
             {
-                if (employee.Name == edittedEmployee.Name)
+                if (employee.FirstName == edittedEmployee.FirstName & employee.LastName == edittedEmployee.LastName)
                 {
-                    employee.Email = edittedEmployee.Email;
-                    employee.Password = edittedEmployee.Password;
-                    employee.Username = edittedEmployee.Username;
+                    employee.PhoneNumber = edittedEmployee.PhoneNumber;
+                    employee.DateOfBirth = edittedEmployee.DateOfBirth;
+                    employee.BSN = edittedEmployee.BSN;
+                    employee.Position = edittedEmployee.Position;
                     break;
                 }
             }
         }
-
-        //public List<Animal> GetAnimalsBySpecies(string species)
-        //{
-        //    List<Animal> result = new List<Animal>();
-        //    foreach (Animal animal in animals)
-        //    {
-        //        if (animal.Species == species)
-        //        {
-        //            result.Add(animal);
-        //        }
-        //    }
-        //    return result;
-        //}
-
-        //public Animal GetAnimalByName(string name)
-        //{
-        //    foreach (Animal animal in animals)
-        //    {
-        //        if (animal.Name == name)
-        //        {
-        //            return animal;
-        //        }
-        //    }
-        //    return null;
-        //}
 
         public string GetEmployeeListAsString()
         {
@@ -62,7 +38,7 @@ namespace Employees
 
             foreach (Employee employee in employees)
             {
-                sb.AppendLine($"Name: {employee.Name}, Email: {employee.Email}, Username: {employee.Username}");
+                sb.AppendLine($"Name: {employee.FirstName} {employee.LastName}, BSN: {employee.BSN}");
             }
 
             return sb.ToString();

@@ -28,197 +28,217 @@
         /// </summary>
         private void InitializeComponent()
         {
-            label1 = new Label();
-            tbxName = new TextBox();
-            label2 = new Label();
-            tbxEmail = new TextBox();
-            tbxPassword = new TextBox();
-            label3 = new Label();
-            tbxRepPassword = new TextBox();
-            label4 = new Label();
-            label5 = new Label();
-            btnAddEmployee = new Button();
-            label6 = new Label();
-            tbxUsername = new TextBox();
-            pictureBox1 = new PictureBox();
-            pictureBox2 = new PictureBox();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
-            SuspendLayout();
+            this.label1 = new System.Windows.Forms.Label();
+            this.tbxLastName = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.tbxPhone = new System.Windows.Forms.TextBox();
+            this.tbxBSN = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.btnAddEmployee = new System.Windows.Forms.Button();
+            this.label6 = new System.Windows.Forms.Label();
+            this.tbxFirstName = new System.Windows.Forms.TextBox();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.dtpBirthDate = new System.Windows.Forms.DateTimePicker();
+            this.label3 = new System.Windows.Forms.Label();
+            this.tbxPosition = new System.Windows.Forms.TextBox();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
+            this.SuspendLayout();
             // 
             // label1
             // 
-            label1.AutoSize = true;
-            label1.BackColor = Color.MediumSlateBlue;
-            label1.Font = new Font("Garamond", 15F, FontStyle.Regular, GraphicsUnit.Point);
-            label1.Location = new Point(134, 9);
-            label1.Name = "label1";
-            label1.Size = new Size(126, 22);
-            label1.TabIndex = 0;
-            label1.Text = "Add Employee";
+            this.label1.AutoSize = true;
+            this.label1.BackColor = System.Drawing.Color.MediumSlateBlue;
+            this.label1.Font = new System.Drawing.Font("Garamond", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label1.Location = new System.Drawing.Point(153, 12);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(159, 29);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "Add Employee";
             // 
-            // tbxName
+            // tbxLastName
             // 
-            tbxName.Location = new Point(134, 96);
-            tbxName.Margin = new Padding(3, 2, 3, 2);
-            tbxName.Name = "tbxName";
-            tbxName.Size = new Size(198, 23);
-            tbxName.TabIndex = 1;
+            this.tbxLastName.Location = new System.Drawing.Point(153, 128);
+            this.tbxLastName.Name = "tbxLastName";
+            this.tbxLastName.Size = new System.Drawing.Size(250, 27);
+            this.tbxLastName.TabIndex = 1;
             // 
             // label2
             // 
-            label2.AutoSize = true;
-            label2.BackColor = Color.MediumSlateBlue;
-            label2.Location = new Point(12, 104);
-            label2.Name = "label2";
-            label2.Size = new Size(42, 15);
-            label2.TabIndex = 2;
-            label2.Text = "Name:";
+            this.label2.AutoSize = true;
+            this.label2.BackColor = System.Drawing.Color.MediumSlateBlue;
+            this.label2.Location = new System.Drawing.Point(14, 139);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(82, 20);
+            this.label2.TabIndex = 2;
+            this.label2.Text = "Last Name:";
             // 
-            // tbxEmail
+            // tbxPhone
             // 
-            tbxEmail.Location = new Point(134, 132);
-            tbxEmail.Margin = new Padding(3, 2, 3, 2);
-            tbxEmail.Name = "tbxEmail";
-            tbxEmail.Size = new Size(198, 23);
-            tbxEmail.TabIndex = 3;
+            this.tbxPhone.Location = new System.Drawing.Point(153, 176);
+            this.tbxPhone.Name = "tbxPhone";
+            this.tbxPhone.Size = new System.Drawing.Size(250, 27);
+            this.tbxPhone.TabIndex = 3;
             // 
-            // tbxPassword
+            // tbxBSN
             // 
-            tbxPassword.Location = new Point(134, 168);
-            tbxPassword.Margin = new Padding(3, 2, 3, 2);
-            tbxPassword.Name = "tbxPassword";
-            tbxPassword.Size = new Size(198, 23);
-            tbxPassword.TabIndex = 4;
-            // 
-            // label3
-            // 
-            label3.AutoSize = true;
-            label3.BackColor = Color.MediumSlateBlue;
-            label3.Location = new Point(12, 140);
-            label3.Name = "label3";
-            label3.Size = new Size(39, 15);
-            label3.TabIndex = 5;
-            label3.Text = "Email:";
-            // 
-            // tbxRepPassword
-            // 
-            tbxRepPassword.Location = new Point(134, 205);
-            tbxRepPassword.Margin = new Padding(3, 2, 3, 2);
-            tbxRepPassword.Name = "tbxRepPassword";
-            tbxRepPassword.Size = new Size(198, 23);
-            tbxRepPassword.TabIndex = 6;
+            this.tbxBSN.Location = new System.Drawing.Point(153, 273);
+            this.tbxBSN.Name = "tbxBSN";
+            this.tbxBSN.Size = new System.Drawing.Size(250, 27);
+            this.tbxBSN.TabIndex = 6;
             // 
             // label4
             // 
-            label4.AutoSize = true;
-            label4.BackColor = Color.MediumSlateBlue;
-            label4.Location = new Point(12, 176);
-            label4.Name = "label4";
-            label4.Size = new Size(60, 15);
-            label4.TabIndex = 7;
-            label4.Text = "Password:";
+            this.label4.AutoSize = true;
+            this.label4.BackColor = System.Drawing.Color.MediumSlateBlue;
+            this.label4.Location = new System.Drawing.Point(14, 183);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(111, 20);
+            this.label4.TabIndex = 7;
+            this.label4.Text = "Phone Number:";
             // 
             // label5
             // 
-            label5.AutoSize = true;
-            label5.BackColor = Color.MediumSlateBlue;
-            label5.Location = new Point(12, 213);
-            label5.Name = "label5";
-            label5.Size = new Size(99, 15);
-            label5.TabIndex = 8;
-            label5.Text = "Repeat Password:";
+            this.label5.AutoSize = true;
+            this.label5.BackColor = System.Drawing.Color.MediumSlateBlue;
+            this.label5.Location = new System.Drawing.Point(12, 231);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(79, 20);
+            this.label5.TabIndex = 8;
+            this.label5.Text = "Birth Date:";
             // 
             // btnAddEmployee
             // 
-            btnAddEmployee.Location = new Point(134, 232);
-            btnAddEmployee.Margin = new Padding(3, 2, 3, 2);
-            btnAddEmployee.Name = "btnAddEmployee";
-            btnAddEmployee.Size = new Size(114, 22);
-            btnAddEmployee.TabIndex = 9;
-            btnAddEmployee.Text = "Add Employee";
-            btnAddEmployee.UseVisualStyleBackColor = true;
-            btnAddEmployee.Click += btnAddEmployee_Click;
+            this.btnAddEmployee.Location = new System.Drawing.Point(249, 385);
+            this.btnAddEmployee.Name = "btnAddEmployee";
+            this.btnAddEmployee.Size = new System.Drawing.Size(130, 29);
+            this.btnAddEmployee.TabIndex = 9;
+            this.btnAddEmployee.Text = "Add Employee";
+            this.btnAddEmployee.UseVisualStyleBackColor = true;
+            this.btnAddEmployee.Click += new System.EventHandler(this.btnAddEmployee_Click);
             // 
             // label6
             // 
-            label6.AutoSize = true;
-            label6.BackColor = Color.MediumSlateBlue;
-            label6.Location = new Point(12, 68);
-            label6.Name = "label6";
-            label6.Size = new Size(63, 15);
-            label6.TabIndex = 10;
-            label6.Text = "Username:";
+            this.label6.AutoSize = true;
+            this.label6.BackColor = System.Drawing.Color.MediumSlateBlue;
+            this.label6.Location = new System.Drawing.Point(14, 91);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(83, 20);
+            this.label6.TabIndex = 10;
+            this.label6.Text = "First Name:";
+            this.label6.Click += new System.EventHandler(this.label6_Click);
             // 
-            // tbxUsername
+            // tbxFirstName
             // 
-            tbxUsername.Location = new Point(134, 60);
-            tbxUsername.Margin = new Padding(3, 2, 3, 2);
-            tbxUsername.Name = "tbxUsername";
-            tbxUsername.Size = new Size(198, 23);
-            tbxUsername.TabIndex = 11;
+            this.tbxFirstName.Location = new System.Drawing.Point(153, 80);
+            this.tbxFirstName.Name = "tbxFirstName";
+            this.tbxFirstName.Size = new System.Drawing.Size(250, 27);
+            this.tbxFirstName.TabIndex = 11;
             // 
             // pictureBox1
             // 
-            pictureBox1.Image = Desktop.Properties.Resources.Screenshot_12;
-            pictureBox1.Location = new Point(-2, -3);
-            pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(386, 46);
-            pictureBox1.TabIndex = 12;
-            pictureBox1.TabStop = false;
+            this.pictureBox1.Image = global::Desktop.Properties.Resources.Screenshot_12;
+            this.pictureBox1.Location = new System.Drawing.Point(-2, -4);
+            this.pictureBox1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(441, 61);
+            this.pictureBox1.TabIndex = 12;
+            this.pictureBox1.TabStop = false;
             // 
             // pictureBox2
             // 
-            pictureBox2.Image = Desktop.Properties.Resources.Screenshot_14;
-            pictureBox2.Location = new Point(-2, 35);
-            pictureBox2.Name = "pictureBox2";
-            pictureBox2.Size = new Size(126, 237);
-            pictureBox2.TabIndex = 13;
-            pictureBox2.TabStop = false;
+            this.pictureBox2.Image = global::Desktop.Properties.Resources.Screenshot_14;
+            this.pictureBox2.Location = new System.Drawing.Point(-2, 47);
+            this.pictureBox2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(144, 367);
+            this.pictureBox2.TabIndex = 13;
+            this.pictureBox2.TabStop = false;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.BackColor = System.Drawing.Color.MediumSlateBlue;
+            this.label7.Location = new System.Drawing.Point(12, 280);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(40, 20);
+            this.label7.TabIndex = 14;
+            this.label7.Text = "BSN:";
+            // 
+            // dtpBirthDate
+            // 
+            this.dtpBirthDate.Location = new System.Drawing.Point(153, 224);
+            this.dtpBirthDate.Name = "dtpBirthDate";
+            this.dtpBirthDate.Size = new System.Drawing.Size(250, 27);
+            this.dtpBirthDate.TabIndex = 15;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.BackColor = System.Drawing.Color.MediumSlateBlue;
+            this.label3.Location = new System.Drawing.Point(12, 329);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(64, 20);
+            this.label3.TabIndex = 16;
+            this.label3.Text = "Position:";
+            // 
+            // tbxPosition
+            // 
+            this.tbxPosition.Location = new System.Drawing.Point(153, 322);
+            this.tbxPosition.Name = "tbxPosition";
+            this.tbxPosition.Size = new System.Drawing.Size(250, 27);
+            this.tbxPosition.TabIndex = 17;
             // 
             // AddEmployee
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
-            AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(381, 265);
-            Controls.Add(label5);
-            Controls.Add(label4);
-            Controls.Add(label3);
-            Controls.Add(label2);
-            Controls.Add(label6);
-            Controls.Add(pictureBox2);
-            Controls.Add(label1);
-            Controls.Add(pictureBox1);
-            Controls.Add(tbxUsername);
-            Controls.Add(btnAddEmployee);
-            Controls.Add(tbxRepPassword);
-            Controls.Add(tbxPassword);
-            Controls.Add(tbxEmail);
-            Controls.Add(tbxName);
-            Margin = new Padding(3, 2, 3, 2);
-            Name = "AddEmployee";
-            Text = "AddEmployee";
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
-            ResumeLayout(false);
-            PerformLayout();
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.ClientSize = new System.Drawing.Size(470, 457);
+            this.Controls.Add(this.tbxPosition);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.dtpBirthDate);
+            this.Controls.Add(this.label7);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.label6);
+            this.Controls.Add(this.pictureBox2);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.pictureBox1);
+            this.Controls.Add(this.tbxFirstName);
+            this.Controls.Add(this.btnAddEmployee);
+            this.Controls.Add(this.tbxBSN);
+            this.Controls.Add(this.tbxPhone);
+            this.Controls.Add(this.tbxLastName);
+            this.Name = "AddEmployee";
+            this.Text = "AddEmployee";
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
+            this.ResumeLayout(false);
+            this.PerformLayout();
+
         }
 
         #endregion
 
         private Label label1;
-        private TextBox tbxName;
+        private TextBox tbxLastName;
         private Label label2;
-        private TextBox tbxEmail;
-        private TextBox tbxPassword;
-        private Label label3;
-        private TextBox tbxRepPassword;
+        private TextBox tbxPhone;
+        private TextBox tbxBSN;
         private Label label4;
         private Label label5;
         private Button btnAddEmployee;
         private Label label6;
-        private TextBox tbxUsername;
+        private TextBox tbxFirstName;
         private PictureBox pictureBox1;
         private PictureBox pictureBox2;
+        private Label label7;
+        private DateTimePicker dtpBirthDate;
+        private Label label3;
+        private TextBox tbxPosition;
     }
 }
