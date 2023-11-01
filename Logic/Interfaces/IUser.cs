@@ -13,7 +13,7 @@ namespace Logic.Interfaces
         bool CreateAccount(UserDTO accountDTO);
         List<UserDTO> GetAllAccounts();
         bool UpdateAccount(UserDTO accountDTO);
-        User GetCurrentUserByEmail(string userEmail);
+        User GetCurrentUserByUsername(string userEmail);
         bool InsertDummyUser(UserDTO userDTO);
         User Login(string email, string password);
     }

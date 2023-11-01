@@ -10,11 +10,16 @@ namespace Logic.Entities
 {
     public class User
     {
-        private string email;
+        private string username;
         private string password;
-        private string name;
-        private int clearanceLevel;
+        private string email;
+        private string salt;
 
+        public string Username
+        {
+            get => username;
+            set => username = value;
+        }
         public string Email
         {
             get => email;
@@ -27,16 +32,12 @@ namespace Logic.Entities
             set => password = value;
         }
 
-        public string Name
-        {
-            get => name;
-            set => name = value;
-        }
+        
 
-        public int ClearanceLevel
+        public string Salt
         {
-            get => clearanceLevel;
-            set => clearanceLevel = value;
+            get => salt;
+            set => salt = value;
         }
 
         public User()
@@ -44,29 +45,29 @@ namespace Logic.Entities
             // Default constructor
         }
 
-        public User(string email, string password, string name, int clearanceLevel)
+        public User(string username, string password, string email, string salt)
         {
-            this.email = email;
+            this.username = username;
             this.password = password;
-            this.name = name;
-            this.clearanceLevel = clearanceLevel;
+            this.email = email;
+            this.salt = salt;
         }
         public User(UserDTO userDTO)
         {
-            this.email = userDTO.Email;
+            this.username = userDTO.Username;
             this.password = userDTO.Password;
-            this.name = userDTO.Name;
-            this.clearanceLevel = userDTO.ClearanceLevel;
+            this.email = userDTO.Email;
+            this.salt = userDTO.Salt;
         }
 
         public UserDTO UserToUserDTO()
         {
             return new UserDTO()
             {
-                Email = this.Email,
+                Username = this.Username,
                 Password = this.Password,
-                Name = this.Name,
-                ClearanceLevel = this.ClearanceLevel
+                Email = this.Email,
+                Salt = this.Salt
             };
         }
 
@@ -74,10 +75,10 @@ namespace Logic.Entities
         {
             return new User()
             {
-                Email = userDTO.Email,
-                Name = userDTO.Name,
+                Username = userDTO.Username,
                 Password = userDTO.Password,
-                ClearanceLevel = userDTO.ClearanceLevel
+                Email = userDTO.Email,
+                Salt = userDTO.Salt
             };
         }
     }

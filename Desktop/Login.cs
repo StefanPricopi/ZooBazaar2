@@ -48,27 +48,27 @@ namespace Desktop
             if (currentUser != null)
             {
 
-                if (currentUser.ClearanceLevel == 0)
+                if (currentUser.Salt == "somdsdething")
                 {
                     Form openfrom = new Form1();
                     openfrom.ShowDialog();
                 }
-                if (currentUser.ClearanceLevel == 1)
+                if (currentUser.Salt == "sometdsdhing")
                 {
                     Form addAnimalForm = new CaretakerOverview();
                     addAnimalForm.ShowDialog();
                 }
-                if (currentUser.ClearanceLevel == 2)
+                if (currentUser.Salt == "somssething")
                 {
                     Form addEmployeeForm = new HrOverview();
                     addEmployeeForm.ShowDialog();
                 }
-                if (currentUser.ClearanceLevel == 3)
+                if (currentUser.Salt == "something")
                 {
                     Form formtoopen = new ManagerOverview();
                     formtoopen.ShowDialog();
                 }
-                if (currentUser.ClearanceLevel == 4)
+                if (currentUser.Salt == "sss")
                 {
                     Form openfrom = new Form1();
                     openfrom.ShowDialog();
@@ -83,10 +83,10 @@ namespace Desktop
 
             UserDTO dummyUser = new UserDTO
             {
-                Email = "test@example.com",
+                Username = "test@example.com",
                 Password = "password",
-                Name = "Test User",
-                ClearanceLevel = 1
+                Email = "Test User"
+             
             };
 
             // Call the InsertDummyUser method on the userRepository instance

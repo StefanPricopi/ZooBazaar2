@@ -10,6 +10,7 @@ using DataAccess;
 using Logic.Entities;
 using Logic.Interfaces;
 using Logic.DTO;
+using Logic.Managers;
 
 namespace DataAccess
 {
@@ -17,9 +18,9 @@ namespace DataAccess
     {
         public User Login(string username, string password)
         {
-            User currentUser = GetCurrentUserByEmail(username); // Call the method via IUser
+            User currentUser = GetCurrentUserByUsername(username); // Call the method via IUser
 
-            if (username == currentUser.Email && currentUser.Password == password)
+            if (username == currentUser.Username && currentUser.Password == password)
             {
                 return currentUser;
 
@@ -28,7 +29,7 @@ namespace DataAccess
             return null;
         }
         
-        public User GetCurrentUserByEmail(string userEmail)
+        public User GetCurrentUserByUsername(string username)
 
         {
 
@@ -37,9 +38,9 @@ namespace DataAccess
                 using (SqlConnection conn = InitializeConection())
                 {
                     conn.Open();
-                    string sql = "SELECT * FROM users WHERE Email = @Email";
+                    string sql = "SELECT * FROM users WHERE Username = @Username";
                     SqlCommand cmd = new SqlCommand(sql, conn);
-                    cmd.Parameters.AddWithValue("@Email", userEmail);
+                    cmd.Parameters.AddWithValue("@Username", username);
 
                     SqlDataReader dr = cmd.ExecuteReader();
 
@@ -47,10 +48,12 @@ namespace DataAccess
                     {
                         var userDTO = new UserDTO
                         {
-                            Email = dr["Email"].ToString(),
+                            Username = dr["Username"].ToString(),
                             Password = dr["Password"].ToString(),
-                            Name = dr["Name"].ToString(),
-                            ClearanceLevel = Convert.ToInt32(dr["ClearanceLevel"])
+                            Email = dr["Email"].ToString(),
+                            Salt = dr["Salt"].ToString(),
+
+
                         };
                         return new User(userDTO); // Create a User object from the UserDTO
                     }
@@ -69,12 +72,12 @@ namespace DataAccess
             {
                 using (SqlConnection conn = InitializeConection())
                 {
-                    string sql = "INSERT INTO users (Email, Password, Name, ClearanceLevel) VALUES (@Email, @Password, @Name, @ClearanceLevel)";
+                    string sql = "INSERT INTO users (Username, Password, Email, Salt) VALUES (@Username, @Password, @Email, @Salt)";
                     SqlCommand cmd = new SqlCommand(sql, conn);
-                    cmd.Parameters.AddWithValue("@Email", userDTO.Email);
+                    cmd.Parameters.AddWithValue("@Username", userDTO.Username);
                     cmd.Parameters.AddWithValue("@Password", userDTO.Password);
-                    cmd.Parameters.AddWithValue("@Name", userDTO.Name);
-                    cmd.Parameters.AddWithValue("@ClearanceLevel", userDTO.ClearanceLevel);
+                    cmd.Parameters.AddWithValue("@Email", userDTO.Email);
+                    cmd.Parameters.AddWithValue("@Salt", userDTO.Salt);
                     conn.Open();
                     cmd.ExecuteNonQuery();
                     return true;
@@ -90,15 +93,17 @@ namespace DataAccess
         {
             try
             {
+                var salt = DateTime.Now.ToString();
+                var hashedPW = UserManager.HashedPassword($"{userDTO.Password}{salt.Trim()}");
                 using (SqlConnection conn = InitializeConection())
                 {
-                    string sql = "INSERT INTO users (Email, Password, Name, ClearanceLevel) VALUES (@Email, @Password, @Name, @ClearanceLevel)";
+                    string sql = "INSERT INTO users (Username, Password, Email, Salt) VALUES (@Username, @Password, @Email, @Salt)";
                     SqlCommand cmd = new SqlCommand(sql, conn);
+                    cmd.Parameters.AddWithValue("@Username", userDTO.Username);
+                    cmd.Parameters.AddWithValue("@Password", hashedPW);
                     cmd.Parameters.AddWithValue("@Email", userDTO.Email);
-                    cmd.Parameters.AddWithValue("@Password", userDTO.Password);
-                    cmd.Parameters.AddWithValue("@Name", userDTO.Name);
-                    cmd.Parameters.AddWithValue("@ClearanceLevel", userDTO.ClearanceLevel);
-                    conn.Open();
+                    cmd.Parameters.AddWithValue("@Salt", salt);
+                    conn.Open();    
                     cmd.ExecuteNonQuery();
                     return true;
                 }
@@ -128,10 +133,10 @@ namespace DataAccess
                     {
                         var userDTO = new UserDTO
                         {
-                            Email = dr["Email"].ToString(),
+                            Username = dr["Username"].ToString(),
                             Password = dr["Password"].ToString(),
-                            Name = dr["Name"].ToString(),
-                            ClearanceLevel = Convert.ToInt32(dr["ClearanceLevel"])
+                            Email = dr["Email"].ToString(),
+                            Salt = dr["Salt"].ToString(),
                         };
                         accounts.Add(userDTO);
                     }
@@ -160,12 +165,12 @@ namespace DataAccess
             {
                 using (SqlConnection conn = InitializeConection())
                 {
-                    string sql = "UPDATE users SET Password = @Password, Name = @Name, ClearanceLevel = @ClearanceLevel WHERE Email = @Email";
+                    string sql = "UPDATE users SET Username = @Username, Password = @Password, Email = @Email, Salt = @Salt WHERE Username = @Username";
                     SqlCommand cmd = new SqlCommand(sql, conn);
-                    cmd.Parameters.AddWithValue("@Email", userDTO.Email);
+                    cmd.Parameters.AddWithValue("@Username", userDTO.Username);
                     cmd.Parameters.AddWithValue("@Password", userDTO.Password);
-                    cmd.Parameters.AddWithValue("@Name", userDTO.Name);
-                    cmd.Parameters.AddWithValue("@ClearanceLevel", userDTO.ClearanceLevel);
+                    cmd.Parameters.AddWithValue("@Email", userDTO.Email);
+                    cmd.Parameters.AddWithValue("@Salt", userDTO.Salt);
                     conn.Open();
                     cmd.ExecuteNonQuery();
                     return true;
