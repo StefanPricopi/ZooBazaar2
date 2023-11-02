@@ -23,6 +23,8 @@ namespace Employees
         {
             InitializeComponent();
             this.employeeManager = employeeManager;
+            dataGridView2.SelectionChanged += dataGridView2_SelectionChanged;
+            dataGridView1.SelectionChanged += dataGridView1_SelectionChanged;
         }
 
         private void EditEmployee_Load(object sender, EventArgs e)
@@ -186,20 +188,48 @@ namespace Employees
 
 
         }
+        private void dataGridView1_SelectionChanged(object sender, EventArgs e)
+        {
+
+
+            if (dataGridView1.SelectedRows.Count > 0)
+            {
+                DataGridViewRow selectedRow = dataGridView1.SelectedRows[0];
+
+                tbxFirstName.Text = selectedRow.Cells["FirstName"].Value.ToString();
+
+                tbxLastName.Text = selectedRow.Cells["LastName"].Value.ToString();
+
+                tbxPhone.Text = selectedRow.Cells["PhoneNumber"].Value.ToString();
+                dtpBirthDate.Text = selectedRow.Cells["DateOfBirth"].Value.ToString();
+                tbxBSN.Text = selectedRow.Cells["BSN"].Value.ToString();
+                tbxPosition.Text = selectedRow.Cells["Position"].Value.ToString();
+
+            }
+        }
         private void dataGridView2_SelectionChanged(object sender, EventArgs e)
         {
 
-            DataGridViewRow selectedRow = dataGridView2.SelectedRows[0];
 
-            string username = selectedRow.Cells["Username"].ToString();
-            string password = selectedRow.Cells["Password"].ToString();
-            string email = selectedRow.Cells["Email"].ToString();
+            if (dataGridView2.SelectedRows.Count > 0)
+            {
+                DataGridViewRow selectedRow = dataGridView2.SelectedRows[0];
 
-            tbxUsername.Text = username;
-            tbxPassword.Text = password;
-            tbxEmail.Text = email;
-            MessageBox.Show(email);
+                if (selectedRow.Cells["Username"].Value != null)
+                    tbxUsername.Text = selectedRow.Cells["Username"].Value.ToString();
+                else
+                    tbxUsername.Text = "gosho";
 
+                if (selectedRow.Cells["Password"].Value != null)
+                    tbxPassword.Text = selectedRow.Cells["Password"].Value.ToString();
+                else
+                    tbxPassword.Text = "ivan";
+
+                if (selectedRow.Cells["Email"].Value != null)
+                    tbxEmail.Text = selectedRow.Cells["Email"].Value.ToString();
+                else
+                    tbxEmail.Text = "ivan";
+            }
         }
 
         private void btnEditLogin_Click(object sender, EventArgs e)
@@ -217,13 +247,14 @@ namespace Employees
                 {
                     connection.Open();
 
-                    string updateQuery = "UPDATE users SET Username = @Username, Password = @Password, Email = @Email WHERE UserID = @UserID";
+                    string updateQuery = "UPDATE users SET Username = @Username, Password = @Password, Email = @Email, Salt = @Salt WHERE UserID = @UserID";
 
                     using (SqlCommand command = new SqlCommand(updateQuery, connection))
                     {
                         command.Parameters.AddWithValue("@Username", editedUsername);
                         command.Parameters.AddWithValue("@Password", hashedPW);
                         command.Parameters.AddWithValue("@Email", editedEmail);
+                        command.Parameters.AddWithValue("@Salt", salt);
                         command.Parameters.AddWithValue("@UserID", userID);
 
                         int rowsAffected = command.ExecuteNonQuery();
