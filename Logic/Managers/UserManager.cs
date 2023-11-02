@@ -16,7 +16,7 @@ namespace Logic.Managers
         public UserManager() { }
         public UserManager(IUser User)
         {
-            user = User;
+            this.user = user;
         }
         public bool InsertDummyUser(UserDTO userDTO)
         {

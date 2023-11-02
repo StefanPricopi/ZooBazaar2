@@ -49,7 +49,7 @@ namespace Desktop
 
             if (currentUser != null)
             {
-               string position = userManager.RetrievePositionInformation(email);
+               string position = userRepository.RetrievePositionInformation(email);
 
                 if (position == "Admin")
                 {

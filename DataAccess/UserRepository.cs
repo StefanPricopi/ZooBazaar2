@@ -21,7 +21,7 @@ namespace DataAccess
             User currentUser = GetCurrentUserByUsername(username); // Call the method via IUser
             var userhashedpass = UserManager.HashedPassword($"{password}{currentUser.Salt.Trim()}");
             
-            if (username == currentUser.Username && currentUser.Password == password)
+            if (username == currentUser.Username && userhashedpass == currentUser.Password)
             {
                 return currentUser;
 
