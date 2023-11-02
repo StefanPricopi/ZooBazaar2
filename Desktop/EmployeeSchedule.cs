@@ -19,7 +19,7 @@ namespace Employees
 {
     public partial class EmployeeSchedule : Form
     {
-        private string connectionString = "Server=mssqlstud.fhict.local;Database=dbi516787;User Id=dbi516787;Password=Xhy30aKiec;Encrypt=false;";
+        private string connectionString = "Server=mssqlstud.fhict.local;Database=dbi478560_dbijungle;User Id=dbi478560_dbijungle;Password=1234;Encrypt=false;";
 
         public EmployeeSchedule()
         {
@@ -42,7 +42,7 @@ namespace Employees
             {
                 connection.Open();
 
-                string selectQuery = "SELECT ID, Name FROM Employee";
+                string selectQuery = "SELECT EmployeeID, FirstName, LastName FROM Employees";
 
                 using (SqlCommand command = new SqlCommand(selectQuery, connection))
                 {
@@ -50,7 +50,7 @@ namespace Employees
                     {
                         while (reader.Read())
                         {
-                            cmbEmployees.Items.Add(reader["Name"].ToString());
+                            cmbEmployees.Items.Add(reader["FirstName"].ToString());
                         }
                     }
                 }

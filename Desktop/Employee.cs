@@ -8,17 +8,22 @@ namespace Employees
 {
     public class Employee
     {
-        public string Username { get; set; }
-        public string Name { get; set; }
-        public string Email { get; set; }
-        public string Password { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string PhoneNumber { get; set; }
+        public DateTime DateOfBirth { get; set; }
+        public string BSN { get; set; }
+        public string Position { get; set; }
 
-        public Employee(string name, string email, string password, string username)
+
+        public Employee(string firstname, string lastname, string phoneNumber, DateTime dateOfBirth, string bsn, string position)
         {
-            Username = username;
-            Name = name;
-            Email = email;
-            Password = password;
+            FirstName = firstname;
+            LastName = lastname;
+            PhoneNumber = phoneNumber;
+            DateOfBirth = dateOfBirth;
+            BSN = bsn;
+            Position = position;
         }
     }
 }

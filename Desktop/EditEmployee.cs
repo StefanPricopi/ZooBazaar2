@@ -14,7 +14,7 @@ namespace Employees
 {
     public partial class EditEmployee : Form
     {
-        string connectionString = "Server=mssqlstud.fhict.local;Database=dbi516787;User Id=dbi516787;Password=Xhy30aKiec;Encrypt=false;";
+        string connectionString = "Server=mssqlstud.fhict.local;Database=dbi478560_dbijungle;User Id=dbi478560_dbijungle;Password=1234;Encrypt=false;";
         private EmployeeManager employeeManager;
 
         public EditEmployee(EmployeeManager employeeManager)
@@ -39,7 +39,7 @@ namespace Employees
             {
                 connection.Open();
 
-                string selectQuery = "SELECT ID, Username, Name, Email, Password FROM Employee";
+                string selectQuery = "SELECT EmployeeID, FirstName, LastName, PhoneNumber, DateOfBirth, BSN, Position FROM Employees";
 
                 using (SqlCommand command = new SqlCommand(selectQuery, connection))
                 {
@@ -59,13 +59,13 @@ namespace Employees
             if (dataGridView1.SelectedRows.Count > 0)
             {
 
-                string uniqueIdentifier = dataGridView1.SelectedRows[0].Cells["ID"].Value.ToString();
+                string uniqueIdentifier = dataGridView1.SelectedRows[0].Cells["EmployeeID"].Value.ToString();
 
                 using (SqlConnection connection = new SqlConnection(connectionString))
                 {
                     connection.Open();
 
-                    string deleteQuery = "DELETE FROM Employee WHERE ID = @UniqueIdentifier";
+                    string deleteQuery = "DELETE FROM Employees WHERE EmployeeID = @UniqueIdentifier";
 
                     using (SqlCommand command = new SqlCommand(deleteQuery, connection))
                     {
@@ -95,25 +95,29 @@ namespace Employees
         {
             if (dataGridView1.SelectedRows.Count > 0)
             {
-                int employeeId = (int)dataGridView1.SelectedRows[0].Cells["ID"].Value;
+                int employeeId = (int)dataGridView1.SelectedRows[0].Cells["EmployeeID"].Value;
 
-                string editedUsername = tbxUsername.Text;
-                string editedName = tbxName.Text;
-                string editedEmail = tbxEmail.Text;
-                string editedPassword = tbxPassword.Text;
+                string editedFirstName = tbxFirstName.Text;
+                string editedLastName = tbxLastName.Text;
+                string editedPhone = tbxPhone.Text;
+                DateTime editedBirthDate = dtpBirthDate.Value;
+                string editedBSN = tbxBSN.Text;
+                string editedPosition = tbxPosition.Text;
 
                 using (SqlConnection connection = new SqlConnection(connectionString))
                 {
                     connection.Open();
 
-                    string updateQuery = "UPDATE Employee SET Username = @Username, Name = @Name, Email = @Email, Password = @Password WHERE ID = @EmployeeID";
+                    string updateQuery = "UPDATE Employees SET FirstName = @FirstName, LastName = @LastName, PhoneNumber = @PhoneNumber, DateOfBirth = @DateOfBirth, BSN = @BSN, Position = @Position WHERE EmployeeID = @EmployeeID";
 
                     using (SqlCommand command = new SqlCommand(updateQuery, connection))
                     {
-                        command.Parameters.AddWithValue("@Username", editedUsername);
-                        command.Parameters.AddWithValue("@Name", editedName);
-                        command.Parameters.AddWithValue("@Email", editedEmail);
-                        command.Parameters.AddWithValue("@Password", editedPassword);
+                        command.Parameters.AddWithValue("@FirstName", editedFirstName);
+                        command.Parameters.AddWithValue("@LastName", editedLastName);
+                        command.Parameters.AddWithValue("@PhoneNumber", editedPhone);
+                        command.Parameters.AddWithValue("@DateOfBirth", editedBirthDate);
+                        command.Parameters.AddWithValue("@BSN", editedBSN);
+                        command.Parameters.AddWithValue("@Position", editedPosition);
                         command.Parameters.AddWithValue("@EmployeeID", employeeId);
 
                         int rowsAffected = command.ExecuteNonQuery();
@@ -136,5 +140,9 @@ namespace Employees
             }
         }
 
+        private void label2_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
