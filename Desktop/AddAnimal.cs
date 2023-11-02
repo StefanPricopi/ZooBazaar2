@@ -194,7 +194,7 @@ namespace Animals
         private void btnAddAnimal_Click(object sender, EventArgs e)
         {
             string name = tbxName.Text;
-            DateTime dateofbirth = dateBirth.Value;
+            DateOnly dateofbirth = (DateOnly)dateBirth.Value;
             string phylum = comboPhylum.SelectedItem.ToString();
             string classis = comboClassis.SelectedItem.ToString();
             string ordo = comboOrdo.SelectedItem.ToString();
