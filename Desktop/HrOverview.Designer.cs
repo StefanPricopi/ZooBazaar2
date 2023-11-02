@@ -70,7 +70,7 @@
             btnEditEmployee.Name = "btnEditEmployee";
             btnEditEmployee.Size = new Size(313, 79);
             btnEditEmployee.TabIndex = 11;
-            btnEditEmployee.Text = "Add Employee";
+            btnEditEmployee.Text = "Change Employee Data";
             btnEditEmployee.UseVisualStyleBackColor = false;
             btnEditEmployee.Click += btnEditEmployee_Click;
             // 
@@ -86,7 +86,7 @@
             btnAddEmployee.Name = "btnAddEmployee";
             btnAddEmployee.Size = new Size(313, 79);
             btnAddEmployee.TabIndex = 12;
-            btnAddEmployee.Text = "Change Employee Data";
+            btnAddEmployee.Text = "Add Employee";
             btnAddEmployee.UseVisualStyleBackColor = false;
             btnAddEmployee.Click += btnAddEmployee_Click;
             // 

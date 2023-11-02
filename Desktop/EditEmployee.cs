@@ -8,7 +8,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Logic.Managers;
 using Microsoft.Data.SqlClient;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
 namespace Employees
 {
@@ -39,7 +41,7 @@ namespace Employees
             {
                 connection.Open();
 
-                string selectQuery = "SELECT EmployeeID, FirstName, LastName, PhoneNumber, DateOfBirth, BSN, Position FROM Employees";
+                string selectQuery = "SELECT EmployeeID, FirstName, LastName, PhoneNumber, DateOfBirth, BSN, UserID, Position FROM Employees";
 
                 using (SqlCommand command = new SqlCommand(selectQuery, connection))
                 {
@@ -51,6 +53,25 @@ namespace Employees
                         dataGridView1.DataSource = employeeDataTable;
                     }
                 }
+            }
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+
+                string selectQuery = "SELECT UserID, Username, Password, Email, Salt FROM users";
+
+
+                using (SqlCommand command = new SqlCommand(selectQuery, connection))
+                {
+                    using (SqlDataAdapter adapter = new SqlDataAdapter(command))
+                    {
+                        DataTable employeeDataTable = new DataTable();
+                        adapter.Fill(employeeDataTable);
+
+                        dataGridView2.DataSource = employeeDataTable;
+                    }
+                }
+
             }
         }
 
@@ -90,7 +111,15 @@ namespace Employees
                 MessageBox.Show("Please select an employee to delete.");
             }
         }
+        private void UpdateInfoWhenUserIsSelected()
+        {
+            if (dataGridView2.SelectedRows.Count > 0)
+            {
+                int employeeId = (int)dataGridView1.SelectedRows[0].Cells["EmployeeID"].Value;
 
+
+            }
+        }
         private void btnEditEmployee_Click(object sender, EventArgs e)
         {
             if (dataGridView1.SelectedRows.Count > 0)
@@ -143,6 +172,78 @@ namespace Employees
         private void label2_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void dataGridView2_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+
+
+
+        }
+        private void dataGridView2_SelectionChanged(object sender, EventArgs e)
+        {
+
+            DataGridViewRow selectedRow = dataGridView2.SelectedRows[0];
+
+            string username = selectedRow.Cells["Username"].ToString();
+            string password = selectedRow.Cells["Password"].ToString();
+            string email = selectedRow.Cells["Email"].ToString();
+
+            tbxUsername.Text = username;
+            tbxPassword.Text = password;
+            tbxEmail.Text = email;
+            MessageBox.Show(email);
+
+        }
+
+        private void btnEditLogin_Click(object sender, EventArgs e)
+        {
+            if (dataGridView2.SelectedRows.Count > 0)
+            {
+                int userID = (int)dataGridView2.SelectedRows[0].Cells["UserID"].Value;
+
+                string editedUsername = tbxUsername.Text;
+                string editedPassword = tbxPassword.Text;
+                string editedEmail = tbxEmail.Text;
+                string salt = DateTime.Now.ToString();
+                var hashedPW = UserManager.HashedPassword($"{editedPassword}{salt.Trim()}");
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    connection.Open();
+
+                    string updateQuery = "UPDATE users SET Username = @Username, Password = @Password, Email = @Email WHERE UserID = @UserID";
+
+                    using (SqlCommand command = new SqlCommand(updateQuery, connection))
+                    {
+                        command.Parameters.AddWithValue("@Username", editedUsername);
+                        command.Parameters.AddWithValue("@Password", hashedPW);
+                        command.Parameters.AddWithValue("@Email", editedEmail);
+                        command.Parameters.AddWithValue("@UserID", userID);
+
+                        int rowsAffected = command.ExecuteNonQuery();
+
+                        if (rowsAffected > 0)
+                        {
+                            MessageBox.Show("Employee updated successfully!");
+                            LoadEmployees();
+                        }
+                        else
+                        {
+                            MessageBox.Show("Employee update failed.");
+                        }
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("Please select an Employee login to edit.");
+            }
         }
     }
 }

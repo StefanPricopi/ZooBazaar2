@@ -28,256 +28,363 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.btnEditEmployee = new System.Windows.Forms.Button();
-            this.tbxFirstName = new System.Windows.Forms.TextBox();
-            this.tbxLastName = new System.Windows.Forms.TextBox();
-            this.tbxPhone = new System.Windows.Forms.TextBox();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.btnReload = new System.Windows.Forms.Button();
-            this.btnDeleteEmployee = new System.Windows.Forms.Button();
-            this.label7 = new System.Windows.Forms.Label();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.label8 = new System.Windows.Forms.Label();
-            this.tbxBSN = new System.Windows.Forms.TextBox();
-            this.dtpBirthDate = new System.Windows.Forms.DateTimePicker();
-            this.label4 = new System.Windows.Forms.Label();
-            this.tbxPosition = new System.Windows.Forms.TextBox();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
-            this.SuspendLayout();
+            label1 = new Label();
+            label2 = new Label();
+            label3 = new Label();
+            label5 = new Label();
+            label6 = new Label();
+            btnEditEmployee = new Button();
+            tbxFirstName = new TextBox();
+            tbxLastName = new TextBox();
+            tbxPhone = new TextBox();
+            dataGridView1 = new DataGridView();
+            btnReload = new Button();
+            btnDeleteEmployee = new Button();
+            label7 = new Label();
+            pictureBox1 = new PictureBox();
+            pictureBox2 = new PictureBox();
+            label8 = new Label();
+            tbxBSN = new TextBox();
+            dtpBirthDate = new DateTimePicker();
+            label4 = new Label();
+            tbxPosition = new TextBox();
+            dataGridView2 = new DataGridView();
+            label9 = new Label();
+            label10 = new Label();
+            label11 = new Label();
+            tbxUsername = new TextBox();
+            tbxPassword = new TextBox();
+            tbxEmail = new TextBox();
+            btnEditLogin = new Button();
+            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)dataGridView2).BeginInit();
+            SuspendLayout();
             // 
             // label1
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Garamond", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label1.Location = new System.Drawing.Point(137, 9);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(158, 29);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Edit Employee";
+            label1.AutoSize = true;
+            label1.Font = new Font("Garamond", 15F, FontStyle.Regular, GraphicsUnit.Point);
+            label1.Location = new Point(120, 7);
+            label1.Name = "label1";
+            label1.Size = new Size(126, 22);
+            label1.TabIndex = 0;
+            label1.Text = "Edit Employee";
             // 
             // label2
             // 
-            this.label2.AutoSize = true;
-            this.label2.BackColor = System.Drawing.Color.MediumSlateBlue;
-            this.label2.Location = new System.Drawing.Point(14, 55);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(83, 20);
-            this.label2.TabIndex = 1;
-            this.label2.Text = "First Name:";
-            this.label2.Click += new System.EventHandler(this.label2_Click);
+            label2.AutoSize = true;
+            label2.BackColor = Color.MediumSlateBlue;
+            label2.Location = new Point(12, 41);
+            label2.Name = "label2";
+            label2.Size = new Size(67, 15);
+            label2.TabIndex = 1;
+            label2.Text = "First Name:";
+            label2.Click += label2_Click;
             // 
             // label3
             // 
-            this.label3.AutoSize = true;
-            this.label3.BackColor = System.Drawing.Color.MediumSlateBlue;
-            this.label3.Location = new System.Drawing.Point(14, 105);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(82, 20);
-            this.label3.TabIndex = 2;
-            this.label3.Text = "Last Name:";
+            label3.AutoSize = true;
+            label3.BackColor = Color.MediumSlateBlue;
+            label3.Location = new Point(12, 79);
+            label3.Name = "label3";
+            label3.Size = new Size(66, 15);
+            label3.TabIndex = 2;
+            label3.Text = "Last Name:";
             // 
             // label5
             // 
-            this.label5.AutoSize = true;
-            this.label5.BackColor = System.Drawing.Color.MediumSlateBlue;
-            this.label5.Location = new System.Drawing.Point(14, 158);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(111, 20);
-            this.label5.TabIndex = 4;
-            this.label5.Text = "Phone Number:";
+            label5.AutoSize = true;
+            label5.BackColor = Color.MediumSlateBlue;
+            label5.Location = new Point(12, 118);
+            label5.Name = "label5";
+            label5.Size = new Size(91, 15);
+            label5.TabIndex = 4;
+            label5.Text = "Phone Number:";
             // 
             // label6
             // 
-            this.label6.AutoSize = true;
-            this.label6.BackColor = System.Drawing.Color.MediumSlateBlue;
-            this.label6.Location = new System.Drawing.Point(14, 208);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(79, 20);
-            this.label6.TabIndex = 5;
-            this.label6.Text = "Birth Date:";
+            label6.AutoSize = true;
+            label6.BackColor = Color.MediumSlateBlue;
+            label6.Location = new Point(12, 156);
+            label6.Name = "label6";
+            label6.Size = new Size(62, 15);
+            label6.TabIndex = 5;
+            label6.Text = "Birth Date:";
             // 
             // btnEditEmployee
             // 
-            this.btnEditEmployee.BackColor = System.Drawing.Color.MediumSlateBlue;
-            this.btnEditEmployee.FlatAppearance.BorderSize = 0;
-            this.btnEditEmployee.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnEditEmployee.Location = new System.Drawing.Point(211, 359);
-            this.btnEditEmployee.Name = "btnEditEmployee";
-            this.btnEditEmployee.Size = new System.Drawing.Size(168, 29);
-            this.btnEditEmployee.TabIndex = 6;
-            this.btnEditEmployee.Text = "Edit Employee Details";
-            this.btnEditEmployee.UseVisualStyleBackColor = false;
-            this.btnEditEmployee.Click += new System.EventHandler(this.btnEditEmployee_Click);
+            btnEditEmployee.BackColor = Color.MediumSlateBlue;
+            btnEditEmployee.FlatAppearance.BorderSize = 0;
+            btnEditEmployee.FlatStyle = FlatStyle.Flat;
+            btnEditEmployee.Location = new Point(120, 458);
+            btnEditEmployee.Margin = new Padding(3, 2, 3, 2);
+            btnEditEmployee.Name = "btnEditEmployee";
+            btnEditEmployee.Size = new Size(147, 22);
+            btnEditEmployee.TabIndex = 6;
+            btnEditEmployee.Text = "Edit Employee Details";
+            btnEditEmployee.UseVisualStyleBackColor = false;
+            btnEditEmployee.Click += btnEditEmployee_Click;
             // 
             // tbxFirstName
             // 
-            this.tbxFirstName.Location = new System.Drawing.Point(153, 48);
-            this.tbxFirstName.Name = "tbxFirstName";
-            this.tbxFirstName.Size = new System.Drawing.Size(263, 27);
-            this.tbxFirstName.TabIndex = 7;
+            tbxFirstName.Location = new Point(134, 36);
+            tbxFirstName.Margin = new Padding(3, 2, 3, 2);
+            tbxFirstName.Name = "tbxFirstName";
+            tbxFirstName.Size = new Size(231, 23);
+            tbxFirstName.TabIndex = 7;
             // 
             // tbxLastName
             // 
-            this.tbxLastName.Location = new System.Drawing.Point(153, 95);
-            this.tbxLastName.Name = "tbxLastName";
-            this.tbxLastName.Size = new System.Drawing.Size(263, 27);
-            this.tbxLastName.TabIndex = 8;
+            tbxLastName.Location = new Point(134, 71);
+            tbxLastName.Margin = new Padding(3, 2, 3, 2);
+            tbxLastName.Name = "tbxLastName";
+            tbxLastName.Size = new Size(231, 23);
+            tbxLastName.TabIndex = 8;
             // 
             // tbxPhone
             // 
-            this.tbxPhone.Location = new System.Drawing.Point(153, 151);
-            this.tbxPhone.Name = "tbxPhone";
-            this.tbxPhone.Size = new System.Drawing.Size(263, 27);
-            this.tbxPhone.TabIndex = 10;
+            tbxPhone.Location = new Point(134, 113);
+            tbxPhone.Margin = new Padding(3, 2, 3, 2);
+            tbxPhone.Name = "tbxPhone";
+            tbxPhone.Size = new Size(231, 23);
+            tbxPhone.TabIndex = 10;
             // 
             // dataGridView1
             // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(443, 48);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.RowHeadersWidth = 51;
-            this.dataGridView1.RowTemplate.Height = 29;
-            this.dataGridView1.Size = new System.Drawing.Size(530, 245);
-            this.dataGridView1.TabIndex = 12;
+            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridView1.Location = new Point(388, 36);
+            dataGridView1.Margin = new Padding(3, 2, 3, 2);
+            dataGridView1.Name = "dataGridView1";
+            dataGridView1.RowHeadersWidth = 51;
+            dataGridView1.RowTemplate.Height = 29;
+            dataGridView1.Size = new Size(464, 204);
+            dataGridView1.TabIndex = 12;
+            dataGridView1.CellContentClick += dataGridView1_CellContentClick;
             // 
             // btnReload
             // 
-            this.btnReload.BackColor = System.Drawing.Color.MediumSlateBlue;
-            this.btnReload.FlatAppearance.BorderSize = 0;
-            this.btnReload.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnReload.Location = new System.Drawing.Point(443, 359);
-            this.btnReload.Name = "btnReload";
-            this.btnReload.Size = new System.Drawing.Size(183, 29);
-            this.btnReload.TabIndex = 13;
-            this.btnReload.Text = "Reload Employee Data";
-            this.btnReload.UseVisualStyleBackColor = false;
-            this.btnReload.Click += new System.EventHandler(this.btnRefresh_Click);
+            btnReload.BackColor = Color.MediumSlateBlue;
+            btnReload.FlatAppearance.BorderSize = 0;
+            btnReload.FlatStyle = FlatStyle.Flat;
+            btnReload.Location = new Point(499, 458);
+            btnReload.Margin = new Padding(3, 2, 3, 2);
+            btnReload.Name = "btnReload";
+            btnReload.Size = new Size(160, 22);
+            btnReload.TabIndex = 13;
+            btnReload.Text = "Reload Employee Data";
+            btnReload.UseVisualStyleBackColor = false;
+            btnReload.Click += btnRefresh_Click;
             // 
             // btnDeleteEmployee
             // 
-            this.btnDeleteEmployee.BackColor = System.Drawing.Color.MediumSlateBlue;
-            this.btnDeleteEmployee.FlatAppearance.BorderSize = 0;
-            this.btnDeleteEmployee.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnDeleteEmployee.Location = new System.Drawing.Point(735, 359);
-            this.btnDeleteEmployee.Name = "btnDeleteEmployee";
-            this.btnDeleteEmployee.Size = new System.Drawing.Size(238, 29);
-            this.btnDeleteEmployee.TabIndex = 14;
-            this.btnDeleteEmployee.Text = "Delete Employee Acount";
-            this.btnDeleteEmployee.UseVisualStyleBackColor = false;
-            this.btnDeleteEmployee.Click += new System.EventHandler(this.btnDelete_Click);
+            btnDeleteEmployee.BackColor = Color.MediumSlateBlue;
+            btnDeleteEmployee.FlatAppearance.BorderSize = 0;
+            btnDeleteEmployee.FlatStyle = FlatStyle.Flat;
+            btnDeleteEmployee.Location = new Point(698, 458);
+            btnDeleteEmployee.Margin = new Padding(3, 2, 3, 2);
+            btnDeleteEmployee.Name = "btnDeleteEmployee";
+            btnDeleteEmployee.Size = new Size(208, 22);
+            btnDeleteEmployee.TabIndex = 14;
+            btnDeleteEmployee.Text = "Delete Employee Acount";
+            btnDeleteEmployee.UseVisualStyleBackColor = false;
+            btnDeleteEmployee.Click += btnDelete_Click;
             // 
             // label7
             // 
-            this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Garamond", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label7.Location = new System.Drawing.Point(430, 12);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(557, 26);
-            this.label7.TabIndex = 15;
-            this.label7.Text = "Select an Employee to edit their data or delete their account";
+            label7.AutoSize = true;
+            label7.Font = new Font("Garamond", 13.8F, FontStyle.Regular, GraphicsUnit.Point);
+            label7.Location = new Point(376, 9);
+            label7.Name = "label7";
+            label7.Size = new Size(456, 21);
+            label7.TabIndex = 15;
+            label7.Text = "Select an Employee to edit their data or delete their account";
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Image = global::Desktop.Properties.Resources.Screenshot_12;
-            this.pictureBox1.Location = new System.Drawing.Point(-2, 339);
-            this.pictureBox1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(1075, 75);
-            this.pictureBox1.TabIndex = 16;
-            this.pictureBox1.TabStop = false;
+            pictureBox1.Image = Desktop.Properties.Resources.Screenshot_12;
+            pictureBox1.Location = new Point(-20, 441);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(941, 56);
+            pictureBox1.TabIndex = 16;
+            pictureBox1.TabStop = false;
             // 
             // pictureBox2
             // 
-            this.pictureBox2.Image = global::Desktop.Properties.Resources.Screenshot_14;
-            this.pictureBox2.Location = new System.Drawing.Point(-2, -3);
-            this.pictureBox2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(133, 334);
-            this.pictureBox2.TabIndex = 17;
-            this.pictureBox2.TabStop = false;
+            pictureBox2.Image = Desktop.Properties.Resources.Screenshot_14;
+            pictureBox2.Location = new Point(-2, -2);
+            pictureBox2.Name = "pictureBox2";
+            pictureBox2.Size = new Size(116, 499);
+            pictureBox2.TabIndex = 17;
+            pictureBox2.TabStop = false;
             // 
             // label8
             // 
-            this.label8.AutoSize = true;
-            this.label8.BackColor = System.Drawing.Color.MediumSlateBlue;
-            this.label8.Location = new System.Drawing.Point(14, 254);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(40, 20);
-            this.label8.TabIndex = 18;
-            this.label8.Text = "BSN:";
+            label8.AutoSize = true;
+            label8.BackColor = Color.MediumSlateBlue;
+            label8.Location = new Point(12, 190);
+            label8.Name = "label8";
+            label8.Size = new Size(32, 15);
+            label8.TabIndex = 18;
+            label8.Text = "BSN:";
             // 
             // tbxBSN
             // 
-            this.tbxBSN.Location = new System.Drawing.Point(153, 247);
-            this.tbxBSN.Name = "tbxBSN";
-            this.tbxBSN.Size = new System.Drawing.Size(263, 27);
-            this.tbxBSN.TabIndex = 19;
+            tbxBSN.Location = new Point(134, 185);
+            tbxBSN.Margin = new Padding(3, 2, 3, 2);
+            tbxBSN.Name = "tbxBSN";
+            tbxBSN.Size = new Size(231, 23);
+            tbxBSN.TabIndex = 19;
             // 
             // dtpBirthDate
             // 
-            this.dtpBirthDate.Location = new System.Drawing.Point(153, 201);
-            this.dtpBirthDate.Name = "dtpBirthDate";
-            this.dtpBirthDate.Size = new System.Drawing.Size(263, 27);
-            this.dtpBirthDate.TabIndex = 20;
+            dtpBirthDate.Location = new Point(134, 151);
+            dtpBirthDate.Margin = new Padding(3, 2, 3, 2);
+            dtpBirthDate.Name = "dtpBirthDate";
+            dtpBirthDate.Size = new Size(231, 23);
+            dtpBirthDate.TabIndex = 20;
             // 
             // label4
             // 
-            this.label4.AutoSize = true;
-            this.label4.BackColor = System.Drawing.Color.MediumSlateBlue;
-            this.label4.Location = new System.Drawing.Point(14, 292);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(64, 20);
-            this.label4.TabIndex = 21;
-            this.label4.Text = "Position:";
+            label4.AutoSize = true;
+            label4.BackColor = Color.MediumSlateBlue;
+            label4.Location = new Point(12, 219);
+            label4.Name = "label4";
+            label4.Size = new Size(53, 15);
+            label4.TabIndex = 21;
+            label4.Text = "Position:";
             // 
             // tbxPosition
             // 
-            this.tbxPosition.Location = new System.Drawing.Point(153, 289);
-            this.tbxPosition.Name = "tbxPosition";
-            this.tbxPosition.Size = new System.Drawing.Size(263, 27);
-            this.tbxPosition.TabIndex = 22;
+            tbxPosition.Location = new Point(134, 217);
+            tbxPosition.Margin = new Padding(3, 2, 3, 2);
+            tbxPosition.Name = "tbxPosition";
+            tbxPosition.Size = new Size(231, 23);
+            tbxPosition.TabIndex = 22;
+            // 
+            // dataGridView2
+            // 
+            dataGridView2.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridView2.Location = new Point(388, 265);
+            dataGridView2.Margin = new Padding(3, 2, 3, 2);
+            dataGridView2.Name = "dataGridView2";
+            dataGridView2.RowHeadersWidth = 51;
+            dataGridView2.RowTemplate.Height = 29;
+            dataGridView2.Size = new Size(464, 171);
+            dataGridView2.TabIndex = 23;
+            dataGridView2.CellContentClick += dataGridView2_CellContentClick;
+            // 
+            // label9
+            // 
+            label9.AutoSize = true;
+            label9.BackColor = Color.MediumSlateBlue;
+            label9.Location = new Point(12, 289);
+            label9.Name = "label9";
+            label9.Size = new Size(63, 15);
+            label9.TabIndex = 24;
+            label9.Text = "Username:";
+            // 
+            // label10
+            // 
+            label10.AutoSize = true;
+            label10.BackColor = Color.MediumSlateBlue;
+            label10.Location = new Point(12, 337);
+            label10.Name = "label10";
+            label10.Size = new Size(60, 15);
+            label10.TabIndex = 25;
+            label10.Text = "Password:";
+            // 
+            // label11
+            // 
+            label11.AutoSize = true;
+            label11.BackColor = Color.MediumSlateBlue;
+            label11.Location = new Point(12, 383);
+            label11.Name = "label11";
+            label11.Size = new Size(39, 15);
+            label11.TabIndex = 26;
+            label11.Text = "Email:";
+            // 
+            // tbxUsername
+            // 
+            tbxUsername.Location = new Point(134, 286);
+            tbxUsername.Margin = new Padding(3, 2, 3, 2);
+            tbxUsername.Name = "tbxUsername";
+            tbxUsername.Size = new Size(231, 23);
+            tbxUsername.TabIndex = 27;
+            // 
+            // tbxPassword
+            // 
+            tbxPassword.Location = new Point(134, 337);
+            tbxPassword.Margin = new Padding(3, 2, 3, 2);
+            tbxPassword.Name = "tbxPassword";
+            tbxPassword.Size = new Size(231, 23);
+            tbxPassword.TabIndex = 28;
+            // 
+            // tbxEmail
+            // 
+            tbxEmail.Location = new Point(134, 383);
+            tbxEmail.Margin = new Padding(3, 2, 3, 2);
+            tbxEmail.Name = "tbxEmail";
+            tbxEmail.Size = new Size(231, 23);
+            tbxEmail.TabIndex = 29;
+            // 
+            // btnEditLogin
+            // 
+            btnEditLogin.BackColor = Color.MediumSlateBlue;
+            btnEditLogin.FlatAppearance.BorderSize = 0;
+            btnEditLogin.FlatStyle = FlatStyle.Flat;
+            btnEditLogin.Location = new Point(302, 458);
+            btnEditLogin.Margin = new Padding(3, 2, 3, 2);
+            btnEditLogin.Name = "btnEditLogin";
+            btnEditLogin.Size = new Size(147, 22);
+            btnEditLogin.TabIndex = 30;
+            btnEditLogin.Text = "Edit Employee Login";
+            btnEditLogin.UseVisualStyleBackColor = false;
+            btnEditLogin.Click += btnEditLogin_Click;
             // 
             // EditEmployee
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1066, 410);
-            this.Controls.Add(this.tbxPosition);
-            this.Controls.Add(this.label4);
-            this.Controls.Add(this.dtpBirthDate);
-            this.Controls.Add(this.tbxBSN);
-            this.Controls.Add(this.label8);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.label5);
-            this.Controls.Add(this.label6);
-            this.Controls.Add(this.pictureBox2);
-            this.Controls.Add(this.btnDeleteEmployee);
-            this.Controls.Add(this.btnReload);
-            this.Controls.Add(this.btnEditEmployee);
-            this.Controls.Add(this.pictureBox1);
-            this.Controls.Add(this.label7);
-            this.Controls.Add(this.dataGridView1);
-            this.Controls.Add(this.tbxPhone);
-            this.Controls.Add(this.tbxLastName);
-            this.Controls.Add(this.tbxFirstName);
-            this.Controls.Add(this.label1);
-            this.Name = "EditEmployee";
-            this.Text = "EditEmployee";
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
-            this.ResumeLayout(false);
-            this.PerformLayout();
-
+            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(933, 491);
+            Controls.Add(btnEditLogin);
+            Controls.Add(tbxEmail);
+            Controls.Add(tbxPassword);
+            Controls.Add(tbxUsername);
+            Controls.Add(label11);
+            Controls.Add(label10);
+            Controls.Add(label9);
+            Controls.Add(dataGridView2);
+            Controls.Add(tbxPosition);
+            Controls.Add(label4);
+            Controls.Add(dtpBirthDate);
+            Controls.Add(tbxBSN);
+            Controls.Add(label8);
+            Controls.Add(label2);
+            Controls.Add(label3);
+            Controls.Add(label5);
+            Controls.Add(label6);
+            Controls.Add(pictureBox2);
+            Controls.Add(btnDeleteEmployee);
+            Controls.Add(btnReload);
+            Controls.Add(btnEditEmployee);
+            Controls.Add(pictureBox1);
+            Controls.Add(label7);
+            Controls.Add(dataGridView1);
+            Controls.Add(tbxPhone);
+            Controls.Add(tbxLastName);
+            Controls.Add(tbxFirstName);
+            Controls.Add(label1);
+            Margin = new Padding(3, 2, 3, 2);
+            Name = "EditEmployee";
+            Text = "EditEmployee";
+            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dataGridView2).EndInit();
+            ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
@@ -302,5 +409,13 @@
         private DateTimePicker dtpBirthDate;
         private Label label4;
         private TextBox tbxPosition;
+        private DataGridView dataGridView2;
+        private Label label9;
+        private Label label10;
+        private Label label11;
+        private TextBox tbxUsername;
+        private TextBox tbxPassword;
+        private TextBox tbxEmail;
+        private Button btnEditLogin;
     }
 }

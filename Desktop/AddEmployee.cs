@@ -9,7 +9,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml.Linq;
+using Logic.DTO;
+using Logic.Managers;
 using Microsoft.Data.SqlClient;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
+
 namespace Employees
 {
     public partial class AddEmployee : Form
@@ -30,7 +34,11 @@ namespace Employees
             DateTime birthDate = dtpBirthDate.Value;
             string BSN = tbxBSN.Text;
             string position = tbxPosition.Text;
-
+            string username = tbxUsername.Text;
+            string password = tbxPassword.Text;
+            string email = tbxEmail.Text;
+            string salt = DateTime.Now.ToString();
+            var hashedPW = UserManager.HashedPassword($"{password}{salt.Trim()}");
             //Employee newEmployee = new Employee(name, email, password, username);
 
             //employeeManager.AddEmployee(newEmployee);
@@ -41,18 +49,29 @@ namespace Employees
             {
                 connection.Open();
 
-                string insertQuery = "INSERT INTO Employees (FirstName, LastName, PhoneNumber, DateOfBirth, BSN, Position) VALUES (@FirstName, @LastName, @PhoneNumber, @DateOfBirth, @BSN, @Position)";
-
-                using (SqlCommand command = new SqlCommand(insertQuery, connection))
+                // Insert into User table
+                using (SqlCommand cmdUser = new SqlCommand("INSERT INTO [users] (Username, Email, Password, Salt) VALUES (@Username, @Email, @Password, @Salt); SELECT SCOPE_IDENTITY();", connection))
                 {
-                    command.Parameters.AddWithValue("@FirstName", firstName);
-                    command.Parameters.AddWithValue("@LastName", lastName);
-                    command.Parameters.AddWithValue("@PhoneNumber", phone);
-                    command.Parameters.AddWithValue("@DateOfBirth", birthDate);
-                    command.Parameters.AddWithValue("@BSN", BSN);
-                    command.Parameters.AddWithValue("@Position", position);
+                    cmdUser.Parameters.AddWithValue("@Username", username);
+                    cmdUser.Parameters.AddWithValue("@Email", email);
+                    cmdUser.Parameters.AddWithValue("@Password", hashedPW);
+                    cmdUser.Parameters.AddWithValue("@Salt", salt);
 
-                    command.ExecuteNonQuery();
+                    int userID = Convert.ToInt32(cmdUser.ExecuteScalar()); // Get the auto-generated UserID
+
+                    // Insert into Employee table with the obtained UserID
+                    using (SqlCommand cmdEmployee = new SqlCommand("INSERT INTO Employees (FirstName, LastName, PhoneNumber, DateOfBirth, BSN, UserID, Position) VALUES (@FirstName, @LastName, @PhoneNumber, @DateOfBirth, @BSN, @UserID, @Position);", connection))
+                    {
+                        cmdEmployee.Parameters.AddWithValue("@FirstName", firstName);
+                        cmdEmployee.Parameters.AddWithValue("@LastName", lastName);
+                        cmdEmployee.Parameters.AddWithValue("@PhoneNumber", phone);
+                        cmdEmployee.Parameters.AddWithValue("@DateOfBirth", birthDate);
+                        cmdEmployee.Parameters.AddWithValue("@BSN", BSN);
+                        cmdEmployee.Parameters.AddWithValue("@UserID", userID); // Use the obtained UserID
+                        cmdEmployee.Parameters.AddWithValue("@Position", position);
+
+                        cmdEmployee.ExecuteNonQuery(); // Insert employee record
+                    }
                 }
             }
             MessageBox.Show("Employee Profile added successfully!");
