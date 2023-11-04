@@ -20,14 +20,16 @@ namespace Desktop
 {
     public partial class Login : Form
     {
-        UserManager userManager = new UserManager();
-        private AnimalManager animalManager;
-        private EmployeeManager employeeManager;
         
+        
+        private readonly UserManager userManager;
+       
         public Login()
         {
             InitializeComponent();
 
+            userManager = new UserManager(new UserRepository());
+            
 
         }
 
@@ -49,7 +51,7 @@ namespace Desktop
 
             if (currentUser != null)
             {
-               string position = userRepository.RetrievePositionInformation(email);
+               string position = userManager.RetrievePositionInformation(email);
 
                 if (position == "Admin")
                 {

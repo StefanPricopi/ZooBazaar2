@@ -9,76 +9,117 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml.Linq;
+using DataAccess;
+using Logic.DTO;
+using Logic.Entities;
 using Logic.DTO;
 using Logic.Managers;
 using Microsoft.Data.SqlClient;
+using Microsoft.Identity.Client;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
 namespace Employees
 {
     public partial class AddEmployee : Form
     {
-        private EmployeeManager employeeManager;
+        private readonly EmployeeManager employeeManager;
+        private Rectangle myTabRect;
 
-        public AddEmployee(EmployeeManager employeeManager)
+
+        public AddEmployee()
         {
             InitializeComponent();
-            this.employeeManager = employeeManager;
+
+            employeeManager = new EmployeeManager(new EmployeeRepository());
+            tabControl1.DrawItem += new DrawItemEventHandler(tabControl1_DrawItem);
+
         }
+        private void tabControl1_DrawItem(object sender, DrawItemEventArgs e)
+        {
+            // Custom drawing logic for your tab control
+            TabControl tabControl = (TabControl)sender;
+            TabPage tabPage = tabControl.TabPages[e.Index];
+
+            // First paint the background with a color based on the current tab
+            switch (e.Index)
+            {
+                case 0:
+                    e.Graphics.FillRectangle(new SolidBrush(Color.MediumSlateBlue), e.Bounds);
+                    break;
+                case 1:
+                    e.Graphics.FillRectangle(new SolidBrush(Color.MediumSlateBlue), e.Bounds);
+                    break;
+                case 2:
+                    e.Graphics.FillRectangle(new SolidBrush(Color.MediumSlateBlue), e.Bounds);
+                    break;
+                case 3:
+                    e.Graphics.FillRectangle(new SolidBrush(Color.MediumSlateBlue), e.Bounds);
+                    break;
+                case 4:
+                    e.Graphics.FillRectangle(new SolidBrush(Color.MediumSlateBlue), e.Bounds);
+                    break;
+            }
+
+            // Define your custom text color and font
+            Color textColor = Color.Black; // Change to the color you want
+            Font textFont = new Font("Arial", 12, FontStyle.Bold); // Change to the font and size you want
+
+            // Then draw the current tab button text with custom text color and font
+            Rectangle paddedBounds = e.Bounds;
+            paddedBounds.Inflate(-2, -2);
+
+            using (Brush textBrush = new SolidBrush(textColor))
+            {
+                e.Graphics.DrawString(tabPage.Text, textFont, textBrush, paddedBounds);
+            }
+        }
+
 
         private void btnAddEmployee_Click(object sender, EventArgs e)
         {
-            string firstName = tbxFirstName.Text;
-            string lastName = tbxLastName.Text;
-            string phone = tbxPhone.Text;
-            DateTime birthDate = dtpBirthDate.Value;
-            string BSN = tbxBSN.Text;
-            string position = tbxPosition.Text;
-            string username = tbxUsername.Text;
-            string password = tbxPassword.Text;
-            string email = tbxEmail.Text;
-            string salt = DateTime.Now.ToString();
-            var hashedPW = UserManager.HashedPassword($"{password}{salt.Trim()}");
-            //Employee newEmployee = new Employee(name, email, password, username);
+            UserDTO userDTO = new UserDTO();
+            EmployeeDTO employeeDTO = new EmployeeDTO();
+            //EmployeeDTO info
+            employeeDTO.FirstName = tbxFirstName.Text;
+            employeeDTO.LastName = tbxLastName.Text;
+            employeeDTO.PhoneNumber = int.Parse(tbxPhone.Text);
+            employeeDTO.DateOfBirth = dtpBirthDate.Value;
+            employeeDTO.BSN = int.Parse(tbxBSN.Text);
+            employeeDTO.Position = cmbPosition.Text;
 
-            //employeeManager.AddEmployee(newEmployee);
+            // UserDTO info
+            userDTO.Username = tbxUsername.Text;
+            userDTO.Password = tbxPassword.Text;
+            userDTO.Email = tbxEmail.Text;
 
-            string connectionString = "Server=mssqlstud.fhict.local;Database=dbi478560_dbijungle;User Id=dbi478560_dbijungle;Password=1234;Encrypt=false;";
 
-            using (SqlConnection connection = new SqlConnection(connectionString))
+            if (employeeManager.CreateEmployee(employeeDTO, userDTO))
             {
-                connection.Open();
-
-                // Insert into User table
-                using (SqlCommand cmdUser = new SqlCommand("INSERT INTO [users] (Username, Email, Password, Salt) VALUES (@Username, @Email, @Password, @Salt); SELECT SCOPE_IDENTITY();", connection))
-                {
-                    cmdUser.Parameters.AddWithValue("@Username", username);
-                    cmdUser.Parameters.AddWithValue("@Email", email);
-                    cmdUser.Parameters.AddWithValue("@Password", hashedPW);
-                    cmdUser.Parameters.AddWithValue("@Salt", salt);
-
-                    int userID = Convert.ToInt32(cmdUser.ExecuteScalar()); // Get the auto-generated UserID
-
-                    // Insert into Employee table with the obtained UserID
-                    using (SqlCommand cmdEmployee = new SqlCommand("INSERT INTO Employees (FirstName, LastName, PhoneNumber, DateOfBirth, BSN, UserID, Position) VALUES (@FirstName, @LastName, @PhoneNumber, @DateOfBirth, @BSN, @UserID, @Position);", connection))
-                    {
-                        cmdEmployee.Parameters.AddWithValue("@FirstName", firstName);
-                        cmdEmployee.Parameters.AddWithValue("@LastName", lastName);
-                        cmdEmployee.Parameters.AddWithValue("@PhoneNumber", phone);
-                        cmdEmployee.Parameters.AddWithValue("@DateOfBirth", birthDate);
-                        cmdEmployee.Parameters.AddWithValue("@BSN", BSN);
-                        cmdEmployee.Parameters.AddWithValue("@UserID", userID); // Use the obtained UserID
-                        cmdEmployee.Parameters.AddWithValue("@Position", position);
-
-                        cmdEmployee.ExecuteNonQuery(); // Insert employee record
-                    }
-                }
+                MessageBox.Show("successful");
             }
-            MessageBox.Show("Employee Profile added successfully!");
-            this.Close();
+            else
+            {
+                MessageBox.Show("failed");
+            }
+
+
         }
 
         private void label6_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void pictureBox5_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void button1_Click(object sender, EventArgs e)
         {
 
         }

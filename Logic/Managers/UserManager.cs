@@ -14,9 +14,9 @@ namespace Logic.Managers
         private readonly IUser user;
 
         public UserManager() { }
-        public UserManager(IUser User)
+        public UserManager(IUser user)
         {
-            this.user = user;
+            this.user = user ?? throw new ArgumentNullException(nameof(user));
         }
         public bool InsertDummyUser(UserDTO userDTO)
         {

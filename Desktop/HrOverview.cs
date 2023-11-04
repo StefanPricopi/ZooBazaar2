@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using Logic.Managers;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,7 +23,7 @@ namespace Desktop
 
         private void btnAddEmployee_Click(object sender, EventArgs e)
         {
-            AddEmployee addEmployeeForm = new AddEmployee(employeeManager);
+            AddEmployee addEmployeeForm = new AddEmployee();
             addEmployeeForm.ShowDialog();
         }
 
@@ -34,7 +35,7 @@ namespace Desktop
 
         private void btnEditEmployee_Click(object sender, EventArgs e)
         {
-            EditEmployee editEmployeeForm = new EditEmployee(employeeManager);
+            EditEmployee editEmployeeForm = new EditEmployee();
             editEmployeeForm.ShowDialog();
         }
     }
