@@ -55,17 +55,14 @@ namespace Animals
                         return;
                     }
 
-                    Animal selectedAnimal = animalManager.GetAnimalByName(selectedAnimalName);
 
 
-                    selectedAnimal.Species = tbxSpecies.Text;
                     if (!int.TryParse(tbxAge.Text, out int newAge))
                     {
                         MessageBox.Show("Age must be a valid number.");
                         return;
                     }
 
-                    animalManager.UpdateAnimal(selectedAnimal);
                     MessageBox.Show("Animal information updated successfully!");
                     this.Close();
                 }
@@ -76,13 +73,9 @@ namespace Animals
         {
             string selectedSpecies = comboSpecies.SelectedItem.ToString();
 
-            List<Animal> animalsOfSelectedSpecies = animalManager.GetAnimalsBySpecies(selectedSpecies);
 
             comboAnimal.Items.Clear();
-            foreach (Animal animal in animalsOfSelectedSpecies)
-            {
-                comboAnimal.Items.Add(animal.Name);
-            }
+            
         }
 
         private void UpdateAnimal_Load(object sender, EventArgs e)

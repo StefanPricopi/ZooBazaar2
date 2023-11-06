@@ -3,6 +3,7 @@ using Logic.Interfaces;
 using Microsoft.Data.SqlClient;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -28,6 +29,7 @@ namespace DataAccess
                     cmd.Parameters.AddWithValue("@Ordo", animalDTO.Ordo);
                     cmd.Parameters.AddWithValue("@Familia", animalDTO.Familia);
                     cmd.Parameters.AddWithValue("@Genus", animalDTO.Genus);
+                    cmd.Parameters.AddWithValue("@Species", animalDTO.Species);
                     cmd.Parameters.AddWithValue("@History", animalDTO.History);
                     cmd.Parameters.AddWithValue("@Status", animalDTO.Status);
                     cmd.Parameters.AddWithValue("@Diet", animalDTO.Diet);
@@ -61,10 +63,9 @@ namespace DataAccess
                     {
                         var animalDTO = new AnimalDTO
                         {
-                            AnimalID = Convert.ToInt32(dr["animalID"]),
                             Name = dr["Name"].ToString(),
                             Regio = dr["Regio"].ToString(),
-                            DateOfBirth = (DateOnly)dr["status"],
+                            DateOfBirth = dr["DateOfBirth"].ToString(),
                             Regnum = dr["Regnum"].ToString(),
                             Phylum = dr["Phylum"].ToString(),
                             Classis = dr["Classis"].ToString(),

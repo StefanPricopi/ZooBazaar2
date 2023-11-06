@@ -8,10 +8,9 @@ namespace Logic.DTO
 {
     public class AnimalDTO
     {
-        public int AnimalID { get; set; }
         public string Name { get; set; }
         public string Regio { get; set; }
-        public DateOnly DateOfBirth { get; set; }
+        public string DateOfBirth { get; set; }
         public string Regnum { get; set; }
         public string Phylum { get; set; }
         public string Classis { get; set; }

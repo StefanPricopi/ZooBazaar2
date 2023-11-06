@@ -10,10 +10,9 @@ namespace Animals
 {
     public class Animal
     {
-        private int animalID;
         private string name;
         private string regio;
-        private DateOnly dateofbirth;
+        private string dateofbirth;
         private string regnum;
         private string phylum;
         private string classis;
@@ -26,10 +25,9 @@ namespace Animals
         private string diet;
         private string specialdiet;
 
-        public int AnimalID { get => animalID; set => animalID = value; }
         public string Name { get =>  name; set => name = value; }
         public string Regio { get => regio; set => regio = value; }
-        public DateOnly DateOfBirth { get => dateofbirth; set => dateofbirth = value; }
+        public string DateOfBirth { get => dateofbirth; set => dateofbirth = value; }
         public string Regnum { get => regnum; set => regnum = value; }
         public string Phylum { get => phylum; set => phylum = value; }
         public string Classis { get => classis; set => classis = value; }
@@ -43,9 +41,8 @@ namespace Animals
         public string SpecialDiet { get => specialdiet; set => specialdiet = value; }
 
 
-        public Animal(int animalID, string name, DateOnly dateofbirth, string phylum, string classis, string ordo, string familia, string genus, string species, string history, string status, string diet, string specialdiet)
+        public Animal(int animalID, string name, string dateofbirth, string phylum, string classis, string ordo, string familia, string genus, string species, string history, string status, string diet, string specialdiet)
         {
-            this.animalID = animalID;
             this.name = name;
             this.regio = "Animal";
             this.dateofbirth = dateofbirth;
@@ -66,7 +63,6 @@ namespace Animals
 
         public Animal(AnimalDTO animalDTO)
         {
-            this.animalID = animalDTO.AnimalID;
             this.name = animalDTO.Name;
             this.regio = "Animal";
             this.dateofbirth = animalDTO.DateOfBirth;
@@ -87,7 +83,6 @@ namespace Animals
         {
             return new AnimalDTO()
             {
-                AnimalID = this.animalID,
                 Name = this.name,
                 Regio = this.regio,
                 DateOfBirth = this.dateofbirth,
@@ -106,9 +101,8 @@ namespace Animals
             };
         }
 
-        public Animal(int animalID, string name, DateOnly dateofbirth, string phylum, string classis, string ordo)
+        public Animal(int animalID, string name, string dateofbirth, string phylum, string classis, string ordo)
         {
-            this.animalID = animalID;
             this.name = name;
             this.regio = "Animal";
             this.dateofbirth = dateofbirth;

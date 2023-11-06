@@ -1,4 +1,7 @@
-﻿using System;
+﻿using DataAccess;
+using Logic.DTO;
+using Logic.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -193,17 +196,39 @@ namespace Animals
 
         private void btnAddAnimal_Click(object sender, EventArgs e)
         {
-            string name = tbxName.Text;
-            DateOnly dateofbirth = (DateOnly)dateBirth.Value;
-            string phylum = comboPhylum.SelectedItem.ToString();
-            string classis = comboClassis.SelectedItem.ToString();
-            string ordo = comboOrdo.SelectedItem.ToString();
+            IAnimal animalRepository = new AnimalRepository();
 
 
-            Animal animal = new Animal(0, name, dateofbirth, phylum, classis, ordo);
-            animalManager.AddAnimal(animal);
+            AnimalDTO dummyAnimal = new AnimalDTO()
+            {
+                Name = "Hi",
+                Regio = "Animal",
+                DateOfBirth = "hi",
+                Regnum = "Animalia",
+                Phylum = "Hmm",
+                Classis = "Woah",
+                Ordo = "Crazy",
+                Familia = "familiaTest",
+                Genus = "genusTest",
+                Species = "speciesTest",
+                History = "historyTest",
+                Diet = "dietTest",
+                SpecialDiet = "specialDietTest"
+            };
 
-            MessageBox.Show("Animal added succesfully!");
+            bool insertionResult = animalRepository.CreateAnimal(dummyAnimal);
+
+            if (insertionResult)
+            {
+                MessageBox.Show("Animal added succesfully!");
+            }
+            else
+            {
+                MessageBox.Show("No");
+            }
+
+           
+
         }
 
         private void FilterComboBoxItems(ComboBox comboBox, string searchText)
