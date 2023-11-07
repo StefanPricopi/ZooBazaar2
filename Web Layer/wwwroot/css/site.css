@@ -1,0 +1,369 @@
+
+html {
+    font-size: 14px;
+    color: #FFFFFF !important;
+}
+
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+html {
+    position: relative;
+    min-height: 100%;
+    color: #FFFFFF !important;
+}
+
+body {
+  width:100%;
+  min-height:100%;
+  margin:0px;
+  padding:0px;
+}
+.primary {
+    background-color: #261342 !important;
+}
+.bg-primary {
+    background-color: #261342 !important;
+
+}
+.header {
+    color: #FFFFFF !important;
+    margin-bottom:-20px;
+    padding-bottom:0px;
+}
+.navbar {
+    color: #FFFFFF !important;
+    box-shadow: 0px 3px 9px #777 !important;
+    padding-top:50px;
+}
+.nav-link {
+    color: #FFFFFF !important;
+}
+.navbar-brand{
+    color:white !important;
+}
+.btn-secondary {
+    background-color: #261342 !important;
+    border: 1px solid #0D6EFD;
+}
+.btn-secondary:hover {
+    background-color: #261342 !important;
+    border: 1px solid red;
+}
+.btn-secondary:focus {
+        
+        border: 1px solid red !important;
+        box-shadow: rgb(255 0 0) 3px 2px   !important;
+        
+}
+.btn-primary {
+    background-color: #261342 !important;
+    width: 157px; 
+    text-overflow: ellipsis; 
+    overflow: hidden;
+    white-space: nowrap; 
+
+}
+/* I refuse to elaborate on the monstrosity from line 67 to 264 it needs refactoring and barely works */
+@media (max-width: 1200px) {
+    .navbar-brand {
+        display: flex;
+        align-items: center;
+    }
+
+        .navbar-brand img {
+            width: 100px; 
+        }
+
+    .navbar-toggler {
+        padding: 0;
+        margin: 0;
+    }
+
+    .navbar-toggler-icon {
+        display: none;
+    }
+
+    .Baazar {
+        margin-right: -20px;
+        padding-right: -20px;
+    }
+
+    .navbar-collapse {
+        flex: 1; 
+    }
+
+    .btn-secondary {
+        padding-left: 0px;
+        margin-left: 0px;
+        width: auto; 
+        max-width: 150px; 
+    }
+
+    .btn-primary {
+        padding-left: 0px;
+        margin-left: 0px;
+        width: auto; 
+        width: 150px;
+    }
+}
+@media (max-width: 1000px) {
+    .navbar-brand {
+        display: flex;
+        align-items: center;
+    }
+    .container{
+        padding:0px;
+    }
+        .navbar-brand img {
+            width: 100px; 
+        }
+
+    .navbar-toggler {
+        padding: 0;
+        margin: 0;
+    }
+
+    .navbar-toggler-icon {
+        display: none;
+    }
+
+    .Baazar {
+        margin-right: -20px;
+        padding-right: -20px;
+    }
+
+    .navbar-collapse {
+        flex: 1; 
+    }
+
+     .btn-secondary {
+        padding-left: 0px;
+        margin-left: 0px;
+        width: auto; 
+        max-width: 150px; 
+    }
+    .btn-primary {
+        padding-left: 0px;
+        margin-left: 0px;
+        width: auto; 
+        width: 150px; 
+    }
+}
+@media (max-width: 910px) {
+    .navbar-brand {
+        display: flex;
+        align-items: center;
+    }
+
+    .container {
+        padding-left: 0px;
+        margin-left: 0px;
+    }
+
+    .navbar-brand img {
+        width: 100px; 
+    }
+
+    .navbar-toggler {
+        padding: 0;
+        margin: 0;
+    }
+
+    .navbar-toggler-icon {
+        display: none;
+    }
+
+    .Baazar {
+        margin-right: -20px;
+        padding-right: -20px;
+    }
+
+    .navbar-collapse {
+        flex: 1; 
+    }
+
+    .btn-secondary {
+        padding-left: 0px;
+        margin-left: 0px;
+        width: auto; 
+        max-width: 150px; 
+    }
+
+    .btn-primary {
+        padding-left: 0px;
+        margin-left: 0px;
+        width: auto; 
+        width: 100px; 
+    }
+}
+@media (max-width: 800px) {
+    .navbar-brand {
+        display: flex;
+        align-items: center;
+    }
+
+        .navbar-brand img {
+            width: 100px; 
+        }
+    .navbar-toggler{
+        padding: 0;
+        margin: 0;
+    }
+    .navbar-toggler-icon {
+        display:none;
+    }
+    .Baazar{
+        margin-right:-20px;
+        padding-right:-20px;
+    }
+
+    .navbar-collapse {
+        flex: 1; 
+    }
+
+    .btn-primary, .btn-secondary {
+        padding-left:0px;
+        margin-left:0px;
+        width: auto;
+        max-width: 100px; 
+    }
+}
+@media (max-width: 800px) {
+    .navbar-brand {
+        display: flex;
+        align-items: center;
+    }
+
+        .navbar-brand img {
+            width: 100px; 
+        }
+    .navbar-toggler{
+        padding: 0;
+        margin: 0;
+    }
+    .navbar-toggler-icon {
+        display:none;
+    }
+    .Baazar{
+        margin-right:-20px;
+        padding-right:-20px;
+    }
+
+    .navbar-collapse {
+        flex: 1; 
+    }
+
+    .btn-primary, .btn-secondary {
+        padding-left:0px;
+        margin-left:0px;
+        width: auto; 
+        max-width: 100px; 
+    }
+}
+@media only screen and (max-width: 575px) {
+    .navbar-collapse {
+        display: flex !important;
+         
+    }
+
+    .navbar-toggler {
+        display: flex !important;
+    }
+
+    .btn-primary,
+    .btn-secondary {
+         
+        
+    }
+}   
+    
+.dropdown-menu {
+    width: 20px !important;
+    margin-top:36px;
+    text-align: center;
+    color: white !important;
+}
+.dropdown-item {
+    color: white !important;
+    outline: none !important;
+    
+}
+.btn {
+   
+}
+.dropdown-item:hover, .dropdown-item:focus {
+    background-color: royalblue;
+    color: white !important;
+    outline: none !important;
+}
+
+.dropdown-divider{
+    color:white !important;
+    background-color: royalblue !important;
+}
+
+
+main{
+    margin-top:0px;
+    padding-bottom:0px;
+}
+.display-4 {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(255, 255, 255, 0.5);
+    padding: 10px;
+}
+section {
+    text-align: center;
+    padding: 200px 0;
+    height: 500px;
+}
+.something {
+    text-align: center;
+    padding: 200px 0;
+    height: 500px;
+}
+header{
+    margin-bottom:-20px;
+    
+}
+
+.tagline{
+    padding-top:-20px;
+    margin-top:-200px;
+}
+h1 {
+    font-size: 3em;
+    letter-spacing: 1px;
+    font-family: fantasy;
+}
+p{
+    max-width:500px;
+    margin:0px auto;
+    background-color: rgba(0,0,0,0.7);
+    color:#fff;
+    padding:20px;
+    font-family:Arial;
+    letter-spacing:1px;
+}
+.parallax-container {
+    position: relative;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.parallax-layer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
