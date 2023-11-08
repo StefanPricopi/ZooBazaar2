@@ -181,7 +181,9 @@
       var minOffset = Math.max(this.boxOffsetTop + this.boxHeight - winHeight, 0);
       var imageHeightMin = this.boxHeight + (maxOffset - minOffset) * (1 - this.speed) | 0;
       var imageOffsetMin = (this.boxOffsetTop - maxOffset) * (1 - this.speed) | 0;
-      var margin;
+      var 
+      
+      ;
 
       if (imageHeightMin * this.aspectRatio >= this.boxWidth) {
         this.imageWidth    = imageHeightMin * this.aspectRatio | 0;

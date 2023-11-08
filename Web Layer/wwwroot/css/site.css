@@ -12,16 +12,15 @@ html {
 }
 
 html {
-    position: relative;
+
     min-height: 100%;
     color: #FFFFFF !important;
 }
 
 body {
-  width:100%;
-  min-height:100%;
-  margin:0px;
-  padding:0px;
+    
+ gap:0;
+    background-image: linear-gradient(#261342, #1339BE);
 }
 .primary {
     background-color: #261342 !important;
@@ -30,15 +29,15 @@ body {
     background-color: #261342 !important;
 
 }
-.header {
-    color: #FFFFFF !important;
-    margin-bottom:-20px;
-    padding-bottom:0px;
+.nav{
+    
 }
+
 .navbar {
     color: #FFFFFF !important;
-    box-shadow: 0px 3px 9px #777 !important;
     padding-top:50px;
+    border-bottom: none !important;
+    
 }
 .nav-link {
     color: #FFFFFF !important;
@@ -330,14 +329,17 @@ section {
     padding: 200px 0;
     height: 500px;
 }
+
 header{
-    margin-bottom:-20px;
-    
+    box-shadow:none;
+    margin-bottom:-50px;
+    padding-bottom:-20px;
+
 }
 
 .tagline{
     padding-top:-20px;
-    margin-top:-200px;
+    margin-top:-150px;
 }
 h1 {
     font-size: 3em;
@@ -366,4 +368,17 @@ p{
     width: 100%;
     height: 100%;
     object-fit: cover;
+}
+.image-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* This centers the image vertically */
+
+}
+
+.image-frame {
+    border: 3px solid black;
+    width: 50%; /* Adjust this as needed */
+    max-width: 100%; /* Prevent the image from getting larger than its original size */
 }

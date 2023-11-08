@@ -9,7 +9,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataAccess", "DataAccess\Da
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Desktop", "Desktop\Desktop.csproj", "{320A413F-5307-41C9-8A1C-19E1539AD206}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Web Layer", "Web Layer\Web Layer.csproj", "{C95CC420-BC82-487B-A3F6-438FE8F67AE0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Web Layer", "Web Layer\Web Layer.csproj", "{C95CC420-BC82-487B-A3F6-438FE8F67AE0}"
+	ProjectSection(ProjectDependencies) = postProject
+		{7D81D87D-E192-479D-BAD7-CE6232FD6B28} = {7D81D87D-E192-479D-BAD7-CE6232FD6B28}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
