@@ -197,17 +197,17 @@ namespace Animals
         private void btnAddAnimal_Click(object sender, EventArgs e)
         {
             IAnimal animalRepository = new AnimalRepository();
-
+            string hi = comboPhylum.Text;
 
             AnimalDTO dummyAnimal = new AnimalDTO()
             {
-                Name = "Hi",
+                Name = tbxName.Text,
                 Regio = "Animal",
                 DateOfBirth = "hi",
                 Regnum = "Animalia",
-                Phylum = "Hmm",
-                Classis = "Woah",
-                Ordo = "Crazy",
+                Phylum = comboPhylum.Text,
+                Classis = comboClassis.Text,
+                Ordo = comboOrdo.Text,
                 Familia = "familiaTest",
                 Genus = "genusTest",
                 Species = "speciesTest",

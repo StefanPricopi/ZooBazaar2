@@ -41,7 +41,7 @@ namespace Animals
         public string SpecialDiet { get => specialdiet; set => specialdiet = value; }
 
 
-        public Animal(int animalID, string name, string dateofbirth, string phylum, string classis, string ordo, string familia, string genus, string species, string history, string status, string diet, string specialdiet)
+        public Animal(string name, string dateofbirth, string phylum, string classis, string ordo, string familia, string genus, string species, string history, string status, string diet, string specialdiet)
         {
             this.name = name;
             this.regio = "Animal";
@@ -101,7 +101,7 @@ namespace Animals
             };
         }
 
-        public Animal(int animalID, string name, string dateofbirth, string phylum, string classis, string ordo)
+        public Animal(string name, string dateofbirth, string phylum, string classis, string ordo)
         {
             this.name = name;
             this.regio = "Animal";
