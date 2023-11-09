@@ -21,9 +21,9 @@ namespace Logic.Managers
             this.employee = employee ?? throw new ArgumentNullException(nameof(employee));
         }
         public EmployeeManager() { }
-        public bool CreateEmployee(EmployeeDTO employeeDTO,UserDTO userDTO)
+        public bool CreateEmployee(EmployeeDTO employeeDTO,UserDTO userDTO,ContractDTO contractDTO,AddressDTO addressDTO, PartnerDTO partnerDTO, RoleDTO roleDTO)
         {
-            return employee.CreateEmployee(employeeDTO,userDTO);
+            return employee.CreateEmployee(employeeDTO,userDTO,contractDTO,addressDTO,partnerDTO,roleDTO);
         }
         public bool UpdateEmployee(EmployeeDTO employeeDTO)
         {
@@ -33,11 +33,23 @@ namespace Logic.Managers
         {
             return employee.UpdateEmployeeLoginDetails(userDTO);
         }
+        public bool UpdateEmployeeContract(ContractDTO contractDTO)
+        {
+            return employee.UpdateEmployeeContract(contractDTO);
+        }
+        public bool UpdateEmployeeAddress(AddressDTO addressDTO)
+        {
+            return employee.UpdateEmployeeAddress(addressDTO);
+        }
+        public bool UpdateEmployeePartner(PartnerDTO partnerDTO)
+        {
+            return employee.UpdateEmployeePartner(partnerDTO);
+        }
         public bool DeleteEmployee(EmployeeDTO employeeDTO)
         {
             return employee.DeleteEmployee(employeeDTO);
         }
-        public (DataTable,DataTable) LoadEmployees()
+        public (DataTable,DataTable,DataTable,DataTable,DataTable) LoadEmployees()
         {
             return employee.LoadEmployees();
         }

@@ -32,6 +32,7 @@ namespace Employees
 
             employeeManager = new EmployeeManager(new EmployeeRepository());
             tabControl1.DrawItem += new DrawItemEventHandler(tabControl1_DrawItem);
+            cmbRole.DataSource = Enum.GetValues(typeof(Role));
 
         }
         private void tabControl1_DrawItem(object sender, DrawItemEventArgs e)
@@ -79,6 +80,11 @@ namespace Employees
         {
             UserDTO userDTO = new UserDTO();
             EmployeeDTO employeeDTO = new EmployeeDTO();
+            ContractDTO contractDTO = new ContractDTO();
+            PartnerDTO partnerDTO = new PartnerDTO();
+            AddressDTO addressDTO = new AddressDTO();
+            RoleDTO roleDTO = new RoleDTO();
+
             //EmployeeDTO info
             employeeDTO.FirstName = tbxFirstName.Text;
             employeeDTO.LastName = tbxLastName.Text;
@@ -92,8 +98,29 @@ namespace Employees
             userDTO.Password = tbxPassword.Text;
             userDTO.Email = tbxEmail.Text;
 
+            //ContractDTO info
+            contractDTO.StartDate = dtpStartDate.Value;
+            contractDTO.EndDate = dtpEndDate.Value;
+            contractDTO.Salary = Convert.ToDecimal(tbxSalary.Text);
+            contractDTO.ContractType = tbxContractType.Text;
+            contractDTO.RoleID = cmbRole.SelectedIndex;
 
-            if (employeeManager.CreateEmployee(employeeDTO, userDTO))
+            //PartnerDTO info
+            partnerDTO.FirstName = tbxFirstNamePartner.Text;
+            partnerDTO.LastName = tbxLastNamePartner.Text;
+            partnerDTO.PhoneNumber = Convert.ToInt32(tbxPhonePartner.Text);
+
+            //AddressDTO info
+            addressDTO.StreetName = tbxStreet.Text;
+            addressDTO.Country = tbxCountry.Text;
+            addressDTO.ZipCode = tbxZipCode.Text;
+            addressDTO.City = tbxCity.Text;
+
+            //RoleDTO info
+            roleDTO.RoleName = cmbRole.SelectedText;
+            roleDTO.RoleID = cmbRole.SelectedIndex;
+
+            if (employeeManager.CreateEmployee(employeeDTO, userDTO, contractDTO, addressDTO, partnerDTO,roleDTO))
             {
                 MessageBox.Show("successful");
             }

@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using DataAccess;
 using Logic.DTO;
+using Logic.Entities;
 using Logic.Managers;
 using Microsoft.Data.SqlClient;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
@@ -20,15 +21,19 @@ namespace Employees
     {
         string connectionString = "Server=mssqlstud.fhict.local;Database=dbi478560_dbijungle;User Id=dbi478560_dbijungle;Password=1234;Encrypt=false;";
         private readonly EmployeeManager employeeManager;
-       
-        
-        
+
+
+
         public EditEmployee()
         {
             InitializeComponent();
             employeeManager = new EmployeeManager(new EmployeeRepository());
             dataGridView2.SelectionChanged += dataGridView2_SelectionChanged;
             dataGridView1.SelectionChanged += dataGridView1_SelectionChanged;
+            dataGridView3.SelectionChanged += dataGridView3_SelectionChanged;
+            dataGridView4.SelectionChanged += dataGridView4_SelectionChanged;
+            dataGridView5.SelectionChanged += dataGridView5_SelectionChanged;
+            cmbRole.DataSource = Enum.GetValues(typeof(Role));
         }
 
         private void EditEmployee_Load(object sender, EventArgs e)
@@ -43,10 +48,13 @@ namespace Employees
 
         private void LoadEmployees()
         {
-            var (employeeTable1, employeeTable2) = employeeManager.LoadEmployees();
+            var (employeeTable1, employeeTable2, employeeTable3, employeeTable4, employeeTable5) = employeeManager.LoadEmployees();
 
             dataGridView1.DataSource = employeeTable1;
             dataGridView2.DataSource = employeeTable2;
+            dataGridView3.DataSource = employeeTable3;
+            dataGridView4.DataSource = employeeTable4;
+            dataGridView5.DataSource = employeeTable5;
         }
 
         private void btnDelete_Click(object sender, EventArgs e)
@@ -65,7 +73,7 @@ namespace Employees
                 {
                     MessageBox.Show("fail");
                 }
-                
+
             }
             else
             {
@@ -117,7 +125,7 @@ namespace Employees
 
             }
         }
-        
+
 
         private void label2_Click(object sender, EventArgs e)
         {
@@ -139,7 +147,6 @@ namespace Employees
         private void dataGridView1_SelectionChanged(object sender, EventArgs e)
         {
 
-
             if (dataGridView1.SelectedRows.Count > 0)
             {
                 DataGridViewRow selectedRow = dataGridView1.SelectedRows[0];
@@ -155,9 +162,9 @@ namespace Employees
 
             }
         }
+
         private void dataGridView2_SelectionChanged(object sender, EventArgs e)
         {
-
 
             if (dataGridView2.SelectedRows.Count > 0)
             {
@@ -179,6 +186,48 @@ namespace Employees
                     tbxEmail.Text = "ivan";
             }
         }
+
+        private void dataGridView3_SelectionChanged(object sender, EventArgs e)
+        {
+
+            if (dataGridView3.SelectedRows.Count > 0)
+            {
+                DataGridViewRow selectedRow = dataGridView3.SelectedRows[0];
+
+                dtpStartDate.Text = selectedRow.Cells["StartDate"].Value.ToString();
+                dtpEndDate.Text = selectedRow.Cells["EndDate"].Value.ToString();
+                tbxSalary.Text = selectedRow.Cells["Salary"].Value.ToString();
+                tbxContractType.Text = selectedRow.Cells["ContractType"].Value.ToString();
+
+            }
+        }
+
+        private void dataGridView4_SelectionChanged(object sender, EventArgs e)
+        {
+
+            if (dataGridView4.SelectedRows.Count > 0)
+            {
+                DataGridViewRow selectedRow = dataGridView4.SelectedRows[0];
+
+                tbxFirstNamePartner.Text = selectedRow.Cells["FirstName"].Value.ToString();
+                tbxLastNamePartner.Text = selectedRow.Cells["LastName"].Value.ToString();
+                tbxPhonePartner.Text = selectedRow.Cells["PhoneNumber"].Value.ToString();
+            }
+        }
+        private void dataGridView5_SelectionChanged(object sender, EventArgs e)
+        {
+
+            if (dataGridView5.SelectedRows.Count > 0)
+            {
+                DataGridViewRow selectedRow = dataGridView5.SelectedRows[0];
+
+                tbxStreet.Text = selectedRow.Cells["StreetName"].Value.ToString();
+                tbxCity.Text = selectedRow.Cells["City"].Value.ToString();
+                tbxZipCode.Text = selectedRow.Cells["ZipCode"].Value.ToString();
+                tbxCountry.Text = selectedRow.Cells["Country"].Value.ToString();
+            }
+        }
+
         private void btnEditEmployee_Click(object sender, EventArgs e)
         {
             if (dataGridView1.SelectedRows.Count > 0)
@@ -216,7 +265,80 @@ namespace Employees
                 userDTO.Username = tbxUsername.Text;
                 userDTO.Password = tbxPassword.Text;
                 userDTO.Email = tbxEmail.Text;
-                if(employeeManager.UpdateEmployeeLoginDetails(userDTO))
+                if (employeeManager.UpdateEmployeeLoginDetails(userDTO))
+                {
+                    MessageBox.Show("Success");
+                    LoadEmployees();
+                }
+                else
+                {
+                    MessageBox.Show("fail");
+                }
+
+            }
+        }
+
+        private void btnEditContract_Click(object sender, EventArgs e)
+        {
+            if (dataGridView3.SelectedRows.Count > 0)
+            {
+                ContractDTO contractDTO = new ContractDTO();
+
+                int contractID = (int)dataGridView3.SelectedRows[0].Cells["ContractID"].Value;
+                contractDTO.ContractID = contractID;
+                contractDTO.StartDate = dtpStartDate.Value;
+                contractDTO.EndDate = dtpEndDate.Value;
+                contractDTO.Salary = Convert.ToDecimal(tbxSalary.Text);
+                contractDTO.ContractType = tbxContractType.Text;
+                contractDTO.RoleID = cmbRole.SelectedIndex;
+                if (employeeManager.UpdateEmployeeContract(contractDTO))
+                {
+                    MessageBox.Show("Success");
+                    LoadEmployees();
+                }
+                else
+                {
+                    MessageBox.Show("fail");
+                }
+
+            }
+        }
+        private void btnEditPartner_Click(object sender, EventArgs e)
+        {
+            if (dataGridView4.SelectedRows.Count > 0)
+            {
+                PartnerDTO partnerDTO = new PartnerDTO();
+
+                int partnerID = (int)dataGridView4.SelectedRows[0].Cells["PartnerID"].Value;
+                partnerDTO.PartnerID = partnerID;
+                partnerDTO.FirstName = tbxFirstNamePartner.Text;
+                partnerDTO.LastName = tbxLastNamePartner.Text;
+                partnerDTO.PhoneNumber = Convert.ToInt32(tbxPhonePartner.Text);
+                if (employeeManager.UpdateEmployeePartner(partnerDTO))
+                {
+                    MessageBox.Show("Success");
+                    LoadEmployees();
+                }
+                else
+                {
+                    MessageBox.Show("fail");
+                }
+
+            }
+        }
+
+        private void btnEditAddress_Click(object sender, EventArgs e)
+        {
+            if (dataGridView5.SelectedRows.Count > 0)
+            {
+                AddressDTO addressDTO = new AddressDTO();
+
+                int addressID = (int)dataGridView5.SelectedRows[0].Cells["AddressID"].Value;
+                addressDTO.AddressID = addressID;
+                addressDTO.StreetName = tbxStreet.Text;
+                addressDTO.City = tbxCity.Text;
+                addressDTO.ZipCode = tbxZipCode.Text;
+                if (employeeManager.UpdateEmployeeAddress(addressDTO))
                 {
                     MessageBox.Show("Success");
                     LoadEmployees();
