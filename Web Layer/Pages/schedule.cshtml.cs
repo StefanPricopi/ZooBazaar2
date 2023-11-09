@@ -1,12 +1,13 @@
-using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace Web_Layer.Pages
 {
-    public class aboutModel : PageModel
+    [Authorize(Policy = "MustBeEmployee")]
+    public class scheduleModel : PageModel
     {
-
+       
         public void OnGet()
         {
         }

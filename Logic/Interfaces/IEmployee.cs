@@ -15,6 +15,8 @@ namespace Logic.Interfaces
         bool UpdateEmployeeLoginDetails(UserDTO userDTO);
         bool DeleteEmployee(EmployeeDTO employeeDTO);
         (DataTable, DataTable) LoadEmployees();
+        
+
 
     }
 }

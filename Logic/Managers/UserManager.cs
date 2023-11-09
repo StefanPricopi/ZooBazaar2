@@ -69,5 +69,66 @@ namespace Logic.Managers
                 return Convert.ToHexString(hashedPasswordBytes);
             }
         }
+        public bool IsLoginValid(string username, string password)
+        {
+
+            User Obj = user.GetCurrentUserByUsername(username);
+            if (Obj != null)
+            {
+
+                var userhashedpass = HashedPassword($"{password}{Obj.Salt.Trim()}");
+                Console.WriteLine(Obj.Salt);
+                if (userhashedpass == Obj.Password)
+                {
+                    return true;
+                }
+                else { return false; }
+            }
+            else { return false; }
+        }
+        public bool IsLoginValidEmployeeCase(string username, string password)
+        {
+
+            UserDTO Obj = user.GetCurrentUserByUsernameForEmployee(username);
+            if (Obj != null)
+            {
+                if(Obj.UserID != 0 & Obj.EmployeeID != 0)
+                { 
+                    var userhashedpass = HashedPassword($"{password}{Obj.Salt.Trim()}");
+                    Console.WriteLine(Obj.Salt);
+                    if (userhashedpass == Obj.Password)
+                    {
+                        return true;
+                    }
+                    else { return false; }
+                }
+                else { return false; }
+            }
+            else { return false; }
+        }
+        public bool IsLoginValidVisitorCase(string username, string password)
+        {
+
+            UserDTO Obj = user.GetCurrentUserByUsernameForVisitor(username);
+            if (Obj != null)
+            {
+                if (Obj.UserID != 0 & Obj.VisitorID != 0)
+                {
+                    var userhashedpass = HashedPassword($"{password}{Obj.Salt.Trim()}");
+                    Console.WriteLine(Obj.Salt);
+                    if (userhashedpass == Obj.Password)
+                    {
+                        return true;
+                    }
+                    else { return false; }
+                }
+                else { return false; }
+            }
+            else { return false; }
+        }
+        public void CreateVisitor(UserDTO userDtO)
+        {
+            user.CreateVisitor(userDtO);
+        }
     }
 }

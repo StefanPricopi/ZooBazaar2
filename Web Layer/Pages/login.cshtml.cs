@@ -27,9 +27,13 @@ namespace Web_Layer.Pages
         {
 
             UserDTO userModel = new UserDTO();
-            bool ValidateLogin()
+            bool ValidateLoginEmployeeCase()
             {
-                return false;
+                return userManager.IsLoginValidEmployeeCase(User.Username,User.Password);
+            }
+            bool ValidateLoginVisitorCase()
+            {
+                return userManager.IsLoginValidVisitorCase(User.Username, User.Password);
             }
 
             if (User == null)
@@ -39,7 +43,28 @@ namespace Web_Layer.Pages
             }
             else
             {
-                if (ValidateLogin())
+                if (ValidateLoginEmployeeCase())
+                {
+                    Console.WriteLine("Login successful.");
+                    var claims = new List<Claim>
+                    {
+                        new Claim(ClaimTypes.Name, "user"),
+                        new Claim(ClaimTypes.Email, "admin@website.com"),
+                        new Claim("Employee", "Caretaker")
+                    };
+                    var identity = new ClaimsIdentity(claims, "LoginCookieAuth");
+                    ClaimsPrincipal claimsPrincipal = new ClaimsPrincipal(identity);
+
+                    // Store the original URL in a session variable
+                    
+
+                    await HttpContext.SignInAsync("LoginCookieAuth", claimsPrincipal);
+
+                    
+                        return RedirectToPage("/schedule"); // Default page to redirect to if no original URL is found
+                    
+                }
+                else if (ValidateLoginVisitorCase())
                 {
                     Console.WriteLine("Login successful.");
                     var claims = new List<Claim>
@@ -55,17 +80,9 @@ namespace Web_Layer.Pages
 
                     await HttpContext.SignInAsync("LoginCookieAuth", claimsPrincipal);
 
-                    // Redirect to the original URL if it exists; otherwise, redirect to a default page
-                    string originalUrl = HttpContext.Session.GetString("OriginalUrl");
-                    if (!string.IsNullOrEmpty(originalUrl))
-                    {
-                        HttpContext.Session.Remove("OriginalUrl"); // Remove the original URL from the session
-                        return Redirect(originalUrl);
-                    }
-                    else
-                    {
+                    
                         return RedirectToPage("/index"); // Default page to redirect to if no original URL is found
-                    }
+                    
                 }
             }
 

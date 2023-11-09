@@ -1,29 +1,41 @@
 using DataAccess;
 using Logic.Interfaces;
 using Logic.Managers;
-using Microsoft.AspNetCore.Authentication; // Import this namespace
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using System;
-var builder = WebApplication.CreateBuilder(args);
+using System.Collections.Generic;
 
+var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddRazorPages();
 builder.Services.AddScoped<IUser, UserRepository>();
 builder.Services.AddScoped<UserManager>();
-builder.Services.AddAuthentication().AddCookie("LoginCookieAuth", options =>
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultAuthenticateScheme = "LoginCookieAuth";
+    options.DefaultChallengeScheme = "LoginCookieAuth";
+})
+.AddCookie("LoginCookieAuth", options =>
 {
     options.Cookie.Name = "LoginCookieAuth";
     options.LoginPath = "/login";
+    options.ExpireTimeSpan = TimeSpan.FromSeconds(5);
 });
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("MustBeEmployee",
+        policy => policy.RequireClaim("Employee", "Caretaker"));
+});
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
 

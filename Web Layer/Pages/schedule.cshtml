@@ -1,0 +1,21 @@
+﻿@page
+@model Web_Layer.Pages.scheduleModel
+@{
+}
+<div class="image-container">
+    <img class="image-frame" src="~/img/schedule.jpg" id="zoom-responsive-image" />
+</div>
+
+<script>
+    window.addEventListener('resize', adjustImageSize);
+
+    function adjustImageSize() {
+        const zoomLevel = window.innerWidth / window.outerWidth;
+
+        // Adjust the image size based on the zoom level
+        const imageSize = 50 * zoomLevel; // Change 50 to your desired initial size
+
+        const image = document.getElementById('zoom-responsive-image');
+        image.style.width = imageSize + 'vw';
+    }
+</script>

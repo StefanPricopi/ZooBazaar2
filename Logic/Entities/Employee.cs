@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Logic.Entities
 {
-    public class Employee
+    public class Employee : User
     {
         private int employeeID;
         private string firstName;

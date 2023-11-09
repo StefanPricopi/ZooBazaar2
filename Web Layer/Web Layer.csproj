@@ -8,8 +8,24 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="Pages\register.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\DataAccess\DataAccess.csproj" />
     <ProjectReference Include="..\Logic\Logic.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Pages\register.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="Pages\register.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Pages\register.cshtml" />
   </ItemGroup>
 
 </Project>

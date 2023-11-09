@@ -15,7 +15,10 @@ namespace Logic.Interfaces
         bool UpdateAccount(UserDTO accountDTO);
         User GetCurrentUserByUsername(string userEmail);
         bool InsertDummyUser(UserDTO userDTO);
+        public void CreateVisitor(UserDTO userDTO);
         User Login(string email, string password);
+        UserDTO GetCurrentUserByUsernameForEmployee(string userEmail);
+        UserDTO GetCurrentUserByUsernameForVisitor(string userEmail);
         public string RetrievePositionInformation(string username);
     }
 }

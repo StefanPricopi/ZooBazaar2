@@ -30,12 +30,13 @@ body {
 
 }
 .nav{
-    
+    padding-bottom:-20px;
 }
 
 .navbar {
     color: #FFFFFF !important;
     padding-top:50px;
+    padding-bottom:-20px;
     border-bottom: none !important;
     
 }
@@ -115,9 +116,8 @@ body {
         display: flex;
         align-items: center;
     }
-    .container{
-        padding:0px;
-    }
+
+
         .navbar-brand img {
             width: 100px; 
         }
@@ -159,10 +159,7 @@ body {
         align-items: center;
     }
 
-    .container {
-        padding-left: 0px;
-        margin-left: 0px;
-    }
+
 
     .navbar-brand img {
         width: 100px; 
@@ -332,8 +329,8 @@ section {
 
 header{
     box-shadow:none;
-    margin-bottom:-50px;
-    padding-bottom:-20px;
+    
+    padding-bottom:-50px;
 
 }
 
@@ -381,4 +378,10 @@ p{
     border: 3px solid black;
     width: 50%; /* Adjust this as needed */
     max-width: 100%; /* Prevent the image from getting larger than its original size */
+}
+.custom-top {
+    position: fixed;
+    top: 0;
+    right: 0;
+    padding: 10px;
 }
