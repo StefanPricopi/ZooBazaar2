@@ -189,6 +189,16 @@ namespace Desktop
             {
                 rbAreaInactive.Checked = true;
             }
+            lbLocations.Items.Clear();
+            locations = locationManager.GetAllLocations();
+            foreach (Location location in locations)
+            {
+                if (location.Area.AreaID == area.AreaID)
+                {
+                    lbLocations.Items.Add(location);
+                }
+
+            }
         }
 
         private void lbLocations_SelectedIndexChanged(object sender, EventArgs e)
@@ -240,6 +250,11 @@ namespace Desktop
         private void pictureBox2_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void btnRefresh_Click(object sender, EventArgs e)
+        {
+            RefreshLocation();
         }
     }
 }
