@@ -25,12 +25,13 @@ namespace Web_Layer.Pages
 
         public async Task<IActionResult> OnPostAsync()
         {
-
             UserDTO userModel = new UserDTO();
+
             bool ValidateLoginEmployeeCase()
             {
-                return userManager.IsLoginValidEmployeeCase(User.Username,User.Password);
+                return userManager.IsLoginValidEmployeeCase(User.Username, User.Password);
             }
+
             bool ValidateLoginVisitorCase()
             {
                 return userManager.IsLoginValidVisitorCase(User.Username, User.Password);
@@ -39,7 +40,6 @@ namespace Web_Layer.Pages
             if (User == null)
             {
                 return Page();
-
             }
             else
             {
@@ -55,14 +55,9 @@ namespace Web_Layer.Pages
                     var identity = new ClaimsIdentity(claims, "LoginCookieAuth");
                     ClaimsPrincipal claimsPrincipal = new ClaimsPrincipal(identity);
 
-                    // Store the original URL in a session variable
-                    
-
                     await HttpContext.SignInAsync("LoginCookieAuth", claimsPrincipal);
 
-                    
-                        return RedirectToPage("/schedule"); // Default page to redirect to if no original URL is found
-                    
+                    return RedirectToPage("/schedule");
                 }
                 else if (ValidateLoginVisitorCase())
                 {
@@ -75,14 +70,9 @@ namespace Web_Layer.Pages
                     var identity = new ClaimsIdentity(claims, "LoginCookieAuth");
                     ClaimsPrincipal claimsPrincipal = new ClaimsPrincipal(identity);
 
-                    // Store the original URL in a session variable
-
-
                     await HttpContext.SignInAsync("LoginCookieAuth", claimsPrincipal);
 
-                    
-                        return RedirectToPage("/index"); // Default page to redirect to if no original URL is found
-                    
+                    return RedirectToPage("/index");
                 }
             }
 

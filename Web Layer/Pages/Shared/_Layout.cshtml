@@ -66,23 +66,21 @@
                 </div>
 
             </div>
-            @if (!User.Identity.IsAuthenticated)
-            {
-                <!-- Your existing login button code -->
-                <div class="custom-top">
+            <div class="custom-top">
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <form method="post" class="form-inline" asp-page="/Logout">
+                        <button type="submit" class="btn btn-primary"><b>Logout</b></button>
+                    </form>
+                }
+                else
+                {
                     <a href="/login">
                         <button type="button" class="btn btn-primary"><b>Login</b></button>
                     </a>
-                </div>
-            }
-            @if (User.Identity.IsAuthenticated)
-            {
-
-                <div class="custom-top">
-                    <button type="button" class="btn btn-primary" onclick="logout()"><b>Logout</b></button>
-                </div>
-               
-            }
+                }
+            </div>
+            
         </nav>
     </header>
     <!-- Render of a page -->
@@ -99,16 +97,7 @@
 
     @await RenderSectionAsync("Scripts", required: false)
 
-    <script>
-        function logout() {
-            // Delete the cookie
-            document.cookie = "LoginCookieAuth=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-
-
-            // Redirect to the desired page
-            window.location.href = '/index';
-        }
-    </script>
+    
 </body>
 
 </html>

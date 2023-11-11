@@ -21,8 +21,7 @@ builder.Services.AddAuthentication(options =>
 .AddCookie("LoginCookieAuth", options =>
 {
     options.Cookie.Name = "LoginCookieAuth";
-    options.LoginPath = "/login";
-    options.ExpireTimeSpan = TimeSpan.FromSeconds(5);
+    options.LoginPath = "/login";   
 });
 builder.Services.AddAuthorization(options =>
 {
