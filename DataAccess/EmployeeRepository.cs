@@ -173,17 +173,17 @@ namespace DataAccess
                                 int contractID = Convert.ToInt32(cmdContract.ExecuteScalar());
                                 cmdContract.ExecuteNonQuery();
                             }
+                            //Insert partner data
+                            using (SqlCommand cmdPartner = new SqlCommand("INSERT INTO EmployeePartner (FirstName, LastName, PhoneNumber, EmployeeID) VALUES (@FirstName, @LastName, @PhoneNumber, @EmployeeID);SELECT SCOPE_IDENTITY();", connection))
+                            {
+                               cmdPartner.Parameters.AddWithValue("@FirstName", partnerDTO.FirstName);
+                               cmdPartner.Parameters.AddWithValue("@LastName", partnerDTO.LastName);
+                               cmdPartner.Parameters.AddWithValue("@PhoneNumber", partnerDTO.PhoneNumber);
+                               cmdPartner.Parameters.AddWithValue("@EmployeeID", employeeID);
 
-                            //using (SqlCommand cmdPartner = new SqlCommand("INSERT INTO EmployeePartner (FirstName, LastName, PhoneNumber, EmployeeID) VALUES (@FirstName, @LastName, @PhoneNumber, @EmployeeID);SELECT SCOPE_IDENTITY();", connection))
-                            //{
-                            //    cmdPartner.Parameters.AddWithValue("@FirstName", partnerDTO.FirstName);
-                            //    cmdPartner.Parameters.AddWithValue("@LastName", partnerDTO.LastName);
-                            //    cmdPartner.Parameters.AddWithValue("@PhoneNumber", partnerDTO.PhoneNumber);
-                            //    cmdPartner.Parameters.AddWithValue("@EmployeeID", employeeID);
-
-                            //    int partnerID = Convert.ToInt32(cmdPartner.ExecuteScalar());
-                            //    cmdPartner.ExecuteNonQuery();
-                            //}
+                               int partnerID = Convert.ToInt32(cmdPartner.ExecuteScalar());
+                               cmdPartner.ExecuteNonQuery();
+                            }
 
                             using (SqlCommand cmdAddress = new SqlCommand("INSERT INTO EmployeeAddress (StreetName, City, ZipCode, Country, EmployeeID) VALUES (@StreetName, @City, @ZipCode, @Country, @EmployeeID);SELECT SCOPE_IDENTITY();", connection))
                             {

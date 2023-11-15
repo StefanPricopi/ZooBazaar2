@@ -237,7 +237,7 @@ namespace Employees
                 employeeDTO.EmployeeID = employeeId;
                 employeeDTO.FirstName = tbxFirstName.Text;
                 employeeDTO.LastName = tbxLastName.Text;
-                employeeDTO.PhoneNumber = int.Parse(tbxPhone.Text);
+                employeeDTO.PhoneNumber = tbxPhone.Text;
                 employeeDTO.DateOfBirth = dtpBirthDate.Value;
                 employeeDTO.BSN = int.Parse(tbxBSN.Text);
                 employeeDTO.Position = tbxPosition.Text;
@@ -313,7 +313,7 @@ namespace Employees
                 partnerDTO.PartnerID = partnerID;
                 partnerDTO.FirstName = tbxFirstNamePartner.Text;
                 partnerDTO.LastName = tbxLastNamePartner.Text;
-                partnerDTO.PhoneNumber = Convert.ToInt32(tbxPhonePartner.Text);
+                partnerDTO.PhoneNumber =tbxPhonePartner.Text;
                 if (employeeManager.UpdateEmployeePartner(partnerDTO))
                 {
                     MessageBox.Show("Success");
@@ -338,6 +338,7 @@ namespace Employees
                 addressDTO.StreetName = tbxStreet.Text;
                 addressDTO.City = tbxCity.Text;
                 addressDTO.ZipCode = tbxZipCode.Text;
+                addressDTO.Country = tbxCountry.Text;
                 if (employeeManager.UpdateEmployeeAddress(addressDTO))
                 {
                     MessageBox.Show("Success");

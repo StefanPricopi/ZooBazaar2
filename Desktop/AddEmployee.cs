@@ -12,7 +12,6 @@ using System.Xml.Linq;
 using DataAccess;
 using Logic.DTO;
 using Logic.Entities;
-using Logic.DTO;
 using Logic.Managers;
 using Microsoft.Data.SqlClient;
 using Microsoft.Identity.Client;
@@ -88,7 +87,7 @@ namespace Employees
             //EmployeeDTO info
             employeeDTO.FirstName = tbxFirstName.Text;
             employeeDTO.LastName = tbxLastName.Text;
-            employeeDTO.PhoneNumber = int.Parse(tbxPhone.Text);
+            employeeDTO.PhoneNumber = tbxPhone.Text;
             employeeDTO.DateOfBirth = dtpBirthDate.Value;
             employeeDTO.BSN = int.Parse(tbxBSN.Text);
             employeeDTO.Position = cmbPosition.Text;
@@ -108,7 +107,7 @@ namespace Employees
             //PartnerDTO info
             partnerDTO.FirstName = tbxFirstNamePartner.Text;
             partnerDTO.LastName = tbxLastNamePartner.Text;
-            partnerDTO.PhoneNumber = Convert.ToInt32(tbxPhonePartner.Text);
+            partnerDTO.PhoneNumber =tbxPhonePartner.Text;
 
             //AddressDTO info
             addressDTO.StreetName = tbxStreet.Text;
@@ -120,7 +119,7 @@ namespace Employees
             roleDTO.RoleName = cmbRole.SelectedText;
             roleDTO.RoleID = cmbRole.SelectedIndex;
 
-            if (employeeManager.CreateEmployee(employeeDTO, userDTO, contractDTO, addressDTO, partnerDTO,roleDTO))
+            if (employeeManager.CreateEmployee(employeeDTO, userDTO, contractDTO, addressDTO, partnerDTO, roleDTO))
             {
                 MessageBox.Show("successful");
             }
@@ -147,6 +146,11 @@ namespace Employees
         }
 
         private void button1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnPartner_Click(object sender, EventArgs e)
         {
 
         }
