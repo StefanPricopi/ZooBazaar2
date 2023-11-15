@@ -26,6 +26,7 @@ namespace Animals
         private string diet;
         private string specialdiet;
         private int employeeID;
+        private int locationID;
 
         public int AnimalID { get => animalID; set => animalID = value; }
         public string Name { get =>  name; set => name = value; }
@@ -43,9 +44,10 @@ namespace Animals
         public string Diet { get => diet; set => diet = value; }
         public string SpecialDiet { get => specialdiet; set => specialdiet = value; }
         public int EmployeeID { get => employeeID; set => employeeID = value; }
+        public int LocationID { get => locationID; set => locationID = value; }
 
 
-        public Animal(string name, DateTime dateofbirth, string phylum, string classis, string ordo, string familia, string genus, string species, string history, string status, string diet, string specialdiet, int employeeID)
+        public Animal(string name, DateTime dateofbirth, string phylum, string classis, string ordo, string familia, string genus, string species, string history, string status, string diet, string specialdiet, int employeeID, int locationID)
         {
             this.name = name;
             this.regio = "Animal";
@@ -62,6 +64,7 @@ namespace Animals
             this.diet = diet;
             this.specialdiet = specialdiet;
             this.employeeID = employeeID;
+            this.locationID = locationID;
         }
 
         public Animal() { }
@@ -84,6 +87,7 @@ namespace Animals
             this.diet = animalDTO.Diet;
             this.specialdiet = animalDTO.SpecialDiet;
             this.employeeID = animalDTO.EmployeeID;
+            this.locationID = animalDTO.LocationID;
         }
 
         public AnimalDTO AnimalToAnimalDTO()
@@ -106,6 +110,7 @@ namespace Animals
                 Diet = this.diet,
                 SpecialDiet = this.specialdiet,
                 EmployeeID = this.employeeID,
+                LocationID = this.locationID,
             };
         }
 

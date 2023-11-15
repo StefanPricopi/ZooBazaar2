@@ -16,6 +16,7 @@ namespace Desktop
     public partial class CaretakerOverview : Form
     {
         private IAnimal animalRepository;
+        private ILocation locationRepository;
         public CaretakerOverview()
         {
             InitializeComponent();
@@ -29,7 +30,7 @@ namespace Desktop
 
         private void btnOpenViewAnimalDetailsForm_Click(object sender, EventArgs e)
         {
-            ViewAnimalDetails viewAnimalDetailsForm = new ViewAnimalDetails(animalRepository);
+            ViewAnimalDetails viewAnimalDetailsForm = new ViewAnimalDetails(animalRepository, locationRepository);
             viewAnimalDetailsForm.ShowDialog();
         }
 

@@ -24,6 +24,7 @@ namespace Logic.DTO
         public string Diet { get; set; }
         public string SpecialDiet { get; set; }
         public int EmployeeID {  get; set; }
+        public int LocationID { get; set; }
 
         public AnimalDTO() { }
     }

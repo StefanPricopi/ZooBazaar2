@@ -16,7 +16,8 @@ namespace Desktop
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
             IAnimal animalRepository = new AnimalRepository();
-            Application.Run(new CaretakerForm(animalRepository));
+            ILocation locationRepository = new LocationRepository();
+            Application.Run(new CaretakerForm(animalRepository, locationRepository));
         }
     }
 }

@@ -18,14 +18,16 @@ namespace Desktop
     public partial class CaretakerForm : Form
     {
         private IAnimal animalRepository;
+        private ILocation locationRepository;
         private Form activeForm;
 
-        public CaretakerForm(IAnimal animalRepository)
+        public CaretakerForm(IAnimal animalRepository, ILocation locationRepository)
         {
             InitializeComponent();
             this.animalRepository = animalRepository;
 
             SetGradientForPanel();
+            this.locationRepository = locationRepository;
         }
         private void OpenChildForm(Form childForm, object btnSender)
         {
@@ -84,7 +86,7 @@ namespace Desktop
 
         private void btnView_Click(object sender, EventArgs e)
         {
-            OpenChildForm(new ViewAnimalDetails(animalRepository), sender);
+            OpenChildForm(new ViewAnimalDetails(animalRepository, locationRepository), sender);
 
         }
 

@@ -18,7 +18,7 @@ namespace DataAccess
             {
                 using (SqlConnection conn = InitializeConection())
                 {
-                    string sql = "INSERT INTO animals (Name, Regio, DateOfBirth, Regnum, Phylum, Classis, Ordo, Familia, Genus, Species, History, Status, Diet, SpecialDiet, EmployeeID) VALUES (@Name, @Regio, @DateOfBirth, @Regnum, @Phylum, @Classis, @Ordo, @Familia, @Genus, @Species, @History, @Status, @Diet, @SpecialDiet, @EmployeeID)";
+                    string sql = "INSERT INTO animals (Name, Regio, DateOfBirth, Regnum, Phylum, Classis, Ordo, Familia, Genus, Species, History, Status, Diet, SpecialDiet, EmployeeID, LocationID) VALUES (@Name, @Regio, @DateOfBirth, @Regnum, @Phylum, @Classis, @Ordo, @Familia, @Genus, @Species, @History, @Status, @Diet, @SpecialDiet, @EmployeeID, @LocationID)";
                     SqlCommand cmd = new SqlCommand(sql, conn);
                     cmd.Parameters.AddWithValue("@Name", animalDTO.Name);
                     cmd.Parameters.AddWithValue("@Regio", animalDTO.Regio);
@@ -35,6 +35,7 @@ namespace DataAccess
                     cmd.Parameters.AddWithValue("@Diet", animalDTO.Diet);
                     cmd.Parameters.AddWithValue("@SpecialDiet", animalDTO.SpecialDiet);
                     cmd.Parameters.AddWithValue("@EmployeeID", animalDTO.EmployeeID);
+                    cmd.Parameters.AddWithValue("@LocationID", DBNull.Value);
                     conn.Open();
                     cmd.ExecuteNonQuery();
                     return true;
@@ -94,7 +95,16 @@ namespace DataAccess
                         }
                         else
                         {
-                            animalDTO.EmployeeID = 69;
+                            animalDTO.EmployeeID = 0;
+                        }
+
+                        if (Int32.TryParse(dr["LocationID"].ToString(), out Int32 locationID))
+                        {
+                            animalDTO.LocationID = locationID;
+                        }
+                        else
+                        {
+                            animalDTO.LocationID = 0;
                         }
 
                         animals.Add(animalDTO);
@@ -123,7 +133,7 @@ namespace DataAccess
             {
                 using (SqlConnection conn = InitializeConection())
                 {
-                    string sql = "UPDATE animals SET Name = @Name, Regio = @Regio, DateOfBirth = @DateOfBirth, Regnum = @Regnum, Phylum = @Phylum, Classis = @Classis, Ordo = @Ordo, Familia = @Familia, Genus = @Genus, Species = @Species, History = @History, Status = @Status, Diet = @Diet, SpecialDiet = @SpecialDiet, EmployeeID = @EmployeeID WHERE AnimalID = @AnimalID";
+                    string sql = "UPDATE animals SET Name = @Name, Regio = @Regio, DateOfBirth = @DateOfBirth, Regnum = @Regnum, Phylum = @Phylum, Classis = @Classis, Ordo = @Ordo, Familia = @Familia, Genus = @Genus, Species = @Species, History = @History, Status = @Status, Diet = @Diet, SpecialDiet = @SpecialDiet, EmployeeID = @EmployeeID, LocationID = @LocationID WHERE AnimalID = @AnimalID";
                     SqlCommand cmd = new SqlCommand(sql, conn);
                     cmd.Parameters.AddWithValue("@AnimalID", animalDTO.AnimalID);
                     cmd.Parameters.AddWithValue("@Name", animalDTO.Name);
@@ -141,6 +151,7 @@ namespace DataAccess
                     cmd.Parameters.AddWithValue("@Diet", animalDTO.Diet);
                     cmd.Parameters.AddWithValue("@SpecialDiet", animalDTO.SpecialDiet);
                     cmd.Parameters.AddWithValue("@EmployeeID", animalDTO.EmployeeID);
+                    cmd.Parameters.AddWithValue("@LocationID", animalDTO.LocationID);
 
                     conn.Open();
                     cmd.ExecuteNonQuery();

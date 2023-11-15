@@ -9,6 +9,7 @@ namespace Desktop
     {
         private EmployeeManager employeeManager;
         private IAnimal animalRepository;
+        private ILocation locationRepository;
         public Form1()
         {
             InitializeComponent();
@@ -30,7 +31,7 @@ namespace Desktop
 
         private void btnOpenViewAnimalDetailsForm_Click(object sender, EventArgs e)
         {
-            ViewAnimalDetails viewAnimalDetailsForm = new ViewAnimalDetails(animalRepository);
+            ViewAnimalDetails viewAnimalDetailsForm = new ViewAnimalDetails(animalRepository, locationRepository);
             viewAnimalDetailsForm.ShowDialog();
         }
 

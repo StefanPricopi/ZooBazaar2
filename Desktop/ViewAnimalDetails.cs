@@ -1,4 +1,5 @@
 ﻿using Logic.DTO;
+using Logic.Entities;
 using Logic.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -15,17 +16,29 @@ namespace Animals
     public partial class ViewAnimalDetails : Form
     {
         private IAnimal animalRepository;
-        public ViewAnimalDetails(IAnimal animalRepository)
+        private ILocation locationRepository;
+
+        public ViewAnimalDetails(IAnimal animalRepository, ILocation locationRepository)
         {
             InitializeComponent();
             this.animalRepository = animalRepository;
+            this.locationRepository = locationRepository;
             InitializeGrid();
+            InitializeLocationComboBox();
         }
 
         private void InitializeGrid()
         {
             dgvAnimals.AutoGenerateColumns = true;
             dgvAnimals.DataSource = animalRepository.GetAllAnimals();
+        }
+
+        private void InitializeLocationComboBox()
+        {
+            List<LocationDTO> locations = locationRepository.GetAllLocations();
+            comboLocation.DataSource = locations;
+            comboLocation.DisplayMember = "LocationName";
+            comboLocation.ValueMember = "LocationID";
         }
         private void btnRefresh_Click(object sender, EventArgs e)
         {
@@ -53,6 +66,42 @@ namespace Animals
         private void dgvAnimals_DoubleClick(object sender, EventArgs e)
         {
 
+        }
+
+        private void btnAssign_Click(object sender, EventArgs e)
+        {
+            int? locationID = null;
+            AnimalDTO selectedAnimal = null;
+
+            if (dgvAnimals.SelectedRows.Count > 0)
+            {
+                selectedAnimal = (AnimalDTO)dgvAnimals.SelectedRows[0].DataBoundItem;
+
+                if (comboLocation.SelectedValue is int selectedLocationID)
+                {
+                    locationID = selectedLocationID;
+                }
+            }
+
+            if (locationID.HasValue && selectedAnimal != null)
+            {
+
+                selectedAnimal.LocationID = locationID.Value;
+
+                if (animalRepository.UpdateAnimal(selectedAnimal))
+                {
+                    MessageBox.Show("Location assigned successfully!");
+                    List<AnimalDTO> updatedAnimals = animalRepository.GetAllAnimals();
+                    InitializeGrid();
+                }
+                else
+                {
+                    MessageBox.Show("Failed to assign location.");
+                }
+            }
+            else
+            {
+                MessageBox.Show("Please select a location from the ComboBox.", "Error");
         }
     }
 }
