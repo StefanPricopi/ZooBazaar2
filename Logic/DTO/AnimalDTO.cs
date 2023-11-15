@@ -8,9 +8,10 @@ namespace Logic.DTO
 {
     public class AnimalDTO
     {
+        public int AnimalID { get; set; }
         public string Name { get; set; }
         public string Regio { get; set; }
-        public string DateOfBirth { get; set; }
+        public DateTime DateOfBirth { get; set; }
         public string Regnum { get; set; }
         public string Phylum { get; set; }
         public string Classis { get; set; }
@@ -22,6 +23,7 @@ namespace Logic.DTO
         public string Status { get; set; }
         public string Diet { get; set; }
         public string SpecialDiet { get; set; }
+        public int EmployeeID {  get; set; }
 
         public AnimalDTO() { }
     }

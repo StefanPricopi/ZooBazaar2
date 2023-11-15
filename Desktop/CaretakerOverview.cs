@@ -1,4 +1,6 @@
 ﻿using Animals;
+using Logic.DTO;
+using Logic.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,35 +15,34 @@ namespace Desktop
 {
     public partial class CaretakerOverview : Form
     {
-        private AnimalManager animalManager;
+        private IAnimal animalRepository;
         public CaretakerOverview()
         {
-            animalManager = new AnimalManager();
             InitializeComponent();
         }
 
         private void btnOpenAddAnimalForm_Click(object sender, EventArgs e)
         {
-            AddAnimal addAnimalForm = new AddAnimal(animalManager);
+            AddAnimal addAnimalForm = new AddAnimal(animalRepository);
             addAnimalForm.ShowDialog();
         }
 
         private void btnOpenViewAnimalDetailsForm_Click(object sender, EventArgs e)
         {
-            ViewAnimalDetails viewAnimalDetailsForm = new ViewAnimalDetails(animalManager);
+            ViewAnimalDetails viewAnimalDetailsForm = new ViewAnimalDetails(animalRepository);
             viewAnimalDetailsForm.ShowDialog();
         }
 
         private void btnOpenUpdateAnimalForm_Click(object sender, EventArgs e)
         {
-            UpdateAnimal updateAnimalForm = new UpdateAnimal(animalManager);
+            List<AnimalDTO> animals = animalRepository.GetAllAnimals();
+
+            UpdateAnimal updateAnimalForm = new UpdateAnimal(animalRepository, animals);
             updateAnimalForm.ShowDialog();
         }
 
         private void btnOpenSearchAnimalForm_Click(object sender, EventArgs e)
         {
-            SearchAnimal searchAnimalForm = new SearchAnimal(animalManager);
-            searchAnimalForm.ShowDialog();
         }
     }
 }

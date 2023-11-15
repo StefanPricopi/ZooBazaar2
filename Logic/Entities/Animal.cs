@@ -10,9 +10,10 @@ namespace Animals
 {
     public class Animal
     {
+        private int animalID;
         private string name;
         private string regio;
-        private string dateofbirth;
+        private DateTime dateofbirth;
         private string regnum;
         private string phylum;
         private string classis;
@@ -24,10 +25,12 @@ namespace Animals
         private string status;
         private string diet;
         private string specialdiet;
+        private int employeeID;
 
+        public int AnimalID { get => animalID; set => animalID = value; }
         public string Name { get =>  name; set => name = value; }
         public string Regio { get => regio; set => regio = value; }
-        public string DateOfBirth { get => dateofbirth; set => dateofbirth = value; }
+        public DateTime DateOfBirth { get => dateofbirth; set => dateofbirth = value; }
         public string Regnum { get => regnum; set => regnum = value; }
         public string Phylum { get => phylum; set => phylum = value; }
         public string Classis { get => classis; set => classis = value; }
@@ -39,9 +42,10 @@ namespace Animals
         public string Status { get => status; set => status = value; }
         public string Diet { get => diet; set => diet = value; }
         public string SpecialDiet { get => specialdiet; set => specialdiet = value; }
+        public int EmployeeID { get => employeeID; set => employeeID = value; }
 
 
-        public Animal(string name, string dateofbirth, string phylum, string classis, string ordo, string familia, string genus, string species, string history, string status, string diet, string specialdiet)
+        public Animal(string name, DateTime dateofbirth, string phylum, string classis, string ordo, string familia, string genus, string species, string history, string status, string diet, string specialdiet, int employeeID)
         {
             this.name = name;
             this.regio = "Animal";
@@ -57,12 +61,14 @@ namespace Animals
             this.status = status;
             this.diet = diet;
             this.specialdiet = specialdiet;
+            this.employeeID = employeeID;
         }
 
         public Animal() { }
 
         public Animal(AnimalDTO animalDTO)
         {
+            this.animalID = animalDTO.AnimalID;
             this.name = animalDTO.Name;
             this.regio = "Animal";
             this.dateofbirth = animalDTO.DateOfBirth;
@@ -77,12 +83,14 @@ namespace Animals
             this.status = animalDTO.Status;
             this.diet = animalDTO.Diet;
             this.specialdiet = animalDTO.SpecialDiet;
+            this.employeeID = animalDTO.EmployeeID;
         }
 
         public AnimalDTO AnimalToAnimalDTO()
         {
             return new AnimalDTO()
             {
+                AnimalID = this.animalID,
                 Name = this.name,
                 Regio = this.regio,
                 DateOfBirth = this.dateofbirth,
@@ -97,11 +105,11 @@ namespace Animals
                 Status = this.status,
                 Diet = this.diet,
                 SpecialDiet = this.specialdiet,
-
+                EmployeeID = this.employeeID,
             };
         }
 
-        public Animal(string name, string dateofbirth, string phylum, string classis, string ordo)
+        public Animal(string name, DateTime dateofbirth, string phylum, string classis, string ordo)
         {
             this.name = name;
             this.regio = "Animal";

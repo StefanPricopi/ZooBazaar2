@@ -1,4 +1,6 @@
 using Animals;
+using DataAccess;
+using Logic.Interfaces;
 
 namespace Desktop
 {
@@ -13,7 +15,8 @@ namespace Desktop
             // To customize application configuration such as set high DPI settings or default font,
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
-            Application.Run(new CaretakerForm());
+            IAnimal animalRepository = new AnimalRepository();
+            Application.Run(new CaretakerForm(animalRepository));
         }
     }
 }

@@ -7,6 +7,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -15,205 +16,223 @@ namespace Animals
 {
     public partial class AddAnimal : Form
     {
-        private AnimalManager animalManager;
-        private List<string> phylumList;
-        private List<string> classisList;
-        private List<string> ordoList;
+        private IAnimal animalRepository;
+        private List<string> phylum;
+        private Dictionary<string, List<string>> classis;
+        private Dictionary<string, List<string>> ordo;
+        private Dictionary<string, List<string>> familia;
+        private Dictionary<string, List<string>> genus;
+        private Dictionary<string, List<string>> species;
 
-        public AddAnimal(AnimalManager animalManager)
+        public AddAnimal(IAnimal animalRepository)
         {
             InitializeComponent();
-            this.animalManager = animalManager;
-
+            this.animalRepository = animalRepository;
+            classis = GetClassisList();
+            ordo = GetOrdoList();
+            familia = GetFamiliaList();
+            genus = GetGenusList();
+            species = GetSpeciesList();
             InitializeComboBoxes();
         }
 
         private void InitializeComboBoxes()
         {
-            phylumList = GetPhylumList();
-            classisList = GetClassisList();
-            ordoList = GetOrdoList();
+            phylum = GetPhylumList();
 
-            comboPhylum.Items.AddRange(phylumList.ToArray());
-            comboClassis.Items.AddRange(classisList.ToArray());
-            comboOrdo.Items.AddRange(ordoList.ToArray());
+            comboPhylum.Items.AddRange(phylum.ToArray());
         }
 
         private List<string> GetPhylumList()
         {
-            List<string> list = new List<string> { "Worms", "Arthropods", "Chordates", "Echinoderms", "Mollusks" };
-            return list;
+            List<string> phylum = new List<string> { "Chordata", "Arthropoda" };
+            return phylum;
         }
 
-        private List<string> GetClassisList()
+        private Dictionary<string, List<string>> GetClassisList()
         {
-            List<string> list = new List<string> { "Polychaeta", "Oligochaeta", "Hirudinea", "Insecta", "Arachnida", "Crustacea", "Myriapoda", "Chilopoda", "Diplopoda", "Malacostraca", "Maxillopoda", "Merostomata", "Mammals", "Birds", "Reptiles", "Amphibians", "Fish", "Sea Stars", "Sea Urchins", "Sea Cucumbers", "Snails", "Clams", "Squid", "Chitons" };
-            return list;
+            Dictionary<string, List<string>> classis = new Dictionary<string, List<string>>
+            {
+                { "Chordata", new List<string> { "Mammals", "Birds", "Reptiles", "Fish" } },
+                { "Arthropoda", new List<string> { "Insects", "Arachnids", "Crustaceans" } }
+            };
+            return classis;
         }
 
-        private List<string> GetOrdoList()
+
+
+        private Dictionary<string, List<string>> GetOrdoList()
         {
-            List<string> list = new List<string> { "Spionida", "Sabellida", "Terebellida", "Eunicida", "Phyllodocida", "Lumbriculida", "Haplotaxida", "Moniligastrida", "Microchaetida", "Lumbricida", "Arhynchobdellida", "Rhynchobdellida", "Gnatobdellida", "Hirudinida", "Coleoptera", "Diptera", "Lepidoptera", "Hymenoptera", "Hemiptera", "Araneae", "Scorpiones", "Opiliones", "Decapoda", "Isopoda", "Amphipoda", "Euphausiacea", "Chilognatha", "Scolopendromorpha", "Lithobiomorpha", "Polydesmida", "Chordeumatida", "Siphonocryptida", "Spirobolida", "Decapoda", "Amphipoda", "Isopoda", "Euphausiacea", "Calanoida", "Cyclopoida", "Harpacticoida", "Xiphosura", "Carnivora", "Rodentia", "Cetacea", "Primates", "Artiodactyla", "Passeriformes", "Falconiformes", "Columbiformes", "Struthioniformes", "Squamata", "Testudines", "Crocodylia", "Anura", "Caudata", "Gymnophiona", "Salmoniformes", "Perciformes", "Cypriniformes", "Siluriformes", "Paxillosida", "Valvatida", "Spinulosida", "Forcipulatida", "Echinoidea", "Cidaroida", "Holothuriida", "Elasipodida", "Apodida", "Pulmonata", "Gastropoda", "Stylommatophora", "Bivalvia", "Protobranchia", "Palaeoheterodonta", "Teuthida", "Vampyromorpha", "Octopoda", "Chitonida", "Lepidopleurida" };
-            return list;
+            Dictionary<string, List<string>> ordo = new Dictionary<string, List<string>>
+            {
+                { "Mammals", new List<string> { "Carnivores", "Primates", "Hoofed Animals" } },
+                { "Birds", new List<string> { "Songbirds", "Parrots", "Ostriches" } },
+                { "Reptiles", new List<string> { "Lizards and Snakes", "Turtles", "Crocodiles" } },
+                { "Fish", new List<string> { "Perch-like Fish", "Catfish", "Carp-like Fish" } },
+                { "Insects", new List<string> { "Butterflies", "Beetles", "Ants and Bees" } },
+                { "Arachnids", new List<string> { "Spiders", "Scorpions", "Whip Scorpions" } },
+                { "Crustaceans", new List<string> { "Crabs", "Isopods", "Amphipods" } }
+            };
+            return ordo;
+        }
+
+        private Dictionary<string, List<string>> GetFamiliaList()
+        {
+            Dictionary<string, List<string>> familia = new Dictionary<string, List<string>>
+            {
+                { "Carnivores", new List<string> { "Big Cats", "Canines", "Bears" } },
+                { "Primates", new List<string> { "Great Apes", "Monkeys" } },
+                { "Hoofed Animals", new List<string> { "Giraffes", "Zebras", "Hippopotamuses" } },
+                { "Songbirds", new List<string> { "Sparrows", "Finches", "Warblers" } },
+                { "Parrots", new List<string> { "Macaws", "Cockatoos", "Lovebirds" } },
+                { "Ostriches", new List<string> { "Common Ostrich", "Somali Ostrich" } },
+                { "Lizards and Snakes", new List<string> { "Lizards", "Snakes" } },
+                { "Turtles", new List<string> { "Tortoises", "Terrapins", "Sea Turtles" } },
+                { "Crocodiles", new List<string> { "Nile Crocodile", "American Alligator" } },
+                { "Perch-like Fish", new List<string> { "Percidae", "Centrarchidae" } },
+                { "Catfish", new List<string> { "Ictaluridae", "Pimelodidae" } },
+                { "Carp-like Fish", new List<string> { "Cyprinidae", "Cichlidae" } },
+                { "Butterflies", new List<string> { "Nymphalids", "Swallowtails", "Blues" } },
+                { "Beetles", new List<string> { "Ladybugs", "Dung Beetles" } },
+                { "Ants and Bees", new List<string> { "Honey Bees", "Carpenter Ants" } },
+                { "Spiders", new List<string> { "Orb-weavers", "Jumping Spiders", "Tarantulas" } },
+                { "Scorpions", new List<string> { "Emperor Scorpions", "Bark Scorpions" } },
+                { "Whip Scorpions", new List<string> { "Vinegaroons" } },
+                { "Crabs", new List<string> { "Blue Crabs", "King Crabs", "Fiddler Crabs" } },
+                { "Isopods", new List<string> { "Woodlice", "Pillbugs" } },
+                { "Amphipods", new List<string> { "Scuds" } }
+            };
+            return familia;
+        }
+
+        private Dictionary<string, List<string>> GetGenusList()
+        {
+            Dictionary<string, List<string>> genus = new Dictionary<string, List<string>>
+            {
+                { "Big Cats", new List<string> { "Lion", "Tiger", "Leopard" } },
+                { "Canines", new List<string> { "Wolf", "Coyote", "Fox" } },
+                { "Bears", new List<string> { "Grizzly Bear", "Polar Bear", "Brown Bear" } },
+                { "Great Apes", new List<string> { "Chimpanzee", "Gorilla", "Orangutan" } },
+                { "Monkeys", new List<string> { "Capuchin Monkey", "Howler Monkey", "Marmoset" } },
+                { "Giraffes", new List<string> { "Reticulated Giraffe", "Masai Giraffe" } },
+                { "Zebras", new List<string> { "Plains Zebra", "Grevy's Zebra" } },
+                { "Hippopotamuses", new List<string> { "Common Hippopotamus" } },
+                { "Sparrows", new List<string> { "House Sparrow", "Song Sparrow" } },
+                { "Finches", new List<string> { "House Finch", "Goldfinch" } },
+                { "Warblers", new List<string> { "Yellow Warbler", "Blackburnian Warbler" } },
+                { "Macaws", new List<string> { "Scarlet Macaw", "Blue-and-yellow Macaw" } },
+                { "Cockatoos", new List<string> { "Sulphur-crested Cockatoo", "Galah" } },
+                { "Lovebirds", new List<string> { "Peach-faced Lovebird", "Fischer's Lovebird" } },
+                { "Common Ostrich", new List<string> { "Common Ostrich" } },
+                { "Somali Ostrich", new List<string> { "Somali Ostrich" } },
+                { "Lizards", new List<string> { "Iguana", "Gecko" } },
+                { "Snakes", new List<string> { "Boa Constrictor", "Corn Snake" } },
+                { "Tortoises", new List<string> { "Aldabra Giant Tortoise" } },
+                { "Terrapins", new List<string> { "Eastern Box Turtle" } },
+                { "Sea Turtles", new List<string> { "Loggerhead Sea Turtle" } },
+                { "Nile Crocodile", new List<string> { "Nile Crocodile" } },
+                { "American Alligator", new List<string> { "American Alligator" } },
+                { "Percidae", new List<string> { "Yellow Perch" } },
+                { "Centrarchidae", new List<string> { "Largemouth Bass" } },
+                { "Ictaluridae", new List<string> { "Channel Catfish" } },
+                { "Pimelodidae", new List<string> { "Amazonian Catfish" } },
+                { "Cyprinidae", new List<string> { "Common Carp" } },
+                { "Cichlidae", new List<string> { "African Cichlid" } },
+                { "Nymphalids", new List<string> { "Monarch Butterfly" } },
+                { "Swallowtails", new List<string> { "Eastern Tiger Swallowtail" } },
+                { "Blues", new List<string> { "Eastern Tailed-Blue" } },
+                { "Ladybugs", new List<string> { "Seven-spot Ladybug" } },
+                { "Dung Beetles", new List<string> { "Scarab Beetle" } },
+                { "Honey Bees", new List<string> { "Western Honey Bee" } },
+                { "Carpenter Ants", new List<string> { "Carpenter Ant" } },
+                { "Orb-weavers", new List<string> { "Garden Orb-weaver" } },
+                { "Jumping Spiders", new List<string> { "Bold Jumping Spider" } },
+                { "Tarantulas", new List<string> { "Mexican Redknee Tarantula" } },
+                { "Emperor Scorpions", new List<string> { "Emperor Scorpion" } },
+                { "Bark Scorpions", new List<string> { "Arizona Bark Scorpion" } },
+                { "Vinegaroons", new List<string> { "Vinegaroon" } },
+                { "Blue Crabs", new List<string> { "Blue Crab" } },
+                { "King Crabs", new List<string> { "King Crab" } },
+                { "Fiddler Crabs", new List<string> { "Fiddler Crab" } },
+                { "Woodlice", new List<string> { "Common Woodlouse" } },
+                { "Pillbugs", new List<string> { "Common Pillbug" } },
+                { "Scuds", new List<string> { "Gammarid" } },
+            };
+            return genus;
+        }
+
+
+        private Dictionary<string, List<string>> GetSpeciesList()
+        {
+            Dictionary<string, List<string>> species = new Dictionary<string, List<string>>
+            {
+                { "Lion", new List<string> { "African Lion" } },
+                { "Tiger", new List<string> { "Bengal Tiger", "Siberian Tiger" } },
+                { "Leopard", new List<string> { "African Leopard", "Snow Leopard" } },
+                { "Wolf", new List<string> { "Gray Wolf" } },
+                { "Coyote", new List<string> { "Common Coyote" } },
+                { "Fox", new List<string> { "Red Fox", "Arctic Fox" } },
+                { "Goldfinch", new List<string> { "American Goldfinch" } },
+                { "Iguana", new List<string> { "Green Iguana" } },
+                { "Gecko", new List<string> { "Leopard Gecko" } },
+            };
+            return species;
         }
 
         private void comboPhylum_SelectedIndexChanged(object sender, EventArgs e)
         {
             string selectedPhylum = comboPhylum.SelectedItem.ToString();
-
             comboClassis.Items.Clear();
-            if (selectedPhylum == "Worms")
+
+            if (classis.ContainsKey(selectedPhylum))
             {
-                comboClassis.Items.AddRange(new string[] { "Polychaeta", "Oligochaeta", "Hirudinea" });
-            }
-            else if (selectedPhylum == "Arthropods")
-            {
-                comboClassis.Items.AddRange(new string[] { "Insecta", "Arachnida", "Crustacea", "Myriapoda", "Chilopoda", "Diplopoda", "Malacostraca", "Maxillopoda", "Merostomata" });
-            }
-            else if (selectedPhylum == "Chordates")
-            {
-                comboClassis.Items.AddRange(new string[] { "Mammals", "Birds", "Reptiles", "Amphibians", "Fish" });
-            }
-            else if (selectedPhylum == "Echinoderms")
-            {
-                comboClassis.Items.AddRange(new string[] { "Sea Stars", "Sea Urchins", "Sea Cucumbers" });
-            }
-            else if (selectedPhylum == "Mollusks")
-            {
-                comboClassis.Items.AddRange(new string[] { "Snails", "Clams", "Squid", "Chitons" });
+                comboClassis.Items.AddRange(classis[selectedPhylum].ToArray());
             }
         }
 
         private void comboClassis_SelectedIndexChanged(object sender, EventArgs e)
         {
             string selectedClassis = comboClassis.SelectedItem.ToString();
-
             comboOrdo.Items.Clear();
-            if (string.IsNullOrEmpty(selectedClassis))
+
+            if (ordo.ContainsKey(selectedClassis))
             {
-                comboOrdo.Items.AddRange(new string[] { "" });
-            }
-            else
-            {
-                if (selectedClassis == "Polychaeta")
-                {
-                    comboOrdo.Items.AddRange(new string[] { "Spionida", "Sabellida", "Terebellida", "Eunicida", "Phyllodocida" });
-                }
-                else if (selectedClassis == "Oligochaeta")
-                {
-                    comboOrdo.Items.AddRange(new string[] { "Lumbriculida", "Haplotaxida", "Moniligastrida", "Microchaetida", "Lumbricida" });
-                }
-                else if (selectedClassis == "Hirudinea")
-                {
-                    comboOrdo.Items.AddRange(new string[] { "Arhynchobdellida", "Rhynchobdellida", "Gnatobdellida", "Hirudinida" });
-                }
-                else if (selectedClassis == "Insecta")
-                {
-                    comboOrdo.Items.AddRange(new string[] { "Coleoptera", "Diptera", "Lepidoptera", "Hymenoptera", "Hemiptera" });
-                }
-                else if (selectedClassis == "Arachnida")
-                {
-                    comboOrdo.Items.AddRange(new string[] { "Araneae", "Scorpiones", "Opiliones" });
-                }
-                else if (selectedClassis == "Crustacea")
-                {
-                    comboOrdo.Items.AddRange(new string[] { "Decapoda", "Isopoda", "Amphipoda", "Euphausiacea" });
-                }
-                else if (selectedClassis == "Myriapoda")
-                {
-                    comboOrdo.Items.AddRange(new string[] { "Chilognatha", "Scolopendromorpha" });
-                }
-                else if (selectedClassis == "Chilopoda")
-                {
-                    comboOrdo.Items.AddRange(new string[] { "Lithobiomorpha", "Scolopendromorpha" });
-                }
-                else if (selectedClassis == "Diplopoda")
-                {
-                    comboOrdo.Items.AddRange(new string[] { "Polydesmida", "Chordeumatida", "Siphonocryptida", "Spirobolida" });
-                }
-                else if (selectedClassis == "Malacostraca")
-                {
-                    comboOrdo.Items.AddRange(new string[] { "Decapoda", "Amphipoda", "Isopoda", "Euphausiacea" });
-                }
-                else if (selectedClassis == "Maxillopoda")
-                {
-                    comboOrdo.Items.AddRange(new string[] { "Calanoida", "Cyclopoida", "Harpacticoida" });
-                }
-                else if (selectedClassis == "Merostomata")
-                {
-                    comboOrdo.Items.AddRange(new string[] { "Xiphosura" });
-                }
-                else if (selectedClassis == "Mammals")
-                {
-                    comboOrdo.Items.AddRange(new string[] { "Carnivora", "Rodentia", "Cetacea", "Primates", "Artiodactyla" });
-                }
-                else if (selectedClassis == "Birds")
-                {
-                    comboOrdo.Items.AddRange(new string[] { "Passeriformes", "Falconiformes", "Columbiformes", "Struthioniformes" });
-                }
-                else if (selectedClassis == "Reptiles")
-                {
-                    comboOrdo.Items.AddRange(new string[] { "Squamata", "Testudines", "Crocodylia" });
-                }
-                else if (selectedClassis == "Amphibians")
-                {
-                    comboOrdo.Items.AddRange(new string[] { "Anura", "Caudata", "Gymnophiona" });
-                }
-                else if (selectedClassis == "Fish")
-                {
-                    comboOrdo.Items.AddRange(new string[] { "Salmoniformes", "Perciformes", "Cypriniformes", "Siluriformes" });
-                }
-                else if (selectedClassis == "Sea Stars")
-                {
-                    comboOrdo.Items.AddRange(new string[] { "Paxillosida", "Valvatida", "Spinulosida", "Forcipulatida" });
-                }
-                else if (selectedClassis == "Sea Urchins")
-                {
-                    comboOrdo.Items.AddRange(new string[] { "Echinoidea", "Cidaroida" });
-                }
-                else if (selectedClassis == "Sea Cucumbers")
-                {
-                    comboOrdo.Items.AddRange(new string[] { "Holothuriida", "Elasipodida", "Apodida" });
-                }
-                else if (selectedClassis == "Snails")
-                {
-                    comboOrdo.Items.AddRange(new string[] { "Pulmonata", "Gastropoda", "Stylommatophora" });
-                }
-                else if (selectedClassis == "Clams")
-                {
-                    comboOrdo.Items.AddRange(new string[] { "Bivalvia", "Protobranchia", "Palaeoheterodonta" });
-                }
-                else if (selectedClassis == "Squid")
-                {
-                    comboOrdo.Items.AddRange(new string[] { "Teuthida", "Vampyromorpha", "Octopoda" });
-                }
-                else if (selectedClassis == "Chitons")
-                {
-                    comboOrdo.Items.AddRange(new string[] { "Chitonida", "Lepidopleurida" });
-                }
+                comboOrdo.Items.AddRange(ordo[selectedClassis].ToArray());
             }
         }
 
         private void btnAddAnimal_Click(object sender, EventArgs e)
         {
-            IAnimal animalRepository = new AnimalRepository();
-            string hi = comboPhylum.Text;
+            string name = tbxName.Text;
+            string phylum = comboPhylum.Text;
+            string classis = comboClassis.Text;
+            string ordo = comboOrdo.Text;
+            string familia = comboFamilia.Text;
+            string genus = comboGenus.Text;
+            string species = comboSpecies.Text;
+            string history = tbxHistory.Text;
+            string status = comboStatus.Text;
+            string diet = tbxDiet.Text;
+            string specialDiet = tbxSpecialDiet.Text;
+            DateTime dateOfBirth = dateBirth.Value;
 
             AnimalDTO dummyAnimal = new AnimalDTO()
             {
-                Name = tbxName.Text,
+                Name = name,
                 Regio = "Animal",
-                DateOfBirth = "hi",
+                DateOfBirth = dateOfBirth,
                 Regnum = "Animalia",
-                Phylum = comboPhylum.Text,
-                Classis = comboClassis.Text,
-                Ordo = comboOrdo.Text,
-                Familia = "familiaTest",
-                Genus = "genusTest",
-                Species = "speciesTest",
-                History = "historyTest",
-                Diet = "dietTest",
-                SpecialDiet = "specialDietTest"
+                Phylum = phylum,
+                Classis = classis,
+                Ordo = ordo,
+                Familia = familia,
+                Genus = genus,
+                Species = species,
+                History = history,
+                Status = status,
+                Diet = diet,
+                SpecialDiet = specialDiet,
+                EmployeeID = 1
             };
 
             bool insertionResult = animalRepository.CreateAnimal(dummyAnimal);
@@ -227,7 +246,7 @@ namespace Animals
                 MessageBox.Show("No");
             }
 
-           
+
 
         }
 
@@ -267,9 +286,6 @@ namespace Animals
 
             if (string.IsNullOrEmpty(searchText))
             {
-                ResetComboBoxItems(comboPhylum, GetPhylumList());
-                ResetComboBoxItems(comboClassis, GetClassisList());
-                ResetComboBoxItems(comboOrdo, GetOrdoList());
             }
             else
             {
@@ -278,6 +294,47 @@ namespace Animals
                 FilterComboBoxItems(comboClassis, searchText);
 
                 FilterComboBoxItems(comboOrdo, searchText);
+            }
+        }
+
+        private void comboOrdo_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string selectedOrdo = comboOrdo.SelectedItem.ToString();
+            comboFamilia.Items.Clear();
+
+            if (familia.ContainsKey(selectedOrdo))
+            {
+                comboFamilia.Items.AddRange(familia[selectedOrdo].ToArray());
+            }
+        }
+
+        private void comboFamilia_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string selectedFamilia = comboFamilia.SelectedItem.ToString();
+            comboGenus.Items.Clear();
+
+            if (genus.ContainsKey(selectedFamilia))
+            {
+                comboGenus.Items.AddRange(genus[selectedFamilia].ToArray());
+            }
+        }
+
+        private void comboGenus_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string selectedGenus = comboGenus.SelectedItem.ToString();
+            comboSpecies.Items.Clear();
+
+            if (species.ContainsKey(selectedGenus))
+            {
+                comboSpecies.Items.AddRange(species[selectedGenus].ToArray());
+            }
+        }
+
+        private void comboSpecies_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            foreach (var item in species)
+            {
+                comboSpecies.Items.Add(item.Key);
             }
         }
     }
