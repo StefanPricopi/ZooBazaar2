@@ -38,27 +38,42 @@ namespace DataAccess
                 using (SqlConnection conn = InitializeConection())
                 {
                     conn.Open();
-                    string sql = "SELECT * FROM Employees WHERE UserID = @UserID";
-                    SqlCommand cmd = new SqlCommand(sql, conn);
-                    cmd.Parameters.AddWithValue("@UserID", currentUser.UserID);
 
-                    SqlDataReader dr = cmd.ExecuteReader();
+                    // Step 1: Get the employeeID from the Employees table
+                    string employeeIdQuery = "SELECT EmployeeID FROM Employees WHERE UserID = @UserID";
+                    SqlCommand employeeIdCmd = new SqlCommand(employeeIdQuery, conn);
+                    employeeIdCmd.Parameters.AddWithValue("@UserID", currentUser.UserID);
 
-                    if (dr.Read())
+                    int employeeID;
+                    object result = employeeIdCmd.ExecuteScalar();
+
+                    if (result != null && int.TryParse(result.ToString(), out employeeID))
                     {
-                        string userDTO = dr["Position"].ToString();
-                        
-                        return userDTO; 
+                        // Step 2: Use the obtained employeeID to retrieve the RoleID from the EmployeeContracts table
+                        string roleIdQuery = "SELECT RoleID FROM EmployeeContracts WHERE EmployeeID = @EmployeeID";
+                        SqlCommand roleIdCmd = new SqlCommand(roleIdQuery, conn);
+                        roleIdCmd.Parameters.AddWithValue("@EmployeeID", employeeID);
+
+                        SqlDataReader dr = roleIdCmd.ExecuteReader();
+
+                        if (dr.Read())
+                        {
+                            string roleDTO = dr["RoleID"].ToString();
+                            return roleDTO;
+                        }
                     }
                 }
             }
             catch (Exception ex)
             {
-                // Handle the exception (e.g., log the error)
+                // Handle exceptions appropriately
+                Console.WriteLine("Error: " + ex.Message);
             }
-            
-            return null; // Return null if no user with the specified email is found
+
+            // Return a default value or handle the case where no data is found
+            return null;
         }
+
         public User GetCurrentUserByUsername(string username)
 
         {

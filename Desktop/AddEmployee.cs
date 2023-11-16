@@ -107,7 +107,7 @@ namespace Employees
             //PartnerDTO info
             partnerDTO.FirstName = tbxFirstNamePartner.Text;
             partnerDTO.LastName = tbxLastNamePartner.Text;
-            partnerDTO.PhoneNumber =tbxPhonePartner.Text;
+            partnerDTO.PhoneNumber = tbxPhonePartner.Text;
 
             //AddressDTO info
             addressDTO.StreetName = tbxStreet.Text;

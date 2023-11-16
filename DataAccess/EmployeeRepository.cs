@@ -126,13 +126,11 @@ namespace DataAccess
         {
             try
             {
-
-
                 using (SqlConnection connection = InitializeConection())
                 {
                     connection.Open();
 
-                    // Insert into User tablestring updateQuery = "UPDATE Employees SET FirstName = @FirstName, LastName = @LastName, PhoneNumber = @PhoneNumber, DateOfBirth = @DateOfBirth, BSN = @BSN, Position = @Position WHERE EmployeeID = @EmployeeID";
+                    // Insert into User table
                     using (SqlCommand cmdUser = new SqlCommand("INSERT INTO [users] (Username, Email, Password, Salt) VALUES (@Username, @Email, @Password, @Salt); SELECT SCOPE_IDENTITY();", connection))
                     {
                         var salt = DateTime.Now.ToString();
@@ -156,11 +154,9 @@ namespace DataAccess
                             cmdEmployee.Parameters.AddWithValue("@UserID", userID); // Use the obtained UserID
                             cmdEmployee.Parameters.AddWithValue("@Position", employeeDTO.Position);
 
-                            int employeeID = Convert.ToInt32(cmdEmployee.ExecuteScalar());
-                            cmdEmployee.ExecuteNonQuery();
+                            int employeeID = Convert.ToInt32(cmdEmployee.ExecuteScalar()); // Get the auto-generated EmployeeID
+
                             // Insert employee record
-
-
                             using (SqlCommand cmdContract = new SqlCommand("INSERT INTO EmployeeContracts (StartDate, EndDate, RoleID, Salary, ContractType, EmployeeID) VALUES (@StartDate, @EndDate, @RoleID, @Salary, @ContractType, @EmployeeID);SELECT SCOPE_IDENTITY();", connection))
                             {
                                 cmdContract.Parameters.AddWithValue("@StartDate", contractDTO.StartDate);
@@ -171,20 +167,20 @@ namespace DataAccess
                                 cmdContract.Parameters.AddWithValue("@RoleID", roleDTO.RoleID);
 
                                 int contractID = Convert.ToInt32(cmdContract.ExecuteScalar());
-                                cmdContract.ExecuteNonQuery();
                             }
-                            //Insert partner data
+
+                            // Insert partner data
                             using (SqlCommand cmdPartner = new SqlCommand("INSERT INTO EmployeePartner (FirstName, LastName, PhoneNumber, EmployeeID) VALUES (@FirstName, @LastName, @PhoneNumber, @EmployeeID);SELECT SCOPE_IDENTITY();", connection))
                             {
-                               cmdPartner.Parameters.AddWithValue("@FirstName", partnerDTO.FirstName);
-                               cmdPartner.Parameters.AddWithValue("@LastName", partnerDTO.LastName);
-                               cmdPartner.Parameters.AddWithValue("@PhoneNumber", partnerDTO.PhoneNumber);
-                               cmdPartner.Parameters.AddWithValue("@EmployeeID", employeeID);
+                                cmdPartner.Parameters.AddWithValue("@FirstName", partnerDTO.FirstName);
+                                cmdPartner.Parameters.AddWithValue("@LastName", partnerDTO.LastName);
+                                cmdPartner.Parameters.AddWithValue("@PhoneNumber", partnerDTO.PhoneNumber);
+                                cmdPartner.Parameters.AddWithValue("@EmployeeID", employeeID);
 
-                               int partnerID = Convert.ToInt32(cmdPartner.ExecuteScalar());
-                               cmdPartner.ExecuteNonQuery();
+                                int partnerID = Convert.ToInt32(cmdPartner.ExecuteScalar());
                             }
 
+                            // Insert address data
                             using (SqlCommand cmdAddress = new SqlCommand("INSERT INTO EmployeeAddress (StreetName, City, ZipCode, Country, EmployeeID) VALUES (@StreetName, @City, @ZipCode, @Country, @EmployeeID);SELECT SCOPE_IDENTITY();", connection))
                             {
                                 cmdAddress.Parameters.AddWithValue("@StreetName", addressDTO.StreetName);
@@ -194,8 +190,8 @@ namespace DataAccess
                                 cmdAddress.Parameters.AddWithValue("@EmployeeID", employeeID);
 
                                 int addressID = Convert.ToInt32(cmdAddress.ExecuteScalar());
-                                cmdAddress.ExecuteNonQuery();
                             }
+
                             return true;
                         }
                     }
@@ -203,10 +199,11 @@ namespace DataAccess
             }
             catch (Exception ex)
             {
+                // Handle the exception (log, rethrow, etc.)
                 return false;
             }
-
         }
+
         public bool UpdateEmployee(EmployeeDTO employeeDTO)
         {
             try

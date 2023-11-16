@@ -64,20 +64,20 @@ namespace Desktop
                     Form addAnimalForm = new CaretakerForm(animalRepository, locationRepository);
                     addAnimalForm.ShowDialog();
                 }
-                if (position == "HR")
+                if (position == "1")
                 {
                     Form addEmployeeForm = new HrOverview();
                     addEmployeeForm.ShowDialog();
                 }
-                if (position == "Manager")
+                if (position == "2")
                 {
                     Form formtoopen = new ManagerOverview();
                     formtoopen.ShowDialog();
                 }
-                if (position == "sss")
+                if (position == "3")
                 {
-                    Form openfrom = new Form1();
-                    openfrom.ShowDialog();
+                    Form addAnimalForm = new CaretakerForm(animalRepository, locationRepository);
+                    addAnimalForm.ShowDialog();
                 }
             }
         }
