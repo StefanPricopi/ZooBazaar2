@@ -11,7 +11,7 @@ namespace Logic.DTO
         public int PartnerID { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        public int PhoneNumber { get; set; }
+        public string PhoneNumber { get; set; }
 
         public PartnerDTO() { }
         public PartnerDTO(PartnerDTO partnerDTO)

@@ -12,7 +12,7 @@ namespace Logic.Entities
         private int employeeID;
         private string firstName;
         private string lastName;
-        private int phoneNumber;
+        private string phoneNumber;
         private DateTime dateOfBirth;
         private int bSN;
         private string position;
@@ -32,7 +32,7 @@ namespace Logic.Entities
             get { return lastName; }
             set { lastName = value; }
         }
-        public int PhoneNumber
+        public string PhoneNumber
         {
             get { return phoneNumber; }
             set { phoneNumber = value; }
@@ -53,7 +53,7 @@ namespace Logic.Entities
             set { position = value; }
         }
 
-        Employee(string firstName, string lastName, int phoneNumber, DateTime dateOfBirth, int bSN, string position) 
+        Employee(string firstName, string lastName, string phoneNumber, DateTime dateOfBirth, int bSN, string position) 
         {
             this.firstName = firstName;
             this.lastName = lastName;

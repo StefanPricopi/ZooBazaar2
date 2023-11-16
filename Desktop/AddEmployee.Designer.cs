@@ -67,6 +67,7 @@
             label2 = new Label();
             pictureBox2 = new PictureBox();
             tabPage4 = new TabPage();
+            cmbRole = new ComboBox();
             label23 = new Label();
             tbxContractType = new TextBox();
             dtpEndDate = new DateTimePicker();
@@ -89,7 +90,6 @@
             label10 = new Label();
             label9 = new Label();
             pictureBox6 = new PictureBox();
-            cmbRole = new ComboBox();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             tabControl1.SuspendLayout();
             tabPage1.SuspendLayout();
@@ -152,7 +152,7 @@
             tabControl1.Margin = new Padding(3, 4, 3, 4);
             tabControl1.Name = "tabControl1";
             tabControl1.SelectedIndex = 0;
-            tabControl1.Size = new Size(493, 496);
+            tabControl1.Size = new Size(540, 515);
             tabControl1.TabIndex = 28;
             tabControl1.SelectedIndexChanged += tabControl1_SelectedIndexChanged;
             // 
@@ -423,7 +423,7 @@
             tabPage3.Margin = new Padding(3, 4, 3, 4);
             tabPage3.Name = "tabPage3";
             tabPage3.Padding = new Padding(3, 4, 3, 4);
-            tabPage3.Size = new Size(485, 438);
+            tabPage3.Size = new Size(532, 457);
             tabPage3.TabIndex = 2;
             tabPage3.Text = "Employee Partner Info";
             tabPage3.UseVisualStyleBackColor = true;
@@ -436,6 +436,7 @@
             btnPartner.TabIndex = 38;
             btnPartner.Text = "Add Partner ";
             btnPartner.UseVisualStyleBackColor = true;
+            btnPartner.Click += btnPartner_Click;
             // 
             // tbxPhonePartner
             // 
@@ -520,6 +521,14 @@
             tabPage4.TabIndex = 3;
             tabPage4.Text = "Employee Contract Info";
             tabPage4.UseVisualStyleBackColor = true;
+            // 
+            // cmbRole
+            // 
+            cmbRole.FormattingEnabled = true;
+            cmbRole.Location = new Point(170, 231);
+            cmbRole.Name = "cmbRole";
+            cmbRole.Size = new Size(250, 30);
+            cmbRole.TabIndex = 46;
             // 
             // label23
             // 
@@ -716,14 +725,6 @@
             pictureBox6.Size = new Size(144, 465);
             pictureBox6.TabIndex = 32;
             pictureBox6.TabStop = false;
-            // 
-            // cmbRole
-            // 
-            cmbRole.FormattingEnabled = true;
-            cmbRole.Location = new Point(170, 231);
-            cmbRole.Name = "cmbRole";
-            cmbRole.Size = new Size(250, 30);
-            cmbRole.TabIndex = 46;
             // 
             // AddEmployee
             // 
