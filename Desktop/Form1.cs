@@ -1,17 +1,19 @@
 using Animals;
 using Logic.Managers;
 using Employees;
+using Logic.DTO;
+using Logic.Interfaces;
 
 namespace Desktop
 {
     public partial class Form1 : Form
     {
-        private AnimalManager animalManager;
         private EmployeeManager employeeManager;
+        private IAnimal animalRepository;
+        private ILocation locationRepository;
         public Form1()
         {
             InitializeComponent();
-            animalManager = new AnimalManager();
             employeeManager = new EmployeeManager();
         }
 
@@ -24,26 +26,26 @@ namespace Desktop
 
         private void btnOpenAddAnimalForm_Click(object sender, EventArgs e)
         {
-            AddAnimal addAnimalForm = new AddAnimal(animalManager);
+            AddAnimal addAnimalForm = new AddAnimal(animalRepository);
             addAnimalForm.ShowDialog();
         }
 
         private void btnOpenViewAnimalDetailsForm_Click(object sender, EventArgs e)
         {
-            ViewAnimalDetails viewAnimalDetailsForm = new ViewAnimalDetails(animalManager);
+            ViewAnimalDetails viewAnimalDetailsForm = new ViewAnimalDetails(animalRepository, locationRepository);
             viewAnimalDetailsForm.ShowDialog();
         }
 
         private void btnOpenUpdateAnimalForm_Click(object sender, EventArgs e)
         {
-            UpdateAnimal updateAnimalForm = new UpdateAnimal(animalManager);
+            List<AnimalDTO> animals = animalRepository.GetAllAnimals();
+
+            UpdateAnimal updateAnimalForm = new UpdateAnimal(animalRepository, animals);
             updateAnimalForm.ShowDialog();
         }
 
         private void btnOpenSearchAnimalForm_Click(object sender, EventArgs e)
         {
-            SearchAnimal searchAnimalForm = new SearchAnimal(animalManager);
-            searchAnimalForm.ShowDialog();
         }
 
         private void btnAddEmployee_Click(object sender, EventArgs e)

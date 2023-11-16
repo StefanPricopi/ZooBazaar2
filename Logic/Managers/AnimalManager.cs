@@ -1,59 +1,45 @@
-﻿using System;
+﻿using Logic.DTO;
+using Logic.Entities;
+using Logic.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
-
 namespace Animals
 {
     public class AnimalManager
     {
+        private readonly IAnimal animal;
+
+        public AnimalManager(IAnimal animal)
+        {
+            this.animal = animal ?? throw new ArgumentNullException(nameof(animal));
+        }
+
+        public AnimalManager() { }
         private List<Animal> animals = new List<Animal>();
 
-        public void AddAnimal(Animal animal)
+        public bool CreateAnimal(AnimalDTO animalDTO)
         {
-            animals.Add(animal);
+            return animal.CreateAnimal(animalDTO);
         }
 
-        public List<Animal> GetAnimalsBySpecies(string species)
+        public List<Animal> GetAllAnimals()
         {
-            List<Animal> result = new List<Animal>();
-            foreach (Animal animal in animals)
+            List<Animal> animals = new List<Animal>();
+            foreach (AnimalDTO a in animal.GetAllAnimals())
             {
-                if (animal.Species == species)
-                {
-                    result.Add(animal);
-                }
+                animals.Add(new Animal(a));
             }
-            return result;
+            return animals;
         }
 
-        public Animal GetAnimalByName(string name)
+        public bool UpdateAnimal(AnimalDTO animalDTO)
         {
-            foreach (Animal animal in animals)
-            {
-                if (animal.Name == name)
-                {
-                    return animal;
-                }
-            }
-            return null;
-        }
-
-        public void UpdateAnimal(Animal updatedAnimal)
-        {
-            foreach (Animal animal in animals)
-            {
-                if (animal.Name == updatedAnimal.Name)
-                {
-                    animal.Species = updatedAnimal.Species;
-                    animal.Age = updatedAnimal.Age;
-                    animal.Location = updatedAnimal.Location;
-                    break; 
-                }
-            }
+            return animal.UpdateAnimal(animalDTO);
         }
     }
 }

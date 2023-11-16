@@ -28,85 +28,90 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.comboSpecies = new System.Windows.Forms.ComboBox();
-            this.listAnimals = new System.Windows.Forms.ListBox();
-            this.btnViewDetails = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.SuspendLayout();
-            // 
-            // comboSpecies
-            // 
-            this.comboSpecies.FormattingEnabled = true;
-            this.comboSpecies.Location = new System.Drawing.Point(77, 68);
-            this.comboSpecies.Name = "comboSpecies";
-            this.comboSpecies.Size = new System.Drawing.Size(121, 24);
-            this.comboSpecies.TabIndex = 0;
-            // 
-            // listAnimals
-            // 
-            this.listAnimals.Font = new System.Drawing.Font("Garamond", 10F);
-            this.listAnimals.FormattingEnabled = true;
-            this.listAnimals.ItemHeight = 19;
-            this.listAnimals.Location = new System.Drawing.Point(13, 142);
-            this.listAnimals.Name = "listAnimals";
-            this.listAnimals.Size = new System.Drawing.Size(401, 118);
-            this.listAnimals.TabIndex = 1;
-            // 
-            // btnViewDetails
-            // 
-            this.btnViewDetails.Font = new System.Drawing.Font("Garamond", 10F);
-            this.btnViewDetails.Location = new System.Drawing.Point(13, 98);
-            this.btnViewDetails.Name = "btnViewDetails";
-            this.btnViewDetails.Size = new System.Drawing.Size(132, 38);
-            this.btnViewDetails.TabIndex = 2;
-            this.btnViewDetails.Text = "View details";
-            this.btnViewDetails.UseVisualStyleBackColor = true;
-            this.btnViewDetails.Click += new System.EventHandler(this.btnViewDetails_Click);
+            label1 = new Label();
+            dgvAnimals = new DataGridView();
+            btnAssign = new Button();
+            label2 = new Label();
+            comboLocation = new ComboBox();
+            ((System.ComponentModel.ISupportInitialize)dgvAnimals).BeginInit();
+            SuspendLayout();
             // 
             // label1
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Garamond", 15F);
-            this.label1.Location = new System.Drawing.Point(12, 23);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(213, 29);
-            this.label1.TabIndex = 3;
-            this.label1.Text = "View Animal Details";
+            label1.AutoSize = true;
+            label1.Font = new Font("Century Gothic", 28F, FontStyle.Regular, GraphicsUnit.Point);
+            label1.Location = new Point(12, 21);
+            label1.Name = "label1";
+            label1.Size = new Size(472, 57);
+            label1.TabIndex = 3;
+            label1.Text = "View Animal Details";
+            // 
+            // dgvAnimals
+            // 
+            dgvAnimals.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvAnimals.Location = new Point(12, 81);
+            dgvAnimals.Name = "dgvAnimals";
+            dgvAnimals.RowHeadersWidth = 51;
+            dgvAnimals.RowTemplate.Height = 29;
+            dgvAnimals.Size = new Size(1548, 458);
+            dgvAnimals.TabIndex = 21;
+            dgvAnimals.DoubleClick += dgvAnimals_DoubleClick;
+            // 
+            // btnAssign
+            // 
+            btnAssign.Font = new Font("Century Gothic", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            btnAssign.Location = new Point(23, 595);
+            btnAssign.Name = "btnAssign";
+            btnAssign.Size = new Size(234, 58);
+            btnAssign.TabIndex = 22;
+            btnAssign.Text = "Assign";
+            btnAssign.UseVisualStyleBackColor = true;
+            btnAssign.Click += btnAssign_Click;
             // 
             // label2
             // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Garamond", 10F);
-            this.label2.Location = new System.Drawing.Point(14, 71);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(61, 19);
-            this.label2.TabIndex = 4;
-            this.label2.Text = "Species:";
+            label2.AutoSize = true;
+            label2.Font = new Font("Century Gothic", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            label2.Location = new Point(23, 557);
+            label2.Name = "label2";
+            label2.Size = new Size(77, 20);
+            label2.TabIndex = 23;
+            label2.Text = "Location:";
+            // 
+            // comboLocation
+            // 
+            comboLocation.DropDownStyle = ComboBoxStyle.DropDownList;
+            comboLocation.FormattingEnabled = true;
+            comboLocation.Location = new Point(106, 554);
+            comboLocation.Name = "comboLocation";
+            comboLocation.Size = new Size(151, 28);
+            comboLocation.TabIndex = 24;
             // 
             // ViewAnimalDetails
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(442, 288);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.btnViewDetails);
-            this.Controls.Add(this.listAnimals);
-            this.Controls.Add(this.comboSpecies);
-            this.Name = "ViewAnimalDetails";
-            this.Text = "ViewAnimalDetails";
-            this.ResumeLayout(false);
-            this.PerformLayout();
-
+            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleMode = AutoScaleMode.Font;
+            BackColor = Color.White;
+            ClientSize = new Size(1572, 665);
+            Controls.Add(comboLocation);
+            Controls.Add(label2);
+            Controls.Add(btnAssign);
+            Controls.Add(dgvAnimals);
+            Controls.Add(label1);
+            Margin = new Padding(3, 4, 3, 4);
+            Name = "ViewAnimalDetails";
+            Text = "ViewAnimalDetails";
+            Load += ViewAnimalDetails_Load;
+            ((System.ComponentModel.ISupportInitialize)dgvAnimals).EndInit();
+            ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
-
-        private System.Windows.Forms.ComboBox comboSpecies;
-        private System.Windows.Forms.ListBox listAnimals;
-        private System.Windows.Forms.Button btnViewDetails;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
+        private Label label1;
+        private DataGridView dgvAnimals;
+        private Button btnAssign;
+        private Label label2;
+        private ComboBox comboLocation;
     }
 }

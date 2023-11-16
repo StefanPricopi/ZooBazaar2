@@ -21,16 +21,7 @@ namespace Animals
 
         private void btnSearch_Click(object sender, EventArgs e)
         {
-            string searchQuery = tbxSearch.Text;
-
-            List<Animal> searchResults = animalManager.SearchAnimals(searchQuery);
-
-            listAnimals.Items.Clear();
-
-            foreach (Animal animal in searchResults)
-            {
-                listAnimals.Items.Add(animal.ToString());
-            }
+            
         }
     }
 }

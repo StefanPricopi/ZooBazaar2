@@ -63,6 +63,26 @@ namespace Desktop.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap JungleCode {
+            get {
+                object obj = ResourceManager.GetObject("JungleCode", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap pngtree_elephant_logo_design_icon_vector_png_image_1928181 {
+            get {
+                object obj = ResourceManager.GetObject("pngtree-elephant-logo-design-icon-vector-png-image_1928181", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Screenshot_12 {
             get {
                 object obj = ResourceManager.GetObject("Screenshot_12", resourceCulture);
@@ -106,6 +126,16 @@ namespace Desktop.Properties {
         internal static System.Drawing.Bitmap Screenshot_15 {
             get {
                 object obj = ResourceManager.GetObject("Screenshot_15", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap search {
+            get {
+                object obj = ResourceManager.GetObject("search", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

@@ -1,4 +1,7 @@
-﻿using System;
+﻿using Logic.DTO;
+using Logic.Entities;
+using Logic.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,58 +15,93 @@ namespace Animals
 {
     public partial class ViewAnimalDetails : Form
     {
-        private AnimalManager animalManager;
+        private IAnimal animalRepository;
+        private ILocation locationRepository;
 
-        public ViewAnimalDetails(AnimalManager animalManager)
+        public ViewAnimalDetails(IAnimal animalRepository, ILocation locationRepository)
         {
             InitializeComponent();
-            this.animalManager = animalManager;
-
-            List<string> speciesList = GetSpeciesList();
-            comboSpecies.DataSource = speciesList;
+            this.animalRepository = animalRepository;
+            this.locationRepository = locationRepository;
+            InitializeGrid();
+            InitializeLocationComboBox();
         }
 
-        private List<string> GetSpeciesList()
+        private void InitializeGrid()
         {
-            List<string> speciesList = new List<string>();
-            foreach (Animal animal in animalManager.GetAllAnimals())
-            {
-                if (!speciesList.Contains(animal.Species))
-                {
-                    speciesList.Add(animal.Species);
-                }
-            }
-            return speciesList;
+            dgvAnimals.AutoGenerateColumns = true;
+            dgvAnimals.DataSource = animalRepository.GetAllAnimals();
+        }
+
+        private void InitializeLocationComboBox()
+        {
+            List<LocationDTO> locations = locationRepository.GetAllLocations();
+            comboLocation.DataSource = locations;
+            comboLocation.DisplayMember = "LocationName";
+            comboLocation.ValueMember = "LocationID";
+        }
+        private void btnRefresh_Click(object sender, EventArgs e)
+        {
+            InitializeGrid();
+        }
+
+
+
+        private void ViewAnimalDetails_Load(object sender, EventArgs e)
+        {
+        }
+
+        private void comboPhylum_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+        private void comboClassis_SelectedIndexChanged(object sender, EventArgs e)
+        {
+        }
+
+        private void tbxSearch_TextChanged_1(object sender, EventArgs e)
+        {
+        }
+
+        private void dgvAnimals_DoubleClick(object sender, EventArgs e)
+        {
 
         }
 
-        private void btnViewDetails_Click(object sender, EventArgs e)
+        private void btnAssign_Click(object sender, EventArgs e)
         {
-            List<string> speciesList = GetSpeciesList();
-            foreach (string species in speciesList)
+            int? locationID = null;
+            AnimalDTO selectedAnimal = null;
+
+            if (dgvAnimals.SelectedRows.Count > 0)
             {
-                if (comboSpecies.SelectedItem == species)
+                selectedAnimal = (AnimalDTO)dgvAnimals.SelectedRows[0].DataBoundItem;
+
+                if (comboLocation.SelectedValue is int selectedLocationID)
                 {
-
-
-                    string selectedSpecies = comboSpecies.SelectedItem.ToString();
-                    {
-                        if (selectedSpecies == species)
-                        {
-
-
-
-                            List<Animal> animalsOfSelectedSpecies = animalManager.GetAnimalsBySpecies(selectedSpecies);
-
-                            listAnimals.Items.Clear();
-                            foreach (Animal animal in animalsOfSelectedSpecies)
-                            {
-                                listAnimals.Items.Add(animal.ToString());
-                            }
-                        }
-                    }
+                    locationID = selectedLocationID;
                 }
             }
+
+            if (locationID.HasValue && selectedAnimal != null)
+            {
+
+                selectedAnimal.LocationID = locationID.Value;
+
+                if (animalRepository.UpdateAnimal(selectedAnimal))
+                {
+                    MessageBox.Show("Location assigned successfully!");
+                    List<AnimalDTO> updatedAnimals = animalRepository.GetAllAnimals();
+                    InitializeGrid();
+                }
+                else
+                {
+                    MessageBox.Show("Failed to assign location.");
+                }
+            }
+            else
+            {
+                MessageBox.Show("Please select a location from the ComboBox.", "Error");
         }
     }
 }
