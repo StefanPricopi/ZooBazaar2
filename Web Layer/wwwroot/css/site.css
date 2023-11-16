@@ -68,6 +68,12 @@ body {
     white-space: nowrap; 
 
 }
+label {
+    color: royalblue;
+    font-size: 18px;
+    letter-spacing: 1px;
+    font-family: fantasy;
+}
 /* I refuse to elaborate on the monstrosity from line 67 to 264 it needs refactoring and barely works */
 @media (max-width: 1200px) {
     .navbar-brand {
@@ -342,6 +348,7 @@ h1 {
     font-size: 3em;
     letter-spacing: 1px;
     font-family: fantasy;
+    color: royalblue;
 }
 p{
     max-width:500px;

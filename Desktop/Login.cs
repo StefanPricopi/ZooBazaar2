@@ -20,8 +20,9 @@ namespace Desktop
 {
     public partial class Login : Form
     {
-        
-        
+        IAnimal animalRepository = new AnimalRepository();
+        ILocation locationRepository = new LocationRepository();
+
         private readonly UserManager userManager;
        
         public Login()
@@ -60,7 +61,7 @@ namespace Desktop
                 }
                 if (position == "Caretaker")
                 {
-                    Form addAnimalForm = new CaretakerOverview();
+                    Form addAnimalForm = new CaretakerForm(animalRepository, locationRepository);
                     addAnimalForm.ShowDialog();
                 }
                 if (position == "HR")

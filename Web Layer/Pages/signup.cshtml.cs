@@ -21,16 +21,18 @@ namespace Web_Layer.Pages
         [BindProperty]
         public UserDTO User { get; set; }
 
-        public void OnPost()
+        public IActionResult OnPost()
         {
             if (User != null)
             {
 
                 userManager.CreateVisitor(User);
+                return RedirectToPage("/login");
             }
             else
             {
                 //  User is null error 
+                return Page();
             }
         }
     }
