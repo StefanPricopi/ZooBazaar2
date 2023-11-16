@@ -52,6 +52,7 @@
             label7 = new Label();
             pictureBox1 = new PictureBox();
             pictureBox2 = new PictureBox();
+            btnRefresh = new Button();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             SuspendLayout();
@@ -281,9 +282,9 @@
             label7.AutoSize = true;
             label7.Location = new Point(602, 312);
             label7.Name = "label7";
-            label7.Size = new Size(53, 15);
+            label7.Size = new Size(141, 15);
             label7.TabIndex = 22;
-            label7.Text = "Capacity";
+            label7.Text = "Max amount of habitants";
             // 
             // pictureBox1
             // 
@@ -304,11 +305,22 @@
             pictureBox2.TabStop = false;
             pictureBox2.Click += pictureBox2_Click;
             // 
+            // btnRefresh
+            // 
+            btnRefresh.Location = new Point(713, 264);
+            btnRefresh.Name = "btnRefresh";
+            btnRefresh.Size = new Size(75, 23);
+            btnRefresh.TabIndex = 25;
+            btnRefresh.Text = "Refresh";
+            btnRefresh.UseVisualStyleBackColor = true;
+            btnRefresh.Click += btnRefresh_Click;
+            // 
             // Area_LocationManagement
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(btnRefresh);
             Controls.Add(rbAreaActive);
             Controls.Add(rbAreaInactive);
             Controls.Add(rbLocationInactive);
@@ -367,5 +379,6 @@
         private Label label7;
         private PictureBox pictureBox1;
         private PictureBox pictureBox2;
+        private Button btnRefresh;
     }
 }
