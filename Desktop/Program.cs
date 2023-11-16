@@ -17,7 +17,7 @@ namespace Desktop
             ApplicationConfiguration.Initialize();
             IAnimal animalRepository = new AnimalRepository();
             ILocation locationRepository = new LocationRepository();
-            Application.Run(new CaretakerForm(animalRepository, locationRepository));
+            Application.Run(new CaretakerForm());
         }
     }
 }

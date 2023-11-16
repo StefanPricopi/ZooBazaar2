@@ -104,4 +104,5 @@ namespace Animals
                 MessageBox.Show("Please select a location from the ComboBox.", "Error");
         }
     }
+    }
 }
