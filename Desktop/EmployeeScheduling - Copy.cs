@@ -18,7 +18,7 @@ namespace Desktop
         {
             currentDate = DateTime.Now;
             startOfWeek = DayOfWeek.Sunday;
-
+            // accessing the dates from the ShiftPanelManager Dictionary
             ShiftPanelManager.MorningShiftPanels = new Dictionary<DateTime, MorningShiftPanel>();
             ShiftPanelManager.AfternoonShiftPanels = new Dictionary<DateTime, AfternoonShiftPanel>();
             ShiftPanelManager.EveningShiftPanels = new Dictionary<DateTime, EveningShiftPanel>();
@@ -40,7 +40,6 @@ namespace Desktop
                 flowLayoutPanel1.Controls.Add(morningShiftPanel);
                 ShiftPanelManager.MorningShiftPanels[currentDay.Date] = morningShiftPanel;
 
-                // Access the label within the scrollable panel
                 Label morningLabel = (Label)morningShiftPanel.Controls[0].Controls[0];
                 morningLabel.Text = $"Morning Shift\n{currentDay.ToShortDateString()}";
             }
@@ -55,7 +54,6 @@ namespace Desktop
                 flowLayoutPanel1.Controls.Add(afternoonShiftPanel);
                 ShiftPanelManager.AfternoonShiftPanels[currentDay.Date] = afternoonShiftPanel;
 
-                // Access the label within the scrollable panel
                 Label afternoonLabel = (Label)afternoonShiftPanel.Controls[0].Controls[0];
                 afternoonLabel.Text = $"Afternoon Shift\n{currentDay.ToShortDateString()}";
             }
@@ -70,7 +68,6 @@ namespace Desktop
                 flowLayoutPanel1.Controls.Add(eveningShiftPanel);
                 ShiftPanelManager.EveningShiftPanels[currentDay.Date] = eveningShiftPanel;
 
-                // Access the label within the scrollable panel
                 Label eveningLabel = (Label)eveningShiftPanel.Controls[0].Controls[0];
                 eveningLabel.Text = $"Evening Shift\n{currentDay.ToShortDateString()}";
             }
@@ -89,6 +86,7 @@ namespace Desktop
         }
     }
 
+    //creating Dictionary that we can use from other partial classes
     public static class ShiftPanelManager
     {
         public static Dictionary<DateTime, MorningShiftPanel> MorningShiftPanels { get; set; } = new Dictionary<DateTime, MorningShiftPanel>();

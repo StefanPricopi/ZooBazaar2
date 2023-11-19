@@ -5,6 +5,7 @@ namespace Desktop
 {
     public partial class AfternoonShiftPanel : UserControl
     {
+        // for comments see morningShiftPanel code is 99% the same
         private const int labelHeight = 50;
         private int initialPanelHeight;
         public AfternoonShiftPanel(DateTime date)
@@ -27,41 +28,31 @@ namespace Desktop
         }
         private void InitializePanel(DateTime date, string shiftType)
         {
-            // Create a scrollable panel
             Panel scrollablePanel = new Panel
             {
                 Dock = DockStyle.Fill,
                 AutoScroll = true
             };
 
-            int labelHeight = 50; // Set the height of each label
+            int labelHeight = 50; 
 
-            // Create the first label with text
             Label label = new Label
             {
                 Text = $"{shiftType}\n{date.ToShortDateString()}",
                 TextAlign = ContentAlignment.MiddleCenter,
                 AutoSize = true,
-                // Add margin between labels
-                Location = new Point(0, 0) // Adjust as needed
+                Location = new Point(0, 0)
             };
-            // Attach a click event handler to the first label
             label.Click += (sender, e) =>
             {
-                // Open the AddEmployee form or perform any other action on click
                 AssignEmployee addEmployeeForm = new AssignEmployee(date, "AfternoonShift");
                 addEmployeeForm.ShowDialog();
             };
 
-
-
-            // Add labels to scrollable panel
             scrollablePanel.Controls.Add(label);
 
-            // Set the height of the panel to ensure vertical scrolling
-            initialPanelHeight = 3 * (labelHeight + 10); ; // Height for three labels
-
-            // Add scrollable panel to MorningShiftPanel
+  
+            initialPanelHeight = 3 * (labelHeight + 10); ;
             Controls.Add(scrollablePanel);
         }
         

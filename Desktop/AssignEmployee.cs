@@ -31,7 +31,6 @@ namespace Desktop
 
             // Find the appropriate shift panel based on selectedShift and selectedDate
             DateTime selectedDate = DateTime.Parse(tbxDate.Text);
-            DateTime newdate = DateTime.Parse(tbxDate.Text);
 
             if (selectedShift == "MorningShift" && ShiftPanelManager.MorningShiftPanels.ContainsKey(selectedDate.Date))
             {

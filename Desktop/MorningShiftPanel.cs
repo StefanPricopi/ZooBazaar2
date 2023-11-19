@@ -6,8 +6,9 @@ namespace Desktop
 {
     public partial class MorningShiftPanel : UserControl
     {
-       
+       // const height for labels, acts as margin between labels
         private const int labelHeight = 50;
+        // this is the margin within panels
         private int initialPanelHeight; 
         public MorningShiftPanel(DateTime date)
         {
@@ -15,6 +16,7 @@ namespace Desktop
             InitializePanel(date, "Morning Shift");
             
         }
+        //method that the button which assigns employee to shift calls, to create the label for the employee
         public void AddShiftLabel(string employeeName)
         {
             Label newLabel = new Label
@@ -28,44 +30,40 @@ namespace Desktop
             Controls[0].Controls.Add(newLabel);
             Controls[0].Height += labelHeight + 10;
         }
-
+        //intial intialization of all the panels, this is to show the date and shift type
         private void InitializePanel(DateTime date, string shiftType)
         {
-            // Create a scrollable panel
+            // making the panels scrollable so that if hundreds of employees are assigned to the same 
+            // shift they can still be seen
             Panel scrollablePanel = new Panel
             {
                 Dock = DockStyle.Fill,
                 AutoScroll = true
             };
 
-            int labelHeight = 50; // Set the height of each label
+            int labelHeight = 50;
 
-            // Create the first label with text
+            //actual label for the shift type and date
             Label label = new Label
             {
                 Text = $"{shiftType}\n{date.ToShortDateString()}",
                 TextAlign = ContentAlignment.MiddleCenter,
                 AutoSize = true,
-                // Add margin between labels
-                Location = new Point(0, 0) // Adjust as needed
+                Location = new Point(0, 0) 
             };
-            // Attach a click event handler to the first label
+            // event for whenever we click on the label
+            //to show the assignemployee form
             label.Click += (sender, e) =>
             {
-                // Open the AddEmployee form or perform any other action on click
                 AssignEmployee addEmployeeForm = new AssignEmployee(date, "MorningShift");
                 addEmployeeForm.ShowDialog();
             };
 
 
-
-            // Add labels to scrollable panel
             scrollablePanel.Controls.Add(label);
 
-            // Set the height of the panel to ensure vertical scrolling
-            initialPanelHeight = 3 * (labelHeight + 10); ; // Height for three labels
+            initialPanelHeight = 3 * (labelHeight + 10); ; 
 
-            // Add scrollable panel to MorningShiftPanel
             Controls.Add(scrollablePanel);
         }
 
