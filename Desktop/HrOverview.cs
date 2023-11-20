@@ -29,7 +29,7 @@ namespace Desktop
 
         private void btnEmployeeSchedule_Click(object sender, EventArgs e)
         {
-            EmployeeSchedule employeeScheduleForm = new EmployeeSchedule();
+            EmployeeSchedulingForm employeeScheduleForm = new EmployeeSchedulingForm();
             employeeScheduleForm.ShowDialog();
         }
 

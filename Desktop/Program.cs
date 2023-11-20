@@ -18,7 +18,7 @@ namespace Desktop
             ApplicationConfiguration.Initialize();
             IAnimal animalRepository = new AnimalRepository();
             ILocation locationRepository = new LocationRepository();
-            Application.Run(new EmployeeSchedulingTest());
+            Application.Run(new Login());
         }
     }
 }

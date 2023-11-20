@@ -1,9 +1,10 @@
-﻿using System;
+﻿using Logic.Interfaces;
+using System;
 using System.Windows.Forms;
 
 namespace Desktop
 {
-    public partial class EveningShiftPanel : UserControl
+    public partial class EveningShiftPanel : UserControl, IShiftPanel
     {
         // for comments see morningShiftPanel code is 99% the same
         private const int labelHeight = 50;
@@ -43,12 +44,19 @@ namespace Desktop
                 AutoSize = true,
                 Location = new Point(0, 0) 
             };
-            label.Click += (sender, e) =>
+            DateTime currentTime = DateTime.Now;
+            if (date <= currentTime.AddDays(-1))
+            {
+
+            }
+            else
+            { 
+                label.Click += (sender, e) =>
             {
                 AssignEmployee addEmployeeForm = new AssignEmployee(date, "EveningShift");
                 addEmployeeForm.ShowDialog();
             };
-
+            }   
 
             scrollablePanel.Controls.Add(label);
 

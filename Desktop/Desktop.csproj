@@ -17,7 +17,7 @@
     <Compile Update="AddAnimal.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="EmployeeScheduling - Copy.cs" />
+    <Compile Update="EmployeeScheduleForm.cs" />
     <Compile Update="Properties\Resources.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>

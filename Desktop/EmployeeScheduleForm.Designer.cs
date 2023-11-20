@@ -1,6 +1,6 @@
 ﻿namespace Desktop
 {
-    partial class EmployeeSchedulingTest
+    partial class EmployeeSchedulingForm
     {
         /// <summary>
         /// Required designer variable.
@@ -40,6 +40,7 @@
             lbFriday = new Label();
             lbSaturday = new Label();
             flowLayoutPanel1 = new FlowLayoutPanel();
+            btnGoBack = new Button();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             SuspendLayout();
@@ -159,11 +160,22 @@
             flowLayoutPanel1.Size = new Size(808, 401);
             flowLayoutPanel1.TabIndex = 32;
             // 
-            // EmployeeSchedulingTest
+            // btnGoBack
+            // 
+            btnGoBack.Location = new Point(675, 12);
+            btnGoBack.Name = "btnGoBack";
+            btnGoBack.Size = new Size(94, 35);
+            btnGoBack.TabIndex = 33;
+            btnGoBack.Text = "Go back";
+            btnGoBack.UseVisualStyleBackColor = true;
+            btnGoBack.Click += btnGoBack_Click;
+            // 
+            // EmployeeSchedulingForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 557);
+            Controls.Add(btnGoBack);
             Controls.Add(flowLayoutPanel1);
             Controls.Add(lbSaturday);
             Controls.Add(lbFriday);
@@ -177,7 +189,7 @@
             Controls.Add(pictureBox2);
             Controls.Add(pictureBox1);
             FormBorderStyle = FormBorderStyle.None;
-            Name = "EmployeeSchedulingTest";
+            Name = "EmployeeSchedulingForm";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "EmployeeScheduling";
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
@@ -200,5 +212,6 @@
         private Label lbFriday;
         private Label lbSaturday;
         private FlowLayoutPanel flowLayoutPanel1;
+        private Button btnGoBack;
     }
 }

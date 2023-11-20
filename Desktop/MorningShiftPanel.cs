@@ -1,11 +1,16 @@
 ﻿using Employees;
+using Logic.Interfaces;
 using System;
 using System.Windows.Forms;
 
 namespace Desktop
 {
-    public partial class MorningShiftPanel : UserControl
+    // might consider making a universal ShiftPanel that accepts, shifttype parameter
+    // so that it is more "scalable" if lets say client wants 100 different shift types
+    // ¯\_(ツ)_/¯
+    public partial class MorningShiftPanel : UserControl, IShiftPanel
     {
+
        // const height for labels, acts as margin between labels
         private const int labelHeight = 50;
         // this is the margin within panels
@@ -53,11 +58,20 @@ namespace Desktop
             };
             // event for whenever we click on the label
             //to show the assignemployee form
-            label.Click += (sender, e) =>
+            DateTime currentTime = DateTime.Now;
+            if (date <= currentTime.AddDays(-1))
             {
-                AssignEmployee addEmployeeForm = new AssignEmployee(date, "MorningShift");
-                addEmployeeForm.ShowDialog();
-            };
+
+            }
+            else
+            {
+                label.Click += (sender, e) =>
+                {
+                    AssignEmployee addEmployeeForm = new AssignEmployee(date, "MorningShift");
+                    addEmployeeForm.ShowDialog();
+                };
+            }
+            
 
 
             scrollablePanel.Controls.Add(label);
