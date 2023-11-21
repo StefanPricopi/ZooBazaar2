@@ -1,5 +1,4 @@
-﻿
-using Microsoft.Data.SqlClient;
+﻿using Microsoft.Data.SqlClient;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -20,7 +19,7 @@ namespace DataAccess
         {
             User currentUser = GetCurrentUserByUsername(username); // Call the method via IUser
             var userhashedpass = UserManager.HashedPassword($"{password}{currentUser.Salt.Trim()}");
-            
+
             if (username == currentUser.Username && userhashedpass == currentUser.Password)
             {
                 return currentUser;
@@ -109,7 +108,7 @@ namespace DataAccess
             {
                 // Handle the exception (e.g., log the error)
             }
-            
+
             return null; // Return null if no user with the specified email is found
         }
         public UserDTO GetCurrentUserByUsernameForEmployee(string username)
@@ -231,7 +230,7 @@ namespace DataAccess
                     cmd.Parameters.AddWithValue("@Password", hashedPW);
                     cmd.Parameters.AddWithValue("@Email", userDTO.Email);
                     cmd.Parameters.AddWithValue("@Salt", salt);
-                    conn.Open();    
+                    conn.Open();
                     cmd.ExecuteNonQuery();
                     return true;
                 }
@@ -271,7 +270,7 @@ namespace DataAccess
                     }
                     passed = true;
                 }
-            }   
+            }
             catch (Exception ex)
             {
                 passed = false;
@@ -336,19 +335,44 @@ namespace DataAccess
                         // Insert into Employee table with the obtained UserID
                         using (SqlCommand cmdEmployee = new SqlCommand("INSERT INTO Visitors (UserID) VALUES (@UserID);", connection))
                         {
-                            
+
                             cmdEmployee.Parameters.AddWithValue("@UserID", userID); // Use the obtained UserID
-                            
+
 
                             cmdEmployee.ExecuteNonQuery(); // Insert employee record
-                            
+
                         }
                     }
                 }
             }
             catch (Exception ex)
             {
-                
+
+            }
+
+        }
+        public int GetEmpIDbyUserId(int id)
+        {
+            try
+            {
+                using (SqlConnection connection = InitializeConection())
+                {
+                    connection.Open();
+
+
+                    using (SqlCommand command = new SqlCommand("SELECT EmployeeId \r\nFROM Employees \r\nWHERE UserId = @UserId\r\n", connection))
+                    {
+                        command.Parameters.Add(new SqlParameter("@UserId", id));
+                        object result = command.ExecuteScalar();
+                        int EmpId = Convert.ToInt32(result);
+                        return EmpId;
+                    }
+
+                }
+            }
+            catch (Exception ex)
+            {
+                return -1;
             }
 
         }
