@@ -14,6 +14,7 @@ namespace Logic.DTO
         public string LocationName { get;set; }
         public int Capacity { get; set; }
         public string Status { get; set; }
+        public int CurrentCapacity {  get; set; }
 
         public LocationDTO() { }
     }
