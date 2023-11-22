@@ -28,48 +28,28 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(HrOverview));
-            pictureBox1 = new PictureBox();
-            pictureBox2 = new PictureBox();
             btnEditEmployee = new Button();
             btnAddEmployee = new Button();
             btnEmployeeSchedule = new Button();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
+            panel1 = new Panel();
+            panel2 = new Panel();
+            pnlOverview = new Panel();
+            panel2.SuspendLayout();
             SuspendLayout();
-            // 
-            // pictureBox1
-            // 
-            pictureBox1.Image = Properties.Resources.Screenshot_12;
-            pictureBox1.Location = new Point(-5, -5);
-            pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(810, 117);
-            pictureBox1.TabIndex = 3;
-            pictureBox1.TabStop = false;
-            // 
-            // pictureBox2
-            // 
-            pictureBox2.BackgroundImageLayout = ImageLayout.None;
-            pictureBox2.BorderStyle = BorderStyle.FixedSingle;
-            pictureBox2.Image = (Image)resources.GetObject("pictureBox2.Image");
-            pictureBox2.Location = new Point(-5, 108);
-            pictureBox2.Name = "pictureBox2";
-            pictureBox2.Size = new Size(167, 342);
-            pictureBox2.TabIndex = 4;
-            pictureBox2.TabStop = false;
             // 
             // btnEditEmployee
             // 
             btnEditEmployee.AutoSizeMode = AutoSizeMode.GrowAndShrink;
             btnEditEmployee.BackColor = SystemColors.ActiveCaptionText;
+            btnEditEmployee.Dock = DockStyle.Top;
             btnEditEmployee.FlatAppearance.BorderSize = 0;
             btnEditEmployee.FlatStyle = FlatStyle.Flat;
             btnEditEmployee.Image = Properties.Resources.Screenshot_13;
-            btnEditEmployee.Location = new Point(277, 137);
+            btnEditEmployee.Location = new Point(0, 249);
             btnEditEmployee.Margin = new Padding(0);
             btnEditEmployee.Name = "btnEditEmployee";
-            btnEditEmployee.Size = new Size(313, 79);
-            btnEditEmployee.TabIndex = 11;
+            btnEditEmployee.Size = new Size(273, 127);
+            btnEditEmployee.TabIndex = 2;
             btnEditEmployee.Text = "Change Employee Data";
             btnEditEmployee.UseVisualStyleBackColor = false;
             btnEditEmployee.Click += btnEditEmployee_Click;
@@ -78,14 +58,15 @@
             // 
             btnAddEmployee.AutoSizeMode = AutoSizeMode.GrowAndShrink;
             btnAddEmployee.BackColor = SystemColors.ActiveCaptionText;
+            btnAddEmployee.Dock = DockStyle.Top;
             btnAddEmployee.FlatAppearance.BorderSize = 0;
             btnAddEmployee.FlatStyle = FlatStyle.Flat;
             btnAddEmployee.Image = Properties.Resources.Screenshot_13;
-            btnAddEmployee.Location = new Point(277, 246);
+            btnAddEmployee.Location = new Point(0, 122);
             btnAddEmployee.Margin = new Padding(0);
             btnAddEmployee.Name = "btnAddEmployee";
-            btnAddEmployee.Size = new Size(313, 79);
-            btnAddEmployee.TabIndex = 12;
+            btnAddEmployee.Size = new Size(273, 127);
+            btnAddEmployee.TabIndex = 0;
             btnAddEmployee.Text = "Add Employee";
             btnAddEmployee.UseVisualStyleBackColor = false;
             btnAddEmployee.Click += btnAddEmployee_Click;
@@ -94,41 +75,73 @@
             // 
             btnEmployeeSchedule.AutoSizeMode = AutoSizeMode.GrowAndShrink;
             btnEmployeeSchedule.BackColor = SystemColors.ActiveCaptionText;
+            btnEmployeeSchedule.Dock = DockStyle.Top;
             btnEmployeeSchedule.FlatAppearance.BorderSize = 0;
             btnEmployeeSchedule.FlatStyle = FlatStyle.Flat;
             btnEmployeeSchedule.Image = Properties.Resources.Screenshot_13;
-            btnEmployeeSchedule.Location = new Point(277, 348);
+            btnEmployeeSchedule.Location = new Point(0, 0);
             btnEmployeeSchedule.Margin = new Padding(0);
             btnEmployeeSchedule.Name = "btnEmployeeSchedule";
-            btnEmployeeSchedule.Size = new Size(313, 79);
-            btnEmployeeSchedule.TabIndex = 13;
+            btnEmployeeSchedule.Size = new Size(273, 122);
+            btnEmployeeSchedule.TabIndex = 1;
             btnEmployeeSchedule.Text = "View Employee Schedule";
             btnEmployeeSchedule.UseVisualStyleBackColor = false;
             btnEmployeeSchedule.Click += btnEmployeeSchedule_Click;
+            // 
+            // panel1
+            // 
+            panel1.BackColor = Color.FromArgb(128, 255, 255);
+            panel1.Dock = DockStyle.Top;
+            panel1.Location = new Point(0, 0);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(1664, 270);
+            panel1.TabIndex = 4;
+            // 
+            // panel2
+            // 
+            panel2.BackColor = Color.Lime;
+            panel2.Controls.Add(btnEditEmployee);
+            panel2.Controls.Add(btnAddEmployee);
+            panel2.Controls.Add(btnEmployeeSchedule);
+            panel2.Dock = DockStyle.Left;
+            panel2.Location = new Point(0, 270);
+            panel2.Name = "panel2";
+            panel2.Size = new Size(273, 505);
+            panel2.TabIndex = 5;
+            // 
+            // pnlOverview
+            // 
+            pnlOverview.Dock = DockStyle.Fill;
+            pnlOverview.Location = new Point(273, 270);
+            pnlOverview.Name = "pnlOverview";
+            pnlOverview.Size = new Size(1391, 505);
+            pnlOverview.TabIndex = 6;
             // 
             // HrOverview
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
-            Controls.Add(btnEmployeeSchedule);
-            Controls.Add(btnAddEmployee);
-            Controls.Add(btnEditEmployee);
-            Controls.Add(pictureBox2);
-            Controls.Add(pictureBox1);
+            ClientSize = new Size(1664, 775);
+            Controls.Add(pnlOverview);
+            Controls.Add(panel2);
+            Controls.Add(panel1);
+            FormBorderStyle = FormBorderStyle.None;
             Name = "HrOverview";
             Text = "HrOverview";
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
+            WindowState = FormWindowState.Maximized;
+            panel2.ResumeLayout(false);
             ResumeLayout(false);
         }
 
         #endregion
 
         private PictureBox pictureBox1;
-        private PictureBox pictureBox2;
         private Button btnEditEmployee;
         private Button btnAddEmployee;
         private Button btnEmployeeSchedule;
+        private PictureBox pictureBox3;
+        private Panel panel1;
+        private Panel panel2;
+        private Panel pnlOverview;
     }
 }
