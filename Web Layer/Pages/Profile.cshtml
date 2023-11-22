@@ -1,0 +1,28 @@
+﻿@page
+@model Web_Layer.Pages.ProfileModel
+@{
+}
+@if (Model.userProfile != null)
+{
+   
+    <div class="details-container">
+
+       
+        <p class="FirstName">FirstName: @Model.userProfile.firstName</p>
+        <p class="LastName">LastName: @Model.userProfile.lastName</p>
+        <p class="PhoneNumber">Phone number: @Model.userProfile.phoneNumber</p>
+        <p class="DateOfBirth">Date of birth: @Model.userProfile.dateOfBirth</p>
+        <p class="Username">Username: @Model.userProfile.username</p>
+        <p class="Email">Email: @Model.userProfile.email</p>
+       
+        <p class="Address">Address: @Model.userProfile.street</p>
+        <p class="ZipCode">Zip code: @Model.userProfile.zipcode</p>
+        <p class="City">City: @Model.userProfile.city</p>
+        <p class="Country">Country: @Model.userProfile.country</p>
+   
+        <p class="PartnerFirstName">Partner FirstName: @Model.userProfile.partnerFirstName</p>
+        <p class="PartnerLastName">Partner LastName: @Model.userProfile.partnerLastName</p>
+        <p class="PartnerEmail">Partner Phone number: @Model.userProfile.partnerPhoneNumber</p>
+    </div>
+
+}
