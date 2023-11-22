@@ -129,7 +129,49 @@ namespace DataAccess
 
             return scheduleEntries;
         }
+        public List<Schedule> GetScheduleByID(int id)
+        {
+            try
+            {
+                using (SqlConnection connection = InitializeConection())
+                {
+                    connection.Open();
+                    string selectQuery1 = "SELECT * FROM Schedules WHERE EmployeeID=@EmployeeID";
+                    using (SqlCommand command1 = new SqlCommand(selectQuery1, connection))
+                    {
+
+                        command1.Parameters.AddWithValue("@EmployeeID", id);
+
+                        using (SqlDataReader reader = command1.ExecuteReader())
+                        {
+                            List<Schedule> schedules = new List<Schedule>();
+
+                            while (reader.Read())
+                            {
+                                Schedule schedule = new Schedule
+                                {
+                                    ScheduleId = reader.GetInt32(reader.GetOrdinal("ScheduleID")),
+                                    EmployeeId = reader.GetInt32(reader.GetOrdinal("EmployeeID")),
+                                    Date = reader.GetDateTime(reader.GetOrdinal("Date")),
+                                    Shift = reader.GetString(reader.GetOrdinal("Shift"))
+                                    // Add other properties here
+                                };
+
+                                schedules.Add(schedule);
+                            }
+
+                            return schedules;
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Invalid ID");
+            }
+        }
 
     }
 
 }
+

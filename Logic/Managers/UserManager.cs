@@ -39,7 +39,7 @@ namespace Logic.Managers
         {
             return user.RetrievePositionInformation(username);
         }
-       
+
 
         public bool CreateAccount(UserDTO userDTO)
         {
@@ -51,7 +51,7 @@ namespace Logic.Managers
             List<User> users = new List<User>();
             foreach (UserDTO userDTO in user.GetAllAccounts())
             {
-                users.Add(new User(userDTO.UserID,userDTO.Username, userDTO.Password, userDTO.Email, userDTO.Salt));
+                users.Add(new User(userDTO.UserID, userDTO.Username, userDTO.Password, userDTO.Email, userDTO.Salt));
             }
             return users;
         }
@@ -92,8 +92,8 @@ namespace Logic.Managers
             UserDTO Obj = user.GetCurrentUserByUsernameForEmployee(username);
             if (Obj != null)
             {
-                if(Obj.UserID != 0 & Obj.EmployeeID != 0)
-                { 
+                if (Obj.UserID != 0 & Obj.EmployeeID != 0)
+                {
                     var userhashedpass = HashedPassword($"{password}{Obj.Salt.Trim()}");
                     Console.WriteLine(Obj.Salt);
                     if (userhashedpass == Obj.Password)
@@ -129,6 +129,14 @@ namespace Logic.Managers
         public void CreateVisitor(UserDTO userDtO)
         {
             user.CreateVisitor(userDtO);
+        }
+        public User GetCurrentUserByUsername(string username)
+        {
+            return user.GetCurrentUserByUsername(username);
+        }
+        public int GetEmpIDbyUserId(int id)
+        {
+            return user.GetEmpIDbyUserId(id);
         }
     }
 }

@@ -22,7 +22,7 @@ namespace Logic.Managers
         }
         public void CreateShift(int employeeID, DateTime Date, string Shift)
         {
-             schedule.CreateShift(employeeID, Date, Shift);
+            schedule.CreateShift(employeeID, Date, Shift);
         }
         public List<Schedule> PopulateSchedule(DateTime selectedDate)
         {
@@ -40,5 +40,7 @@ namespace Logic.Managers
 
             return employeeID;
         }
+        public List<Schedule> GetScheduleByID(int id)
+        { return schedule.GetScheduleByID(id); }
     }
 }

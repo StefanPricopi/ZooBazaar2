@@ -12,5 +12,6 @@ namespace Logic.Interfaces
         public List<KeyValuePair<int, string>> GetEmployeeList();
         public void CreateShift(int employeeID, DateTime Date, string Shift);
         public List<Schedule> PopulateSchedule(DateTime selectedDate);
+        public List<Schedule> GetScheduleByID(int id);
     }
 }

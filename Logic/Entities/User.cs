@@ -21,6 +21,7 @@ namespace Logic.Entities
             get => userID;
             set => userID = value;
         }
+
         public string Username
         {
             get => username;
@@ -38,7 +39,7 @@ namespace Logic.Entities
             set => password = value;
         }
 
-        
+
 
         public string Salt
         {
@@ -51,7 +52,7 @@ namespace Logic.Entities
             // Default constructor
         }
 
-        public User(int userID,string username, string password, string email, string salt)
+        public User(int userID, string username, string password, string email, string salt)
         {
             this.userID = userID;
             this.username = username;

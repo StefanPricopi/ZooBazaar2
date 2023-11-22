@@ -20,5 +20,6 @@ namespace Logic.Interfaces
         UserDTO GetCurrentUserByUsernameForEmployee(string userEmail);
         UserDTO GetCurrentUserByUsernameForVisitor(string userEmail);
         public string RetrievePositionInformation(string username);
+        public int GetEmpIDbyUserId(int id);
     }
 }

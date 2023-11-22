@@ -5,6 +5,7 @@ using System.Security.Claims;
 using Logic.Managers;
 using Logic.DTO;
 using Logic.Interfaces;
+using Logic.Entities;
 
 namespace Web_Layer.Pages
 {
@@ -26,6 +27,7 @@ namespace Web_Layer.Pages
         public async Task<IActionResult> OnPostAsync()
         {
             UserDTO userModel = new UserDTO();
+            User s = new User();
 
             bool ValidateLoginEmployeeCase()
             {
@@ -45,11 +47,14 @@ namespace Web_Layer.Pages
             {
                 if (ValidateLoginEmployeeCase())
                 {
+                    s = userManager.GetCurrentUserByUsername(User.Username);
+                    int id = userManager.GetEmpIDbyUserId(s.UserID);
                     Console.WriteLine("Login successful.");
                     var claims = new List<Claim>
                     {
                         new Claim(ClaimTypes.Name, "user"),
                         new Claim(ClaimTypes.Email, "admin@website.com"),
+                        new Claim("EmployeeId",id.ToString()),
                         new Claim("Employee", "Caretaker")
                     };
                     var identity = new ClaimsIdentity(claims, "LoginCookieAuth");
@@ -80,3 +85,4 @@ namespace Web_Layer.Pages
         }
     }
 }
+

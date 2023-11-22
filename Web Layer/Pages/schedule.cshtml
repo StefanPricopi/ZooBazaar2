@@ -2,20 +2,29 @@
 @model Web_Layer.Pages.scheduleModel
 @{
 }
-<div class="image-container">
-    <img class="image-frame" src="~/img/schedule.jpg" id="zoom-responsive-image" />
-</div>
+<body>
+    <h1>Schedules</h1>
 
-<script>
-    window.addEventListener('resize', adjustImageSize);
+    <table>
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Time</th>
+                <th>EmployeeID</th>
+                <th>ShiftID</th>
 
-    function adjustImageSize() {
-        const zoomLevel = window.innerWidth / window.outerWidth;
-
-        // Adjust the image size based on the zoom level
-        const imageSize = 50 * zoomLevel; // Change 50 to your desired initial size
-
-        const image = document.getElementById('zoom-responsive-image');
-        image.style.width = imageSize + 'vw';
-    }
-</script>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var schedule in Model.schedules)
+            {
+                <tr>
+                    <td>@schedule.ScheduleId</td>
+                    <td>@schedule.EmployeeId</td>
+                    <td>@schedule.Shift</td>
+                    <td>@schedule.Date</td>                   
+                </tr>
+            }
+        </tbody>
+    </table>
+</body>
