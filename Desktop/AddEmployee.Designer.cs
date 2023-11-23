@@ -28,11 +28,43 @@
         /// </summary>
         private void InitializeComponent()
         {
-            label1 = new Label();
             btnAddEmployee = new Button();
-            pictureBox1 = new PictureBox();
             tabControl1 = new TabControl();
             tabPage1 = new TabPage();
+            textBox9 = new TextBox();
+            textBox10 = new TextBox();
+            textBox11 = new TextBox();
+            textBox12 = new TextBox();
+            label34 = new Label();
+            label35 = new Label();
+            label36 = new Label();
+            label37 = new Label();
+            pictureBox9 = new PictureBox();
+            textBox6 = new TextBox();
+            textBox7 = new TextBox();
+            textBox8 = new TextBox();
+            label31 = new Label();
+            label32 = new Label();
+            label33 = new Label();
+            pictureBox8 = new PictureBox();
+            comboBox1 = new ComboBox();
+            label26 = new Label();
+            textBox4 = new TextBox();
+            dateTimePicker1 = new DateTimePicker();
+            dateTimePicker2 = new DateTimePicker();
+            label27 = new Label();
+            textBox5 = new TextBox();
+            label28 = new Label();
+            label29 = new Label();
+            label30 = new Label();
+            pictureBox7 = new PictureBox();
+            textBox1 = new TextBox();
+            textBox2 = new TextBox();
+            textBox3 = new TextBox();
+            label1 = new Label();
+            label24 = new Label();
+            label25 = new Label();
+            pictureBox1 = new PictureBox();
             cmbPosition = new ComboBox();
             cmbDialing = new ComboBox();
             label18 = new Label();
@@ -49,7 +81,6 @@
             label12 = new Label();
             pictureBox4 = new PictureBox();
             tabPage2 = new TabPage();
-            button1 = new Button();
             tbxEmail = new TextBox();
             tbxPassword = new TextBox();
             tbxUsername = new TextBox();
@@ -58,7 +89,6 @@
             label19 = new Label();
             pictureBox5 = new PictureBox();
             tabPage3 = new TabPage();
-            btnPartner = new Button();
             tbxPhonePartner = new TextBox();
             tbxLastNamePartner = new TextBox();
             tbxFirstNamePartner = new TextBox();
@@ -73,14 +103,12 @@
             dtpEndDate = new DateTimePicker();
             dtpStartDate = new DateTimePicker();
             label8 = new Label();
-            btnContract = new Button();
             tbxSalary = new TextBox();
             label7 = new Label();
             label6 = new Label();
             label5 = new Label();
             pictureBox3 = new PictureBox();
             tabPage5 = new TabPage();
-            btnAddress = new Button();
             tbxCountry = new TextBox();
             tbxZipCode = new TextBox();
             tbxCity = new TextBox();
@@ -90,9 +118,12 @@
             label10 = new Label();
             label9 = new Label();
             pictureBox6 = new PictureBox();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             tabControl1.SuspendLayout();
             tabPage1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox9).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox8).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox7).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)tbxPhone).BeginInit();
             ((System.ComponentModel.ISupportInitialize)tbxBSN).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox4).BeginInit();
@@ -106,36 +137,16 @@
             ((System.ComponentModel.ISupportInitialize)pictureBox6).BeginInit();
             SuspendLayout();
             // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.BackColor = Color.MediumSlateBlue;
-            label1.Font = new Font("Garamond", 15F, FontStyle.Regular, GraphicsUnit.Point);
-            label1.Location = new Point(134, 9);
-            label1.Name = "label1";
-            label1.Size = new Size(126, 22);
-            label1.TabIndex = 0;
-            label1.Text = "Add Employee";
-            // 
             // btnAddEmployee
             // 
-            btnAddEmployee.Location = new Point(132, 272);
+            btnAddEmployee.Location = new Point(0, 601);
             btnAddEmployee.Margin = new Padding(3, 2, 3, 2);
             btnAddEmployee.Name = "btnAddEmployee";
-            btnAddEmployee.Size = new Size(219, 34);
+            btnAddEmployee.Size = new Size(1492, 78);
             btnAddEmployee.TabIndex = 9;
             btnAddEmployee.Text = "Add Employee";
             btnAddEmployee.UseVisualStyleBackColor = true;
             btnAddEmployee.Click += btnAddEmployee_Click;
-            // 
-            // pictureBox1
-            // 
-            pictureBox1.Image = Desktop.Properties.Resources.Screenshot_12;
-            pictureBox1.Location = new Point(-2, -3);
-            pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(431, 46);
-            pictureBox1.TabIndex = 12;
-            pictureBox1.TabStop = false;
             // 
             // tabControl1
             // 
@@ -148,16 +159,50 @@
             tabControl1.Font = new Font("Times New Roman", 12F, FontStyle.Regular, GraphicsUnit.Point);
             tabControl1.ImeMode = ImeMode.NoControl;
             tabControl1.ItemSize = new Size(100, 50);
-            tabControl1.Location = new Point(-2, 34);
+            tabControl1.Location = new Point(-2, 1);
             tabControl1.Name = "tabControl1";
             tabControl1.SelectedIndex = 0;
-            tabControl1.Size = new Size(472, 386);
+            tabControl1.Size = new Size(1580, 742);
             tabControl1.TabIndex = 28;
             tabControl1.SelectedIndexChanged += tabControl1_SelectedIndexChanged;
             // 
             // tabPage1
             // 
             tabPage1.BackColor = Color.MediumSlateBlue;
+            tabPage1.Controls.Add(textBox9);
+            tabPage1.Controls.Add(textBox10);
+            tabPage1.Controls.Add(textBox11);
+            tabPage1.Controls.Add(textBox12);
+            tabPage1.Controls.Add(label34);
+            tabPage1.Controls.Add(label35);
+            tabPage1.Controls.Add(label36);
+            tabPage1.Controls.Add(label37);
+            tabPage1.Controls.Add(pictureBox9);
+            tabPage1.Controls.Add(textBox6);
+            tabPage1.Controls.Add(textBox7);
+            tabPage1.Controls.Add(textBox8);
+            tabPage1.Controls.Add(label31);
+            tabPage1.Controls.Add(label32);
+            tabPage1.Controls.Add(label33);
+            tabPage1.Controls.Add(pictureBox8);
+            tabPage1.Controls.Add(comboBox1);
+            tabPage1.Controls.Add(label26);
+            tabPage1.Controls.Add(textBox4);
+            tabPage1.Controls.Add(dateTimePicker1);
+            tabPage1.Controls.Add(dateTimePicker2);
+            tabPage1.Controls.Add(label27);
+            tabPage1.Controls.Add(textBox5);
+            tabPage1.Controls.Add(label28);
+            tabPage1.Controls.Add(label29);
+            tabPage1.Controls.Add(label30);
+            tabPage1.Controls.Add(pictureBox7);
+            tabPage1.Controls.Add(textBox1);
+            tabPage1.Controls.Add(textBox2);
+            tabPage1.Controls.Add(textBox3);
+            tabPage1.Controls.Add(label1);
+            tabPage1.Controls.Add(label24);
+            tabPage1.Controls.Add(label25);
+            tabPage1.Controls.Add(pictureBox1);
             tabPage1.Controls.Add(cmbPosition);
             tabPage1.Controls.Add(cmbDialing);
             tabPage1.Controls.Add(label18);
@@ -176,17 +221,315 @@
             tabPage1.Controls.Add(btnAddEmployee);
             tabPage1.Location = new Point(4, 54);
             tabPage1.Name = "tabPage1";
-            tabPage1.Padding = new Padding(3, 3, 3, 3);
-            tabPage1.Size = new Size(464, 328);
+            tabPage1.Padding = new Padding(3);
+            tabPage1.Size = new Size(1572, 684);
             tabPage1.TabIndex = 0;
             tabPage1.Text = "Employee info";
+            // 
+            // textBox9
+            // 
+            textBox9.Location = new Point(1314, 123);
+            textBox9.Margin = new Padding(3, 2, 3, 2);
+            textBox9.Name = "textBox9";
+            textBox9.Size = new Size(141, 26);
+            textBox9.TabIndex = 73;
+            // 
+            // textBox10
+            // 
+            textBox10.Location = new Point(1314, 85);
+            textBox10.Margin = new Padding(3, 2, 3, 2);
+            textBox10.Name = "textBox10";
+            textBox10.Size = new Size(141, 26);
+            textBox10.TabIndex = 72;
+            // 
+            // textBox11
+            // 
+            textBox11.Location = new Point(1314, 53);
+            textBox11.Margin = new Padding(3, 2, 3, 2);
+            textBox11.Name = "textBox11";
+            textBox11.Size = new Size(141, 26);
+            textBox11.TabIndex = 71;
+            // 
+            // textBox12
+            // 
+            textBox12.Location = new Point(1314, 16);
+            textBox12.Margin = new Padding(3, 2, 3, 2);
+            textBox12.Name = "textBox12";
+            textBox12.Size = new Size(141, 26);
+            textBox12.TabIndex = 70;
+            // 
+            // label34
+            // 
+            label34.AutoSize = true;
+            label34.Location = new Point(1179, 125);
+            label34.Name = "label34";
+            label34.Size = new Size(61, 19);
+            label34.TabIndex = 69;
+            label34.Text = "Country:";
+            // 
+            // label35
+            // 
+            label35.AutoSize = true;
+            label35.Location = new Point(1179, 87);
+            label35.Name = "label35";
+            label35.Size = new Size(70, 19);
+            label35.TabIndex = 68;
+            label35.Text = "Zip Code:";
+            // 
+            // label36
+            // 
+            label36.AutoSize = true;
+            label36.Location = new Point(1179, 56);
+            label36.Name = "label36";
+            label36.Size = new Size(37, 19);
+            label36.TabIndex = 67;
+            label36.Text = "City:";
+            // 
+            // label37
+            // 
+            label37.AutoSize = true;
+            label37.Location = new Point(1179, 18);
+            label37.Name = "label37";
+            label37.Size = new Size(89, 19);
+            label37.TabIndex = 66;
+            label37.Text = "Street Name:";
+            // 
+            // pictureBox9
+            // 
+            pictureBox9.Image = Desktop.Properties.Resources.Screenshot_14;
+            pictureBox9.Location = new Point(1164, -54);
+            pictureBox9.Name = "pictureBox9";
+            pictureBox9.Size = new Size(126, 657);
+            pictureBox9.TabIndex = 65;
+            pictureBox9.TabStop = false;
+            // 
+            // textBox6
+            // 
+            textBox6.Location = new Point(1012, 93);
+            textBox6.Margin = new Padding(3, 2, 3, 2);
+            textBox6.Name = "textBox6";
+            textBox6.Size = new Size(146, 26);
+            textBox6.TabIndex = 64;
+            // 
+            // textBox7
+            // 
+            textBox7.Location = new Point(1012, 52);
+            textBox7.Margin = new Padding(3, 2, 3, 2);
+            textBox7.Name = "textBox7";
+            textBox7.Size = new Size(146, 26);
+            textBox7.TabIndex = 63;
+            // 
+            // textBox8
+            // 
+            textBox8.Location = new Point(1012, 16);
+            textBox8.Margin = new Padding(3, 2, 3, 2);
+            textBox8.Name = "textBox8";
+            textBox8.Size = new Size(146, 26);
+            textBox8.TabIndex = 62;
+            // 
+            // label31
+            // 
+            label31.AutoSize = true;
+            label31.BackColor = Color.MediumSlateBlue;
+            label31.Location = new Point(886, 95);
+            label31.Name = "label31";
+            label31.Size = new Size(50, 19);
+            label31.TabIndex = 61;
+            label31.Text = "Phone:";
+            // 
+            // label32
+            // 
+            label32.AutoSize = true;
+            label32.BackColor = Color.MediumSlateBlue;
+            label32.Location = new Point(886, 55);
+            label32.Name = "label32";
+            label32.Size = new Size(79, 19);
+            label32.TabIndex = 60;
+            label32.Text = "Last Name:";
+            // 
+            // label33
+            // 
+            label33.AutoSize = true;
+            label33.BackColor = Color.MediumSlateBlue;
+            label33.Location = new Point(886, 18);
+            label33.Name = "label33";
+            label33.Size = new Size(80, 19);
+            label33.TabIndex = 59;
+            label33.Text = "First Name:";
+            // 
+            // pictureBox8
+            // 
+            pictureBox8.Image = Desktop.Properties.Resources.Screenshot_14;
+            pictureBox8.Location = new Point(869, -54);
+            pictureBox8.Name = "pictureBox8";
+            pictureBox8.Size = new Size(126, 657);
+            pictureBox8.TabIndex = 58;
+            pictureBox8.TabStop = false;
+            // 
+            // comboBox1
+            // 
+            comboBox1.FormattingEnabled = true;
+            comboBox1.Location = new Point(717, 163);
+            comboBox1.Margin = new Padding(3, 2, 3, 2);
+            comboBox1.Name = "comboBox1";
+            comboBox1.Size = new Size(146, 27);
+            comboBox1.TabIndex = 57;
+            // 
+            // label26
+            // 
+            label26.AutoSize = true;
+            label26.Location = new Point(593, 169);
+            label26.Name = "label26";
+            label26.Size = new Size(40, 19);
+            label26.TabIndex = 56;
+            label26.Text = "Role:";
+            // 
+            // textBox4
+            // 
+            textBox4.Location = new Point(717, 127);
+            textBox4.Margin = new Padding(3, 2, 3, 2);
+            textBox4.Name = "textBox4";
+            textBox4.Size = new Size(146, 26);
+            textBox4.TabIndex = 55;
+            // 
+            // dateTimePicker1
+            // 
+            dateTimePicker1.Location = new Point(717, 46);
+            dateTimePicker1.Margin = new Padding(3, 2, 3, 2);
+            dateTimePicker1.Name = "dateTimePicker1";
+            dateTimePicker1.Size = new Size(146, 26);
+            dateTimePicker1.TabIndex = 54;
+            // 
+            // dateTimePicker2
+            // 
+            dateTimePicker2.Location = new Point(717, 10);
+            dateTimePicker2.Margin = new Padding(3, 2, 3, 2);
+            dateTimePicker2.Name = "dateTimePicker2";
+            dateTimePicker2.Size = new Size(146, 26);
+            dateTimePicker2.TabIndex = 53;
+            // 
+            // label27
+            // 
+            label27.AutoSize = true;
+            label27.Location = new Point(593, 130);
+            label27.Name = "label27";
+            label27.Size = new Size(42, 19);
+            label27.TabIndex = 52;
+            label27.Text = "Type:";
+            // 
+            // textBox5
+            // 
+            textBox5.Location = new Point(717, 85);
+            textBox5.Margin = new Padding(3, 2, 3, 2);
+            textBox5.Name = "textBox5";
+            textBox5.Size = new Size(146, 26);
+            textBox5.TabIndex = 51;
+            // 
+            // label28
+            // 
+            label28.AutoSize = true;
+            label28.Location = new Point(593, 88);
+            label28.Name = "label28";
+            label28.Size = new Size(50, 19);
+            label28.TabIndex = 50;
+            label28.Text = "Salary:";
+            // 
+            // label29
+            // 
+            label29.AutoSize = true;
+            label29.Location = new Point(593, 51);
+            label29.Name = "label29";
+            label29.Size = new Size(69, 19);
+            label29.TabIndex = 49;
+            label29.Text = "End Date:";
+            // 
+            // label30
+            // 
+            label30.AutoSize = true;
+            label30.Location = new Point(593, 14);
+            label30.Name = "label30";
+            label30.Size = new Size(74, 19);
+            label30.TabIndex = 48;
+            label30.Text = "Start Date:";
+            // 
+            // pictureBox7
+            // 
+            pictureBox7.Image = Desktop.Properties.Resources.Screenshot_14;
+            pictureBox7.Location = new Point(568, -54);
+            pictureBox7.Name = "pictureBox7";
+            pictureBox7.Size = new Size(126, 654);
+            pictureBox7.TabIndex = 47;
+            pictureBox7.TabStop = false;
+            // 
+            // textBox1
+            // 
+            textBox1.Location = new Point(416, 90);
+            textBox1.Margin = new Padding(3, 2, 3, 2);
+            textBox1.Name = "textBox1";
+            textBox1.Size = new Size(146, 26);
+            textBox1.TabIndex = 44;
+            // 
+            // textBox2
+            // 
+            textBox2.Location = new Point(416, 51);
+            textBox2.Margin = new Padding(3, 2, 3, 2);
+            textBox2.Name = "textBox2";
+            textBox2.Size = new Size(146, 26);
+            textBox2.TabIndex = 45;
+            // 
+            // textBox3
+            // 
+            textBox3.Location = new Point(416, 10);
+            textBox3.Margin = new Padding(3, 2, 3, 2);
+            textBox3.Name = "textBox3";
+            textBox3.Size = new Size(146, 26);
+            textBox3.TabIndex = 46;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.BackColor = Color.MediumSlateBlue;
+            label1.Location = new Point(306, 89);
+            label1.Name = "label1";
+            label1.Size = new Size(45, 19);
+            label1.TabIndex = 41;
+            label1.Text = "Email:";
+            // 
+            // label24
+            // 
+            label24.AutoSize = true;
+            label24.BackColor = Color.MediumSlateBlue;
+            label24.Location = new Point(306, 53);
+            label24.Name = "label24";
+            label24.Size = new Size(72, 19);
+            label24.TabIndex = 42;
+            label24.Text = "Password:";
+            // 
+            // label25
+            // 
+            label25.AutoSize = true;
+            label25.BackColor = Color.MediumSlateBlue;
+            label25.Location = new Point(306, 17);
+            label25.Name = "label25";
+            label25.Size = new Size(73, 19);
+            label25.TabIndex = 43;
+            label25.Text = "Username:";
+            // 
+            // pictureBox1
+            // 
+            pictureBox1.Image = Desktop.Properties.Resources.Screenshot_14;
+            pictureBox1.Location = new Point(284, -82);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(126, 682);
+            pictureBox1.TabIndex = 40;
+            pictureBox1.TabStop = false;
             // 
             // cmbPosition
             // 
             cmbPosition.FormattingEnabled = true;
             cmbPosition.Location = new Point(132, 240);
             cmbPosition.Name = "cmbPosition";
-            cmbPosition.Size = new Size(219, 27);
+            cmbPosition.Size = new Size(146, 27);
             cmbPosition.TabIndex = 39;
             // 
             // cmbDialing
@@ -194,7 +537,7 @@
             cmbDialing.FormattingEnabled = true;
             cmbDialing.Location = new Point(132, 123);
             cmbDialing.Name = "cmbDialing";
-            cmbDialing.Size = new Size(219, 27);
+            cmbDialing.Size = new Size(146, 27);
             cmbDialing.TabIndex = 38;
             // 
             // label18
@@ -212,7 +555,7 @@
             tbxPhone.Location = new Point(132, 92);
             tbxPhone.Maximum = new decimal(new int[] { -159383552, 46653770, 5421, 0 });
             tbxPhone.Name = "tbxPhone";
-            tbxPhone.Size = new Size(219, 26);
+            tbxPhone.Size = new Size(146, 26);
             tbxPhone.TabIndex = 36;
             // 
             // tbxBSN
@@ -220,7 +563,7 @@
             tbxBSN.Location = new Point(132, 204);
             tbxBSN.Maximum = new decimal(new int[] { -727379968, 232, 0, 0 });
             tbxBSN.Name = "tbxBSN";
-            tbxBSN.Size = new Size(219, 26);
+            tbxBSN.Size = new Size(146, 26);
             tbxBSN.TabIndex = 35;
             // 
             // dtpBirthDate
@@ -228,7 +571,7 @@
             dtpBirthDate.Location = new Point(132, 163);
             dtpBirthDate.Margin = new Padding(3, 2, 3, 2);
             dtpBirthDate.Name = "dtpBirthDate";
-            dtpBirthDate.Size = new Size(219, 26);
+            dtpBirthDate.Size = new Size(146, 26);
             dtpBirthDate.TabIndex = 29;
             // 
             // tbxLastName
@@ -236,7 +579,7 @@
             tbxLastName.Location = new Point(132, 58);
             tbxLastName.Margin = new Padding(3, 2, 3, 2);
             tbxLastName.Name = "tbxLastName";
-            tbxLastName.Size = new Size(219, 26);
+            tbxLastName.Size = new Size(146, 26);
             tbxLastName.TabIndex = 30;
             // 
             // label17
@@ -294,7 +637,7 @@
             tbxFirstName.Location = new Point(132, 17);
             tbxFirstName.Margin = new Padding(3, 2, 3, 2);
             tbxFirstName.Name = "tbxFirstName";
-            tbxFirstName.Size = new Size(219, 26);
+            tbxFirstName.Size = new Size(146, 26);
             tbxFirstName.TabIndex = 29;
             // 
             // label12
@@ -312,14 +655,13 @@
             pictureBox4.Image = Desktop.Properties.Resources.Screenshot_14;
             pictureBox4.Location = new Point(0, -82);
             pictureBox4.Name = "pictureBox4";
-            pictureBox4.Size = new Size(126, 463);
+            pictureBox4.Size = new Size(126, 685);
             pictureBox4.TabIndex = 14;
             pictureBox4.TabStop = false;
             // 
             // tabPage2
             // 
             tabPage2.BackColor = Color.MediumSlateBlue;
-            tabPage2.Controls.Add(button1);
             tabPage2.Controls.Add(tbxEmail);
             tabPage2.Controls.Add(tbxPassword);
             tabPage2.Controls.Add(tbxUsername);
@@ -329,21 +671,10 @@
             tabPage2.Controls.Add(pictureBox5);
             tabPage2.Location = new Point(4, 54);
             tabPage2.Name = "tabPage2";
-            tabPage2.Padding = new Padding(3, 3, 3, 3);
-            tabPage2.Size = new Size(464, 328);
+            tabPage2.Padding = new Padding(3);
+            tabPage2.Size = new Size(1572, 684);
             tabPage2.TabIndex = 1;
             tabPage2.Text = "Employee Login Info";
-            // 
-            // button1
-            // 
-            button1.Location = new Point(132, 126);
-            button1.Margin = new Padding(3, 2, 3, 2);
-            button1.Name = "button1";
-            button1.Size = new Size(219, 34);
-            button1.TabIndex = 29;
-            button1.Text = "Add Employee";
-            button1.UseVisualStyleBackColor = true;
-            button1.Click += button1_Click;
             // 
             // tbxEmail
             // 
@@ -398,20 +729,20 @@
             label19.Size = new Size(73, 19);
             label19.TabIndex = 29;
             label19.Text = "Username:";
+            label19.Click += label19_Click;
             // 
             // pictureBox5
             // 
             pictureBox5.Image = Desktop.Properties.Resources.Screenshot_14;
             pictureBox5.Location = new Point(0, 0);
             pictureBox5.Name = "pictureBox5";
-            pictureBox5.Size = new Size(126, 322);
+            pictureBox5.Size = new Size(126, 775);
             pictureBox5.TabIndex = 29;
             pictureBox5.TabStop = false;
             pictureBox5.Click += pictureBox5_Click;
             // 
             // tabPage3
             // 
-            tabPage3.Controls.Add(btnPartner);
             tabPage3.Controls.Add(tbxPhonePartner);
             tabPage3.Controls.Add(tbxLastNamePartner);
             tabPage3.Controls.Add(tbxFirstNamePartner);
@@ -421,22 +752,11 @@
             tabPage3.Controls.Add(pictureBox2);
             tabPage3.Location = new Point(4, 54);
             tabPage3.Name = "tabPage3";
-            tabPage3.Padding = new Padding(3, 3, 3, 3);
-            tabPage3.Size = new Size(464, 328);
+            tabPage3.Padding = new Padding(3);
+            tabPage3.Size = new Size(1572, 684);
             tabPage3.TabIndex = 2;
             tabPage3.Text = "Employee Partner Info";
             tabPage3.UseVisualStyleBackColor = true;
-            // 
-            // btnPartner
-            // 
-            btnPartner.Location = new Point(149, 144);
-            btnPartner.Margin = new Padding(3, 2, 3, 2);
-            btnPartner.Name = "btnPartner";
-            btnPartner.Size = new Size(219, 34);
-            btnPartner.TabIndex = 38;
-            btnPartner.Text = "Add Partner ";
-            btnPartner.UseVisualStyleBackColor = true;
-            btnPartner.Click += btnPartner_Click;
             // 
             // tbxPhonePartner
             // 
@@ -497,7 +817,7 @@
             pictureBox2.Image = Desktop.Properties.Resources.Screenshot_14;
             pictureBox2.Location = new Point(3, -4);
             pictureBox2.Name = "pictureBox2";
-            pictureBox2.Size = new Size(126, 349);
+            pictureBox2.Size = new Size(126, 775);
             pictureBox2.TabIndex = 30;
             pictureBox2.TabStop = false;
             // 
@@ -509,7 +829,6 @@
             tabPage4.Controls.Add(dtpEndDate);
             tabPage4.Controls.Add(dtpStartDate);
             tabPage4.Controls.Add(label8);
-            tabPage4.Controls.Add(btnContract);
             tabPage4.Controls.Add(tbxSalary);
             tabPage4.Controls.Add(label7);
             tabPage4.Controls.Add(label6);
@@ -517,8 +836,8 @@
             tabPage4.Controls.Add(pictureBox3);
             tabPage4.Location = new Point(4, 54);
             tabPage4.Name = "tabPage4";
-            tabPage4.Padding = new Padding(3, 3, 3, 3);
-            tabPage4.Size = new Size(464, 328);
+            tabPage4.Padding = new Padding(3);
+            tabPage4.Size = new Size(1572, 684);
             tabPage4.TabIndex = 3;
             tabPage4.Text = "Employee Contract Info";
             tabPage4.UseVisualStyleBackColor = true;
@@ -574,16 +893,6 @@
             label8.TabIndex = 40;
             label8.Text = "Type:";
             // 
-            // btnContract
-            // 
-            btnContract.Location = new Point(149, 217);
-            btnContract.Margin = new Padding(3, 2, 3, 2);
-            btnContract.Name = "btnContract";
-            btnContract.Size = new Size(219, 38);
-            btnContract.TabIndex = 38;
-            btnContract.Text = "Add Contract";
-            btnContract.UseVisualStyleBackColor = true;
-            // 
             // tbxSalary
             // 
             tbxSalary.Location = new Point(149, 95);
@@ -624,13 +933,12 @@
             pictureBox3.Image = Desktop.Properties.Resources.Screenshot_14;
             pictureBox3.Location = new Point(0, 0);
             pictureBox3.Name = "pictureBox3";
-            pictureBox3.Size = new Size(126, 349);
+            pictureBox3.Size = new Size(126, 775);
             pictureBox3.TabIndex = 31;
             pictureBox3.TabStop = false;
             // 
             // tabPage5
             // 
-            tabPage5.Controls.Add(btnAddress);
             tabPage5.Controls.Add(tbxCountry);
             tabPage5.Controls.Add(tbxZipCode);
             tabPage5.Controls.Add(tbxCity);
@@ -642,21 +950,12 @@
             tabPage5.Controls.Add(pictureBox6);
             tabPage5.Location = new Point(4, 54);
             tabPage5.Name = "tabPage5";
-            tabPage5.Padding = new Padding(3, 3, 3, 3);
-            tabPage5.Size = new Size(464, 328);
+            tabPage5.Padding = new Padding(3);
+            tabPage5.Size = new Size(1572, 684);
             tabPage5.TabIndex = 4;
             tabPage5.Text = "Employee Address Info";
             tabPage5.UseVisualStyleBackColor = true;
-            // 
-            // btnAddress
-            // 
-            btnAddress.Location = new Point(144, 177);
-            btnAddress.Margin = new Padding(3, 2, 3, 2);
-            btnAddress.Name = "btnAddress";
-            btnAddress.Size = new Size(189, 26);
-            btnAddress.TabIndex = 42;
-            btnAddress.Text = "Add Address";
-            btnAddress.UseVisualStyleBackColor = true;
+            tabPage5.Click += tabPage5_Click;
             // 
             // tbxCountry
             // 
@@ -665,6 +964,7 @@
             tbxCountry.Name = "tbxCountry";
             tbxCountry.Size = new Size(190, 26);
             tbxCountry.TabIndex = 41;
+            tbxCountry.TextChanged += tbxCountry_TextChanged;
             // 
             // tbxZipCode
             // 
@@ -673,6 +973,7 @@
             tbxZipCode.Name = "tbxZipCode";
             tbxZipCode.Size = new Size(190, 26);
             tbxZipCode.TabIndex = 40;
+            tbxZipCode.TextChanged += tbxZipCode_TextChanged;
             // 
             // tbxCity
             // 
@@ -681,6 +982,7 @@
             tbxCity.Name = "tbxCity";
             tbxCity.Size = new Size(190, 26);
             tbxCity.TabIndex = 39;
+            tbxCity.TextChanged += tbxCity_TextChanged;
             // 
             // tbxStreet
             // 
@@ -689,6 +991,7 @@
             tbxStreet.Name = "tbxStreet";
             tbxStreet.Size = new Size(190, 26);
             tbxStreet.TabIndex = 38;
+            tbxStreet.TextChanged += tbxStreet_TextChanged;
             // 
             // label22
             // 
@@ -698,6 +1001,7 @@
             label22.Size = new Size(61, 19);
             label22.TabIndex = 37;
             label22.Text = "Country:";
+            label22.Click += label22_Click;
             // 
             // label11
             // 
@@ -707,6 +1011,7 @@
             label11.Size = new Size(70, 19);
             label11.TabIndex = 36;
             label11.Text = "Zip Code:";
+            label11.Click += label11_Click;
             // 
             // label10
             // 
@@ -716,6 +1021,7 @@
             label10.Size = new Size(37, 19);
             label10.TabIndex = 34;
             label10.Text = "City:";
+            label10.Click += label10_Click;
             // 
             // label9
             // 
@@ -725,31 +1031,34 @@
             label9.Size = new Size(89, 19);
             label9.TabIndex = 33;
             label9.Text = "Street Name:";
+            label9.Click += label9_Click;
             // 
             // pictureBox6
             // 
             pictureBox6.Image = Desktop.Properties.Resources.Screenshot_14;
             pictureBox6.Location = new Point(0, 0);
             pictureBox6.Name = "pictureBox6";
-            pictureBox6.Size = new Size(126, 349);
+            pictureBox6.Size = new Size(126, 775);
             pictureBox6.TabIndex = 32;
             pictureBox6.TabStop = false;
+            pictureBox6.Click += pictureBox6_Click;
             // 
             // AddEmployee
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(831, 495);
+            ClientSize = new Size(1496, 736);
             Controls.Add(tabControl1);
-            Controls.Add(label1);
-            Controls.Add(pictureBox1);
             Margin = new Padding(3, 2, 3, 2);
             Name = "AddEmployee";
             Text = "AddEmployee";
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             tabControl1.ResumeLayout(false);
             tabPage1.ResumeLayout(false);
             tabPage1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox9).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox8).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox7).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ((System.ComponentModel.ISupportInitialize)tbxPhone).EndInit();
             ((System.ComponentModel.ISupportInitialize)tbxBSN).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox4).EndInit();
@@ -766,14 +1075,10 @@
             tabPage5.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox6).EndInit();
             ResumeLayout(false);
-            PerformLayout();
         }
 
         #endregion
-
-        private Label label1;
         private Button btnAddEmployee;
-        private PictureBox pictureBox1;
         private TabControl tabControl1;
 
         private TabPage tabPage1;
@@ -793,7 +1098,6 @@
         private PictureBox pictureBox4;
         private ComboBox cmbPosition;
         private ComboBox cmbDialing;
-        private Button button1;
         private TextBox tbxEmail;
         private TextBox tbxPassword;
         private TextBox tbxUsername;
@@ -811,12 +1115,10 @@
         private TextBox tbxPhonePartner;
         private TextBox tbxLastNamePartner;
         private TextBox tbxFirstNamePartner;
-        private Button btnPartner;
         private PictureBox pictureBox3;
         private Label label7;
         private Label label6;
         private Label label5;
-        private Button btnContract;
         private TextBox tbxSalary;
         private Label label8;
         private Label label11;
@@ -827,12 +1129,45 @@
         private TextBox tbxZipCode;
         private TextBox tbxCity;
         private TextBox tbxStreet;
-        private Button btnAddress;
         private TextBox tbxCountry;
         private DateTimePicker dtpEndDate;
         private DateTimePicker dtpStartDate;
         private TextBox tbxContractType;
         private Label label23;
         private ComboBox cmbRole;
+        private TextBox textBox6;
+        private TextBox textBox7;
+        private TextBox textBox8;
+        private Label label31;
+        private Label label32;
+        private Label label33;
+        private PictureBox pictureBox8;
+        private ComboBox comboBox1;
+        private Label label26;
+        private TextBox textBox4;
+        private DateTimePicker dateTimePicker1;
+        private DateTimePicker dateTimePicker2;
+        private Label label27;
+        private TextBox textBox5;
+        private Label label28;
+        private Label label29;
+        private Label label30;
+        private PictureBox pictureBox7;
+        private TextBox textBox1;
+        private TextBox textBox2;
+        private TextBox textBox3;
+        private Label label1;
+        private Label label24;
+        private Label label25;
+        private PictureBox pictureBox1;
+        private TextBox textBox9;
+        private TextBox textBox10;
+        private TextBox textBox11;
+        private TextBox textBox12;
+        private Label label34;
+        private Label label35;
+        private Label label36;
+        private Label label37;
+        private PictureBox pictureBox9;
     }
 }

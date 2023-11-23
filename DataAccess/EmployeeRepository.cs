@@ -21,7 +21,7 @@ namespace DataAccess
             {
                 connection.Open();
 
-                string selectQuery1 = "SELECT EmployeeID, FirstName, LastName, PhoneNumber, DateOfBirth, BSN, UserID, Position FROM Employees";
+                string selectQuery1 = "SELECT EmployeeID, FirstName, LastName, PhoneNumber, DateOfBirth, BSN, UserID FROM Employees";
 
                 using (SqlCommand command1 = new SqlCommand(selectQuery1, connection))
                 {
@@ -144,7 +144,7 @@ namespace DataAccess
                         int userID = Convert.ToInt32(cmdUser.ExecuteScalar()); // Get the auto-generated UserID
 
                         // Insert into Employee table with the obtained UserID
-                        using (SqlCommand cmdEmployee = new SqlCommand("INSERT INTO Employees (FirstName, LastName, PhoneNumber, DateOfBirth, BSN, UserID, Position) VALUES (@FirstName, @LastName, @PhoneNumber, @DateOfBirth, @BSN, @UserID, @Position);SELECT SCOPE_IDENTITY();", connection))
+                        using (SqlCommand cmdEmployee = new SqlCommand("INSERT INTO Employees (FirstName, LastName, PhoneNumber, DateOfBirth, BSN, UserID) VALUES (@FirstName, @LastName, @PhoneNumber, @DateOfBirth, @BSN, @UserID);SELECT SCOPE_IDENTITY();", connection))
                         {
                             cmdEmployee.Parameters.AddWithValue("@FirstName", employeeDTO.FirstName);
                             cmdEmployee.Parameters.AddWithValue("@LastName", employeeDTO.LastName);
@@ -152,8 +152,7 @@ namespace DataAccess
                             cmdEmployee.Parameters.AddWithValue("@DateOfBirth", employeeDTO.DateOfBirth);
                             cmdEmployee.Parameters.AddWithValue("@BSN", employeeDTO.BSN);
                             cmdEmployee.Parameters.AddWithValue("@UserID", userID); // Use the obtained UserID
-                            cmdEmployee.Parameters.AddWithValue("@Position", employeeDTO.Position);
-
+                            
                             int employeeID = Convert.ToInt32(cmdEmployee.ExecuteScalar()); // Get the auto-generated EmployeeID
 
                             // Insert employee record

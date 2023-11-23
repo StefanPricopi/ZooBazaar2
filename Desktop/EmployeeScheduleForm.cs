@@ -14,6 +14,12 @@ namespace Desktop
         private DateTime currentDate;
         private readonly ScheduleManager manager;
         private DayOfWeek startOfWeek;
+        public DateTime currentStartday(DateTime startDate)
+        {
+            DateTime currentDay = startDate.AddDays(-(int)startDate.DayOfWeek);
+            return currentDay;
+        }
+       
 
         public EmployeeSchedulingForm()
         {
@@ -27,18 +33,20 @@ namespace Desktop
             currentDate = DateTime.Now;
             startOfWeek = DayOfWeek.Sunday;
             GenerateWeek(currentDate);
-            manager.PopulateSchedule(currentDate);
+            DateTime curr = currentStartday(currentDate);
+            manager.PopulateSchedule(curr);
         }
 
         private void GenerateWeek(DateTime startDate)
         {
             flowLayoutPanel1.Controls.Clear();
 
+            // Find the Sunday of last week
+            DateTime currentDay = startDate.AddDays(-(int)startDate.DayOfWeek);
+
             // Morning Shifts
             for (int i = 0; i < 7; i++)
             {
-                DateTime currentDay = startDate.AddDays(i);
-
                 // Create morning shift panel
                 MorningShiftPanel morningShiftPanel = new MorningShiftPanel(currentDay.Date);
                 flowLayoutPanel1.Controls.Add(morningShiftPanel);
@@ -46,13 +54,14 @@ namespace Desktop
 
                 Label morningLabel = (Label)morningShiftPanel.Controls[0].Controls[0];
                 morningLabel.Text = $"Morning Shift\n{currentDay.ToShortDateString()}";
+
+                // Move to the next day
+                currentDay = currentDay.AddDays(1);
             }
 
             // Afternoon Shifts
             for (int i = 0; i < 7; i++)
             {
-                DateTime currentDay = startDate.AddDays(i);
-
                 // Create afternoon shift panel
                 AfternoonShiftPanel afternoonShiftPanel = new AfternoonShiftPanel(currentDay.Date);
                 flowLayoutPanel1.Controls.Add(afternoonShiftPanel);
@@ -60,13 +69,14 @@ namespace Desktop
 
                 Label afternoonLabel = (Label)afternoonShiftPanel.Controls[0].Controls[0];
                 afternoonLabel.Text = $"Afternoon Shift\n{currentDay.ToShortDateString()}";
+
+                // Move to the next day
+                currentDay = currentDay.AddDays(1);
             }
 
             // Evening Shifts
             for (int i = 0; i < 7; i++)
             {
-                DateTime currentDay = startDate.AddDays(i);
-
                 // Create evening shift panel
                 EveningShiftPanel eveningShiftPanel = new EveningShiftPanel(currentDay.Date);
                 flowLayoutPanel1.Controls.Add(eveningShiftPanel);
@@ -74,8 +84,13 @@ namespace Desktop
 
                 Label eveningLabel = (Label)eveningShiftPanel.Controls[0].Controls[0];
                 eveningLabel.Text = $"Evening Shift\n{currentDay.ToShortDateString()}";
+
+                // Move to the next day
+                currentDay = currentDay.AddDays(1);
             }
         }
+
+
 
         private void btnNext_Click(object sender, EventArgs e)
         {

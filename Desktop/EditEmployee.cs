@@ -313,7 +313,7 @@ namespace Employees
                 partnerDTO.PartnerID = partnerID;
                 partnerDTO.FirstName = tbxFirstNamePartner.Text;
                 partnerDTO.LastName = tbxLastNamePartner.Text;
-                partnerDTO.PhoneNumber =tbxPhonePartner.Text;
+                partnerDTO.PhoneNumber = tbxPhonePartner.Text;
                 if (employeeManager.UpdateEmployeePartner(partnerDTO))
                 {
                     MessageBox.Show("Success");

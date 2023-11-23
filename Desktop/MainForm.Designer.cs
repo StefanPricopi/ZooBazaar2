@@ -28,15 +28,23 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             pnlForm = new Panel();
+            btnLogOut = new Button();
+            pictureBox1 = new PictureBox();
+            lbText = new Label();
             pnlNav = new Panel();
             pnlContents = new Panel();
             pnlForm.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
             // pnlForm
             // 
             pnlForm.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            pnlForm.Controls.Add(btnLogOut);
+            pnlForm.Controls.Add(pictureBox1);
+            pnlForm.Controls.Add(lbText);
             pnlForm.Controls.Add(pnlNav);
             pnlForm.Controls.Add(pnlContents);
             pnlForm.Location = new Point(0, 0);
@@ -44,20 +52,54 @@
             pnlForm.Size = new Size(1921, 1061);
             pnlForm.TabIndex = 1;
             // 
+            // btnLogOut
+            // 
+            btnLogOut.BackColor = Color.Transparent;
+            btnLogOut.FlatStyle = FlatStyle.Flat;
+            btnLogOut.Font = new Font("Century Gothic", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            btnLogOut.ForeColor = Color.Black;
+            btnLogOut.Location = new Point(1557, 158);
+            btnLogOut.Name = "btnLogOut";
+            btnLogOut.Size = new Size(337, 55);
+            btnLogOut.TabIndex = 4;
+            btnLogOut.Text = "Logout";
+            btnLogOut.UseVisualStyleBackColor = false;
+            btnLogOut.Click += btnLogOut_Click;
+            // 
+            // pictureBox1
+            // 
+            pictureBox1.BackgroundImage = (Image)resources.GetObject("pictureBox1.BackgroundImage");
+            pictureBox1.BackgroundImageLayout = ImageLayout.Stretch;
+            pictureBox1.InitialImage = (Image)resources.GetObject("pictureBox1.InitialImage");
+            pictureBox1.Location = new Point(3, 21);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(302, 192);
+            pictureBox1.TabIndex = 2;
+            pictureBox1.TabStop = false;
+            // 
+            // lbText
+            // 
+            lbText.AutoSize = true;
+            lbText.Font = new Font("Century Gothic", 27.75F, FontStyle.Regular, GraphicsUnit.Point);
+            lbText.Location = new Point(400, 169);
+            lbText.Name = "lbText";
+            lbText.Size = new Size(356, 44);
+            lbText.TabIndex = 3;
+            lbText.Text = "Display name Here";
+            // 
             // pnlNav
             // 
-            pnlNav.Dock = DockStyle.Left;
-            pnlNav.Location = new Point(0, 0);
+            pnlNav.Location = new Point(0, 219);
             pnlNav.Name = "pnlNav";
-            pnlNav.Size = new Size(405, 1061);
+            pnlNav.Size = new Size(305, 842);
             pnlNav.TabIndex = 1;
             // 
             // pnlContents
             // 
             pnlContents.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            pnlContents.Location = new Point(500, 280);
+            pnlContents.Location = new Point(400, 274);
             pnlContents.Name = "pnlContents";
-            pnlContents.Size = new Size(1355, 751);
+            pnlContents.Size = new Size(1512, 775);
             pnlContents.TabIndex = 0;
             // 
             // MainForm
@@ -70,6 +112,8 @@
             Text = "MainForm";
             WindowState = FormWindowState.Maximized;
             pnlForm.ResumeLayout(false);
+            pnlForm.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
         }
 
@@ -77,5 +121,8 @@
         private Panel pnlForm;
         private Panel pnlContents;
         private Panel pnlNav;
+        private Label lbText;
+        private PictureBox pictureBox1;
+        private Button btnLogOut;
     }
 }

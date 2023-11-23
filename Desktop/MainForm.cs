@@ -1,4 +1,8 @@
-﻿using Logic.Entities;
+﻿using Animals;
+using DataAccess;
+using Employees;
+using Logic.Entities;
+using Logic.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,10 +17,13 @@ namespace Desktop
 {
     public partial class MainForm : Form
     {
-        private List<string> EmplNavFeatures = new List<string> { "Employee Management", "Scheduling", "Announcement" };
-        private List<string> AnimNavFeatures = new List<string> { "Animal Management", "Feeding Table", "Other feature", "Other feature" };
+        private string[] EmplNavFeatures = { "Employee Creation", "Scheduling", "Update Existing Employees" };
+        private string[] AnimNavFeatures = { "Animal Management" };
+        private string[] AreaNavFeatures = { "Area Management" };
+        IAnimal animalRepository = new AnimalRepository();
+        ILocation locationRepository = new LocationRepository();
 
-        public MainForm(string role)
+        public MainForm(int role)
         {
             this.DoubleBuffered = true;
 
@@ -24,52 +31,49 @@ namespace Desktop
             this.FormBorderStyle = FormBorderStyle.None;   // Remove the border for full screen
             this.DoubleBuffered = true;
             this.TopMost = true;
-            InitializeComponent();
-            this.Resize += new EventHandler(Nav_pnl_Resize);
             // Keep the form on top
-
-            PageEmployeeManagement();
-            PopulateButtons(role);
+            InitializeComponent();
+            switch (role)
+            {
+                case 1:
+                    CreateNavButtons(EmplNavFeatures);
+                    lbText.Text = "HR Overview";
+                    break;
+                case 3:
+                    CreateNavButtons(AnimNavFeatures);
+                    lbText.Text = "Animal Manager Overview";
+                    break;
+                case 2:
+                    CreateNavButtons(AreaNavFeatures);
+                    lbText.Text = "Area/Location Manager Overview";
+                    break;
+                default:
+                    break;
+            }
         }
+
         private void ClearCanvas()
         {
             pnlContents.Controls.Clear();
         }
-        private void PageEmployeeManagement()
-        {
-            ClearCanvas();
-            EmployeeSchedulingForm empPage = new EmployeeSchedulingForm();
-            empPage.TopLevel = false;
-            pnlContents.Controls.Add(empPage);
-            empPage.Dock = DockStyle.Fill;
-            
-            empPage.Show();
-        }
-        private void PopulateButtons(string role)
-        {
-            if (role.Equals("animal_manager"))
-            {
-                CreateNavButtons(EmplNavFeatures, new List<Form> { new EmployeeSchedulingForm(), /* Add other forms as needed */ });
-            }
-            else
-            {
-                CreateNavButtons(AnimNavFeatures, new List<Form> { /* Add forms for the other role */ });
-            }
-        }
-        private void CreateNavButtons(List<string> features, List<Form> forms)
-        {
-            int xPos = 14;
-            int yPos = 269;
-            int buttonSpacing = 5;
 
-            for (int i = 0; i < features.Count; i++)
+        private void CreateNavButtons(string[] data)
+        {
+            int yPos = 150;
+            int xPos = 20;
+
+            int buttonSpacing = 5;
+            Color btnColor = Color.FromArgb(60, 74, 62);
+
+            foreach (string item in data)
             {
                 Button btn = new Button();
-                btn.Text = features[i];
+                btn.Text = item;
                 btn.ForeColor = Color.Black;
-                btn.Font = new Font("Microsoft Sans Serif", 12);
+                btn.Font = new Font("Microsoft Sans Serif", 12, FontStyle.Bold);
+
                 btn.FlatStyle = FlatStyle.Flat;
-                btn.Size = new Size(337, 55);
+                btn.Size = new Size(275, 55);
                 btn.Location = new Point(xPos, yPos);
                 btn.BackColor = Color.Transparent;
                 yPos += btn.Height + buttonSpacing;
@@ -77,27 +81,22 @@ namespace Desktop
                 btn.MouseEnter += (sender, e) => ((Button)sender).BackColor = Color.DarkGray;
                 btn.MouseLeave += (sender, e) => ((Button)sender).BackColor = Color.Transparent;
 
-                // Attach a click event handler
-                btn.Click += (sender, e) =>
-                {
-                    // Clear existing controls from pnlContents
-                    pnlContents.Controls.Clear();
-
-                    // Add the corresponding form to pnlContents
-                    forms[i].TopLevel = false;
-                    pnlContents.Controls.Add(forms[i]);
-                    forms[i].Size = pnlContents.Size;
-                    forms[i].Dock = DockStyle.Fill;
-                    forms[i].Show();
-                };
-
+                pnlNav.Controls.Add(btn);
                 pnlNav.Controls.Add(btn);
                 yPos += btn.Height + buttonSpacing;
+                btn.Click += ChangeCanvas;
             }
         }
+
+        private void Btn_Click(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
         private void BtnLogOut_MouseEnter(object sender, EventArgs e)
         {
             Button btn = (Button)sender;
+
             btn.BackColor = Color.DarkGray;
         }
 
@@ -109,9 +108,12 @@ namespace Desktop
         private void Logout_Click(object sender, EventArgs e)
         {
             Login f = new Login();
+            this.Hide();
+            f.FormClosed += (e, args) => this.Close();
             f.Show();
-            Dispose();
         }
+
+
         private void Forms_MainForm_Load(object sender, EventArgs e)
         {
 
@@ -122,9 +124,8 @@ namespace Desktop
 
             // Optionally make the form topmost
             this.TopMost = true;
-
-
         }
+
         private void Nav_pnl_Resize(object sender, EventArgs e)
         {
             int hight = Screen.PrimaryScreen.Bounds.Height;
@@ -133,10 +134,65 @@ namespace Desktop
             this.Width = width;
             Top = 0;
             Left = 0;
-            pnlContents.Width = width - 20;
-            pnlContents.Height = hight - 20;
+            pnlNav.Width = width - 0;
+            pnlNav.Height = hight - 20;
         }
 
+        private void pictureBox2_Click(object sender, EventArgs e)
+        {
 
+        }
+
+        private void ChangeCanvas(object sender, EventArgs e)
+        {
+            Button btn = (Button)sender;
+
+
+            switch (btn.Text)
+            {
+                case "Employee Creation":
+                    ClearCanvas();
+                    SetCanvas(new EmployeeCreation());
+                    break;
+                case "Scheduling":
+                    ClearCanvas();
+                    SetCanvas(new EmployeeSchedulingForm());
+                    break;
+                case "Update Existing Employees":
+                    ClearCanvas();
+                    ClearCanvas();
+                    SetCanvas(new EditEmployee());
+                    break;
+                case "Animal Management":
+                    ClearCanvas();
+                    SetCanvas(new CaretakerForm(animalRepository, locationRepository));
+                    break;
+                case "Area Management":
+                    ClearCanvas();
+                    SetCanvas(new Area_LocationManagement());
+                    break;
+            }
+        }
+
+        private void SetCanvas(Form x)
+        {
+            x.TopLevel = false;
+            pnlContents.Controls.Add(x);
+
+            // Adjust the size of the form to fit the panel
+            x.Width = pnlContents.Width;
+            x.Height = pnlContents.Height;
+            x.FormBorderStyle = FormBorderStyle.None;
+            x.Dock = DockStyle.Fill;
+            x.Show();
+        }
+
+        private void btnLogOut_Click(object sender, EventArgs e)
+        {
+            Login f = new Login();
+            this.Hide();
+            f.FormClosed += (e, args) => this.Close();
+            f.Show();
+        }
     }
 }

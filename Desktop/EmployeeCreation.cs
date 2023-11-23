@@ -1,36 +1,31 @@
-﻿using System;
+﻿using DataAccess;
+using Logic.DTO;
+using Logic.Entities;
+using Logic.Managers;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Xml.Linq;
-using DataAccess;
-using Logic.DTO;
-using Logic.Entities;
-using Logic.Managers;
-using Microsoft.Data.SqlClient;
-using Microsoft.Identity.Client;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
-namespace Employees
+namespace Desktop
 {
-    public partial class AddEmployee : Form
+    public partial class EmployeeCreation : Form
     {
         private readonly EmployeeManager employeeManager;
         private Rectangle myTabRect;
 
 
-        public AddEmployee()
+        public EmployeeCreation()
         {
             InitializeComponent();
 
             employeeManager = new EmployeeManager(new EmployeeRepository());
-            tabControl1.DrawItem += new DrawItemEventHandler(tabControl1_DrawItem);
+           
             cmbRole.DataSource = Enum.GetValues(typeof(Role));
 
         }
@@ -90,7 +85,7 @@ namespace Employees
             employeeDTO.PhoneNumber = tbxPhone.Text;
             employeeDTO.DateOfBirth = dtpBirthDate.Value;
             employeeDTO.BSN = int.Parse(tbxBSN.Text);
-            employeeDTO.Position = cmbPosition.Text;
+           
 
             // UserDTO info
             userDTO.Username = tbxUsername.Text;
@@ -98,19 +93,19 @@ namespace Employees
             userDTO.Email = tbxEmail.Text;
 
             //ContractDTO info
-            contractDTO.StartDate = dtpStartDate.Value;
-            contractDTO.EndDate = dtpEndDate.Value;
+            contractDTO.StartDate = dtpStart.Value;
+            contractDTO.EndDate = dtpEnd.Value;
             contractDTO.Salary = Convert.ToDecimal(tbxSalary.Text);
             contractDTO.ContractType = tbxContractType.Text;
             contractDTO.RoleID = cmbRole.SelectedIndex;
 
             //PartnerDTO info
-            partnerDTO.FirstName = tbxFirstNamePartner.Text;
-            partnerDTO.LastName = tbxLastNamePartner.Text;
-            partnerDTO.PhoneNumber = tbxPhonePartner.Text;
+            partnerDTO.FirstName = tbxPartnerFirstName.Text;
+            partnerDTO.LastName = tbxPartnerLastName.Text;
+            partnerDTO.PhoneNumber = tbxPartnerPhone.Text;
 
             //AddressDTO info
-            addressDTO.StreetName = tbxStreet.Text;
+            addressDTO.StreetName = tbxStreetName.Text;
             addressDTO.Country = tbxCountry.Text;
             addressDTO.ZipCode = tbxZipCode.Text;
             addressDTO.City = tbxCity.Text;

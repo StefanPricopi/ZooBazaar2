@@ -40,7 +40,6 @@
             lbFriday = new Label();
             lbSaturday = new Label();
             flowLayoutPanel1 = new FlowLayoutPanel();
-            btnGoBack = new Button();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             SuspendLayout();
@@ -87,7 +86,7 @@
             // 
             lbSunday.AutoSize = true;
             lbSunday.Font = new Font("Century Gothic", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
-            lbSunday.Location = new Point(18, 60);
+            lbSunday.Location = new Point(12, 60);
             lbSunday.Name = "lbSunday";
             lbSunday.Size = new Size(80, 22);
             lbSunday.TabIndex = 25;
@@ -97,7 +96,7 @@
             // 
             lbMonday.AutoSize = true;
             lbMonday.Font = new Font("Century Gothic", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
-            lbMonday.Location = new Point(127, 60);
+            lbMonday.Location = new Point(117, 60);
             lbMonday.Name = "lbMonday";
             lbMonday.Size = new Size(88, 22);
             lbMonday.TabIndex = 26;
@@ -107,7 +106,7 @@
             // 
             lbTuesday.AutoSize = true;
             lbTuesday.Font = new Font("Century Gothic", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
-            lbTuesday.Location = new Point(236, 60);
+            lbTuesday.Location = new Point(223, 60);
             lbTuesday.Name = "lbTuesday";
             lbTuesday.Size = new Size(86, 22);
             lbTuesday.TabIndex = 27;
@@ -117,7 +116,7 @@
             // 
             lbWednesday.AutoSize = true;
             lbWednesday.Font = new Font("Century Gothic", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
-            lbWednesday.Location = new Point(343, 60);
+            lbWednesday.Location = new Point(329, 60);
             lbWednesday.Name = "lbWednesday";
             lbWednesday.Size = new Size(120, 22);
             lbWednesday.TabIndex = 28;
@@ -127,7 +126,7 @@
             // 
             tbThursday.AutoSize = true;
             tbThursday.Font = new Font("Century Gothic", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
-            tbThursday.Location = new Point(469, 60);
+            tbThursday.Location = new Point(484, 60);
             tbThursday.Name = "tbThursday";
             tbThursday.Size = new Size(92, 22);
             tbThursday.TabIndex = 29;
@@ -137,7 +136,7 @@
             // 
             lbFriday.AutoSize = true;
             lbFriday.Font = new Font("Century Gothic", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
-            lbFriday.Location = new Point(586, 60);
+            lbFriday.Location = new Point(605, 60);
             lbFriday.Name = "lbFriday";
             lbFriday.Size = new Size(65, 22);
             lbFriday.TabIndex = 30;
@@ -147,7 +146,7 @@
             // 
             lbSaturday.AutoSize = true;
             lbSaturday.Font = new Font("Century Gothic", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
-            lbSaturday.Location = new Point(675, 60);
+            lbSaturday.Location = new Point(694, 60);
             lbSaturday.Name = "lbSaturday";
             lbSaturday.Size = new Size(94, 22);
             lbSaturday.TabIndex = 31;
@@ -160,22 +159,12 @@
             flowLayoutPanel1.Size = new Size(808, 401);
             flowLayoutPanel1.TabIndex = 32;
             // 
-            // btnGoBack
-            // 
-            btnGoBack.Location = new Point(675, 12);
-            btnGoBack.Name = "btnGoBack";
-            btnGoBack.Size = new Size(94, 35);
-            btnGoBack.TabIndex = 33;
-            btnGoBack.Text = "Go back";
-            btnGoBack.UseVisualStyleBackColor = true;
-            btnGoBack.Click += btnGoBack_Click;
-            // 
             // EmployeeSchedulingForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 557);
-            Controls.Add(btnGoBack);
+            Controls.Add(lbSunday);
             Controls.Add(flowLayoutPanel1);
             Controls.Add(lbSaturday);
             Controls.Add(lbFriday);
@@ -183,7 +172,6 @@
             Controls.Add(lbWednesday);
             Controls.Add(lbTuesday);
             Controls.Add(lbMonday);
-            Controls.Add(lbSunday);
             Controls.Add(btnPrevious);
             Controls.Add(btnNext);
             Controls.Add(pictureBox2);
@@ -212,6 +200,5 @@
         private Label lbFriday;
         private Label lbSaturday;
         private FlowLayoutPanel flowLayoutPanel1;
-        private Button btnGoBack;
     }
 }

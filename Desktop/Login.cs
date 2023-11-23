@@ -66,17 +66,17 @@ namespace Desktop
                 }
                 if (position == "1")
                 {
-                    Form addEmployeeForm = new HrOverview();
+                    Form addEmployeeForm = new MainForm(1);
                     addEmployeeForm.ShowDialog();
                 }
                 if (position == "2")
                 {
-                    Form formtoopen = new ManagerOverview();
+                    Form formtoopen = new MainForm(2);
                     formtoopen.ShowDialog();
                 }
                 if (position == "3")
                 {
-                    Form addAnimalForm = new CaretakerForm(animalRepository, locationRepository);
+                    Form addAnimalForm = new MainForm(3);
                     addAnimalForm.ShowDialog();
                 }
             }
