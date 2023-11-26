@@ -1,30 +1,33 @@
 ﻿@page
 @model Web_Layer.Pages.scheduleModel
 @{
+    var schedulesByDate = Model.schedules.GroupBy(s => s.Date.Date).OrderBy(g => g.Key);
 }
+
 <body>
     <h1>Schedules</h1>
 
-    <table>
-        <thead>
-            <tr>
-                <th>Date</th>
-                <th>Time</th>
-                <th>EmployeeID</th>
-                <th>ShiftID</th>
-
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var schedule in Model.schedules)
-            {
+    @foreach (var scheduleGroup in schedulesByDate)
+    {
+        <h2>@scheduleGroup.Key.ToShortDateString()</h2>
+        <table>
+            <thead>
                 <tr>
-                    <td>@schedule.ScheduleId</td>
-                    <td>@schedule.EmployeeId</td>
-                    <td>@schedule.Shift</td>
-                    <td>@schedule.Date</td>                   
+                    <th>Date</th>
+                    <th>EmployeeID</th>
+                    <th>ShiftID</th>
                 </tr>
-            }
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                @foreach (var schedule in scheduleGroup)
+                {
+                    <tr>
+                        <td>@schedule.Date</td>
+                        <td>@schedule.EmployeeId</td>
+                        <td>@schedule.Shift</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
 </body>
