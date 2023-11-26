@@ -25,7 +25,7 @@ namespace Desktop
             InitializeComponent();
 
             employeeManager = new EmployeeManager(new EmployeeRepository());
-           
+
             cmbRole.DataSource = Enum.GetValues(typeof(Role));
 
         }
@@ -85,7 +85,7 @@ namespace Desktop
             employeeDTO.PhoneNumber = tbxPhone.Text;
             employeeDTO.DateOfBirth = dtpBirthDate.Value;
             employeeDTO.BSN = int.Parse(tbxBSN.Text);
-           
+
 
             // UserDTO info
             userDTO.Username = tbxUsername.Text;

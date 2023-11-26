@@ -36,7 +36,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             AutoScroll = true;
             Name = "AfternoonShiftPanel";
-            Size = new Size(104, 100);
+            Size = new Size(192, 190);
             ResumeLayout(false);
         }
 

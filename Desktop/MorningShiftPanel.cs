@@ -11,15 +11,15 @@ namespace Desktop
     public partial class MorningShiftPanel : UserControl, IShiftPanel
     {
 
-       // const height for labels, acts as margin between labels
+        // const height for labels, acts as margin between labels
         private const int labelHeight = 50;
         // this is the margin within panels
-        private int initialPanelHeight; 
+        private int initialPanelHeight;
         public MorningShiftPanel(DateTime date)
         {
             InitializeComponent();
             InitializePanel(date, "Morning Shift");
-            
+
         }
         //method that the button which assigns employee to shift calls, to create the label for the employee
         public void AddShiftLabel(string employeeName)
@@ -54,7 +54,7 @@ namespace Desktop
                 Text = $"{shiftType}\n{date.ToShortDateString()}",
                 TextAlign = ContentAlignment.MiddleCenter,
                 AutoSize = true,
-                Location = new Point(0, 0) 
+                Location = new Point(0, 0)
             };
             // event for whenever we click on the label
             //to show the assignemployee form
@@ -71,12 +71,12 @@ namespace Desktop
                     addEmployeeForm.Show();
                 };
             }
-            
+
 
 
             scrollablePanel.Controls.Add(label);
 
-            initialPanelHeight = 3 * (labelHeight + 10); ; 
+            initialPanelHeight = 3 * (labelHeight + 10); ;
 
             Controls.Add(scrollablePanel);
         }

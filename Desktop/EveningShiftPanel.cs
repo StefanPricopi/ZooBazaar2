@@ -35,14 +35,14 @@ namespace Desktop
                 AutoScroll = true
             };
 
-            int labelHeight = 50; 
+            int labelHeight = 50;
 
             Label label = new Label
             {
                 Text = $"{shiftType}\n{date.ToShortDateString()}",
                 TextAlign = ContentAlignment.MiddleCenter,
                 AutoSize = true,
-                Location = new Point(0, 0) 
+                Location = new Point(0, 0)
             };
             DateTime currentTime = DateTime.Now;
             if (date <= currentTime.AddDays(-1))
@@ -50,20 +50,20 @@ namespace Desktop
 
             }
             else
-            { 
+            {
                 label.Click += (sender, e) =>
             {
                 AssignEmployee addEmployeeForm = new AssignEmployee(date, "EveningShift");
                 addEmployeeForm.ShowDialog();
             };
-            }   
+            }
 
             scrollablePanel.Controls.Add(label);
 
-            initialPanelHeight = 3 * (labelHeight + 10); ; 
+            initialPanelHeight = 3 * (labelHeight + 10); ;
 
             Controls.Add(scrollablePanel);
         }
-        
+
     }
 }

@@ -118,10 +118,10 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="pictureBox1.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="pictureBox3.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAABU4AAAXkCAYAAAAVQpFwAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
-        vgAADr4B6kKxwAAA/7JJREFUeF7s/cmRZNkePWo9JZhghhAIwIwxOjDFDC0wJEABRk8EBk8BxGCAHo+7
+        vAAADrwBlbxySQAA/7JJREFUeF7s/cmRZNkePWo9JZhghhAIwIwxOjDFDC0wJEABRk8EBk8BxGCAHo+7
         /nk35RX5i+3daXbzfWbLsm7dzAj30+xm+Yms/+l//V//VxERERERERERERF5SPkvRURERERERERERHZO
         +S9FREREREREREREdk75L0VERERERERERER2TvkvRURERERERERERHZO+S9FREREREREREREdk75L0VE
         RERERERERER2TvkvRURERERERERERHZO+S9FREREREREREREdk75L0VERERERERERER2TvkvRURERERE
@@ -1589,10 +1589,10 @@
         /j8io4BwKtNWLQAAAABJRU5ErkJggg==
 </value>
   </data>
-  <data name="pictureBox1.InitialImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="pictureBox3.InitialImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAABU4AAAXkCAYAAAAVQpFwAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
-        vgAADr4B6kKxwAAA/7JJREFUeF7s/cmRZNkePWo9JZhghhAIwIwxOjDFDC0wJEABRk8EBk8BxGCAHo+7
+        vAAADrwBlbxySQAA/7JJREFUeF7s/cmRZNkePWo9JZhghhAIwIwxOjDFDC0wJEABRk8EBk8BxGCAHo+7
         /nk35RX5i+3daXbzfWbLsm7dzAj30+xm+Yms/+l//V//VxERERERERERERF5SPkvRURERERERERERHZO
         +S9FREREREREREREdk75L0VERERERERERER2TvkvRURERERERERERHZO+S9FREREREREREREdk75L0VE
         RERERERERER2TvkvRURERERERERERHZO+S9FREREREREREREdk75L0VERERERERERER2TvkvRURERERE

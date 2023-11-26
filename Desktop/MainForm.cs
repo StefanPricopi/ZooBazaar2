@@ -32,8 +32,13 @@ namespace Desktop
             this.FormBorderStyle = FormBorderStyle.None;   // Remove the border for full screen
             this.DoubleBuffered = true;
             this.TopMost = true;
+            
             // Keep the form on top
             InitializeComponent();
+            lbText.Parent = pictureBox1;
+            lbText.Location = new Point(65, 169);
+            btnLogOut.Parent = pictureBox1;
+            btnLogOut.Location = new Point(1200, 160);
             switch (role)
             {
                 case 1:
@@ -196,7 +201,7 @@ namespace Desktop
             x.Show();
         }
 
-        private void btnLogOut_Click(object sender, EventArgs e)
+        private void btnLogOut_Click_1(object sender, EventArgs e)
         {
             Login f = new Login();
             this.Hide();

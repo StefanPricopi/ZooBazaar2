@@ -499,10 +499,12 @@
             // 
             // btnAddEmployee
             // 
+            btnAddEmployee.FlatStyle = FlatStyle.Flat;
+            btnAddEmployee.Font = new Font("Century Gothic", 21.75F, FontStyle.Bold, GraphicsUnit.Point);
             btnAddEmployee.Location = new Point(0, 658);
             btnAddEmployee.Margin = new Padding(3, 2, 3, 2);
             btnAddEmployee.Name = "btnAddEmployee";
-            btnAddEmployee.Size = new Size(1504, 78);
+            btnAddEmployee.Size = new Size(1504, 114);
             btnAddEmployee.TabIndex = 74;
             btnAddEmployee.Text = "Add Employee";
             btnAddEmployee.UseVisualStyleBackColor = true;
@@ -621,7 +623,7 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.MediumSlateBlue;
-            ClientSize = new Size(1475, 736);
+            ClientSize = new Size(1496, 772);
             Controls.Add(label26);
             Controls.Add(label27);
             Controls.Add(label6);

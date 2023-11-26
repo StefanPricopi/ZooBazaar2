@@ -35,7 +35,7 @@ namespace Desktop
                 AutoScroll = true
             };
 
-            int labelHeight = 50; 
+            int labelHeight = 50;
 
             Label label = new Label
             {
@@ -50,7 +50,7 @@ namespace Desktop
 
             }
             else
-            { 
+            {
                 label.Click += (sender, e) =>
             {
                 AssignEmployee addEmployeeForm = new AssignEmployee(date, "AfternoonShift");
@@ -59,10 +59,10 @@ namespace Desktop
             }
             scrollablePanel.Controls.Add(label);
 
-  
+
             initialPanelHeight = 3 * (labelHeight + 10); ;
             Controls.Add(scrollablePanel);
         }
-        
+
     }
 }

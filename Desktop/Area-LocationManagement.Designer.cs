@@ -65,7 +65,7 @@
             btnAddArea.FlatStyle = FlatStyle.Flat;
             btnAddArea.Font = new Font("Century", 12F, FontStyle.Bold, GraphicsUnit.Point);
             btnAddArea.ForeColor = Color.Cyan;
-            btnAddArea.Location = new Point(107, 643);
+            btnAddArea.Location = new Point(124, 712);
             btnAddArea.Margin = new Padding(4);
             btnAddArea.Name = "btnAddArea";
             btnAddArea.Size = new Size(270, 45);
@@ -78,7 +78,7 @@
             // 
             rbLocationActive.AutoSize = true;
             rbLocationActive.Font = new Font("Century Gothic", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
-            rbLocationActive.Location = new Point(770, 568);
+            rbLocationActive.Location = new Point(741, 601);
             rbLocationActive.Margin = new Padding(4);
             rbLocationActive.Name = "rbLocationActive";
             rbLocationActive.Size = new Size(90, 26);
@@ -91,7 +91,7 @@
             // 
             cbArea.Font = new Font("Century Gothic", 12F, FontStyle.Regular, GraphicsUnit.Point);
             cbArea.FormattingEnabled = true;
-            cbArea.Location = new Point(748, 522);
+            cbArea.Location = new Point(746, 508);
             cbArea.Margin = new Padding(4);
             cbArea.Name = "cbArea";
             cbArea.Size = new Size(263, 29);
@@ -102,7 +102,7 @@
             // 
             Area.AutoSize = true;
             Area.Font = new Font("Century Gothic", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
-            Area.Location = new Point(748, 496);
+            Area.Location = new Point(746, 482);
             Area.Margin = new Padding(4, 0, 4, 0);
             Area.Name = "Area";
             Area.Size = new Size(56, 22);
@@ -113,7 +113,7 @@
             // tbAreaName
             // 
             tbAreaName.Font = new Font("Century Gothic", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            tbAreaName.Location = new Point(13, 518);
+            tbAreaName.Location = new Point(13, 452);
             tbAreaName.Margin = new Padding(4);
             tbAreaName.Name = "tbAreaName";
             tbAreaName.Size = new Size(537, 27);
@@ -122,7 +122,7 @@
             // tbLocationName
             // 
             tbLocationName.Font = new Font("Century Gothic", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            tbLocationName.Location = new Point(748, 466);
+            tbLocationName.Location = new Point(746, 452);
             tbLocationName.Margin = new Padding(4);
             tbLocationName.Name = "tbLocationName";
             tbLocationName.Size = new Size(263, 27);
@@ -137,7 +137,7 @@
             btnEditArea.FlatStyle = FlatStyle.Flat;
             btnEditArea.Font = new Font("Century Gothic", 12F, FontStyle.Bold, GraphicsUnit.Point);
             btnEditArea.ForeColor = Color.Cyan;
-            btnEditArea.Location = new Point(442, 643);
+            btnEditArea.Location = new Point(459, 712);
             btnEditArea.Margin = new Padding(4);
             btnEditArea.Name = "btnEditArea";
             btnEditArea.Size = new Size(270, 45);
@@ -153,7 +153,7 @@
             btnAddLocation.FlatStyle = FlatStyle.Flat;
             btnAddLocation.Font = new Font("Century Gothic", 12F, FontStyle.Bold, GraphicsUnit.Point);
             btnAddLocation.ForeColor = Color.Cyan;
-            btnAddLocation.Location = new Point(770, 643);
+            btnAddLocation.Location = new Point(787, 712);
             btnAddLocation.Margin = new Padding(4);
             btnAddLocation.Name = "btnAddLocation";
             btnAddLocation.Size = new Size(270, 45);
@@ -169,7 +169,7 @@
             btnEditLocation.FlatStyle = FlatStyle.Flat;
             btnEditLocation.Font = new Font("Century Gothic", 12F, FontStyle.Bold, GraphicsUnit.Point);
             btnEditLocation.ForeColor = Color.Cyan;
-            btnEditLocation.Location = new Point(1114, 644);
+            btnEditLocation.Location = new Point(1131, 713);
             btnEditLocation.Margin = new Padding(4);
             btnEditLocation.Name = "btnEditLocation";
             btnEditLocation.Size = new Size(270, 45);
@@ -182,7 +182,7 @@
             // 
             rbLocationInactive.AutoSize = true;
             rbLocationInactive.Font = new Font("Century Gothic", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
-            rbLocationInactive.Location = new Point(959, 568);
+            rbLocationInactive.Location = new Point(930, 601);
             rbLocationInactive.Margin = new Padding(4);
             rbLocationInactive.Name = "rbLocationInactive";
             rbLocationInactive.Size = new Size(105, 26);
@@ -223,7 +223,7 @@
             // 
             label2.AutoSize = true;
             label2.Font = new Font("Century Gothic", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
-            label2.Location = new Point(13, 492);
+            label2.Location = new Point(13, 426);
             label2.Margin = new Padding(4, 0, 4, 0);
             label2.Name = "label2";
             label2.Size = new Size(66, 22);
@@ -235,7 +235,7 @@
             // 
             label3.AutoSize = true;
             label3.Font = new Font("Century Gothic", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
-            label3.Location = new Point(748, 440);
+            label3.Location = new Point(746, 426);
             label3.Margin = new Padding(4, 0, 4, 0);
             label3.Name = "label3";
             label3.Size = new Size(66, 22);
@@ -320,10 +320,10 @@
             // tbCapacity
             // 
             tbCapacity.Font = new Font("Century Gothic", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            tbCapacity.Location = new Point(1021, 466);
+            tbCapacity.Location = new Point(1019, 452);
             tbCapacity.Margin = new Padding(4);
             tbCapacity.Name = "tbCapacity";
-            tbCapacity.Size = new Size(172, 27);
+            tbCapacity.Size = new Size(242, 27);
             tbCapacity.TabIndex = 21;
             tbCapacity.TextChanged += tbCapacity_TextChanged;
             // 
@@ -331,7 +331,7 @@
             // 
             label7.AutoSize = true;
             label7.Font = new Font("Century Gothic", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
-            label7.Location = new Point(1021, 431);
+            label7.Location = new Point(1019, 426);
             label7.Margin = new Padding(4, 0, 4, 0);
             label7.Name = "label7";
             label7.Size = new Size(242, 22);
@@ -353,10 +353,10 @@
             // pictureBox2
             // 
             pictureBox2.Image = Properties.Resources.Screenshot_12;
-            pictureBox2.Location = new Point(-9, 601);
+            pictureBox2.Location = new Point(-9, 663);
             pictureBox2.Margin = new Padding(4);
             pictureBox2.Name = "pictureBox2";
-            pictureBox2.Size = new Size(2147, 118);
+            pictureBox2.Size = new Size(2147, 131);
             pictureBox2.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox2.TabIndex = 24;
             pictureBox2.TabStop = false;
@@ -364,7 +364,7 @@
             // 
             // btnRefresh
             // 
-            btnRefresh.Location = new Point(605, 513);
+            btnRefresh.Location = new Point(443, 561);
             btnRefresh.Margin = new Padding(4);
             btnRefresh.Name = "btnRefresh";
             btnRefresh.Size = new Size(107, 32);
@@ -379,14 +379,14 @@
             panel1.Location = new Point(737, 108);
             panel1.Margin = new Padding(4, 3, 4, 3);
             panel1.Name = "panel1";
-            panel1.Size = new Size(1, 490);
+            panel1.Size = new Size(1, 540);
             panel1.TabIndex = 78;
             // 
             // Area_LocationManagement
             // 
             AutoScaleDimensions = new SizeF(10F, 21F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1496, 736);
+            ClientSize = new Size(1496, 772);
             Controls.Add(panel1);
             Controls.Add(btnRefresh);
             Controls.Add(rbAreaActive);

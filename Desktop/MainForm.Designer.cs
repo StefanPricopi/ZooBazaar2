@@ -31,21 +31,27 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             pnlForm = new Panel();
             btnLogOut = new Button();
-            pictureBox1 = new PictureBox();
             lbText = new Label();
+            pictureBox1 = new PictureBox();
+            pictureBox3 = new PictureBox();
             pnlNav = new Panel();
+            pictureBox2 = new PictureBox();
             pnlContents = new Panel();
             pnlForm.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             SuspendLayout();
             // 
             // pnlForm
             // 
             pnlForm.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             pnlForm.Controls.Add(btnLogOut);
-            pnlForm.Controls.Add(pictureBox1);
             pnlForm.Controls.Add(lbText);
+            pnlForm.Controls.Add(pictureBox1);
+            pnlForm.Controls.Add(pictureBox3);
             pnlForm.Controls.Add(pnlNav);
+            pnlForm.Controls.Add(pictureBox2);
             pnlForm.Controls.Add(pnlContents);
             pnlForm.Location = new Point(0, 0);
             pnlForm.Name = "pnlForm";
@@ -58,41 +64,67 @@
             btnLogOut.FlatStyle = FlatStyle.Flat;
             btnLogOut.Font = new Font("Century Gothic", 12F, FontStyle.Regular, GraphicsUnit.Point);
             btnLogOut.ForeColor = Color.Black;
-            btnLogOut.Location = new Point(1557, 158);
+            btnLogOut.Location = new Point(1559, 145);
             btnLogOut.Name = "btnLogOut";
             btnLogOut.Size = new Size(337, 55);
-            btnLogOut.TabIndex = 4;
+            btnLogOut.TabIndex = 9;
             btnLogOut.Text = "Logout";
             btnLogOut.UseVisualStyleBackColor = false;
-            btnLogOut.Click += btnLogOut_Click;
-            // 
-            // pictureBox1
-            // 
-            pictureBox1.BackgroundImage = (Image)resources.GetObject("pictureBox1.BackgroundImage");
-            pictureBox1.BackgroundImageLayout = ImageLayout.Stretch;
-            pictureBox1.InitialImage = (Image)resources.GetObject("pictureBox1.InitialImage");
-            pictureBox1.Location = new Point(3, 21);
-            pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(302, 192);
-            pictureBox1.TabIndex = 2;
-            pictureBox1.TabStop = false;
+            btnLogOut.Click += btnLogOut_Click_1;
             // 
             // lbText
             // 
-            lbText.AutoSize = true;
+            lbText.BackColor = Color.Transparent;
+            lbText.FlatStyle = FlatStyle.Flat;
             lbText.Font = new Font("Century Gothic", 27.75F, FontStyle.Regular, GraphicsUnit.Point);
+            lbText.ImageAlign = ContentAlignment.MiddleLeft;
             lbText.Location = new Point(400, 169);
             lbText.Name = "lbText";
             lbText.Size = new Size(356, 44);
-            lbText.TabIndex = 3;
+            lbText.TabIndex = 8;
             lbText.Text = "Display name Here";
+            // 
+            // pictureBox1
+            // 
+            pictureBox1.BackgroundImageLayout = ImageLayout.None;
+            pictureBox1.Image = Properties.Resources.Screenshot_12;
+            pictureBox1.Location = new Point(337, -3);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(1596, 229);
+            pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureBox1.TabIndex = 7;
+            pictureBox1.TabStop = false;
+            // 
+            // pictureBox3
+            // 
+            pictureBox3.BackColor = Color.DarkViolet;
+            pictureBox3.BackgroundImage = (Image)resources.GetObject("pictureBox3.BackgroundImage");
+            pictureBox3.BackgroundImageLayout = ImageLayout.Stretch;
+            pictureBox3.InitialImage = (Image)resources.GetObject("pictureBox3.InitialImage");
+            pictureBox3.Location = new Point(15, 21);
+            pictureBox3.Name = "pictureBox3";
+            pictureBox3.Size = new Size(302, 192);
+            pictureBox3.TabIndex = 6;
+            pictureBox3.TabStop = false;
             // 
             // pnlNav
             // 
-            pnlNav.Location = new Point(0, 219);
+            pnlNav.BackColor = Color.DarkViolet;
+            pnlNav.ForeColor = Color.GhostWhite;
+            pnlNav.Location = new Point(12, 236);
             pnlNav.Name = "pnlNav";
-            pnlNav.Size = new Size(305, 842);
-            pnlNav.TabIndex = 1;
+            pnlNav.Size = new Size(305, 793);
+            pnlNav.TabIndex = 2;
+            // 
+            // pictureBox2
+            // 
+            pictureBox2.Image = Properties.Resources.Screenshot_14;
+            pictureBox2.Location = new Point(0, -3);
+            pictureBox2.Name = "pictureBox2";
+            pictureBox2.Size = new Size(340, 1061);
+            pictureBox2.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureBox2.TabIndex = 5;
+            pictureBox2.TabStop = false;
             // 
             // pnlContents
             // 
@@ -112,17 +144,20 @@
             Text = "MainForm";
             WindowState = FormWindowState.Maximized;
             pnlForm.ResumeLayout(false);
-            pnlForm.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox3).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
             ResumeLayout(false);
         }
 
         #endregion
         private Panel pnlForm;
         private Panel pnlContents;
+        private PictureBox pictureBox3;
         private Panel pnlNav;
-        private Label lbText;
+        private PictureBox pictureBox2;
         private PictureBox pictureBox1;
         private Button btnLogOut;
+        private Label lbText;
     }
 }

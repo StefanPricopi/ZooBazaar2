@@ -26,6 +26,7 @@ namespace Desktop
         {
             manager = new ScheduleManager(new ScheduleRepository());
             InitializeComponent();
+            lbWeekNum.Parent = pictureBox2;
             InitializeWeek();
         }
 
@@ -36,7 +37,7 @@ namespace Desktop
             GenerateWeek(currentDate);
             DateTime curr = currentStartday(currentDate);
             manager.PopulateSchedule(curr);
-           lbWeekNum.Text ="Current week: " + CalculateTheCurrentWeekByYear(currentDate).ToString();
+            lbWeekNum.Text = "Current week: " + CalculateTheCurrentWeekByYear(currentDate).ToString();
 
 
         }
