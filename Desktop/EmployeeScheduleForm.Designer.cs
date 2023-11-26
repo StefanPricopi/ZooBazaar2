@@ -40,6 +40,7 @@
             lbFriday = new Label();
             lbSaturday = new Label();
             flowLayoutPanel1 = new FlowLayoutPanel();
+            lbWeekNum = new Label();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             SuspendLayout();
@@ -159,11 +160,22 @@
             flowLayoutPanel1.Size = new Size(808, 401);
             flowLayoutPanel1.TabIndex = 32;
             // 
+            // lbWeekNum
+            // 
+            lbWeekNum.AutoSize = true;
+            lbWeekNum.Font = new Font("Century Gothic", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
+            lbWeekNum.Location = new Point(303, 9);
+            lbWeekNum.Name = "lbWeekNum";
+            lbWeekNum.Size = new Size(226, 23);
+            lbWeekNum.TabIndex = 33;
+            lbWeekNum.Text = "Display Week num here";
+            // 
             // EmployeeSchedulingForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 557);
+            ClientSize = new Size(1512, 775);
+            Controls.Add(lbWeekNum);
             Controls.Add(lbSunday);
             Controls.Add(flowLayoutPanel1);
             Controls.Add(lbSaturday);
@@ -200,5 +212,6 @@
         private Label lbFriday;
         private Label lbSaturday;
         private FlowLayoutPanel flowLayoutPanel1;
+        private Label lbWeekNum;
     }
 }

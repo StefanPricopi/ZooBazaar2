@@ -111,7 +111,7 @@ namespace DataAccess
 
             return null; // Return null if no user with the specified email is found
         }
-        public UserDTO GetCurrentUserByUsernameForEmployee(string username)
+        public UserDTO FindUserByProvidedUsername(string username)
         {
             try
             {
@@ -119,9 +119,10 @@ namespace DataAccess
                 {
                     conn.Open();
                     string sql = @"
-                SELECT u.*, e.*
-                FROM users u
+                SELECT u.*, e.EmployeeID, v.VisitorID
+                FROM Users u
                 LEFT JOIN Employees e ON u.UserID = e.UserID
+                LEFT JOIN Visitors v ON u.UserID = v.UserID
                 WHERE u.Username = @Username;
             ";
                     SqlCommand cmd = new SqlCommand(sql, conn);
@@ -131,16 +132,37 @@ namespace DataAccess
 
                     if (dr.Read())
                     {
-                        var userDTO = new UserDTO
+                        string compareEmp = dr["EmployeeID"].ToString();
+                        string compareVis = dr["VisitorID"].ToString();
+                        if (compareEmp == "")
                         {
-                            UserID = Convert.ToInt32(dr["UserID"]),
-                            Username = dr["Username"].ToString(),
-                            Password = dr["Password"].ToString(),
-                            Email = dr["Email"].ToString(),
-                            Salt = dr["Salt"].ToString(),
-                            EmployeeID = Convert.ToInt32(dr["EmployeeID"]),
-                        };
-                        return userDTO;
+                            var userDTO = new UserDTO
+                            {
+                                UserID = Convert.ToInt32(dr["UserID"]),
+                                Username = dr["Username"].ToString(),
+                                Password = dr["Password"].ToString(),
+                                Email = dr["Email"].ToString(),
+                                Salt = dr["Salt"].ToString(),
+                                VisitorID = Convert.ToInt32(dr["VisitorID"]),
+                            };
+                            return userDTO;
+                        }
+                        else if (compareVis == "")
+                        {
+                            var userDTO = new UserDTO
+                            {
+                                UserID = Convert.ToInt32(dr["UserID"]),
+                                Username = dr["Username"].ToString(),
+                                Password = dr["Password"].ToString(),
+                                Email = dr["Email"].ToString(),
+                                Salt = dr["Salt"].ToString(),
+                                EmployeeID = Convert.ToInt32(dr["EmployeeID"]),
+                                
+                            };
+                            return userDTO;
+                        }
+                        
+                        
                     }
                 }
             }
@@ -160,8 +182,10 @@ namespace DataAccess
                     conn.Open();
                     string sql = @"
                 SELECT u.*, v.*
-                FROM users u
-                LEFT JOIN Visitors v ON u.UserID = v.UserID
+                FROM Visitors v
+                FROM Employees e  
+                LEFT JOIN users v ON u.UserID = v.UserID
+                LEFT JOIN users u ON u.UserID = e.UserID
                 WHERE u.Username = @Username;
             ";
                     SqlCommand cmd = new SqlCommand(sql, conn);

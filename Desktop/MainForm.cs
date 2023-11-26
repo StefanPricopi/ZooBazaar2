@@ -122,8 +122,7 @@ namespace Desktop
             // Remove borders for a true full screen experience
             this.FormBorderStyle = FormBorderStyle.None;
 
-            // Optionally make the form topmost
-            this.TopMost = true;
+
         }
 
         private void Nav_pnl_Resize(object sender, EventArgs e)

@@ -27,16 +27,13 @@ namespace Web_Layer.Pages
         public async Task<IActionResult> OnPostAsync()
         {
             UserDTO userModel = new UserDTO();
-            User s = new User();
+           
 
-            bool ValidateLoginEmployeeCase()
-            {
-                return userManager.IsLoginValidEmployeeCase(User.Username, User.Password);
-            }
+            userModel = ValidateLoginVisitorOrEmployee();
 
-            bool ValidateLoginVisitorCase()
+            UserDTO ValidateLoginVisitorOrEmployee()
             {
-                return userManager.IsLoginValidVisitorCase(User.Username, User.Password);
+                return userManager.IsLoginEmployeeOrVisitor(User.Username, User.Password);
             }
 
             if (User == null)
@@ -45,16 +42,15 @@ namespace Web_Layer.Pages
             }
             else
             {
-                if (ValidateLoginEmployeeCase())
+                if (userModel.EmployeeID != 0)
                 {
-                    s = userManager.GetCurrentUserByUsername(User.Username);
-                    int id = userManager.GetEmpIDbyUserId(s.UserID);
+
                     Console.WriteLine("Login successful.");
                     var claims = new List<Claim>
                     {
                         new Claim(ClaimTypes.Name, "user"),
                         new Claim(ClaimTypes.Email, "admin@website.com"),
-                        new Claim("EmployeeId",id.ToString()),
+                        new Claim("EmployeeId",userModel.UserID.ToString()),
                         new Claim("Employee", "Caretaker")
                     };
                     var identity = new ClaimsIdentity(claims, "LoginCookieAuth");
@@ -64,7 +60,7 @@ namespace Web_Layer.Pages
 
                     return RedirectToPage("/schedule");
                 }
-                else if (ValidateLoginVisitorCase())
+                else if (userModel.VisitorID != 0)
                 {
                     Console.WriteLine("Login successful.");
                     var claims = new List<Claim>

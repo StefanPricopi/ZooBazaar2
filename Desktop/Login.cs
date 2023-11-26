@@ -66,18 +66,28 @@ namespace Desktop
                 }
                 if (position == "1")
                 {
-                    Form addEmployeeForm = new MainForm(1);
-                    addEmployeeForm.ShowDialog();
+                    
+                    MainForm addEmployeeForm = new MainForm(1);
+                    this.Hide();
+                    addEmployeeForm.FormClosed += (e, args) => this.Close();
+                    addEmployeeForm.Show();
                 }
                 if (position == "2")
                 {
-                    Form formtoopen = new MainForm(2);
-                    formtoopen.ShowDialog();
+                    MainForm addEmployeeForm = new MainForm(2);
+                    this.Hide();
+                    addEmployeeForm.FormClosed += (e, args) => this.Close();
+                    addEmployeeForm.Show();
                 }
                 if (position == "3")
                 {
-                    Form addAnimalForm = new MainForm(3);
-                    addAnimalForm.ShowDialog();
+                    MainForm addAnimalForm = new MainForm(3);
+                    this.Hide();
+                    addAnimalForm.FormClosed += (e, args) => this.Close();
+                    addAnimalForm.Show();
+                    
+                    
+                    
                 }
             }
         }

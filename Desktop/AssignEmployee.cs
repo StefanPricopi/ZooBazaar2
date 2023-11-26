@@ -28,6 +28,8 @@ namespace Desktop
             string selectedDateFormatted = selectedDate.ToShortDateString();
             tbxDate.Text = selectedDateFormatted;
             tbxShiftType.Text = selectedShift;
+            // Optionally make the form topmost
+            this.TopMost = true;
             PopulateComboBox();
         }
         private void PopulateComboBox()

@@ -86,45 +86,24 @@ namespace Logic.Managers
             }
             else { return false; }
         }
-        public bool IsLoginValidEmployeeCase(string username, string password)
+        
+        public UserDTO IsLoginEmployeeOrVisitor(string username, string password)
         {
 
-            UserDTO Obj = user.GetCurrentUserByUsernameForEmployee(username);
+            UserDTO Obj = user.FindUserByProvidedUsername(username);
             if (Obj != null)
             {
-                if (Obj.UserID != 0 & Obj.EmployeeID != 0)
-                {
+                
                     var userhashedpass = HashedPassword($"{password}{Obj.Salt.Trim()}");
                     Console.WriteLine(Obj.Salt);
                     if (userhashedpass == Obj.Password)
                     {
-                        return true;
+                    return Obj;
                     }
-                    else { return false; }
-                }
-                else { return false; }
+                    else { return null; }
+                
             }
-            else { return false; }
-        }
-        public bool IsLoginValidVisitorCase(string username, string password)
-        {
-
-            UserDTO Obj = user.GetCurrentUserByUsernameForVisitor(username);
-            if (Obj != null)
-            {
-                if (Obj.UserID != 0 & Obj.VisitorID != 0)
-                {
-                    var userhashedpass = HashedPassword($"{password}{Obj.Salt.Trim()}");
-                    Console.WriteLine(Obj.Salt);
-                    if (userhashedpass == Obj.Password)
-                    {
-                        return true;
-                    }
-                    else { return false; }
-                }
-                else { return false; }
-            }
-            else { return false; }
+            else { return null; }
         }
         public void CreateVisitor(UserDTO userDtO)
         {

@@ -132,7 +132,9 @@
             Controls.Add(cmbEmployee);
             Controls.Add(tbxShiftType);
             Controls.Add(tbxDate);
+            MinimizeBox = false;
             Name = "AssignEmployee";
+            StartPosition = FormStartPosition.CenterParent;
             Text = "AssignEmployee";
             Load += AssignEmployee_Load;
             ResumeLayout(false);

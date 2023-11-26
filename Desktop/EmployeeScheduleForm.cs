@@ -4,6 +4,7 @@ using Logic.Entities;
 using Logic.Interfaces;
 using Logic.Managers;
 using Microsoft.Data.SqlClient;
+using Microsoft.VisualBasic;
 using System;
 using System.Windows.Forms;
 
@@ -19,7 +20,7 @@ namespace Desktop
             DateTime currentDay = startDate.AddDays(-(int)startDate.DayOfWeek);
             return currentDay;
         }
-       
+
 
         public EmployeeSchedulingForm()
         {
@@ -35,8 +36,26 @@ namespace Desktop
             GenerateWeek(currentDate);
             DateTime curr = currentStartday(currentDate);
             manager.PopulateSchedule(curr);
-        }
+           lbWeekNum.Text ="Current week: " + CalculateTheCurrentWeekByYear(currentDate).ToString();
 
+
+        }
+        private int CalculateTheCurrentWeekByYear(DateTime todayDate)
+        {
+
+            DateTime startOfYear = new DateTime(todayDate.Year, 1, 1);
+
+            // Determine the current week number
+            int currentWeek = GetIso8601WeekNumber(todayDate);
+
+            return currentWeek;
+        }
+        public static int GetIso8601WeekNumber(DateTime date)
+        {
+            var cal = System.Globalization.DateTimeFormatInfo.CurrentInfo.Calendar;
+            int week = cal.GetWeekOfYear(date, System.Globalization.CalendarWeekRule.FirstFourDayWeek, DayOfWeek.Monday);
+            return week;
+        }
         private void GenerateWeek(DateTime startDate)
         {
             flowLayoutPanel1.Controls.Clear();
@@ -58,7 +77,7 @@ namespace Desktop
                 // Move to the next day
                 currentDay = currentDay.AddDays(1);
             }
-
+            currentDay = currentDay.AddDays(-7);
             // Afternoon Shifts
             for (int i = 0; i < 7; i++)
             {
@@ -73,7 +92,7 @@ namespace Desktop
                 // Move to the next day
                 currentDay = currentDay.AddDays(1);
             }
-
+            currentDay = currentDay.AddDays(-7);
             // Evening Shifts
             for (int i = 0; i < 7; i++)
             {
@@ -97,6 +116,7 @@ namespace Desktop
             currentDate = currentDate.AddDays(7);
             GenerateWeek(currentDate);
             manager.PopulateSchedule(currentDate);
+            lbWeekNum.Text = "Current week: " + CalculateTheCurrentWeekByYear(currentDate).ToString();
         }
 
         private void btnPrevious_Click(object sender, EventArgs e)
@@ -104,6 +124,7 @@ namespace Desktop
             currentDate = currentDate.AddDays(-7);
             GenerateWeek(currentDate);
             manager.PopulateSchedule(currentDate);
+            lbWeekNum.Text = "Current week: " + CalculateTheCurrentWeekByYear(currentDate).ToString();
         }
 
         private void btnGoBack_Click(object sender, EventArgs e)

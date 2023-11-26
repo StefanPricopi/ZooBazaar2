@@ -68,7 +68,7 @@ namespace Desktop
                 label.Click += (sender, e) =>
                 {
                     AssignEmployee addEmployeeForm = new AssignEmployee(date, "MorningShift");
-                    addEmployeeForm.ShowDialog();
+                    addEmployeeForm.Show();
                 };
             }
             
