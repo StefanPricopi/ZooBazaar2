@@ -85,10 +85,15 @@ namespace Animals
 
             if (locationID.HasValue && selectedAnimal != null)
             {
+                // Use the repository method to check if the location is at capacity
+                if (locationRepository.IsLocationAtCapacity(locationID.Value))
+                {
+                    MessageBox.Show("Error: Location has reached its capacity. Cannot assign animal.");
+                    return;
+                }
 
-                selectedAnimal.LocationID = locationID.Value;
-
-                if (animalRepository.UpdateAnimal(selectedAnimal))
+                // Call the AssignAnimalToLocation method to handle the assignment
+                if (locationRepository.AssignAnimalToLocation(selectedAnimal.AnimalID, locationID.Value))
                 {
                     MessageBox.Show("Location assigned successfully!");
                     List<AnimalDTO> updatedAnimals = animalRepository.GetAllAnimals();
@@ -102,7 +107,10 @@ namespace Animals
             else
             {
                 MessageBox.Show("Please select a location from the ComboBox.", "Error");
+            }
         }
+
+
     }
     }
 }

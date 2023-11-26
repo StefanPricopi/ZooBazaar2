@@ -12,5 +12,9 @@ namespace Logic.Interfaces
         public bool CreateLocation(LocationDTO locationDTO);
         public List<LocationDTO> GetAllLocations();
         public bool UpdateLocation(LocationDTO locationDTO);
+        public LocationDTO GetLocationDetails(int locationID);
+        public bool AssignAnimalToLocation(int animalID, int locationID);
+        public bool IsLocationAtCapacity(int locationID);
+
     }
 }

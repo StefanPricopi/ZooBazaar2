@@ -21,21 +21,24 @@ namespace Logic.Entities
         private string locationName;
         private int capacity;
         private string status;
+        private int currentCapacity;
 
         public int LocationID { get => locationID; set => locationID = value; }
         public Area Area { get => area; set => area = value; }
         public string LocationName { get => locationName; set => locationName = value; }
         public int Capacity { get => capacity; set => capacity = value; }
         public string Status { get => status; set => status = value; }
+        public int CurrentCapacity { get => currentCapacity; set => currentCapacity = value; }
 
         public Location() { }
-        public Location(int locationID, Area area, string locationName, int capacity, string status)
+        public Location(int locationID, Area area, string locationName, int capacity, string status, int currentCapacity)
         {
             this.locationID = locationID;
             this.area = area;
             this.locationName = locationName;
             this.capacity = capacity;
             this.status = status;
+            this.currentCapacity = currentCapacity;
         }
 
         public Location(LocationDTO locationDTO)
@@ -50,6 +53,7 @@ namespace Logic.Entities
             this.locationName=locationDTO.LocationName;
             this.capacity = locationDTO.Capacity;
             this.status = locationDTO.Status;
+            this.currentCapacity = locationDTO.CurrentCapacity;
         }
 
         public LocationDTO LocationToLocationDTO() 
@@ -60,7 +64,8 @@ namespace Logic.Entities
                 AreaDTO = this.Area.AreaToAreaDTO(),
                 LocationName = this.LocationName,
                 Capacity = this.Capacity,
-                Status = this.Status
+                Status = this.Status,
+                CurrentCapacity = this.CurrentCapacity
             };
         }
 

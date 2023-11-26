@@ -24,6 +24,7 @@ namespace Animals
         private Dictionary<string, List<string>> genus;
         private Dictionary<string, List<string>> species;
 
+
         public AddAnimal(IAnimal animalRepository)
         {
             InitializeComponent();
@@ -36,11 +37,21 @@ namespace Animals
             InitializeComboBoxes();
         }
 
+        private void FillComboBox(ComboBox comboBox, string[] items)
+        {
+            comboBox.Items.AddRange(items);
+        }
+
         private void InitializeComboBoxes()
         {
             phylum = GetPhylumList();
-
             comboPhylum.Items.AddRange(phylum.ToArray());
+
+            FillComboBox(comboClassis, classis.SelectMany(kv => kv.Value).ToArray());
+            FillComboBox(comboOrdo, ordo.SelectMany(kv => kv.Value).ToArray());
+            FillComboBox(comboFamilia, familia.SelectMany(kv => kv.Value).ToArray());
+            FillComboBox(comboGenus, genus.SelectMany(kv => kv.Value).ToArray());
+            FillComboBox(comboSpecies, species.SelectMany(kv => kv.Value).ToArray());
         }
 
         private List<string> GetPhylumList()
@@ -181,23 +192,44 @@ namespace Animals
 
         private void comboPhylum_SelectedIndexChanged(object sender, EventArgs e)
         {
-            string selectedPhylum = comboPhylum.SelectedItem.ToString();
+            
             comboClassis.Items.Clear();
+            comboOrdo.Items.Clear();
+            comboFamilia.Items.Clear();
+            comboGenus.Items.Clear();
+            comboSpecies.Items.Clear();
 
-            if (classis.ContainsKey(selectedPhylum))
+            if (classis.TryGetValue(comboPhylum.Text, out var classisList))
             {
-                comboClassis.Items.AddRange(classis[selectedPhylum].ToArray());
+                comboClassis.Items.AddRange(classisList.ToArray());
+                comboClassis.SelectedItem = classisList.FirstOrDefault();
             }
         }
 
+
         private void comboClassis_SelectedIndexChanged(object sender, EventArgs e)
         {
-            string selectedClassis = comboClassis.SelectedItem.ToString();
             comboOrdo.Items.Clear();
-
-            if (ordo.ContainsKey(selectedClassis))
+            comboFamilia.Items.Clear();
+            comboGenus.Items.Clear();
+            comboSpecies.Items.Clear();
+            if (comboClassis.SelectedItem != null)
             {
-                comboOrdo.Items.AddRange(ordo[selectedClassis].ToArray());
+                string selectedClassis = comboClassis.SelectedItem.ToString();
+
+                foreach (var classisEntry in classis)
+                {
+                    if (classisEntry.Value.Contains(selectedClassis))
+                    {
+                        comboPhylum.SelectedItem = classisEntry.Key;
+                        break;
+                    }
+                }
+                if (ordo.TryGetValue(comboClassis.Text, out var ordoList))
+                {
+                    comboOrdo.Items.AddRange(ordoList.ToArray());
+                    comboOrdo.SelectedItem = ordoList.FirstOrDefault();
+                }
             }
         }
 
@@ -299,42 +331,188 @@ namespace Animals
 
         private void comboOrdo_SelectedIndexChanged(object sender, EventArgs e)
         {
-            string selectedOrdo = comboOrdo.SelectedItem.ToString();
             comboFamilia.Items.Clear();
+            comboGenus.Items.Clear();
+            comboSpecies.Items.Clear();
 
-            if (familia.ContainsKey(selectedOrdo))
+            if (comboOrdo.SelectedItem != null)
             {
-                comboFamilia.Items.AddRange(familia[selectedOrdo].ToArray());
+                string selectedOrdo = comboOrdo.SelectedItem.ToString();
+
+                foreach (var ordoEntry in ordo)
+                {
+                    if (ordoEntry.Value.Contains(selectedOrdo))
+                    {
+                        comboClassis.SelectedItem = ordoEntry.Key;
+
+
+                        foreach (var classisEntry in classis)
+                        {
+                            if (classisEntry.Value.Contains(comboClassis.Text))
+                            {
+                                comboPhylum.SelectedItem = classisEntry.Key;
+                                break;
+                            }
+                        }
+
+                        if (familia.TryGetValue(comboOrdo.Text, out var familiaList))
+                        {
+                            comboFamilia.Items.AddRange(familiaList.ToArray());
+                            comboFamilia.SelectedItem = familiaList.FirstOrDefault();
+                        }
+                        break;
+                    }
+                }
             }
         }
 
         private void comboFamilia_SelectedIndexChanged(object sender, EventArgs e)
         {
-            string selectedFamilia = comboFamilia.SelectedItem.ToString();
             comboGenus.Items.Clear();
+            comboSpecies.Items.Clear();
 
-            if (genus.ContainsKey(selectedFamilia))
+            if (comboFamilia.SelectedItem != null)
             {
-                comboGenus.Items.AddRange(genus[selectedFamilia].ToArray());
+                string selectedFamilia = comboFamilia.SelectedItem.ToString();
+
+                foreach (var familiaEntry in familia)
+                {
+                    if (familiaEntry.Value.Contains(selectedFamilia))
+                    {
+                        comboOrdo.SelectedItem = familiaEntry.Key;
+
+                        foreach (var ordoEntry in ordo)
+                        {
+                            if (ordoEntry.Value.Contains(comboOrdo.Text))
+                            {
+                                comboClassis.SelectedItem = ordoEntry.Key;
+
+                                foreach (var classisEntry in classis)
+                                {
+                                    if (classisEntry.Value.Contains(comboClassis.Text))
+                                    {
+                                        comboPhylum.SelectedItem = classisEntry.Key;
+                                        break;
+                                    }
+                                }
+
+                                if (genus.TryGetValue(comboFamilia.Text, out var genusList))
+                                {
+                                    comboGenus.Items.AddRange(genusList.ToArray());
+                                    comboGenus.SelectedItem = genusList.FirstOrDefault();
+                                }
+                                break;
+                            }
+                        }
+
+                        break;
+                    }
+                }
             }
         }
 
         private void comboGenus_SelectedIndexChanged(object sender, EventArgs e)
         {
-            string selectedGenus = comboGenus.SelectedItem.ToString();
             comboSpecies.Items.Clear();
 
-            if (species.ContainsKey(selectedGenus))
+            if (comboGenus.SelectedItem != null)
             {
-                comboSpecies.Items.AddRange(species[selectedGenus].ToArray());
+                string selectedGenus = comboGenus.SelectedItem.ToString();
+
+                foreach (var genusEntry in genus)
+                {
+                    if (genusEntry.Value.Contains(comboGenus.Text))
+                    {
+                        comboFamilia.SelectedItem = genusEntry.Key;
+
+                        foreach (var familiaEntry in familia)
+                        {
+                            if (familiaEntry.Value.Contains(comboFamilia.Text))
+                            {
+                                comboOrdo.SelectedItem = familiaEntry.Key;
+
+                                foreach (var ordoEntry in ordo)
+                                {
+                                    if (ordoEntry.Value.Contains(comboOrdo.Text))
+                                    {
+                                        comboClassis.SelectedItem = ordoEntry.Key;
+
+                                        foreach (var classisEntry in classis)
+                                        {
+                                            if (classisEntry.Value.Contains(comboClassis.Text))
+                                            {
+                                                comboPhylum.SelectedItem = classisEntry.Key;
+                                                break;
+                                            }
+                                        }
+
+                                        if (species.TryGetValue(comboGenus.Text, out var speciesList))
+                                        {
+                                            comboSpecies.Items.AddRange(speciesList.ToArray());
+                                            comboSpecies.SelectedItem = speciesList.FirstOrDefault();
+                                        }
+                                        break;
+                                    }
+                                }
+                                break;
+                            }
+                        }
+                        break;
+                    }
+                }
             }
         }
 
         private void comboSpecies_SelectedIndexChanged(object sender, EventArgs e)
         {
-            foreach (var item in species)
+            if (comboSpecies.SelectedItem != null)
             {
-                comboSpecies.Items.Add(item.Key);
+                string selectedSpecies = comboSpecies.SelectedItem.ToString();
+
+                foreach (var speciesEntry in species)
+                {
+                    if (speciesEntry.Value.Contains(selectedSpecies))
+                    {
+                        comboGenus.SelectedItem = speciesEntry.Key;
+
+                        foreach (var genusEntry in genus)
+                        {
+                            if (genusEntry.Value.Contains(comboGenus.Text))
+                            {
+                                comboFamilia.SelectedItem = genusEntry.Key;
+
+                                foreach (var familiaEntry in familia)
+                                {
+                                    if (familiaEntry.Value.Contains(comboFamilia.Text))
+                                    {
+                                        comboOrdo.SelectedItem = familiaEntry.Key;
+
+                                        foreach (var ordoEntry in ordo)
+                                        {
+                                            if (ordoEntry.Value.Contains(comboOrdo.Text))
+                                            {
+                                                comboClassis.SelectedItem = ordoEntry.Key;
+
+                                                foreach (var classisEntry in classis)
+                                                {
+                                                    if (classisEntry.Value.Contains(comboClassis.Text))
+                                                    {
+                                                        comboPhylum.SelectedItem = classisEntry.Key;
+                                                        break;
+                                                    }
+                                                }
+                                                break;
+                                            }
+                                        }
+                                        break;
+                                    }
+                                }
+                                break;
+                            }
+                        }
+                        break;
+                    }
+                }
             }
         }
     }
