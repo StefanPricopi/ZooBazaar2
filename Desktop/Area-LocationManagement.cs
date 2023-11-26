@@ -256,5 +256,35 @@ namespace Desktop
         {
             RefreshLocation();
         }
+
+        private void cbArea_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void tbCapacity_TextChanged(object sender, EventArgs e)
+        {
+        }
+
+        private void label7_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void Area_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void label3_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void tbLocationName_TextChanged(object sender, EventArgs e)
+        {
+        }
+
+        private void Area_LocationManagement_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

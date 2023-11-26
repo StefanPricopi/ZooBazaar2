@@ -1,6 +1,7 @@
 ﻿using Animals;
 using DataAccess;
 using Employees;
+using Logic.DTO;
 using Logic.Entities;
 using Logic.Interfaces;
 using System;
@@ -18,7 +19,7 @@ namespace Desktop
     public partial class MainForm : Form
     {
         private string[] EmplNavFeatures = { "Employee Creation", "Scheduling", "Update Existing Employees" };
-        private string[] AnimNavFeatures = { "Animal Management" };
+        private string[] AnimNavFeatures = { "Adding Animal", "Update Existing Animal", "View Details" };
         private string[] AreaNavFeatures = { "Area Management" };
         IAnimal animalRepository = new AnimalRepository();
         ILocation locationRepository = new LocationRepository();
@@ -144,6 +145,7 @@ namespace Desktop
 
         private void ChangeCanvas(object sender, EventArgs e)
         {
+            List<AnimalDTO> animals = animalRepository.GetAllAnimals();
             Button btn = (Button)sender;
 
 
@@ -162,9 +164,17 @@ namespace Desktop
                     ClearCanvas();
                     SetCanvas(new EditEmployee());
                     break;
-                case "Animal Management":
+                case "View Details":
                     ClearCanvas();
-                    SetCanvas(new CaretakerForm(animalRepository, locationRepository));
+                    SetCanvas(new ViewAnimalDetails(animalRepository, locationRepository));
+                    break;
+                case "Adding Animal":
+                    ClearCanvas();
+                    SetCanvas(new AddAnimal(animalRepository));
+                    break;
+                case "Update Existing Animal":
+                    ClearCanvas();
+                    SetCanvas(new UpdateAnimal(animalRepository, animals));
                     break;
                 case "Area Management":
                     ClearCanvas();

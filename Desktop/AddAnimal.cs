@@ -192,7 +192,7 @@ namespace Animals
 
         private void comboPhylum_SelectedIndexChanged(object sender, EventArgs e)
         {
-            
+
             comboClassis.Items.Clear();
             comboOrdo.Items.Clear();
             comboFamilia.Items.Clear();

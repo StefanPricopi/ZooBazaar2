@@ -53,6 +53,7 @@
             pictureBox1 = new PictureBox();
             pictureBox2 = new PictureBox();
             btnRefresh = new Button();
+            panel1 = new Panel();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             SuspendLayout();
@@ -62,9 +63,12 @@
             btnAddArea.BackgroundImage = Properties.Resources.Screenshot_12;
             btnAddArea.FlatAppearance.BorderSize = 0;
             btnAddArea.FlatStyle = FlatStyle.Flat;
-            btnAddArea.Location = new Point(12, 415);
+            btnAddArea.Font = new Font("Century", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            btnAddArea.ForeColor = Color.Cyan;
+            btnAddArea.Location = new Point(107, 643);
+            btnAddArea.Margin = new Padding(4);
             btnAddArea.Name = "btnAddArea";
-            btnAddArea.Size = new Size(149, 23);
+            btnAddArea.Size = new Size(270, 45);
             btnAddArea.TabIndex = 0;
             btnAddArea.Text = "Add Area";
             btnAddArea.UseVisualStyleBackColor = true;
@@ -73,9 +77,11 @@
             // rbLocationActive
             // 
             rbLocationActive.AutoSize = true;
-            rbLocationActive.Location = new Point(411, 359);
+            rbLocationActive.Font = new Font("Century Gothic", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
+            rbLocationActive.Location = new Point(770, 568);
+            rbLocationActive.Margin = new Padding(4);
             rbLocationActive.Name = "rbLocationActive";
-            rbLocationActive.Size = new Size(58, 19);
+            rbLocationActive.Size = new Size(90, 26);
             rbLocationActive.TabIndex = 1;
             rbLocationActive.TabStop = true;
             rbLocationActive.Text = "Active";
@@ -83,34 +89,45 @@
             // 
             // cbArea
             // 
+            cbArea.Font = new Font("Century Gothic", 12F, FontStyle.Regular, GraphicsUnit.Point);
             cbArea.FormattingEnabled = true;
-            cbArea.Location = new Point(411, 330);
+            cbArea.Location = new Point(748, 522);
+            cbArea.Margin = new Padding(4);
             cbArea.Name = "cbArea";
-            cbArea.Size = new Size(185, 23);
+            cbArea.Size = new Size(263, 29);
             cbArea.TabIndex = 3;
+            cbArea.SelectedIndexChanged += cbArea_SelectedIndexChanged;
             // 
             // Area
             // 
             Area.AutoSize = true;
-            Area.Location = new Point(411, 312);
+            Area.Font = new Font("Century Gothic", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
+            Area.Location = new Point(748, 496);
+            Area.Margin = new Padding(4, 0, 4, 0);
             Area.Name = "Area";
-            Area.Size = new Size(31, 15);
+            Area.Size = new Size(56, 22);
             Area.TabIndex = 4;
             Area.Text = "Area";
+            Area.Click += Area_Click;
             // 
             // tbAreaName
             // 
-            tbAreaName.Location = new Point(12, 279);
+            tbAreaName.Font = new Font("Century Gothic", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            tbAreaName.Location = new Point(13, 518);
+            tbAreaName.Margin = new Padding(4);
             tbAreaName.Name = "tbAreaName";
-            tbAreaName.Size = new Size(377, 23);
+            tbAreaName.Size = new Size(537, 27);
             tbAreaName.TabIndex = 5;
             // 
             // tbLocationName
             // 
-            tbLocationName.Location = new Point(411, 279);
+            tbLocationName.Font = new Font("Century Gothic", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            tbLocationName.Location = new Point(748, 466);
+            tbLocationName.Margin = new Padding(4);
             tbLocationName.Name = "tbLocationName";
-            tbLocationName.Size = new Size(377, 23);
+            tbLocationName.Size = new Size(263, 27);
             tbLocationName.TabIndex = 6;
+            tbLocationName.TextChanged += tbLocationName_TextChanged;
             // 
             // btnEditArea
             // 
@@ -118,9 +135,12 @@
             btnEditArea.BackgroundImage = Properties.Resources.Screenshot_12;
             btnEditArea.FlatAppearance.BorderSize = 0;
             btnEditArea.FlatStyle = FlatStyle.Flat;
-            btnEditArea.Location = new Point(215, 415);
+            btnEditArea.Font = new Font("Century Gothic", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            btnEditArea.ForeColor = Color.Cyan;
+            btnEditArea.Location = new Point(442, 643);
+            btnEditArea.Margin = new Padding(4);
             btnEditArea.Name = "btnEditArea";
-            btnEditArea.Size = new Size(149, 23);
+            btnEditArea.Size = new Size(270, 45);
             btnEditArea.TabIndex = 7;
             btnEditArea.Text = "Edit Area";
             btnEditArea.UseVisualStyleBackColor = false;
@@ -131,9 +151,12 @@
             btnAddLocation.BackgroundImage = Properties.Resources.Screenshot_12;
             btnAddLocation.FlatAppearance.BorderSize = 0;
             btnAddLocation.FlatStyle = FlatStyle.Flat;
-            btnAddLocation.Location = new Point(411, 415);
+            btnAddLocation.Font = new Font("Century Gothic", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            btnAddLocation.ForeColor = Color.Cyan;
+            btnAddLocation.Location = new Point(770, 643);
+            btnAddLocation.Margin = new Padding(4);
             btnAddLocation.Name = "btnAddLocation";
-            btnAddLocation.Size = new Size(149, 23);
+            btnAddLocation.Size = new Size(270, 45);
             btnAddLocation.TabIndex = 8;
             btnAddLocation.Text = "Add Location";
             btnAddLocation.UseVisualStyleBackColor = true;
@@ -144,9 +167,12 @@
             btnEditLocation.BackgroundImage = Properties.Resources.Screenshot_12;
             btnEditLocation.FlatAppearance.BorderSize = 0;
             btnEditLocation.FlatStyle = FlatStyle.Flat;
-            btnEditLocation.Location = new Point(612, 415);
+            btnEditLocation.Font = new Font("Century Gothic", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            btnEditLocation.ForeColor = Color.Cyan;
+            btnEditLocation.Location = new Point(1114, 644);
+            btnEditLocation.Margin = new Padding(4);
             btnEditLocation.Name = "btnEditLocation";
-            btnEditLocation.Size = new Size(149, 23);
+            btnEditLocation.Size = new Size(270, 45);
             btnEditLocation.TabIndex = 9;
             btnEditLocation.Text = "Edit Location";
             btnEditLocation.UseVisualStyleBackColor = true;
@@ -155,9 +181,11 @@
             // rbLocationInactive
             // 
             rbLocationInactive.AutoSize = true;
-            rbLocationInactive.Location = new Point(475, 359);
+            rbLocationInactive.Font = new Font("Century Gothic", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
+            rbLocationInactive.Location = new Point(959, 568);
+            rbLocationInactive.Margin = new Padding(4);
             rbLocationInactive.Name = "rbLocationInactive";
-            rbLocationInactive.Size = new Size(66, 19);
+            rbLocationInactive.Size = new Size(105, 26);
             rbLocationInactive.TabIndex = 10;
             rbLocationInactive.TabStop = true;
             rbLocationInactive.Text = "Inactive";
@@ -166,9 +194,11 @@
             // rbAreaInactive
             // 
             rbAreaInactive.AutoSize = true;
-            rbAreaInactive.Location = new Point(76, 359);
+            rbAreaInactive.Font = new Font("Century Gothic", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
+            rbAreaInactive.Location = new Point(197, 567);
+            rbAreaInactive.Margin = new Padding(4);
             rbAreaInactive.Name = "rbAreaInactive";
-            rbAreaInactive.Size = new Size(66, 19);
+            rbAreaInactive.Size = new Size(105, 26);
             rbAreaInactive.TabIndex = 12;
             rbAreaInactive.TabStop = true;
             rbAreaInactive.Text = "Inactive";
@@ -179,9 +209,11 @@
             rbAreaActive.AutoSize = true;
             rbAreaActive.BackColor = Color.Transparent;
             rbAreaActive.FlatStyle = FlatStyle.Flat;
-            rbAreaActive.Location = new Point(12, 359);
+            rbAreaActive.Font = new Font("Century Gothic", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
+            rbAreaActive.Location = new Point(3, 567);
+            rbAreaActive.Margin = new Padding(4);
             rbAreaActive.Name = "rbAreaActive";
-            rbAreaActive.Size = new Size(57, 19);
+            rbAreaActive.Size = new Size(89, 26);
             rbAreaActive.TabIndex = 11;
             rbAreaActive.TabStop = true;
             rbAreaActive.Text = "Active";
@@ -190,9 +222,11 @@
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(12, 261);
+            label2.Font = new Font("Century Gothic", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
+            label2.Location = new Point(13, 492);
+            label2.Margin = new Padding(4, 0, 4, 0);
             label2.Name = "label2";
-            label2.Size = new Size(39, 15);
+            label2.Size = new Size(66, 22);
             label2.TabIndex = 13;
             label2.Text = "Name";
             label2.Click += label2_Click;
@@ -200,126 +234,160 @@
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(411, 261);
+            label3.Font = new Font("Century Gothic", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
+            label3.Location = new Point(748, 440);
+            label3.Margin = new Padding(4, 0, 4, 0);
             label3.Name = "label3";
-            label3.Size = new Size(39, 15);
+            label3.Size = new Size(66, 22);
             label3.TabIndex = 14;
             label3.Text = "Name";
+            label3.Click += label3_Click;
             // 
             // lbArea
             // 
             lbArea.FormattingEnabled = true;
-            lbArea.ItemHeight = 15;
-            lbArea.Location = new Point(12, 77);
+            lbArea.ItemHeight = 21;
+            lbArea.Location = new Point(17, 108);
+            lbArea.Margin = new Padding(4);
             lbArea.Name = "lbArea";
-            lbArea.Size = new Size(377, 184);
+            lbArea.Size = new Size(712, 298);
             lbArea.TabIndex = 15;
             lbArea.SelectedIndexChanged += lbArea_SelectedIndexChanged;
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            label1.Font = new Font("Century Gothic", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
+            label1.ForeColor = Color.Cyan;
             label1.Image = Properties.Resources.Screenshot_14;
-            label1.Location = new Point(12, 54);
+            label1.Location = new Point(17, 76);
+            label1.Margin = new Padding(4, 0, 4, 0);
             label1.Name = "label1";
-            label1.Size = new Size(41, 17);
+            label1.Size = new Size(63, 23);
             label1.TabIndex = 16;
             label1.Text = "Areas";
             // 
             // label4
             // 
             label4.AutoSize = true;
-            label4.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            label4.Font = new Font("Century Gothic", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
+            label4.ForeColor = SystemColors.ActiveCaptionText;
             label4.Image = Properties.Resources.Screenshot_12;
-            label4.Location = new Point(411, 54);
+            label4.Location = new Point(746, 76);
+            label4.Margin = new Padding(4, 0, 4, 0);
             label4.Name = "label4";
-            label4.Size = new Size(63, 17);
+            label4.Size = new Size(97, 23);
             label4.TabIndex = 18;
             label4.Text = "Locations";
             // 
             // lbLocations
             // 
             lbLocations.FormattingEnabled = true;
-            lbLocations.ItemHeight = 15;
-            lbLocations.Location = new Point(411, 74);
+            lbLocations.ItemHeight = 21;
+            lbLocations.Location = new Point(746, 108);
+            lbLocations.Margin = new Padding(4);
             lbLocations.Name = "lbLocations";
-            lbLocations.Size = new Size(377, 184);
+            lbLocations.Size = new Size(737, 298);
             lbLocations.TabIndex = 17;
             lbLocations.SelectedIndexChanged += lbLocations_SelectedIndexChanged;
             // 
             // label5
             // 
             label5.AutoSize = true;
-            label5.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
+            label5.Font = new Font("Century Gothic", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
+            label5.ForeColor = Color.Cyan;
             label5.Image = Properties.Resources.Screenshot_13;
-            label5.Location = new Point(99, 22);
+            label5.Location = new Point(17, 31);
+            label5.Margin = new Padding(4, 0, 4, 0);
             label5.Name = "label5";
-            label5.Size = new Size(138, 25);
+            label5.Size = new Size(147, 23);
             label5.TabIndex = 19;
             label5.Text = "Manage Areas";
             // 
             // label6
             // 
             label6.AutoSize = true;
-            label6.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
+            label6.Font = new Font("Century Gothic", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
+            label6.ForeColor = SystemColors.ActiveCaptionText;
             label6.Image = Properties.Resources.Screenshot_12;
-            label6.Location = new Point(524, 22);
+            label6.Location = new Point(746, 31);
+            label6.Margin = new Padding(4, 0, 4, 0);
             label6.Name = "label6";
-            label6.Size = new Size(174, 25);
+            label6.Size = new Size(181, 23);
             label6.TabIndex = 20;
             label6.Text = "Manage Locations";
             // 
             // tbCapacity
             // 
-            tbCapacity.Location = new Point(602, 330);
+            tbCapacity.Font = new Font("Century Gothic", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            tbCapacity.Location = new Point(1021, 466);
+            tbCapacity.Margin = new Padding(4);
             tbCapacity.Name = "tbCapacity";
-            tbCapacity.Size = new Size(186, 23);
+            tbCapacity.Size = new Size(172, 27);
             tbCapacity.TabIndex = 21;
+            tbCapacity.TextChanged += tbCapacity_TextChanged;
             // 
             // label7
             // 
             label7.AutoSize = true;
-            label7.Location = new Point(602, 312);
+            label7.Font = new Font("Century Gothic", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
+            label7.Location = new Point(1021, 431);
+            label7.Margin = new Padding(4, 0, 4, 0);
             label7.Name = "label7";
-            label7.Size = new Size(141, 15);
+            label7.Size = new Size(242, 22);
             label7.TabIndex = 22;
             label7.Text = "Max amount of habitants";
+            label7.Click += label7_Click;
             // 
             // pictureBox1
             // 
             pictureBox1.Image = Properties.Resources.Screenshot_12;
-            pictureBox1.Location = new Point(-6, -13);
+            pictureBox1.Location = new Point(-9, -18);
+            pictureBox1.Margin = new Padding(4);
             pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(822, 84);
+            pictureBox1.Size = new Size(2147, 118);
+            pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox1.TabIndex = 23;
             pictureBox1.TabStop = false;
             // 
             // pictureBox2
             // 
             pictureBox2.Image = Properties.Resources.Screenshot_12;
-            pictureBox2.Location = new Point(-6, 384);
+            pictureBox2.Location = new Point(-9, 601);
+            pictureBox2.Margin = new Padding(4);
             pictureBox2.Name = "pictureBox2";
-            pictureBox2.Size = new Size(822, 84);
+            pictureBox2.Size = new Size(2147, 118);
+            pictureBox2.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox2.TabIndex = 24;
             pictureBox2.TabStop = false;
             pictureBox2.Click += pictureBox2_Click;
             // 
             // btnRefresh
             // 
-            btnRefresh.Location = new Point(713, 264);
+            btnRefresh.Location = new Point(605, 513);
+            btnRefresh.Margin = new Padding(4);
             btnRefresh.Name = "btnRefresh";
-            btnRefresh.Size = new Size(75, 23);
+            btnRefresh.Size = new Size(107, 32);
             btnRefresh.TabIndex = 25;
             btnRefresh.Text = "Refresh";
             btnRefresh.UseVisualStyleBackColor = true;
             btnRefresh.Click += btnRefresh_Click;
             // 
+            // panel1
+            // 
+            panel1.BackColor = Color.Black;
+            panel1.Location = new Point(737, 108);
+            panel1.Margin = new Padding(4, 3, 4, 3);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(1, 490);
+            panel1.TabIndex = 78;
+            // 
             // Area_LocationManagement
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(10F, 21F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(1496, 736);
+            Controls.Add(panel1);
             Controls.Add(btnRefresh);
             Controls.Add(rbAreaActive);
             Controls.Add(rbAreaInactive);
@@ -345,8 +413,11 @@
             Controls.Add(tbAreaName);
             Controls.Add(Area);
             Controls.Add(cbArea);
+            Font = new Font("Century Gothic", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            Margin = new Padding(4);
             Name = "Area_LocationManagement";
             Text = "Area_LocationManagement";
+            Load += Area_LocationManagement_Load;
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
             ResumeLayout(false);
@@ -380,5 +451,6 @@
         private PictureBox pictureBox1;
         private PictureBox pictureBox2;
         private Button btnRefresh;
+        private Panel panel1;
     }
 }
