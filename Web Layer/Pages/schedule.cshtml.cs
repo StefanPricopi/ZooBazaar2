@@ -59,7 +59,7 @@ namespace Web_Layer.Pages
 
                 // Create morning shift card
                 result.Append($"<div class='card'><div class='card-body'><h5 class='card-title'>Morning Shift: {DaysOfWeek[i]}</h5>");
-                result.Append($"<p class='card-text'>{}</p></div></div>");
+                result.Append($"<p class='card-text'>{currentDay.ToShortDateString()}</p></div></div>");
 
                 // Create afternoon shift card
                 result.Append($"<div class='card'><div class='card-body'><h5 class='card-title'>Afternoon Shift: {DaysOfWeek[i]}</h5>");
