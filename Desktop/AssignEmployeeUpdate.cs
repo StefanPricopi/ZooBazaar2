@@ -10,21 +10,11 @@ using System.Windows.Forms;
 
 namespace Desktop
 {
-    public partial class EmployeeScheduling : Form
+    public partial class AssignEmployeeUpdate : Form
     {
-        public EmployeeScheduling()
+        public AssignEmployeeUpdate()
         {
             InitializeComponent();
-        }
-
-        private void panel1_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void panel19_Paint(object sender, PaintEventArgs e)
-        {
-
         }
     }
 }

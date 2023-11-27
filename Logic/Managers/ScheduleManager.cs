@@ -2,6 +2,7 @@
 using Logic.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,9 +21,21 @@ namespace Logic.Managers
         {
             return schedule.GetEmployeeList();
         }
+        public bool DeleteShift(int id)
+        {
+           return schedule.DeleteShift(id);
+        }
         public void CreateShift(int employeeID, DateTime Date, string Shift)
         {
             schedule.CreateShift(employeeID, Date, Shift);
+        }
+        public bool UpdateShift(Schedule selected)
+        {
+            return schedule.UpdateShift(selected);
+        }
+        public DataTable LoadSchedules(DateTime time)
+        {
+            return schedule.LoadSchedules(time);
         }
         public List<Schedule> PopulateSchedule(DateTime selectedDate)
         {

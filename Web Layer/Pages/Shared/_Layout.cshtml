@@ -46,8 +46,13 @@
                                 <a class="dropdown-item" href="/map"><b>Map</b></a>
                                 <a class="dropdown-item" href="/ticket_info"><b>Admission prices</b></a>
                                 <a class="dropdown-item" href="/opening hours"><b>Opening Hours</b></a>
-                                <a class="dropdown-item" href="/schedule"><b>Schedule</b></a>
-                                <a class="dropdown-item" href="/Profile"><b>Profile</b></a>
+                                @if (User.IsInRole("Caretaker"))
+                                {
+                                    <a class="dropdown-item" href="/schedule"><b>Schedule</b></a>
+                                    <a class="dropdown-item" href="/Profile"><b>Profile</b></a>
+                                }
+                                
+                           
                                     
                                 </div>
                             </div>

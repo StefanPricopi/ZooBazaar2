@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -59,6 +60,60 @@ namespace DataAccess
                 }
             }
         }
+        public bool UpdateShift(Schedule schedule)
+        {
+            try
+            {
+                using (SqlConnection connection = InitializeConection())
+                {
+                    connection.Open();
+
+                    string updateQuery = "UPDATE Schedules SET EmployeeID = @EmployeeID, Date = @Date, Shift = @Shift WHERE ScheduleID = @ScheduleID";
+
+                    using (SqlCommand command = new SqlCommand(updateQuery, connection))
+                    {
+                        command.Parameters.AddWithValue("@EmployeeID", schedule.EmployeeId);
+                        command.Parameters.AddWithValue("@Date", schedule.Date);
+                        command.Parameters.AddWithValue("@Shift", schedule.Shift);
+                        command.Parameters.AddWithValue("@ScheduleID", schedule.ScheduleId);
+
+
+                        int rowsAffected = command.ExecuteNonQuery();
+
+                        return rowsAffected > 0; // Return true if at least one row was affected by the update.
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
+        public DataTable LoadSchedules(DateTime selectedDate)
+        {
+            using (SqlConnection connection = InitializeConection())
+            {
+                connection.Open();
+
+                string selectQuery1 = "SELECT ScheduleID, EmployeeID, Date, Shift" +
+                                        " FROM Schedules WHERE " +
+                                        "Date BETWEEN @StartDate AND @EndDate";
+
+                using (SqlCommand command1 = new SqlCommand(selectQuery1, connection))
+                {
+                    command1.Parameters.AddWithValue("@StartDate", selectedDate.Date);
+                    command1.Parameters.AddWithValue("@EndDate", selectedDate.Date);
+                    using (SqlDataAdapter adapter1 = new SqlDataAdapter(command1))
+                    {
+                        DataTable employeeDataTable1 = new DataTable();
+                        adapter1.Fill(employeeDataTable1);
+
+                        
+                         return employeeDataTable1;
+                    }       
+                }
+            }
+        }
 
         public List<Schedule> PopulateSchedule(DateTime selectedDate)
         {
@@ -108,11 +163,11 @@ namespace DataAccess
                             employees.Add(employee);
 
                             // Check the shift type and use the interface
-                            if (scheduleEntry.Shift == "MorningShift" && ShiftPanelManager.MorningShiftPanels.ContainsKey(scheduleEntry.Date))
+                            if (scheduleEntry.Shift == "MorningShift"  && ShiftPanelManager.MorningShiftPanels.ContainsKey(scheduleEntry.Date))
                             {
                                 ShiftPanelManager.MorningShiftPanels[scheduleEntry.Date].AddShiftLabel(employee.FirstName);
                             }
-                            else if (scheduleEntry.Shift == "AfternoonShift" && ShiftPanelManager.AfternoonShiftPanels.ContainsKey(scheduleEntry.Date))
+                            else if (scheduleEntry.Shift == "AfternoonShift"  && ShiftPanelManager.AfternoonShiftPanels.ContainsKey(scheduleEntry.Date))
                             {
                                 ShiftPanelManager.AfternoonShiftPanels[scheduleEntry.Date].AddShiftLabel(employee.FirstName);
                             }
@@ -171,6 +226,31 @@ namespace DataAccess
             }
         }
 
+        public bool DeleteShift(int Id)
+        {
+            using (SqlConnection connection = InitializeConection())
+            {
+                connection.Open();
+
+                string deleteQuery = "DELETE FROM Schedules WHERE ScheduleID = @UniqueIdentifier";
+
+                using (SqlCommand command = new SqlCommand(deleteQuery, connection))
+                {
+                    command.Parameters.AddWithValue("@UniqueIdentifier", Id);
+
+                    int rowsAffected = command.ExecuteNonQuery();
+
+                    if (rowsAffected > 0)
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+            }
+        }
     }
 
 }

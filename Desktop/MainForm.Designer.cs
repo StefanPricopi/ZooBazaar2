@@ -90,7 +90,7 @@
             pictureBox1.Image = Properties.Resources.Screenshot_12;
             pictureBox1.Location = new Point(337, -3);
             pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(1596, 229);
+            pictureBox1.Size = new Size(1649, 229);
             pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox1.TabIndex = 7;
             pictureBox1.TabStop = false;
@@ -121,7 +121,7 @@
             pictureBox2.Image = Properties.Resources.Screenshot_14;
             pictureBox2.Location = new Point(0, -3);
             pictureBox2.Name = "pictureBox2";
-            pictureBox2.Size = new Size(340, 1061);
+            pictureBox2.Size = new Size(340, 1106);
             pictureBox2.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox2.TabIndex = 5;
             pictureBox2.TabStop = false;

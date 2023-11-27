@@ -15,11 +15,41 @@ namespace Desktop
         private const int labelHeight = 50;
         // this is the margin within panels
         private int initialPanelHeight;
-        public MorningShiftPanel(DateTime date)
+        private DateTime dates;
+        FlowLayoutPanel flowLayoutPanel1;
+        public MorningShiftPanel(DateTime date, FlowLayoutPanel flow)
         {
             InitializeComponent();
             InitializePanel(date, "Morning Shift");
+            dates = date;
+            this.Click += EveningShiftPanel_Click;
+            AttachClickEventToChildren(this);
+            flowLayoutPanel1 = flow;
 
+        }
+       
+        private void EveningShiftPanel_Click(object sender, EventArgs e)
+        {
+            DateTime currentTime = DateTime.Now;
+            if (dates <= currentTime.AddDays(-1))
+            {
+
+            }
+            else
+            {
+                AssignEmployee addEmployeeForm = new AssignEmployee(dates, "MorningShift", flowLayoutPanel1);
+                addEmployeeForm.ShowDialog();
+            }
+
+        }
+        private void AttachClickEventToChildren(Control control)
+        {
+            
+            foreach (Control childControl in control.Controls)
+            {
+                childControl.Click += EveningShiftPanel_Click;
+                AttachClickEventToChildren(childControl); 
+            }
         }
         //method that the button which assigns employee to shift calls, to create the label for the employee
         public void AddShiftLabel(string employeeName)
@@ -65,11 +95,7 @@ namespace Desktop
             }
             else
             {
-                label.Click += (sender, e) =>
-                {
-                    AssignEmployee addEmployeeForm = new AssignEmployee(date, "MorningShift");
-                    addEmployeeForm.Show();
-                };
+                
             }
 
 

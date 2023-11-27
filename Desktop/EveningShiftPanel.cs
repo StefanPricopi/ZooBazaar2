@@ -9,10 +9,39 @@ namespace Desktop
         // for comments see morningShiftPanel code is 99% the same
         private const int labelHeight = 50;
         private int initialPanelHeight;
-        public EveningShiftPanel(DateTime date)
+        private DateTime dates;
+        FlowLayoutPanel flowLayoutPanel;
+        public EveningShiftPanel(DateTime date, FlowLayoutPanel flow)
         {
             InitializeComponent();
+            dates = date;
             InitializePanel(date, "Evening Shift");
+            this.Click += EveningShiftPanel_Click;
+            AttachClickEventToChildren(this);
+            flowLayoutPanel = flow;
+        }
+        private void EveningShiftPanel_Click(object sender, EventArgs e)
+        {
+            DateTime currentTime = DateTime.Now;
+            if (dates <= currentTime.AddDays(-1))
+            {
+
+            }
+            else
+            {
+                AssignEmployee addEmployeeForm = new AssignEmployee(dates, "EveningShift", flowLayoutPanel);
+                addEmployeeForm.ShowDialog();
+            }
+            
+        }
+        private void AttachClickEventToChildren(Control control)
+        {
+            // Recursively attach the click event handler to all child controls
+            foreach (Control childControl in control.Controls)
+            {
+                childControl.Click += EveningShiftPanel_Click;
+                AttachClickEventToChildren(childControl); // Recursively attach to children of children
+            }
         }
         public void AddShiftLabel(string employeeName)
         {
@@ -51,11 +80,7 @@ namespace Desktop
             }
             else
             {
-                label.Click += (sender, e) =>
-            {
-                AssignEmployee addEmployeeForm = new AssignEmployee(date, "EveningShift");
-                addEmployeeForm.ShowDialog();
-            };
+           
             }
 
             scrollablePanel.Controls.Add(label);

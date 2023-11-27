@@ -50,8 +50,9 @@ namespace Web_Layer.Pages
                     {
                         new Claim(ClaimTypes.Name, "user"),
                         new Claim(ClaimTypes.Email, "admin@website.com"),
-                        new Claim("EmployeeId",userModel.UserID.ToString()),
-                        new Claim("Employee", "Caretaker")
+                        new Claim("EmployeeId",userModel.EmployeeID.ToString()),
+                        new Claim("Employee", "Caretaker"),
+                        new Claim(ClaimTypes.Role, "Caretaker")
                     };
                     var identity = new ClaimsIdentity(claims, "LoginCookieAuth");
                     ClaimsPrincipal claimsPrincipal = new ClaimsPrincipal(identity);

@@ -99,70 +99,70 @@
             // lbSunday
             // 
             lbSunday.AutoSize = true;
-            lbSunday.Font = new Font("Century Gothic", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
-            lbSunday.Location = new Point(109, 60);
+            lbSunday.Font = new Font("Century Gothic", 20.25F, FontStyle.Regular, GraphicsUnit.Point);
+            lbSunday.Location = new Point(125, 70);
             lbSunday.Name = "lbSunday";
-            lbSunday.Size = new Size(80, 22);
+            lbSunday.Size = new Size(112, 33);
             lbSunday.TabIndex = 25;
             lbSunday.Text = "Sunday";
             // 
             // lbMonday
             // 
             lbMonday.AutoSize = true;
-            lbMonday.Font = new Font("Century Gothic", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
-            lbMonday.Location = new Point(214, 60);
+            lbMonday.Font = new Font("Century Gothic", 20.25F, FontStyle.Regular, GraphicsUnit.Point);
+            lbMonday.Location = new Point(313, 70);
             lbMonday.Name = "lbMonday";
-            lbMonday.Size = new Size(88, 22);
+            lbMonday.Size = new Size(126, 33);
             lbMonday.TabIndex = 26;
             lbMonday.Text = "Monday";
             // 
             // lbTuesday
             // 
             lbTuesday.AutoSize = true;
-            lbTuesday.Font = new Font("Century Gothic", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
-            lbTuesday.Location = new Point(320, 60);
+            lbTuesday.Font = new Font("Century Gothic", 20.25F, FontStyle.Regular, GraphicsUnit.Point);
+            lbTuesday.Location = new Point(514, 70);
             lbTuesday.Name = "lbTuesday";
-            lbTuesday.Size = new Size(86, 22);
+            lbTuesday.Size = new Size(122, 33);
             lbTuesday.TabIndex = 27;
             lbTuesday.Text = "Tuesday";
             // 
             // lbWednesday
             // 
             lbWednesday.AutoSize = true;
-            lbWednesday.Font = new Font("Century Gothic", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
-            lbWednesday.Location = new Point(426, 60);
+            lbWednesday.Font = new Font("Century Gothic", 20.25F, FontStyle.Regular, GraphicsUnit.Point);
+            lbWednesday.Location = new Point(711, 70);
             lbWednesday.Name = "lbWednesday";
-            lbWednesday.Size = new Size(120, 22);
+            lbWednesday.Size = new Size(173, 33);
             lbWednesday.TabIndex = 28;
             lbWednesday.Text = "Wednesday";
             // 
             // tbThursday
             // 
             tbThursday.AutoSize = true;
-            tbThursday.Font = new Font("Century Gothic", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
-            tbThursday.Location = new Point(581, 60);
+            tbThursday.Font = new Font("Century Gothic", 20.25F, FontStyle.Regular, GraphicsUnit.Point);
+            tbThursday.Location = new Point(923, 70);
             tbThursday.Name = "tbThursday";
-            tbThursday.Size = new Size(92, 22);
+            tbThursday.Size = new Size(128, 33);
             tbThursday.TabIndex = 29;
             tbThursday.Text = "Thursday";
             // 
             // lbFriday
             // 
             lbFriday.AutoSize = true;
-            lbFriday.Font = new Font("Century Gothic", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
-            lbFriday.Location = new Point(702, 60);
+            lbFriday.Font = new Font("Century Gothic", 20.25F, FontStyle.Regular, GraphicsUnit.Point);
+            lbFriday.Location = new Point(1110, 70);
             lbFriday.Name = "lbFriday";
-            lbFriday.Size = new Size(65, 22);
+            lbFriday.Size = new Size(94, 33);
             lbFriday.TabIndex = 30;
             lbFriday.Text = "Friday";
             // 
             // lbSaturday
             // 
             lbSaturday.AutoSize = true;
-            lbSaturday.Font = new Font("Century Gothic", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
-            lbSaturday.Location = new Point(791, 60);
+            lbSaturday.Font = new Font("Century Gothic", 20.25F, FontStyle.Regular, GraphicsUnit.Point);
+            lbSaturday.Location = new Point(1313, 70);
             lbSaturday.Name = "lbSaturday";
-            lbSaturday.Size = new Size(94, 22);
+            lbSaturday.Size = new Size(132, 33);
             lbSaturday.TabIndex = 31;
             lbSaturday.Text = "Saturday";
             // 

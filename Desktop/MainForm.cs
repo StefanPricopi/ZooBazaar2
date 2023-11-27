@@ -32,7 +32,7 @@ namespace Desktop
             this.FormBorderStyle = FormBorderStyle.None;   // Remove the border for full screen
             this.DoubleBuffered = true;
             this.TopMost = true;
-            
+
             // Keep the form on top
             InitializeComponent();
             lbText.Parent = pictureBox1;
