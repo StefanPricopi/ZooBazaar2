@@ -26,8 +26,13 @@
                         <td>@schedule.EmployeeId</td>
                         <td>@schedule.Shift</td>
                     </tr>
-                }
+                }   
             </tbody>
         </table>
     }
+    <div class="container mt-2" style=" justify-content: center; align-items: center;">
+        <div class="row" style="justify-content: center; align-items: center;">
+            @Html.Raw(Model.GenerateShifts(Model.currentDay))
+        </div>
+    </div>
 </body>

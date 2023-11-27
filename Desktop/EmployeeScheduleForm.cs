@@ -40,7 +40,7 @@ namespace Desktop
             manager.PopulateSchedule(curr);
             lbWeekNum.Text = "Current week: " + CalculateTheCurrentWeekByYear(currentDate).ToString();
 
-
+                
         }
         private int CalculateTheCurrentWeekByYear(DateTime todayDate)
         {
