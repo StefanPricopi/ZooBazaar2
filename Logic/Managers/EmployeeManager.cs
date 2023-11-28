@@ -45,11 +45,47 @@ namespace Logic.Managers
         {
             return employee.UpdateEmployeePartner(partnerDTO);
         }
+        public bool IsLoginValid(string username, string password)
+        {
+
+            User Obj = employee.GetCurrentUserByUsername(username);
+            if (Obj != null)
+            {
+
+                var userhashedpass = UserManager.HashedPassword($"{password}{Obj.Salt.Trim()}");
+                Console.WriteLine(Obj.Salt);
+                if (password == Obj.Password)
+                {
+                    return true;
+                }
+                else { return false; }
+            }
+            else { return false; }
+        }
+        public bool UpdateAllTables(EmployeeDTO employeeDTO, UserDTO userDTO, ContractDTO contractDTO, PartnerDTO partnerDTO, AddressDTO addressDTO)
+        {
+            string password = userDTO.Password;
+            string username = userDTO.Username;
+            if (!IsLoginValid(username, password))
+            {
+                DateTime dateTime = DateTime.Now;
+                userDTO.Salt = dateTime.ToString();
+                var hashedPW = UserManager.HashedPassword($"{userDTO.Password}{userDTO.Salt.Trim()}");
+                userDTO.Password = hashedPW;
+            }
+            else
+            {
+                User Obj = employee.GetCurrentUserByUsername(username);
+                userDTO.Salt = Obj.Salt;
+            }
+            
+            return employee.UpdateAllTables(employeeDTO,userDTO,contractDTO,partnerDTO,addressDTO);
+        }
         public bool DeleteEmployee(EmployeeDTO employeeDTO)
         {
             return employee.DeleteEmployee(employeeDTO);
         }
-        public (DataTable,DataTable,DataTable,DataTable,DataTable) LoadEmployees()
+        public DataTable LoadEmployees()
         {
             return employee.LoadEmployees();
         }

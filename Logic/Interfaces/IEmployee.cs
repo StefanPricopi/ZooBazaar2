@@ -1,4 +1,5 @@
 ﻿using Logic.DTO;
+using Logic.Entities;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -12,12 +13,14 @@ namespace Logic.Interfaces
     {
         bool CreateEmployee(EmployeeDTO employeeDTO, UserDTO userDTO, ContractDTO contractDTO, AddressDTO addressDTO, PartnerDTO partnerDTO, RoleDTO roleDTO);
         bool UpdateEmployee(EmployeeDTO employeeDTO);
+        User GetCurrentUserByUsername(string userEmail);
         bool UpdateEmployeeLoginDetails(UserDTO userDTO);
         bool UpdateEmployeeContract(ContractDTO contractDTO);
         bool UpdateEmployeeAddress(AddressDTO addressDTO);
         bool UpdateEmployeePartner(PartnerDTO partnerDTO);
         bool DeleteEmployee(EmployeeDTO employeeDTO);
-        (DataTable, DataTable, DataTable, DataTable, DataTable) LoadEmployees();
+        public bool UpdateAllTables(EmployeeDTO employeeDTO, UserDTO userDTO, ContractDTO contractDTO, PartnerDTO partnerDTO, AddressDTO addressDTO);
+        public DataTable LoadEmployees();
 
 
     }

@@ -35,7 +35,8 @@ namespace Desktop
         {
             currentDate = DateTime.Now;
             startOfWeek = DayOfWeek.Sunday;
-            GenerateWeek(currentDate);
+            DateTime newDate = currentStartday(currentDate);
+            GenerateWeek(newDate);
             DateTime curr = currentStartday(currentDate);
             manager.PopulateSchedule(curr);
             lbWeekNum.Text = "Current week: " + CalculateTheCurrentWeekByYear(currentDate).ToString();
@@ -58,6 +59,7 @@ namespace Desktop
             int week = cal.GetWeekOfYear(date, System.Globalization.CalendarWeekRule.FirstFourDayWeek, DayOfWeek.Monday);
             return week;
         }
+
         private void GenerateWeek(DateTime startDate)
         {
             flowLayoutPanel1.Controls.Clear();
@@ -74,7 +76,7 @@ namespace Desktop
                 ShiftPanelManager.MorningShiftPanels[currentDay.Date] = morningShiftPanel;
 
                 Label morningLabel = (Label)morningShiftPanel.Controls[0].Controls[0];
-                morningLabel.Text = $"Morning Shift\n{currentDay.ToShortDateString()}";
+                morningLabel.Text = $"{currentDay.ToShortDateString()}";
 
                 // Move to the next day
                 currentDay = currentDay.AddDays(1);
@@ -89,7 +91,7 @@ namespace Desktop
                 ShiftPanelManager.AfternoonShiftPanels[currentDay.Date] = afternoonShiftPanel;
 
                 Label afternoonLabel = (Label)afternoonShiftPanel.Controls[0].Controls[0];
-                afternoonLabel.Text = $"Afternoon Shift\n{currentDay.ToShortDateString()}";
+                afternoonLabel.Text = $"{currentDay.ToShortDateString()}";
 
                 // Move to the next day
                 currentDay = currentDay.AddDays(1);
@@ -104,7 +106,7 @@ namespace Desktop
                 ShiftPanelManager.EveningShiftPanels[currentDay.Date] = eveningShiftPanel;
 
                 Label eveningLabel = (Label)eveningShiftPanel.Controls[0].Controls[0];
-                eveningLabel.Text = $"Evening Shift\n{currentDay.ToShortDateString()}";
+                eveningLabel.Text = $"{currentDay.ToShortDateString()}";
 
                 // Move to the next day
                 currentDay = currentDay.AddDays(1);
@@ -115,17 +117,20 @@ namespace Desktop
 
         private void btnNext_Click(object sender, EventArgs e)
         {
+
             currentDate = currentDate.AddDays(7);
+            DateTime newDate = currentStartday(currentDate);
             GenerateWeek(currentDate);
-            manager.PopulateSchedule(currentDate);
+            manager.PopulateSchedule(newDate);
             lbWeekNum.Text = "Current week: " + CalculateTheCurrentWeekByYear(currentDate).ToString();
         }
 
         private void btnPrevious_Click(object sender, EventArgs e)
         {
             currentDate = currentDate.AddDays(-7);
+            DateTime newDate = currentStartday(currentDate);
             GenerateWeek(currentDate);
-            manager.PopulateSchedule(currentDate);
+            manager.PopulateSchedule(newDate);
             lbWeekNum.Text = "Current week: " + CalculateTheCurrentWeekByYear(currentDate).ToString();
         }
 

@@ -8,7 +8,6 @@ namespace Logic.Entities
 {
     public enum Role
     {
-        Empty,
         HR,
         Manager,
         Caretaker,

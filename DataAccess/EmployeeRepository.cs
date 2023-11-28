@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Numerics;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -15,70 +16,59 @@ namespace DataAccess
 {
     public class EmployeeRepository : Connection, IEmployee
     {
-        public (DataTable, DataTable, DataTable, DataTable, DataTable) LoadEmployees()
+        public DataTable LoadEmployees()
         {
             using (SqlConnection connection = InitializeConection())
             {
                 connection.Open();
 
-                string selectQuery1 = "SELECT EmployeeID, FirstName, LastName, PhoneNumber, DateOfBirth, BSN, UserID FROM Employees";
+                string selectQuery = @"
+                SELECT 
+                    E.EmployeeID, 
+                    E.FirstName, 
+                    E.LastName, 
+                    E.PhoneNumber, 
+                    E.DateOfBirth, 
+                    E.BSN, 
+                    u.UserID,
+                    U.Username, 
+                    U.Password, 
+                    U.Email, 
+                    U.Salt, 
+                    EC.ContractID, 
+                    EC.StartDate, 
+                    EC.EndDate, 
+                    EC.RoleID, 
+                    EC.Salary, 
+                    EC.ContractType, 
+                    EP.PartnerID, 
+                    EP.FirstName AS PartnerFirstName, 
+                    EP.LastName AS PartnerLastName, 
+                    EP.PhoneNumber AS PartnerPhoneNumber,  
+                    EA.AddressID, 
+                    EA.StreetName, 
+                    EA.City, 
+                    EA.ZipCode, 
+                    EA.Country
+                FROM Employees E
+                LEFT JOIN Users U ON E.UserID = U.UserID
+                LEFT JOIN EmployeeContracts EC ON E.EmployeeID = EC.EmployeeID
+                LEFT JOIN EmployeePartner EP ON E.EmployeeID = EP.EmployeeID
+                LEFT JOIN EmployeeAddress EA ON E.EmployeeID = EA.EmployeeID";
 
-                using (SqlCommand command1 = new SqlCommand(selectQuery1, connection))
+                using (SqlCommand command = new SqlCommand(selectQuery, connection))
                 {
-                    using (SqlDataAdapter adapter1 = new SqlDataAdapter(command1))
+                    using (SqlDataAdapter adapter = new SqlDataAdapter(command))
                     {
-                        DataTable employeeDataTable1 = new DataTable();
-                        adapter1.Fill(employeeDataTable1);
-
-                        string selectQuery2 = "SELECT UserID, Username, Password, Email, Salt FROM users";
-
-                        using (SqlCommand command2 = new SqlCommand(selectQuery2, connection))
-                        {
-                            using (SqlDataAdapter adapter2 = new SqlDataAdapter(command2))
-                            {
-                                DataTable employeeDataTable2 = new DataTable();
-                                adapter2.Fill(employeeDataTable2);
-
-                                string selectQuery3 = "SELECT ContractID, StartDate, EndDate, RoleID, Salary, ContractType, EmployeeID FROM EmployeeContracts";
-                                using (SqlCommand command3 = new SqlCommand(selectQuery3, connection))
-                                {
-                                    using (SqlDataAdapter adapter3 = new SqlDataAdapter(command3))
-                                    {
-                                        DataTable employeeDataTable3 = new DataTable();
-                                        adapter3.Fill(employeeDataTable3);
-
-                                        string selectQuery4 = "SELECT PartnerID, FirstName, LastName, PhoneNumber, EmployeeID FROM EmployeePartner";
-
-                                        using (SqlCommand command4 = new SqlCommand(selectQuery4, connection))
-                                        {
-                                            using (SqlDataAdapter adapter4 = new SqlDataAdapter(command4))
-                                            {
-                                                DataTable employeeDataTable4 = new DataTable();
-                                                adapter4.Fill(employeeDataTable4);
-
-                                                string selectQuery5 = "SELECT AddressID, StreetName, City, ZipCode, Country, EmployeeID FROM EmployeeAddress";
-
-                                                using (SqlCommand command5 = new SqlCommand(selectQuery5, connection))
-                                                {
-                                                    using (SqlDataAdapter adapter5 = new SqlDataAdapter(command5))
-                                                    {
-                                                        DataTable employeeDataTable5 = new DataTable();
-                                                        adapter5.Fill(employeeDataTable5);
-
-                                                        return (employeeDataTable1, employeeDataTable2, employeeDataTable3, employeeDataTable4, employeeDataTable5);
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
+                        DataTable employeeDataTable = new DataTable();
+                        adapter.Fill(employeeDataTable);
+                        return employeeDataTable;
                     }
                 }
             }
         }
-        public bool DeleteEmployee(EmployeeDTO employeeDTO)
+    
+    public bool DeleteEmployee(EmployeeDTO employeeDTO)
         {
             int uniqueIdentifier = employeeDTO.EmployeeID;
 
@@ -163,7 +153,7 @@ namespace DataAccess
                                 cmdContract.Parameters.AddWithValue("@Salary", contractDTO.Salary);
                                 cmdContract.Parameters.AddWithValue("@ContractType", contractDTO.ContractType);
                                 cmdContract.Parameters.AddWithValue("@EmployeeID", employeeID);
-                                cmdContract.Parameters.AddWithValue("@RoleID", roleDTO.RoleID);
+                                cmdContract.Parameters.AddWithValue("@RoleID", contractDTO.RoleID+1);
 
                                 int contractID = Convert.ToInt32(cmdContract.ExecuteScalar());
                             }
@@ -356,6 +346,134 @@ namespace DataAccess
                 return false;
             }
         }
+        public bool UpdateAllTables(EmployeeDTO employeeDTO, UserDTO userDTO, ContractDTO contractDTO, PartnerDTO partnerDTO, AddressDTO addressDTO)
+        {
+            try
+            {
+                using (SqlConnection connection = InitializeConection())
+                {
+                    connection.Open();
+
+                    string updateQuery = @"
+                UPDATE Employees
+                SET FirstName = @EmployeeFirstName, LastName = @EmployeeLastName, PhoneNumber = @EmployeePhoneNumber,
+                    DateOfBirth = @EmployeeDateOfBirth, BSN = @EmployeeBSN
+                WHERE EmployeeID = @EmployeeID;
+
+                UPDATE Users
+                SET Username = @UserUsername, Password = @UserPassword, Email = @UserEmail, Salt = @UserSalt
+                WHERE UserID = @UserID;
+
+                UPDATE EmployeeContracts
+                SET StartDate = @ContractStartDate, EndDate = @ContractEndDate, RoleID = @ContractRoleID,
+                    Salary = @ContractSalary, ContractType = @ContractType
+                WHERE ContractID = @ContractID;
+
+                UPDATE EmployeePartner
+                SET FirstName = @PartnerFirstName, LastName = @PartnerLastName, PhoneNumber = @PartnerPhoneNumber
+                WHERE PartnerID = @PartnerID;
+
+                UPDATE EmployeeAddress
+                SET StreetName = @AddressStreetName, City = @AddressCity, ZipCode = @AddressZipCode, Country = @AddressCountry
+                WHERE AddressID = @AddressID;";
+                    
+                    
+                    using (SqlCommand command = new SqlCommand(updateQuery, connection))
+                    {
+                        // Add parameters for the query
+                        AddParameter(command, "@EmployeeID", employeeDTO.EmployeeID);
+                        AddParameter(command, "@EmployeeFirstName", employeeDTO.FirstName);
+                        AddParameter(command, "@EmployeeLastName", employeeDTO.LastName);
+                        AddParameter(command, "@EmployeePhoneNumber", employeeDTO.PhoneNumber);
+                        AddParameter(command, "@EmployeeDateOfBirth", employeeDTO.DateOfBirth);
+                        AddParameter(command, "@EmployeeBSN", employeeDTO.BSN);
+
+                        AddParameter(command, "@UserID", userDTO.UserID);
+                        AddParameter(command, "@UserUsername", userDTO.Username);
+                        AddParameter(command, "@UserPassword", userDTO.Password);
+                        AddParameter(command, "@UserEmail", userDTO.Email);
+                        AddParameter(command, "@UserSalt", userDTO.Salt);
+
+                        AddParameter(command, "@ContractID", contractDTO.ContractID);
+                        AddParameter(command, "@ContractStartDate", contractDTO.StartDate);
+                        AddParameter(command, "@ContractEndDate", contractDTO.EndDate);
+                        AddParameter(command, "@ContractRoleID", contractDTO.RoleID+1);
+                        AddParameter(command, "@ContractSalary", contractDTO.Salary);
+                        AddParameter(command, "@ContractType", contractDTO.ContractType);
+
+                        AddParameter(command, "@PartnerID", partnerDTO.PartnerID);
+                        AddParameter(command, "@PartnerFirstName", partnerDTO.FirstName);
+                        AddParameter(command, "@PartnerLastName", partnerDTO.LastName);
+                        AddParameter(command, "@PartnerPhoneNumber", partnerDTO.PhoneNumber);
+
+                        AddParameter(command, "@AddressID", addressDTO.AddressID);
+                        AddParameter(command, "@AddressStreetName", addressDTO.StreetName);
+                        AddParameter(command, "@AddressCity", addressDTO.City);
+                        AddParameter(command, "@AddressZipCode", addressDTO.ZipCode);
+                        AddParameter(command, "@AddressCountry", addressDTO.Country);
+
+                        // Execute the query
+                        command.ExecuteNonQuery();
+
+                        return true; // If the query executes successfully
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
+
+        private void AddParameter(SqlCommand command, string parameterName, object value)
+        {
+            command.Parameters.AddWithValue(parameterName, value);
+        }
+
+
+
+
+        public User GetCurrentUserByUsername(string username)
+
+        {
+
+            try
+            {
+                using (SqlConnection conn = InitializeConection())
+                {
+                    conn.Open();
+                    string sql = "SELECT * FROM users WHERE Username = @Username";
+                    SqlCommand cmd = new SqlCommand(sql, conn);
+                    cmd.Parameters.AddWithValue("@Username", username);
+
+                    SqlDataReader dr = cmd.ExecuteReader();
+
+                    if (dr.Read())
+                    {
+                        var userDTO = new UserDTO
+                        {
+                            UserID = Convert.ToInt32(dr["UserID"]),
+                            Username = dr["Username"].ToString(),
+                            Password = dr["Password"].ToString(),
+                            Email = dr["Email"].ToString(),
+                            Salt = dr["Salt"].ToString(),
+
+
+                        };
+                        return new User(userDTO); // Create a User object from the UserDTO
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                // Handle the exception (e.g., log the error)
+            }
+
+            return null; // Return null if no user with the specified email is found
+        }
+
+
+
     }
 }
 

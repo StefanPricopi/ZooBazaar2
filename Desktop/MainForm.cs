@@ -167,7 +167,7 @@ namespace Desktop
                 case "Update Existing Employees":
                     ClearCanvas();
                     ClearCanvas();
-                    SetCanvas(new EditEmployee());
+                    SetCanvas(new UpdateEmployeeForm());
                     break;
                 case "View Details":
                     ClearCanvas();

@@ -43,7 +43,7 @@
             tabPage2 = new TabPage();
             btnDeleteShift = new Button();
             tbxUpdateDate = new TextBox();
-            cmbUpdateLocation = new ComboBox();
+            cmbUpdateArea = new ComboBox();
             label4 = new Label();
             label6 = new Label();
             label7 = new Label();
@@ -117,6 +117,7 @@
             cmbArea.Name = "cmbArea";
             cmbArea.Size = new Size(184, 29);
             cmbArea.TabIndex = 7;
+            cmbArea.SelectedIndexChanged += cmbArea_SelectedIndexChanged;
             // 
             // btnCreate
             // 
@@ -184,7 +185,7 @@
             // 
             tabPage2.Controls.Add(btnDeleteShift);
             tabPage2.Controls.Add(tbxUpdateDate);
-            tabPage2.Controls.Add(cmbUpdateLocation);
+            tabPage2.Controls.Add(cmbUpdateArea);
             tabPage2.Controls.Add(label4);
             tabPage2.Controls.Add(label6);
             tabPage2.Controls.Add(label7);
@@ -220,13 +221,14 @@
             tbxUpdateDate.Size = new Size(118, 27);
             tbxUpdateDate.TabIndex = 11;
             // 
-            // cmbUpdateLocation
+            // cmbUpdateArea
             // 
-            cmbUpdateLocation.FormattingEnabled = true;
-            cmbUpdateLocation.Location = new Point(252, 261);
-            cmbUpdateLocation.Name = "cmbUpdateLocation";
-            cmbUpdateLocation.Size = new Size(118, 29);
-            cmbUpdateLocation.TabIndex = 18;
+            cmbUpdateArea.FormattingEnabled = true;
+            cmbUpdateArea.Location = new Point(252, 261);
+            cmbUpdateArea.Name = "cmbUpdateArea";
+            cmbUpdateArea.Size = new Size(118, 29);
+            cmbUpdateArea.TabIndex = 18;
+            cmbUpdateArea.SelectedIndexChanged += cmbUpdateArea_SelectedIndexChanged;
             // 
             // label4
             // 
@@ -332,7 +334,7 @@
         private TabPage tabPage2;
         private DataGridView dgvShifts;
         private TextBox tbxUpdateDate;
-        private ComboBox cmbUpdateLocation;
+        private ComboBox cmbUpdateArea;
         private Label label4;
         private Label label6;
         private Label label7;

@@ -87,6 +87,7 @@ namespace Logic.Managers
             else { return false; }
         }
         
+
         public UserDTO IsLoginEmployeeOrVisitor(string username, string password)
         {
 

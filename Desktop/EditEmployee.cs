@@ -48,13 +48,10 @@ namespace Employees
 
         private void LoadEmployees()
         {
-            var (employeeTable1, employeeTable2, employeeTable3, employeeTable4, employeeTable5) = employeeManager.LoadEmployees();
+            var employeeTable1 = employeeManager.LoadEmployees();
 
             dataGridView1.DataSource = employeeTable1;
-            dataGridView2.DataSource = employeeTable2;
-            dataGridView3.DataSource = employeeTable3;
-            dataGridView4.DataSource = employeeTable4;
-            dataGridView5.DataSource = employeeTable5;
+            
         }
 
         private void btnDelete_Click(object sender, EventArgs e)

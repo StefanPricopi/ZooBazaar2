@@ -25,9 +25,9 @@ namespace Logic.Managers
         {
            return schedule.DeleteShift(id);
         }
-        public void CreateShift(int employeeID, DateTime Date, string Shift)
+        public void CreateShift(int employeeID, DateTime Date, string Shift, int areaID)
         {
-            schedule.CreateShift(employeeID, Date, Shift);
+            schedule.CreateShift(employeeID, Date, Shift, areaID);
         }
         public bool UpdateShift(Schedule selected)
         {

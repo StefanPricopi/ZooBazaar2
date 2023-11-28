@@ -12,5 +12,7 @@ namespace Logic.Entities
         public int EmployeeId { get; set; }
         public DateTime Date { get; set; }
         public string Shift { get; set; }
+        public string AreaName { get; set; }
+        public int AreaID { get; set; }
     }
 }

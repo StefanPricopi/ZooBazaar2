@@ -51,5 +51,6 @@ namespace Logic.Entities
         {
             return areaName + " " + status;
         }
+        public string DisplayName => AreaName;
     }
 }

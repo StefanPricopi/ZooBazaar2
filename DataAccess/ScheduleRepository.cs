@@ -43,17 +43,18 @@ namespace DataAccess
 
             return employeeList;
         }
-        public void CreateShift(int employeeID, DateTime Date, string Shift)
+        public void CreateShift(int employeeID, DateTime Date, string Shift, int areaID)
         {
             using (SqlConnection connection = InitializeConection())
             {
-                string sqlString = "INSERT INTO Schedules (EmployeeID, Date, Shift) VALUES (@EmployeeID,@Date,@Shift);";
+                string sqlString = "INSERT INTO Schedules (EmployeeID, Date, Shift, AreaID) VALUES (@EmployeeID,@Date,@Shift,@AreaID);";
                 using (SqlCommand command = new SqlCommand(sqlString, connection))
                 {
 
                     command.Parameters.AddWithValue("@EmployeeID", employeeID);
                     command.Parameters.AddWithValue("@Date", Date);
                     command.Parameters.AddWithValue("@Shift", Shift);
+                    command.Parameters.AddWithValue("@AreaID", areaID);
                     connection.Open();
                     command.ExecuteNonQuery();
 
@@ -68,7 +69,7 @@ namespace DataAccess
                 {
                     connection.Open();
 
-                    string updateQuery = "UPDATE Schedules SET EmployeeID = @EmployeeID, Date = @Date, Shift = @Shift WHERE ScheduleID = @ScheduleID";
+                    string updateQuery = "UPDATE Schedules SET EmployeeID = @EmployeeID, Date = @Date, Shift = @Shift, AreaID=@AreaID WHERE ScheduleID = @ScheduleID";
 
                     using (SqlCommand command = new SqlCommand(updateQuery, connection))
                     {
@@ -76,6 +77,7 @@ namespace DataAccess
                         command.Parameters.AddWithValue("@Date", schedule.Date);
                         command.Parameters.AddWithValue("@Shift", schedule.Shift);
                         command.Parameters.AddWithValue("@ScheduleID", schedule.ScheduleId);
+                        command.Parameters.AddWithValue("@AreaID", schedule.AreaID);
 
 
                         int rowsAffected = command.ExecuteNonQuery();
@@ -95,7 +97,7 @@ namespace DataAccess
             {
                 connection.Open();
 
-                string selectQuery1 = "SELECT ScheduleID, EmployeeID, Date, Shift" +
+                string selectQuery1 = "SELECT ScheduleID, EmployeeID, Date, Shift,AreaID" +
                                         " FROM Schedules WHERE " +
                                         "Date BETWEEN @StartDate AND @EndDate";
 
@@ -130,11 +132,15 @@ namespace DataAccess
             s.EmployeeID,
             s.Date,
             s.Shift,
-            e.FirstName
+            s.AreaID,
+            e.FirstName,
+            z.areaName
         FROM 
             Schedules s
         INNER JOIN 
             Employees e ON s.EmployeeID = e.EmployeeID
+        INNER JOIN
+            zooArea z ON z.areaID = s.AreaID
         WHERE 
             CAST(s.Date AS DATE) BETWEEN @StartDate AND @EndDate";
 
@@ -152,7 +158,8 @@ namespace DataAccess
                                 ScheduleId = reader.GetInt32(reader.GetOrdinal("ScheduleID")),
                                 EmployeeId = reader.GetInt32(reader.GetOrdinal("EmployeeID")),
                                 Date = reader.GetDateTime(reader.GetOrdinal("Date")),
-                                Shift = reader.GetString(reader.GetOrdinal("Shift"))
+                                Shift = reader.GetString(reader.GetOrdinal("Shift")),
+                                AreaName = reader.GetString(reader.GetOrdinal("AreaName"))
                             };
 
                             EmployeeDTO employee = new EmployeeDTO
@@ -165,15 +172,15 @@ namespace DataAccess
                             // Check the shift type and use the interface
                             if (scheduleEntry.Shift == "MorningShift"  && ShiftPanelManager.MorningShiftPanels.ContainsKey(scheduleEntry.Date))
                             {
-                                ShiftPanelManager.MorningShiftPanels[scheduleEntry.Date].AddShiftLabel(employee.FirstName);
+                                ShiftPanelManager.MorningShiftPanels[scheduleEntry.Date].AddShiftLabel(employee.FirstName + "(" + scheduleEntry.AreaName + ")");
                             }
                             else if (scheduleEntry.Shift == "AfternoonShift"  && ShiftPanelManager.AfternoonShiftPanels.ContainsKey(scheduleEntry.Date))
                             {
-                                ShiftPanelManager.AfternoonShiftPanels[scheduleEntry.Date].AddShiftLabel(employee.FirstName);
+                                ShiftPanelManager.AfternoonShiftPanels[scheduleEntry.Date].AddShiftLabel(employee.FirstName + "(" + scheduleEntry.AreaName + ")");
                             }
                             else if (scheduleEntry.Shift == "EveningShift" && ShiftPanelManager.EveningShiftPanels.ContainsKey(scheduleEntry.Date))
                             {
-                                ShiftPanelManager.EveningShiftPanels[scheduleEntry.Date].AddShiftLabel(employee.FirstName);
+                                ShiftPanelManager.EveningShiftPanels[scheduleEntry.Date].AddShiftLabel(employee.FirstName + "("+ scheduleEntry.AreaName + ")");
                             }
 
                             scheduleEntries.Add(scheduleEntry);
@@ -191,7 +198,10 @@ namespace DataAccess
                 using (SqlConnection connection = InitializeConection())
                 {
                     connection.Open();
-                    string selectQuery1 = "SELECT * FROM Schedules WHERE EmployeeID=@EmployeeID";
+                    string selectQuery1 = "SELECT s.ScheduleID, s.EmployeeID, s.Date, s.Shift, s.AreaID, z.AreaName " +
+                                            "FROM Schedules s " +
+                                            "INNER JOIN zooArea z ON s.AreaID = z.AreaID " +
+                                            "WHERE s.EmployeeID = @EmployeeID";
                     using (SqlCommand command1 = new SqlCommand(selectQuery1, connection))
                     {
 
@@ -208,7 +218,9 @@ namespace DataAccess
                                     ScheduleId = reader.GetInt32(reader.GetOrdinal("ScheduleID")),
                                     EmployeeId = reader.GetInt32(reader.GetOrdinal("EmployeeID")),
                                     Date = reader.GetDateTime(reader.GetOrdinal("Date")),
-                                    Shift = reader.GetString(reader.GetOrdinal("Shift"))
+                                    Shift = reader.GetString(reader.GetOrdinal("Shift")),
+                                    AreaID = reader.GetInt32(reader.GetOrdinal("AreaID")),
+                                    AreaName = reader.GetString(reader.GetOrdinal("AreaName"))
                                     // Add other properties here
                                 };
 

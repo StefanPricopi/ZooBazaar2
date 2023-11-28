@@ -12,15 +12,19 @@ namespace Desktop
     public partial class AssignEmployee : Form
     {
         private readonly ScheduleManager manager;
+        private readonly AreaManager areaManager;
         private DateTime selectedDate;
         private string selectedShift;
         private string selectedEmployee;
         private string employeeIDValue;
+        private int areaID;
+        private Area selectedArea;
         FlowLayoutPanel flowLayoutPanel1;
 
         public AssignEmployee(DateTime date, string shiftType, FlowLayoutPanel flow)
         {
             manager = new ScheduleManager(new ScheduleRepository());
+            areaManager = new AreaManager(new AreaRepository());
             InitializeComponent();
 
             dgvShifts.SelectionChanged += dgvShifts_SelectionChanged;
@@ -44,22 +48,36 @@ namespace Desktop
 
 
                 if (selectedRow.Cells["EmployeeID"].Value != null)
+                {
+
+                
                     employeeIDValue = selectedRow.Cells["EmployeeID"].Value.ToString();
 
-                int index = int.Parse(employeeIDValue) - 1;
-
+                int index = int.Parse(employeeIDValue) - 2;
+                
                 if (index != -1)
                 {
                     cmbUpdateEmployee.SelectedIndex = index;
                 }
-
+                }
 
                 if (selectedRow.Cells["Date"].Value != null)
                     tbxUpdateDate.Text = selectedRow.Cells["Date"].Value.ToString();
 
                 if (selectedRow.Cells["Shift"].Value != null)
                     cmbUpdateShift.Text = selectedRow.Cells["Shift"].Value.ToString();
+                if (selectedRow.Cells["AreaID"].Value != null && selectedRow.Cells["AreaID"].Value.ToString() != "")
+                {
+                    int areaID = Convert.ToInt32(selectedRow.Cells["AreaID"].Value);
 
+                    Area selectedArea = cmbUpdateArea.Items.OfType<Area>().FirstOrDefault(a => a.AreaID == areaID);
+
+                    if (selectedArea != null)
+                    {
+                        cmbUpdateArea.SelectedItem = selectedArea;
+                    }
+
+                }
             }
         }
 
@@ -75,6 +93,8 @@ namespace Desktop
             PopulateUpdatedShifts();
             PopulateUpdatedComboBox();
             LoadEmployees();
+            PopulateAreas(cmbArea);
+            PopulateAreas(cmbUpdateArea);
         }
         private void PopulateComboBox()
         {
@@ -115,6 +135,20 @@ namespace Desktop
                 cmbUpdateShift.Items.Add(time);
             }
         }
+        private void PopulateAreas(System.Windows.Forms.ComboBox cmb)
+        {
+            List<Area> areas = areaManager.GetAllAreas();
+
+
+            cmb.DisplayMember = "DisplayName";
+
+            foreach (Area area in areas)
+            {
+                cmb.Items.Add(area);
+            }
+        }
+
+
         private void btnCreate_Click(object sender, EventArgs e)
         {
             selectedEmployee = cmbEmployee.Text;
@@ -122,7 +156,7 @@ namespace Desktop
             DateTime Date = DateTime.TryParse(tbxDate.Text, out DateTime parsedShift) ? parsedShift : DateTime.MinValue;
             string shift = cmbShift.Text;
 
-            manager.CreateShift(employeeID, Date, shift);
+            manager.CreateShift(employeeID, Date, shift, areaID);
             // Find the appropriate shift panel based on selectedShift and selectedDate
             DateTime selectedDate = DateTime.Parse(tbxDate.Text);
             DateTime newDate = currentStartday(selectedDate);
@@ -190,7 +224,7 @@ namespace Desktop
         private void btnUpdateShift_Click(object sender, EventArgs e)
         {
             DateTime Date;
-            
+
             DateTime.TryParse(tbxUpdateDate.Text, out Date);
             DataGridViewRow selectedRow = dgvShifts.SelectedRows[0];
             string selectedUpdateEmployee = cmbUpdateEmployee.Text;
@@ -201,6 +235,7 @@ namespace Desktop
                 Shift = cmbUpdateShift.Text,
                 Date = Date,
                 EmployeeId = int.Parse(manager.GetEmployeeID(selectedUpdateEmployee)),
+                AreaID = areaID
             };
             manager.UpdateShift(schedule);
             dgvShifts.DataSource = null;
@@ -237,6 +272,28 @@ namespace Desktop
             else
             {
                 MessageBox.Show("Please select an employee to delete.");
+            }
+        }
+
+        private void cmbArea_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cmbArea.SelectedItem != null)
+            {
+                selectedArea = (Area)cmbArea.SelectedItem;
+                areaID = selectedArea.AreaID;
+
+
+            }
+        }
+
+        private void cmbUpdateArea_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cmbUpdateArea.SelectedItem != null)
+            {
+                selectedArea = (Area)cmbUpdateArea.SelectedItem;
+                areaID = selectedArea.AreaID;
+
+
             }
         }
 

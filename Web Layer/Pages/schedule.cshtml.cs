@@ -88,7 +88,7 @@ namespace Web_Layer.Pages
 
                 if (morningSchedule != null)
                 {
-                    result.Append($"<p class='card-text'>Scheduled: {morningSchedule.Date.ToShortDateString()}</p>");
+                    result.Append($"<p class='card-text'>Scheduled In Area: {morningSchedule.AreaName}</p>");
                     
                 }
                 result.Append("</div></div>");
@@ -98,7 +98,7 @@ namespace Web_Layer.Pages
             
                 if (afternoonSchedule != null)
                 {
-                    result.Append($"<p class='card-text'>Scheduled: {afternoonSchedule.Date.ToShortDateString()}</p>");
+                    result.Append($"<p class='card-text'>Scheduled In Area: {afternoonSchedule.AreaName}</p>");
                 }
                 result.Append("</div></div>");
                 // Create evening shift card
@@ -107,7 +107,7 @@ namespace Web_Layer.Pages
               
                 if (eveningSchedule != null)
                 {
-                    result.Append($"<p class='card-text'>Scheduled: {eveningSchedule.Date.ToShortDateString()}</p>");
+                    result.Append($"<p class='card-text'>Scheduled In Area: {eveningSchedule.AreaName}</p>");
                 }
                 result.Append("</div></div>");
                 result.Append("</div>");
