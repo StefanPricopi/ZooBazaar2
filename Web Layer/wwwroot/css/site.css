@@ -162,6 +162,7 @@ label {
 @media (max-width: 910px) {
     .navbar-brand {
         display: flex;
+        
         align-items: center;
     }
 
@@ -208,7 +209,9 @@ label {
         display: flex;
         align-items: center;
     }
-
+    .title-holder {
+        padding-left: 100px;
+    }
         .navbar-brand img {
             width: 100px; 
         }
@@ -240,7 +243,9 @@ label {
         display: flex;
         align-items: center;
     }
-
+    .title-holder {
+        padding-left: 100px;
+    }
         .navbar-brand img {
             width: 100px; 
         }
@@ -259,7 +264,9 @@ label {
     .navbar-collapse {
         flex: 1; 
     }
-
+    .title-holder {
+        padding-left: 100px;
+    }
     .btn-primary, .btn-secondary {
         padding-left:0px;
         margin-left:0px;
@@ -271,6 +278,9 @@ label {
     .navbar-collapse {
         display: flex !important;
          
+    }
+    .title-holder {
+        padding-left: 100px;
     }
 
     .navbar-toggler {
