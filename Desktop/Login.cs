@@ -24,13 +24,13 @@ namespace Desktop
         ILocation locationRepository = new LocationRepository();
 
         private readonly UserManager userManager;
-       
+
         public Login()
         {
             InitializeComponent();
 
             userManager = new UserManager(new UserRepository());
-            
+
 
         }
 
@@ -47,12 +47,12 @@ namespace Desktop
             string email = tbxEmail.Text;
             string password = tbxPassword.Text;
 
-            User currentUser = userRepository.Login(email, password);   
+            User currentUser = userRepository.Login(email, password);
 
 
             if (currentUser != null)
             {
-               string position = userManager.RetrievePositionInformation(email);
+                string position = userManager.RetrievePositionInformation(email);
 
                 if (position == "Admin")
                 {
@@ -66,7 +66,7 @@ namespace Desktop
                 }
                 if (position == "1")
                 {
-                    
+
                     MainForm addEmployeeForm = new MainForm(1);
                     this.Hide();
                     addEmployeeForm.FormClosed += (e, args) => this.Close();
@@ -85,9 +85,9 @@ namespace Desktop
                     this.Hide();
                     addAnimalForm.FormClosed += (e, args) => this.Close();
                     addAnimalForm.Show();
-                    
-                    
-                    
+
+
+
                 }
             }
         }
@@ -102,7 +102,7 @@ namespace Desktop
                 Username = "test@example.com",
                 Password = "password",
                 Email = "Test User"
-             
+
             };
 
             // Call the InsertDummyUser method on the userRepository instance

@@ -56,6 +56,7 @@
             // 
             tbxPassword.Location = new Point(323, 235);
             tbxPassword.Name = "tbxPassword";
+            tbxPassword.PasswordChar = 'ඞ';
             tbxPassword.Size = new Size(100, 23);
             tbxPassword.TabIndex = 2;
             // 
