@@ -6,6 +6,7 @@ using Logic.Managers;
 using Logic.DTO;
 using Logic.Interfaces;
 using Logic.Entities;
+using static Logic.CustomException;
 
 namespace Web_Layer.Pages
 {
@@ -26,60 +27,72 @@ namespace Web_Layer.Pages
 
         public async Task<IActionResult> OnPostAsync()
         {
-            UserDTO userModel = new UserDTO();
-           
-
-            userModel = ValidateLoginVisitorOrEmployee();
-
-            UserDTO ValidateLoginVisitorOrEmployee()
+            try
             {
-                return userManager.IsLoginEmployeeOrVisitor(User.Username, User.Password);
-            }
+                UserDTO userModel = new UserDTO();
 
-            if (User == null)
-            {
+                userModel = ValidateLoginVisitorOrEmployee();
+
+                UserDTO ValidateLoginVisitorOrEmployee()
+                {
+                    return userManager.IsLoginEmployeeOrVisitor(User.Username, User.Password);
+                }
+
+                if (User == null)
+                {
+                    return Page();
+                }
+                else if (userModel == null)
+                {
+                       
+                    return Page();
+                }
+                else
+                {
+                    if (userModel.EmployeeID != 0)
+                    {
+                        Console.WriteLine("Login successful.");
+                        var claims = new List<Claim>
+                {
+                    new Claim(ClaimTypes.Name, "user"),
+                    new Claim(ClaimTypes.Email, "admin@website.com"),
+                    new Claim("EmployeeId", userModel.EmployeeID.ToString()),
+                    new Claim("Employee", "Caretaker"),
+                    new Claim(ClaimTypes.Role, "Caretaker")
+                };
+                        var identity = new ClaimsIdentity(claims, "LoginCookieAuth");
+                        ClaimsPrincipal claimsPrincipal = new ClaimsPrincipal(identity);
+
+                        await HttpContext.SignInAsync("LoginCookieAuth", claimsPrincipal);
+
+                        return RedirectToPage("/schedule");
+                    }
+                    else if (userModel.VisitorID != 0)
+                    {
+                        Console.WriteLine("Login successful.");
+                        var claims = new List<Claim>
+                {
+                    new Claim(ClaimTypes.Name, "user"),
+                    new Claim(ClaimTypes.Email, "admin@website.com")
+                };
+                        var identity = new ClaimsIdentity(claims, "LoginCookieAuth");
+                        ClaimsPrincipal claimsPrincipal = new ClaimsPrincipal(identity);
+
+                        await HttpContext.SignInAsync("LoginCookieAuth", claimsPrincipal);
+
+                        return RedirectToPage("/index");
+                    }
+                }
                 return Page();
             }
-            else
+            catch (Exception ex)
             {
-                if (userModel.EmployeeID != 0)
-                {
-
-                    Console.WriteLine("Login successful.");
-                    var claims = new List<Claim>
-                    {
-                        new Claim(ClaimTypes.Name, "user"),
-                        new Claim(ClaimTypes.Email, "admin@website.com"),
-                        new Claim("EmployeeId",userModel.EmployeeID.ToString()),
-                        new Claim("Employee", "Caretaker"),
-                        new Claim(ClaimTypes.Role, "Caretaker")
-                    };
-                    var identity = new ClaimsIdentity(claims, "LoginCookieAuth");
-                    ClaimsPrincipal claimsPrincipal = new ClaimsPrincipal(identity);
-
-                    await HttpContext.SignInAsync("LoginCookieAuth", claimsPrincipal);
-
-                    return RedirectToPage("/schedule");
-                }
-                else if (userModel.VisitorID != 0)
-                {
-                    Console.WriteLine("Login successful.");
-                    var claims = new List<Claim>
-                    {
-                        new Claim(ClaimTypes.Name, "user"),
-                        new Claim(ClaimTypes.Email, "admin@website.com")
-                    };
-                    var identity = new ClaimsIdentity(claims, "LoginCookieAuth");
-                    ClaimsPrincipal claimsPrincipal = new ClaimsPrincipal(identity);
-
-                    await HttpContext.SignInAsync("LoginCookieAuth", claimsPrincipal);
-
-                    return RedirectToPage("/index");
-                }
+                // Log the exception or handle it accordingly
+                string errorMessage = CustomErrorHandler.GetErrorMessage(ex);
+                return Page();
             }
-
-            return Page();
         }
+
     }
 }
 

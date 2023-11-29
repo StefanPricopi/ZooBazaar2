@@ -21,7 +21,8 @@ builder.Services.AddAuthentication(options =>
 .AddCookie("LoginCookieAuth", options =>
 {
     options.Cookie.Name = "LoginCookieAuth";
-    options.LoginPath = "/login";   
+    options.LoginPath = "/login";
+    options.AccessDeniedPath = "/index";
 });
 builder.Services.AddAuthorization(options =>
 {
