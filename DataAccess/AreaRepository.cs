@@ -84,7 +84,7 @@ namespace DataAccess
             {
                 using (SqlConnection conn = InitializeConection())
                 {
-                    string sql = "UPDATE zooArea SET areaName = @areaName, status = @status WHERE areaID = areaID";
+                    string sql = "UPDATE zooArea SET areaName = @areaName, status = @status WHERE areaID = @areaID";
                     SqlCommand cmd = new SqlCommand(sql, conn);
                     cmd.Parameters.AddWithValue("@areaID", areaDTO.AreaID);
                     cmd.Parameters.AddWithValue("@areaName", areaDTO.AreaName);
