@@ -38,6 +38,9 @@ namespace Animals
             species = GetSpeciesList();
             InitializeForm();
             InitializeComboBoxes();
+            InitializeUpdateComboBoxes();
+
+            comboUpdatePhylum.SelectedIndex = 0;
         }
 
         private void InitializeComboBoxes()
@@ -45,6 +48,23 @@ namespace Animals
             phylum = GetPhylumList();
 
             comboPhylum.Items.AddRange(phylum.ToArray());
+        }
+
+        private void InitializeUpdateComboBoxes()
+        {
+            phylum = GetPhylumList();
+            comboUpdatePhylum.Items.AddRange(phylum.ToArray());
+
+            FillComboBox(comboUpdateClassis, classis.SelectMany(kv => kv.Value).ToArray());
+            FillComboBox(comboUpdateOrdo, ordo.SelectMany(kv => kv.Value).ToArray());
+            FillComboBox(comboUpdateFamilia, familia.SelectMany(kv => kv.Value).ToArray());
+            FillComboBox(comboUpdateGenus, genus.SelectMany(kv => kv.Value).ToArray());
+            FillComboBox(comboUpdateSpecies, species.SelectMany(kv => kv.Value).ToArray());
+        }
+
+        private void FillComboBox(ComboBox comboBox, string[] items)
+        {
+            comboBox.Items.AddRange(items);
         }
 
         private List<string> GetPhylumList()
@@ -204,6 +224,27 @@ namespace Animals
             dgvAnimals.Columns["Name"].HeaderText = "Animal Name";
         }
 
+        private void FilterAnimals()
+        {
+            string selectedPhylum = comboUpdatePhylum.SelectedItem?.ToString();
+            string selectedClassis = comboUpdateClassis.SelectedItem?.ToString();
+            string selectedOrdo = comboUpdateOrdo.SelectedItem?.ToString();
+            string selectedFamilia = comboUpdateFamilia.SelectedItem?.ToString();
+            string selectedGenus = comboUpdateGenus.SelectedItem?.ToString();
+            string selectedSpecies = comboUpdateSpecies.SelectedItem?.ToString();
+
+            filteredAnimals = animals.Where(animal =>
+                (selectedPhylum == null || animal.Phylum == selectedPhylum) &&
+                (selectedClassis == null || animal.Classis == selectedClassis) &&
+                (selectedOrdo == null || animal.Ordo == selectedOrdo) &&
+                (selectedFamilia == null || animal.Familia == selectedFamilia) &&
+                (selectedGenus == null || animal.Genus == selectedGenus) &&
+                (selectedSpecies == null || animal.Species == selectedSpecies)
+            ).ToList();
+
+            DisplayAnimals();
+        }
+
 
 
         private void btnUpdate_Click(object sender, EventArgs e)
@@ -359,6 +400,250 @@ namespace Animals
                     comboStatus.SelectedItem = selectedAnimal.Status;
                     tbxDiet.Text = selectedAnimal.Diet;
                     tbxSpecialDiet.Text = selectedAnimal.SpecialDiet;
+                }
+            }
+        }
+
+        private void comboUpdateGenus_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            comboUpdateSpecies.Items.Clear();
+
+            if (comboUpdateGenus.SelectedItem != null)
+            {
+                string selectedGenus = comboUpdateGenus.SelectedItem.ToString();
+
+                foreach (var genusEntry in genus)
+                {
+                    if (genusEntry.Value.Contains(comboUpdateGenus.Text))
+                    {
+                        comboUpdateFamilia.SelectedItem = genusEntry.Key;
+
+                        foreach (var familiaEntry in familia)
+                        {
+                            if (familiaEntry.Value.Contains(comboUpdateFamilia.Text))
+                            {
+                                comboUpdateOrdo.SelectedItem = familiaEntry.Key;
+
+                                foreach (var ordoEntry in ordo)
+                                {
+                                    if (ordoEntry.Value.Contains(comboUpdateOrdo.Text))
+                                    {
+                                        comboUpdateClassis.SelectedItem = ordoEntry.Key;
+
+                                        foreach (var classisEntry in classis)
+                                        {
+                                            if (classisEntry.Value.Contains(comboUpdateClassis.Text))
+                                            {
+                                                comboUpdatePhylum.SelectedItem = classisEntry.Key;
+                                                break;
+                                            }
+                                        }
+
+                                        if (species.TryGetValue(comboUpdateGenus.Text, out var speciesList))
+                                        {
+                                            comboUpdateSpecies.Items.AddRange(speciesList.ToArray());
+                                            comboUpdateSpecies.SelectedItem = speciesList.FirstOrDefault();
+                                        }
+                                        FilterAnimals(); // Add this line to apply filtering when Phylum changes
+
+                                        break;
+                                    }
+                                }
+                                break;
+                            }
+                        }
+                        break;
+                    }
+                }
+            }
+        }
+
+        private void comboUpdatePhylum_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            comboUpdateClassis.Items.Clear();
+            comboUpdateOrdo.Items.Clear();
+            comboUpdateFamilia.Items.Clear();
+            comboUpdateGenus.Items.Clear();
+            comboUpdateSpecies.Items.Clear();
+
+            if (classis.TryGetValue(comboUpdatePhylum.Text, out var classisList))
+            {
+                comboUpdateClassis.Items.AddRange(classisList.ToArray());
+                comboUpdateClassis.SelectedItem = classisList.FirstOrDefault();
+            }
+
+            FilterAnimals();
+
+        }
+
+        private void comboUpdateClassis_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            comboUpdateOrdo.Items.Clear();
+            comboUpdateFamilia.Items.Clear();
+            comboUpdateGenus.Items.Clear();
+            comboUpdateSpecies.Items.Clear();
+            if (comboUpdateClassis.SelectedItem != null)
+            {
+                string selectedClassis = comboUpdateClassis.SelectedItem.ToString();
+
+                foreach (var classisEntry in classis)
+                {
+                    if (classisEntry.Value.Contains(selectedClassis))
+                    {
+                        comboUpdatePhylum.SelectedItem = classisEntry.Key;
+
+                        break;
+                    }
+                }
+                if (ordo.TryGetValue(comboUpdateClassis.Text, out var ordoList))
+                {
+                    comboUpdateOrdo.Items.AddRange(ordoList.ToArray());
+                    comboUpdateOrdo.SelectedItem = ordoList.FirstOrDefault();
+                }
+
+                FilterAnimals(); // Add this line to apply filtering when Phylum changes
+
+            }
+        }
+
+        private void comboUpdateOrdo_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            comboUpdateFamilia.Items.Clear();
+            comboUpdateGenus.Items.Clear();
+            comboUpdateSpecies.Items.Clear();
+
+            if (comboUpdateOrdo.SelectedItem != null)
+            {
+                string selectedOrdo = comboUpdateOrdo.SelectedItem.ToString();
+
+                foreach (var ordoEntry in ordo)
+                {
+                    if (ordoEntry.Value.Contains(selectedOrdo))
+                    {
+                        comboUpdateClassis.SelectedItem = ordoEntry.Key;
+
+
+                        foreach (var classisEntry in classis)
+                        {
+                            if (classisEntry.Value.Contains(comboUpdateClassis.Text))
+                            {
+                                comboUpdatePhylum.SelectedItem = classisEntry.Key;
+                                break;
+                            }
+                        }
+
+                        if (familia.TryGetValue(comboUpdateOrdo.Text, out var familiaList))
+                        {
+                            comboUpdateFamilia.Items.AddRange(familiaList.ToArray());
+                            comboUpdateFamilia.SelectedItem = familiaList.FirstOrDefault();
+                        }
+
+                        FilterAnimals(); // Add this line to apply filtering when Phylum changes
+
+                        break;
+                    }
+                }
+            }
+        }
+
+        private void comboUpdateFamilia_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            comboUpdateGenus.Items.Clear();
+            comboUpdateSpecies.Items.Clear();
+
+            if (comboUpdateFamilia.SelectedItem != null)
+            {
+                string selectedFamilia = comboUpdateFamilia.SelectedItem.ToString();
+
+                foreach (var familiaEntry in familia)
+                {
+                    if (familiaEntry.Value.Contains(selectedFamilia))
+                    {
+                        comboUpdateOrdo.SelectedItem = familiaEntry.Key;
+
+                        foreach (var ordoEntry in ordo)
+                        {
+                            if (ordoEntry.Value.Contains(comboUpdateOrdo.Text))
+                            {
+                                comboUpdateClassis.SelectedItem = ordoEntry.Key;
+
+                                foreach (var classisEntry in classis)
+                                {
+                                    if (classisEntry.Value.Contains(comboUpdateClassis.Text))
+                                    {
+                                        comboUpdatePhylum.SelectedItem = classisEntry.Key;
+                                        break;
+                                    }
+                                }
+
+                                if (genus.TryGetValue(comboUpdateFamilia.Text, out var genusList))
+                                {
+                                    comboUpdateGenus.Items.AddRange(genusList.ToArray());
+                                    comboUpdateGenus.SelectedItem = genusList.FirstOrDefault();
+                                }
+                                FilterAnimals(); // Add this line to apply filtering when Phylum changes
+
+                                break;
+                            }
+                        }
+
+                        break;
+                    }
+                }
+            }
+        }
+
+        private void comboUpdateSpecies_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (comboUpdateSpecies.SelectedItem != null)
+            {
+                string selectedSpecies = comboUpdateSpecies.SelectedItem.ToString();
+
+                foreach (var speciesEntry in species)
+                {
+                    if (speciesEntry.Value.Contains(selectedSpecies))
+                    {
+                        comboUpdateGenus.SelectedItem = speciesEntry.Key;
+
+                        foreach (var genusEntry in genus)
+                        {
+                            if (genusEntry.Value.Contains(comboUpdateGenus.Text))
+                            {
+                                comboUpdateFamilia.SelectedItem = genusEntry.Key;
+
+                                foreach (var familiaEntry in familia)
+                                {
+                                    if (familiaEntry.Value.Contains(comboUpdateFamilia.Text))
+                                    {
+                                        comboUpdateOrdo.SelectedItem = familiaEntry.Key;
+
+                                        foreach (var ordoEntry in ordo)
+                                        {
+                                            if (ordoEntry.Value.Contains(comboUpdateOrdo.Text))
+                                            {
+                                                comboUpdateClassis.SelectedItem = ordoEntry.Key;
+
+                                                foreach (var classisEntry in classis)
+                                                {
+                                                    if (classisEntry.Value.Contains(comboUpdateClassis.Text))
+                                                    {
+                                                        comboUpdatePhylum.SelectedItem = classisEntry.Key;
+                                                        break;
+                                                        FilterAnimals(); // Add this line to apply filtering when Phylum changes
+
+                                                    }
+                                                }
+                                                break;
+                                            }
+                                        }
+                                        break;
+                                    }
+                                }
+                                break;
+                            }
+                        }
+                        break;
+                    }
                 }
             }
         }
