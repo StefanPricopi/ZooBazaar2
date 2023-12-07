@@ -40,6 +40,8 @@ namespace Animals
             comboLocation.DisplayMember = "LocationName";
             comboLocation.ValueMember = "LocationID";
         }
+
+
         private void btnRefresh_Click(object sender, EventArgs e)
         {
             InitializeGrid();
@@ -85,14 +87,12 @@ namespace Animals
 
             if (locationID.HasValue && selectedAnimal != null)
             {
-                // Use the repository method to check if the location is at capacity
                 if (locationRepository.IsLocationAtCapacity(locationID.Value))
                 {
                     MessageBox.Show("Error: Location has reached its capacity. Cannot assign animal.");
                     return;
                 }
 
-                // Call the AssignAnimalToLocation method to handle the assignment
                 if (locationRepository.AssignAnimalToLocation(selectedAnimal.AnimalID, locationID.Value))
                 {
                     MessageBox.Show("Location assigned successfully!");

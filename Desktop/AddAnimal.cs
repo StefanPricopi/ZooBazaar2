@@ -35,6 +35,8 @@ namespace Animals
             genus = GetGenusList();
             species = GetSpeciesList();
             InitializeComboBoxes();
+
+            comboPhylum.SelectedIndex = 0;
         }
 
         private void FillComboBox(ComboBox comboBox, string[] items)
@@ -222,6 +224,7 @@ namespace Animals
                     if (classisEntry.Value.Contains(selectedClassis))
                     {
                         comboPhylum.SelectedItem = classisEntry.Key;
+
                         break;
                     }
                 }

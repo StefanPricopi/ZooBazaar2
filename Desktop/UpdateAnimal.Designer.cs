@@ -348,6 +348,7 @@
             comboUpdateOrdo.Name = "comboUpdateOrdo";
             comboUpdateOrdo.Size = new Size(133, 23);
             comboUpdateOrdo.TabIndex = 69;
+            comboUpdateOrdo.SelectedIndexChanged += comboUpdateOrdo_SelectedIndexChanged;
             // 
             // label16
             // 
@@ -368,6 +369,7 @@
             comboUpdateClassis.Name = "comboUpdateClassis";
             comboUpdateClassis.Size = new Size(133, 23);
             comboUpdateClassis.TabIndex = 67;
+            comboUpdateClassis.SelectedIndexChanged += comboUpdateClassis_SelectedIndexChanged;
             // 
             // label17
             // 
@@ -388,6 +390,7 @@
             comboUpdatePhylum.Name = "comboUpdatePhylum";
             comboUpdatePhylum.Size = new Size(133, 23);
             comboUpdatePhylum.TabIndex = 65;
+            comboUpdatePhylum.SelectedIndexChanged += comboUpdatePhylum_SelectedIndexChanged;
             // 
             // label18
             // 
@@ -408,6 +411,7 @@
             comboUpdateSpecies.Name = "comboUpdateSpecies";
             comboUpdateSpecies.Size = new Size(133, 23);
             comboUpdateSpecies.TabIndex = 75;
+            comboUpdateSpecies.SelectedIndexChanged += comboUpdateSpecies_SelectedIndexChanged;
             // 
             // label19
             // 
@@ -428,6 +432,7 @@
             comboUpdateGenus.Name = "comboUpdateGenus";
             comboUpdateGenus.Size = new Size(133, 23);
             comboUpdateGenus.TabIndex = 73;
+            comboUpdateGenus.SelectedIndexChanged += comboUpdateGenus_SelectedIndexChanged;
             // 
             // label20
             // 
@@ -448,6 +453,7 @@
             comboUpdateFamilia.Name = "comboUpdateFamilia";
             comboUpdateFamilia.Size = new Size(133, 23);
             comboUpdateFamilia.TabIndex = 71;
+            comboUpdateFamilia.SelectedIndexChanged += comboUpdateFamilia_SelectedIndexChanged;
             // 
             // panel1
             // 
