@@ -2,3 +2,160 @@
 @model Web_Layer.Pages.buy_ticketModel
 @{
 }
+<head>
+    <style>
+        #cartList {
+            background-color: white;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        #totalPrice {
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <label class="input-group-text" for="ticketTypeSelect">Ticket Type</label>
+                </div>
+                <select class="custom-select" id="ticketTypeSelect">
+                    <option selected>Choose...</option>
+                    <option value="children">Children</option>
+                    <option value="adult">Adult</option>
+                    <option value="elderly">Elderly</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <label class="input-group-text" for="ticketCountSelect">Ticket Count</label>
+                </div>
+                <select class="custom-select" id="ticketCountSelect">
+                    <option selected>Choose...</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <!-- Add more options as needed -->
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <label class="input-group-text" for="datePicker">Select Date</label>
+                </div>
+                <input type="date" class="form-control" id="datePicker" min="<?php echo date('Y-m-d'); ?>">
+            </div>
+        </div>
+    </div>
+
+    <button class="btn btn-primary" onclick="addToCart()">Add to Cart</button>
+    <button class="btn btn-success" onclick="calculateTotal()">Calculate Total</button>
+
+    <div class="mt-3">
+        <h5>Shopping Cart</h5>
+        <ul id="cartList"></ul>
+    </div>
+
+    <p id="totalPrice"></p>
+
+    <form method="post">
+        <input type="hidden" id="ticketIds" name="TicketIds" value="">
+        <input type="hidden" id="totalAmount" name="TotalAmount" value="">
+        <input type="hidden" id="ticketDetails" name="TicketDetails" value="">
+        <button asp-page-handler="Ticket" type="submit" class="btn btn-primary mt-3">Submit Order</button>
+    </form>
+</div>
+
+<script>
+    const ticketPrices = {
+        "children": 3,
+        "adult": 15,
+        "elderly": 10
+    };
+
+    let cart = {};
+
+    function addToCart() {
+        const ticketTypeSelect = document.getElementById('ticketTypeSelect');
+        const selectedTicketType = ticketTypeSelect.value;
+
+        const ticketCountSelect = document.getElementById('ticketCountSelect');
+        const selectedTicketCount = parseInt(ticketCountSelect.value);
+
+        const datePicker = document.getElementById('datePicker');
+        const selectedDate = datePicker.value;
+
+        if (selectedTicketType === "Choose..." || selectedTicketCount === 0 || !selectedDate) {
+            alert("Please select a valid ticket type, count, and date.");
+            return;
+        }
+
+        if (cart[selectedTicketType]) {
+            cart[selectedTicketType].count += selectedTicketCount;
+        } else {
+            cart[selectedTicketType] = {
+                count: selectedTicketCount,
+                price: ticketPrices[selectedTicketType],
+                date: selectedDate
+            };
+        }
+
+        updateCart();
+    }
+
+    function updateCart() {
+        const cartList = document.getElementById('cartList');
+        cartList.innerHTML = '';
+
+        for (const type in cart) {
+            const listItem = document.createElement('li');
+            listItem.innerHTML = `${cart[type].count} ${type} ticket(s) - Date: ${cart[type].date} <button onclick="removeFromCart('${type}')">Remove</button>`;
+            cartList.appendChild(listItem);
+        }
+
+        updateHiddenFields();
+    }
+
+    function updateHiddenFields() {
+        const ticketIdsInput = document.getElementById('ticketIds');
+        const totalAmountInput = document.getElementById('totalAmount');
+        const ticketDetailsInput = document.getElementById('ticketDetails');
+
+        const ticketIds = Object.keys(cart).join(',');
+        const totalAmount = Object.keys(cart).reduce((total, type) => {
+            return total + (cart[type].price * cart[type].count);
+        }, 0);
+
+        const ticketDetails = Object.keys(cart).map(type => {
+            return {
+                TicketType: type,
+                Count: cart[type].count,
+                Price: cart[type].price,
+                Date: cart[type].date
+            };
+        });
+
+        ticketIdsInput.value = ticketIds;
+        totalAmountInput.value = totalAmount;
+        ticketDetailsInput.value = JSON.stringify(ticketDetails);
+    }
+
+    function calculateTotal() {
+        const totalPrice = Object.keys(cart).reduce((total, type) => {
+            return total + (ticketPrices[type] * cart[type]);
+        }, 0);
+
+        document.getElementById('totalPrice').innerText = `Total Price: $${totalPrice}`;
+    }
+</script>

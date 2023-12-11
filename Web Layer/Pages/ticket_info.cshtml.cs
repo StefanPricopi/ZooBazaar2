@@ -5,15 +5,15 @@ namespace Web_Layer.Pages
 {
     public class ticket_infoModel : PageModel
     {
-        public void OnPost()
+        public IActionResult OnPost()
         {
             if (User.Identity.IsAuthenticated)
             {
-                RedirectToPage("/buy_ticket");
+                return RedirectToPage("/buy_ticket");
             }
             else
             {
-                RedirectToPage("/login");
+               return RedirectToPage("/login");
             }
         }
         public void OnGet()

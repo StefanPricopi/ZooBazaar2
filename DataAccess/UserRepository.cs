@@ -168,7 +168,7 @@ namespace DataAccess
             }
             catch (Exception ex)
             {
-                // Handle the exception (e.g., log the error)
+                
             }
 
             return null; // Return null if no user with the specified username is found
@@ -345,7 +345,7 @@ namespace DataAccess
                     connection.Open();
 
                     // Insert into User tablestring updateQuery = "UPDATE Employees SET FirstName = @FirstName, LastName = @LastName, PhoneNumber = @PhoneNumber, DateOfBirth = @DateOfBirth, BSN = @BSN, Position = @Position WHERE EmployeeID = @EmployeeID";
-                    using (SqlCommand cmdUser = new SqlCommand("INSERT INTO [users] (Username, Password, Salt) VALUES (@Username, @Password, @Salt); SELECT SCOPE_IDENTITY();", connection))
+                    using (SqlCommand cmdUser = new SqlCommand("INSERT INTO [users] (Username, Password, Salt,Email) VALUES (@Username, @Password, @Salt,@Email); SELECT SCOPE_IDENTITY();", connection))
                     {
                         var salt = DateTime.Now.ToString();
                         var hashedPW = UserManager.HashedPassword($"{userDTO.Password}{salt.Trim()}");
@@ -353,6 +353,7 @@ namespace DataAccess
                         cmdUser.Parameters.AddWithValue("@Username", userDTO.Username);
                         cmdUser.Parameters.AddWithValue("@Password", hashedPW);
                         cmdUser.Parameters.AddWithValue("@Salt", salt);
+                        cmdUser.Parameters.AddWithValue("@Email", userDTO.Email);
 
                         int userID = Convert.ToInt32(cmdUser.ExecuteScalar()); // Get the auto-generated UserID
 

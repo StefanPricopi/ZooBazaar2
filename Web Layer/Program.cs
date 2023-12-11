@@ -5,12 +5,14 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
+using Stripe;
 using System;
 using System.Collections.Generic;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddRazorPages();
+builder.Services.AddScoped<ITicket, TicketRepository>();
 builder.Services.AddScoped<IUser, UserRepository>();
 builder.Services.AddScoped<UserManager>();
 builder.Services.AddAuthentication(options =>
@@ -42,6 +44,8 @@ if (!app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseRouting();
+StripeConfiguration.ApiKey = "sk_test_51OJI1sDIahZEuybpv2NkfiO0t440kElxNBhUhb5GAEbC28CAIGwCx4YAiczeVQqtcUJMUIWvOBuBMNQxX67YoL1G00VTeFsN5y";
+
 app.UseAuthentication();
 app.UseAuthorization();
 
