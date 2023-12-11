@@ -343,6 +343,10 @@ section {
     height: 500px;
 }
 
+.myHeader {
+    box-shadow: none;
+    padding-bottom: -50px;
+}
 header{
     box-shadow:none;
     

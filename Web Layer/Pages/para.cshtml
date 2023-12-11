@@ -1,0 +1,132 @@
+﻿@page
+@model Web_Layer.Pages.paraModel
+@{
+}
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<style>
+    body{
+        margin:0;
+        padding:0;
+        height:2000px;
+            background: #80281D;
+
+    }
+    .container{
+        position:relative;
+        width: 100%;
+        height: 768px;
+        overflow:hidden;
+    }
+
+        .container .bg {
+            height: 100%;
+            width: 100%;
+            position: absolute;
+            left: 0;
+            top: 0;
+            background: url(/parallax/BG1.png);
+            background-size: cover;
+        }
+
+        .container .bg2 {
+            height: 100%;
+            width: 100%;
+            position: absolute;
+            left: 0;
+            top: 0;
+            background: url(/parallax/BG2.png);
+            background-size: cover;
+        }
+
+        .container .bg3 {
+            height: 100%;
+            width: 100%;
+            position: absolute;
+            left: 0;
+            top: 0;
+            background: url(/parallax/BG3png.png);
+            background-size: cover;
+        }
+
+        .content {
+            padding: 16px;
+        }
+
+        .sticky {
+            position: fixed;
+            top: 0;
+            width: 100%;
+        }
+
+            .sticky + .content {
+                padding-top: 102px;
+            }
+
+        .header {
+            padding: 40px 16px;
+            background: #261342;
+            color: #f1f1f1;
+        }
+</style>
+</head>
+<body>
+<div class="container">
+    <div class="bg"></div>
+    <div class="bg2"></div>
+    <div class="bg3"></></div>
+    
+</div>
+    <div class="header" id="myHeader">
+        <a class="navbar-brand" href="/">
+            <div style="display: flex; flex-direction: row; align-items: center;">
+                <img src="img/logo3.png" width="150" height="100" style="padding-top:-20px; margin-top:-45px;" class="mr-2" />
+                <div class="Bazaar" style="display: flex; flex-direction: column;">
+                    <b>Zoo</b>
+                    <b>Bazaar</b>
+                </div>
+            </div>
+        </a>
+    </div>
+    <div class="content">
+        <h3>Lorem</h3>
+        <p>Scroll back up to remove the sticky effect.</p>
+        <p>Some text to enable scrolling.. Lorem ipsum dolor sit amet, illum definitiones no quo, maluisset concludaturque et eum, altera fabulas ut quo. Atqui causae gloriatur ius te, id agam omnis evertitur eum. Affert laboramus repudiandae nec et. Inciderint efficiantur his ad. Eum no molestiae voluptatibus.</p>
+
+    </div>
+<script src="https://code.jquery.com/jquery-3.7.1.slim.min.js"
+        integrity="sha256-kmHvs0B+OpCW5GVHUNjv9rOmY0IvSIRcf7zGUDTDQM8="
+        crossorigin="anonymous"></script>
+<script>
+    $(window).scroll(function () {
+        var winScroll = $(this).scrollTop();
+        $('.bg').css({
+            'transform': 'translate(0, ' + winScroll / 8 + '%)'
+        });
+        $('.bg2').css({
+            'transform': 'translate(0, ' + winScroll / 24 + '%)'
+        });
+    });
+</script>
+    <script>
+        window.onscroll = function () { myFunction() };
+
+        var header = document.getElementById("myHeader");
+        var sticky = header.offsetTop;
+
+        function myFunction() {
+            if (window.pageYOffset > sticky) {
+                header.classList.add("sticky");
+            } else {
+                header.classList.remove("sticky");
+            }
+        }
+    </script>
+</body>
+</html>
