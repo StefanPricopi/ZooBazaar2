@@ -118,7 +118,7 @@ namespace Web_Layer.Pages
                                 ticketclass.TicketType = ticket.TicketType;
                                 ticketclass.UserID = userId;
                                 int ticketID = ticketManager.CreateTicket(ticketclass);
-                                string qrCodeText = "Example QR Code Text" + testValue.ToString(); // Text to encode in QR code
+                                string qrCodeText ="Your order number is: " + ticketID + "\r\n" + "Your ticket type is: " + ticket.TicketType.ToString() + "\r\n" + "Your email is: " + UserEmail + "\r\n" + "the ticket is available for the date: " + ticket.DateValidity.Date.ToString() + "\r\n"; // Text to encode in QR code
 
                                 // Generate QR code as Bitmap
                                 Bitmap qrCodeImage = await GenerateQRCodeAsync(qrCodeText);
