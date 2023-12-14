@@ -34,7 +34,8 @@ namespace DataAccess
                     U.Username, 
                     U.Password, 
                     U.Email, 
-                    U.Salt, 
+                    U.Salt,
+                    U.Rfid,
                     EC.ContractID, 
                     EC.StartDate, 
                     EC.EndDate, 
@@ -121,7 +122,7 @@ namespace DataAccess
                     connection.Open();
 
                     // Insert into User table
-                    using (SqlCommand cmdUser = new SqlCommand("INSERT INTO [users] (Username, Email, Password, Salt) VALUES (@Username, @Email, @Password, @Salt); SELECT SCOPE_IDENTITY();", connection))
+                    using (SqlCommand cmdUser = new SqlCommand("INSERT INTO [users] (Username, Email, Password, Salt, Rfid) VALUES (@Username, @Email, @Password, @Salt, @Rfid); SELECT SCOPE_IDENTITY();", connection))
                     {
                         var salt = DateTime.Now.ToString();
                         var hashedPW = UserManager.HashedPassword($"{userDTO.Password}{salt.Trim()}");
@@ -130,6 +131,7 @@ namespace DataAccess
                         cmdUser.Parameters.AddWithValue("@Email", userDTO.Email);
                         cmdUser.Parameters.AddWithValue("@Password", hashedPW);
                         cmdUser.Parameters.AddWithValue("@Salt", salt);
+                        cmdUser.Parameters.AddWithValue("@Rfid", userDTO.Rfid);
 
                         int userID = Convert.ToInt32(cmdUser.ExecuteScalar()); // Get the auto-generated UserID
 
@@ -457,7 +459,7 @@ namespace DataAccess
                             Password = dr["Password"].ToString(),
                             Email = dr["Email"].ToString(),
                             Salt = dr["Salt"].ToString(),
-
+                            Rfid = dr["Rfid"].ToString()
 
                         };
                         return new User(userDTO); // Create a User object from the UserDTO

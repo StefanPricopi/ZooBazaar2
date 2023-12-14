@@ -29,6 +29,44 @@ namespace DataAccess
             return null;
         }
 
+        public UserDTO LoginByRfid(string rfid)
+        {
+            try
+            {
+                using (SqlConnection conn = InitializeConection())
+                {
+                    conn.Open();
+                    string sql = "SELECT * FROM users WHERE Rfid = @rfid";
+                    SqlCommand cmd = new SqlCommand(sql, conn);
+                    cmd.Parameters.AddWithValue("@rfid", rfid);
+
+                    SqlDataReader dr = cmd.ExecuteReader();
+
+                    if (dr.Read())
+                    {
+                        var userDTO = new UserDTO
+                        {
+                            UserID = Convert.ToInt32(dr["UserID"]),
+                            Username = dr["Username"].ToString(),
+                            Password = dr["Password"].ToString(),
+                            Email = dr["Email"].ToString(),
+                            Salt = dr["Salt"].ToString(),
+                            Rfid = dr["Rfid"].ToString(),
+
+
+                        };
+                        return userDTO; // Create a User object from the UserDTO
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                // Handle the exception (e.g., log the error)
+            }
+
+            return null; // Return null if no user with the specified email is found
+        }
+
         public string RetrievePositionInformation(string username)
         {
             User currentUser = GetCurrentUserByUsername(username);

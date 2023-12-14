@@ -21,5 +21,6 @@ namespace Logic.Interfaces
         UserDTO FindUserByProvidedUsername(string userEmail);
         public string RetrievePositionInformation(string username);
         public int GetEmpIDbyUserId(int id);
+        public UserDTO LoginByRfid(string rfid);
     }
 }

@@ -17,6 +17,7 @@ namespace Logic.DTO
         public string Password { get; set; }
         public string Email { get; set; }
         public string Salt { get; set; }
+        public string Rfid { get; set; }
        
         public UserDTO() { }
         public UserDTO(UserDTO userDTO) { }

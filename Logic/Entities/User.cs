@@ -15,6 +15,7 @@ namespace Logic.Entities
         private string password;
         private string email;
         private string salt;
+        private string rfid;
 
         public int UserID
         {
@@ -47,18 +48,25 @@ namespace Logic.Entities
             set => salt = value;
         }
 
+        public string Rfid
+        {
+            get => rfid;
+            set => rfid = value;
+        }
+
         public User()
         {
             // Default constructor
         }
 
-        public User(int userID, string username, string password, string email, string salt)
+        public User(int userID, string username, string password, string email, string salt, string rfid)
         {
             this.userID = userID;
             this.username = username;
             this.password = password;
             this.email = email;
             this.salt = salt;
+            this.rfid = rfid;
         }
         public User(UserDTO userDTO)
         {
@@ -67,6 +75,7 @@ namespace Logic.Entities
             this.password = userDTO.Password;
             this.email = userDTO.Email;
             this.salt = userDTO.Salt;
+            this.rfid = userDTO.Rfid;
         }
 
         public UserDTO UserToUserDTO()
@@ -77,7 +86,8 @@ namespace Logic.Entities
                 Username = this.Username,
                 Password = this.Password,
                 Email = this.Email,
-                Salt = this.Salt
+                Salt = this.Salt,
+                Rfid = this.Rfid
             };
         }
 
@@ -89,7 +99,8 @@ namespace Logic.Entities
                 Username = userDTO.Username,
                 Password = userDTO.Password,
                 Email = userDTO.Email,
-                Salt = userDTO.Salt
+                Salt = userDTO.Salt,
+                Rfid = userDTO.Rfid
             };
         }
     }
