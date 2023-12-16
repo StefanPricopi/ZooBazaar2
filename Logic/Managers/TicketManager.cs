@@ -18,5 +18,28 @@ namespace Logic.Managers
         {
             return iticket.CreateTicket(ticket);
         }
+        public Ticket RetrieveTicketFromID(int id)
+        {
+            return iticket.RetrieveTicketFromID(id);
+        }
+        public bool CheckIfGivenQrIsValid(Ticket ticket, DateTime validity, int givenID) 
+        {
+            DateTime now = DateTime.Now;
+            if (ticket != null) 
+            {
+                if(ticket.TicketID == givenID && ticket.DateValidity.Date == validity.Date && validity.Date == now.Date)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            else
+            {
+                return false;   
+            }
+        }
     }
 }

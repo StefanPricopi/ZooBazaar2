@@ -10,5 +10,6 @@ namespace Logic.Interfaces
     public interface ITicket
     {
         public int CreateTicket(Ticket ticket);
+        public Ticket RetrieveTicketFromID(int id);
     }
 }

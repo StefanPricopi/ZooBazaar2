@@ -14,6 +14,15 @@ using Microsoft.Identity.Client;
 using Microsoft.Identity.Client.Platforms.Features.DesktopOs.Kerberos;
 using System;
 using System.Threading.Tasks;
+using ZXing;
+using System.IO;
+using System.Net.Http;
+using ZXing.ImageSharp;
+using ZXing.SkiaSharp;
+using System.IO;
+using System.Net.Http;
+using SkiaSharp;
+using ZXing.SkiaSharp.Rendering;
 
 namespace Web_Layer.Pages
 {
@@ -26,23 +35,31 @@ namespace Web_Layer.Pages
             iticket = TopUpService;
             ticketManager = new TicketManager(iticket);
         }
-        private async Task<Bitmap> GenerateQRCodeAsync(string qrCodeText)
+        private SKBitmap GenerateQRCode(string link)
         {
-            using (HttpClient client = new HttpClient())
+            // Append the link to the qrCodeText
+            string qrCodeText = "https://localhost:7281/Qrpage?" + Uri.EscapeUriString(link);
+
+            // Create a BarcodeWriter instance for ZXing
+            ZXing.BarcodeWriter<SKBitmap> barcodeWriter = new ZXing.BarcodeWriter<SKBitmap>
             {
-                HttpResponseMessage response = await client.GetAsync($"https://api.qrserver.com/v1/create-qr-code/?data={qrCodeText}&size=300x300");
-                if (response.IsSuccessStatusCode)
+                Format = ZXing.BarcodeFormat.QR_CODE,
+                Options = new ZXing.Common.EncodingOptions
                 {
-                    Stream stream = await response.Content.ReadAsStreamAsync();
-                    return new Bitmap(stream);
+                    Width = 300,
+                    Height = 300
                 }
-                else
-                {
-                    // Handle error response
-                    return null;
-                }
-            }
+            };
+
+            // setting instance for renderer
+            barcodeWriter.Renderer = new SKBitmapRenderer();
+
+            // Encoding the QR code via ZXing API
+            return barcodeWriter.Write(qrCodeText);
         }
+
+
+
 
         private byte[] ImageToByteArray(Bitmap image)
         {
@@ -87,7 +104,15 @@ namespace Web_Layer.Pages
             }
         }
 
-
+        private Bitmap ConvertToSystemDrawingBitmap(SKBitmap skBitmap)
+        {
+            using (MemoryStream stream = new MemoryStream())
+            {
+                skBitmap.Encode(SKEncodedImageFormat.Png, 100).SaveTo(stream);
+                stream.Position = 0;
+                return new Bitmap(stream);
+            }
+        }
         private List<Ticket> ConvertAmountToTicketList(string serializedAmount)
         {
             List<Ticket> ticketList = JsonConvert.DeserializeObject<List<Ticket>>(serializedAmount);
@@ -118,10 +143,12 @@ namespace Web_Layer.Pages
                                 ticketclass.TicketType = ticket.TicketType;
                                 ticketclass.UserID = userId;
                                 int ticketID = ticketManager.CreateTicket(ticketclass);
-                                string qrCodeText ="Your order number is: " + ticketID + "\r\n" + "Your ticket type is: " + ticket.TicketType.ToString() + "\r\n" + "Your email is: " + UserEmail + "\r\n" + "the ticket is available for the date: " + ticket.DateValidity.Date.ToString() + "\r\n"; // Text to encode in QR code
-
+                                string qrCodeText = "Your order number is: " + ticketID + "\r\n" +
+                     "Your ticket type is: " + ticket.TicketType.ToString() + "\r\n" +
+                     "Your email is: " + UserEmail + "\r\n" +
+                     "The ticket is available for the date: " + ticket.DateValidity.Date.ToShortDateString() + "\r\n";
                                 // Generate QR code as Bitmap
-                                Bitmap qrCodeImage = await GenerateQRCodeAsync(qrCodeText);
+                                Bitmap qrCodeImage = ConvertToSystemDrawingBitmap(GenerateQRCode(qrCodeText));
 
                                 // Convert QR code image to byte array
                                 byte[] qrCodeImageData = ImageToByteArray(qrCodeImage);
