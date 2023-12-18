@@ -35,7 +35,7 @@ namespace Web_Layer.Pages
             iticket = TopUpService;
             ticketManager = new TicketManager(iticket);
         }
-        private SKBitmap GenerateQRCode(string link)
+        private SKBitmap GenerateQRCodeWithResizedLogo(string link, string logoFilePath, int logoSize)
         {
             // Append the link to the qrCodeText
             string qrCodeText = "https://localhost:7281/Qrpage?" + Uri.EscapeUriString(link);
@@ -48,19 +48,74 @@ namespace Web_Layer.Pages
                 {
                     Width = 300,
                     Height = 300
-                }
+                },
+                Renderer = new SKBitmapRenderer()
             };
 
-            // setting instance for renderer
-            barcodeWriter.Renderer = new SKBitmapRenderer();
+            // Encoding the QR code
+            SKBitmap qrCodeBitmap = barcodeWriter.Write(qrCodeText);
 
-            // Encoding the QR code via ZXing API
-            return barcodeWriter.Write(qrCodeText);
+            // Loading the logo to the QR
+            SKBitmap logoBitmap = SKBitmap.Decode(logoFilePath);
+
+            if (qrCodeBitmap != null && logoBitmap != null)
+            {
+                // Resize the logo to fit within the specified size(the one set in parameter)
+                logoBitmap = ResizeBitmap(logoBitmap, logoSize);
+
+               // set it on the center
+                int x = (qrCodeBitmap.Width - logoBitmap.Width) / 2;
+                int y = (qrCodeBitmap.Height - logoBitmap.Height) / 2;
+
+                // Create a new SKCanvas to draw the QR code and logo
+                using (var canvas = new SKCanvas(qrCodeBitmap))
+                {
+                    // Draw the QR code
+                    canvas.DrawBitmap(qrCodeBitmap, 0, 0);
+
+                    // Draw the resized logo on top of the QR code
+                    canvas.DrawBitmap(logoBitmap, x, y);
+                }
+
+                return qrCodeBitmap;
+            }
+            else
+            {
+                return null;
+            }
         }
 
+        private SKBitmap ResizeBitmap(SKBitmap bitmap, int newSize)
+        {
+            if (bitmap == null)
+            {
+                return null;
+            }
 
+            // calculating the new size while maintaining the aspect ratio
+            int newWidth, newHeight;
+            if (bitmap.Width > bitmap.Height)
+            {
+                newWidth = newSize;
+                newHeight = (int)((float)bitmap.Height / bitmap.Width * newSize);
+            }
+            else
+            {
+                newWidth = (int)((float)bitmap.Width / bitmap.Height * newSize);
+                newHeight = newSize;
+            }
+            SKBitmap resizedBitmap = new SKBitmap(newWidth, newHeight);
+            using (var canvas = new SKCanvas(resizedBitmap))
+            {
+                var paint = new SKPaint
+                {
+                    FilterQuality = SKFilterQuality.High
+                };
+                canvas.DrawBitmap(bitmap, new SKRect(0, 0, newWidth, newHeight), paint);
+            }
 
-
+            return resizedBitmap;
+        }
         private byte[] ImageToByteArray(Bitmap image)
         {
             using (MemoryStream stream = new MemoryStream())
@@ -148,8 +203,10 @@ namespace Web_Layer.Pages
                      "Your email is: " + UserEmail + "\r\n" +
                      "The ticket is available for the date: " + ticket.DateValidity.Date.ToShortDateString() + "\r\n";
                                 // Generate QR code as Bitmap
-                                Bitmap qrCodeImage = ConvertToSystemDrawingBitmap(GenerateQRCode(qrCodeText));
+                                string logoFilePath = @"D:\project repository for group pj\zoo-bazaar-group-5\Web Layer\wwwroot\img\logo3.png"; // works only with absolute address for some reason huh
 
+                                Bitmap qrCodeImage = ConvertToSystemDrawingBitmap(GenerateQRCodeWithResizedLogo(qrCodeText, logoFilePath, 90));// added parameter size keep it between 50-90 more 
+                                                                                                                                               // will break the QR decoding
                                 // Convert QR code image to byte array
                                 byte[] qrCodeImageData = ImageToByteArray(qrCodeImage);
 
