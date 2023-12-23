@@ -2,27 +2,35 @@
 @model Web_Layer.Pages.ticket_infoModel
 @{
 }
+<div class="text-center">
+    <h2 class="display-4  purple-heading">TICKET PRIZES</h2>
+    <div class="text-container ticket-text">
+        <p>
+            <strong>Individual Visit</strong>
+            <ul class="ticket-list">
+                <li>Children up to 3 years old - Free</li>
+                <li>From 3 to 18 years old - €5,00</li>
+                <li>Over 18 years old - €15,00</li>
+                <li>Pensioners - €5,00</li>
+                <li>People with disabilities - Free</li>
+            </ul>
+        </p>
 
-<section>
-    <h1> Ticket information</h1>
-    <p>
-        Individual Visit
-        Children up to 3 years old – Free
-        From 3 to 18 years old – 5€
-        Over 18 years old- 15€
-        Pensioners- 5€
-        People with disabilities – Free
+        <p>
+            <strong>Group Visits (for groups of 15 or more individuals)</strong>
+            <ul class="ticket-list">
+                <li>For the group organizer - Free</li>
+                <li>Children up to 3 years old - Free</li>
+                <li>From 3 to 18 years old - €2,00</li>
+                <li>Over 18 years old - €3,00</li>
+                <li>People with disabilities - Free</li>
+            </ul>
+        </p>
 
-        Group Visits (for groups of 15 or more individuals)
-        For the group organizer-Free
-        Children up to 3 years old- Free
-        From 3 to 18 years old – 2€
-        Over 18 years old – 3€
-        For individuals in special institutions-Free
+        <p>
+            Please bring the appropriate document to verify age and special categories.
+        </p>
+    </div>
+    <a class="btn btn-light-blue btn-lg" asp-area="" asp-page="/buy_ticket">Order Tickets</a>
 
-        Please bring the appropriate document to verify age and special categories.
-    </p>
-    <form method="post">
-    <button type="submit" class="btn btn-primary">Buy ticket</button>
-    </form>
-</section>
+</div>

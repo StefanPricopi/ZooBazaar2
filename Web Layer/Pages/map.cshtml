@@ -2,29 +2,43 @@
 @model Web_Layer.Pages.mapModel
 @{
 }
-<div class="image-container">
-    <img class="image-frame" src="@Model.Img" id="zoom-responsive-image" />
-</div>
+
 <form method='post' asp-page="./map" id="languageForm">
-    <div class='form-group row gap-5' style='margin-top:-80px;padding-top:0px;display:flex;justify-content: center; align-items: center; text-align:center;flex-direction:row;'>
-        <div class='col-1'>
-            <input type='submit' class='btn btn-primary btn-lg' value='EN' asp-page-handler='EN' />
-        </div>
-        <div class='col-1'>
-            <input type='submit' class='btn btn-primary btn-lg' value='NL' asp-page-handler='NL' />
-        </div>
+    <div class="image-container">
+        <button type='submit' class='btn btn-link' asp-page-handler='EN'>
+            <img src='/img/english.png' alt='English Flag' class='flag-image' />
+        </button>
+
+        <img class="image-frame" src="@Model.Img" id="zoom-responsive-image" />
+
+        <button type='submit' class='btn btn-link' asp-page-handler='NL'>
+            <img src='/img/dutch.png' alt='Dutch Flag' class='flag-image' />
+        </button>
     </div>
+
 </form>
+
 <script>
     window.addEventListener('resize', adjustImageSize);
 
     function adjustImageSize() {
         const zoomLevel = window.innerWidth / window.outerWidth;
 
-        // Adjust the image size based on the zoom level
-        const imageSize = 50 * zoomLevel; // Change 50 to your desired initial size
+        const imageSize = 30 * zoomLevel; // Adjust the size as needed
 
         const image = document.getElementById('zoom-responsive-image');
         image.style.width = imageSize + 'vw';
     }
+
+    document.addEventListener('DOMContentLoaded', function () {
+        document.querySelectorAll('.flag-btn').forEach(function (button) {
+            button.addEventListener('click', function (event) {
+                event.preventDefault(); // Prevent the default form submission
+                var form = document.getElementById('languageForm');
+                var handler = this.getAttribute('asp-page-handler');
+                form.elements['handler'].value = handler;
+                form.submit(); // Manually submit the form
+            });
+        });
+    });
 </script>

@@ -7,9 +7,11 @@ using Stripe;
 using Microsoft.Extensions.Primitives;
 using static Web_Layer.Pages.buy_ticketModel;
 using System.Linq;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Web_Layer.Pages
 {
+    [Authorize]
     public class buy_ticketModel : PageModel
     {
         public void OnGet()
