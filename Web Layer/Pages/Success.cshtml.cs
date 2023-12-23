@@ -203,9 +203,9 @@ namespace Web_Layer.Pages
                      "Your email is: " + UserEmail + "\r\n" +
                      "The ticket is available for the date: " + ticket.DateValidity.Date.ToShortDateString() + "\r\n";
                                 // Generate QR code as Bitmap
-                                string logoFilePath = @"D:\project repository for group pj\zoo-bazaar-group-5\Web Layer\wwwroot\img\logo3.png"; // works only with absolute address for some reason huh
+                                string logoFilePath = @"D:\project repository for group pj\zoo-bazaar-group-5\Web Layer\wwwroot\img\logo3.jpg"; // works only with absolute address for some reason huh
 
-                                Bitmap qrCodeImage = ConvertToSystemDrawingBitmap(GenerateQRCodeWithResizedLogo(qrCodeText, logoFilePath, 90));// added parameter size keep it between 50-90 more 
+                                Bitmap qrCodeImage = ConvertToSystemDrawingBitmap(GenerateQRCodeWithResizedLogo(qrCodeText, logoFilePath, 60));// added parameter size keep it between 50-90 more 
                                                                                                                                                // will break the QR decoding
                                 // Convert QR code image to byte array
                                 byte[] qrCodeImageData = ImageToByteArray(qrCodeImage);
