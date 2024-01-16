@@ -1,28 +1,140 @@
 ﻿@page
 @model Web_Layer.Pages.ProfileModel
-@{
-}
-@if (Model.userProfile != null)
-{
-   
-    <div class="details-container">
 
-       
-        <p class="FirstName">FirstName: @Model.userProfile.firstName</p>
-        <p class="LastName">LastName: @Model.userProfile.lastName</p>
-        <p class="PhoneNumber">Phone number: @Model.userProfile.phoneNumber</p>
-        <p class="DateOfBirth">Date of birth: @Model.userProfile.dateOfBirth</p>
-        <p class="Username">Username: @Model.userProfile.username</p>
-        <p class="Email">Email: @Model.userProfile.email</p>
-       
-        <p class="Address">Address: @Model.userProfile.street</p>
-        <p class="ZipCode">Zip code: @Model.userProfile.zipcode</p>
-        <p class="City">City: @Model.userProfile.city</p>
-        <p class="Country">Country: @Model.userProfile.country</p>
-   
-        <p class="PartnerFirstName">Partner FirstName: @Model.userProfile.partnerFirstName</p>
-        <p class="PartnerLastName">Partner LastName: @Model.userProfile.partnerLastName</p>
-        <p class="PartnerEmail">Partner Phone number: @Model.userProfile.partnerPhoneNumber</p>
+@* Add this in the <head> section of your HTML file to include Bootstrap styles *@
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8sh+WyEdQVXGrnbcz0lf4aPpRv34u6fwFQK5" crossorigin="anonymous">
+<script>
+    function toggleForm(formId) {
+        // Hide all forms
+        document.querySelectorAll('.profile-form').forEach(form => {
+            form.style.display = 'none';
+        });
+
+        // Show the selected form
+        document.getElementById(formId).style.display = 'block';
+    }
+</script>
+
+<!-- Personal Information Form -->
+<button type="button" class="btn btn-primary" onclick="toggleForm('personalForm')">Modify Personal Information</button>
+<form id="personalForm" method="post" asp-page-handler="UpdateProfile" class="my-4 profile-form" style="display: none;">
+    <h4 class="mb-3">Personal Information</h4>
+    <!-- Personal Information Fields -->
+    <div class="form-group">
+        <label for="modifiedFirstName">New First Name:</label>
+        <input type="text" id="modifiedFirstName" name="updatedProfile.modifiedFirstName" class="form-control">
     </div>
 
+    <div class="form-group">
+        <label for="modifiedLastName">New Last Name:</label>
+        <input type="text" id="modifiedLastName" name="updatedProfile.modifiedLastName" class="form-control">
+    </div>
+
+    <div class="form-group">
+        <label for="modifiedPhoneNumber">New Phone Number:</label>
+        <input type="text" id="modifiedPhoneNumber" name="updatedProfile.modifiedPhoneNumber" class="form-control">
+    </div>
+
+    <div class="form-group">
+        <label for="modifiedDateOfBirth">New Date of Birth:</label>
+        <input type="text" id="modifiedDateOfBirth" name="updatedProfile.modifiedDateOfBirth" class="form-control">
+    </div>
+
+    <div class="form-group">
+        <label for="modifiedEmail">New Email:</label>
+        <input type="text" id="modifiedEmail" name="updatedProfile.modifiedEmail" class="form-control">
+    </div>
+
+    <button type="submit" class="btn btn-primary">Save Changes</button>
+    <button type="button" class="btn btn-secondary cancel" asp-page-handler="Cancel">Cancel</button>
+</form>
+
+<!-- Address Information Form -->
+<button type="button" class="btn btn-primary" onclick="toggleForm('addressForm')">Modify Address Information</button>
+<form id="addressForm" method="post" asp-page-handler="UpdateProfile" class="my-4 profile-form" style="display: none;">
+    <h4 class="mb-3">Address Information</h4>
+    <!-- Address Information Fields -->
+    <div class="form-group">
+        <label for="modifiedStreet">New Street Address:</label>
+        <input type="text" id="modifiedStreet" name="updatedProfile.modifiedStreet" class="form-control">
+    </div>
+
+    <div class="form-group">
+        <label for="modifiedZipCode">New Zip Code:</label>
+        <input type="text" id="modifiedZipCode" name="updatedProfile.modifiedZipCode" class="form-control">
+    </div>
+
+    <div class="form-group">
+        <label for="modifiedCity">New City:</label>
+        <input type="text" id="modifiedCity" name="updatedProfile.modifiedCity" class="form-control">
+    </div>
+
+    <div class="form-group">
+        <label for="modifiedCountry">New Country:</label>
+        <input type="text" id="modifiedCountry" name="updatedProfile.modifiedCountry" class="form-control">
+    </div>
+
+    <button type="submit" class="btn btn-primary">Save Changes</button>
+    <button type="button" class="btn btn-secondary cancel" asp-page-handler="Cancel">Cancel</button>
+</form>
+
+<!-- Spouse Information Form -->
+<button type="button" class="btn btn-primary" onclick="toggleForm('spouseForm')">Modify Spouse Information</button>
+<form id="spouseForm" method="post" asp-page-handler="UpdateProfile" class="my-4 profile-form" style="display: none;">
+    <h4 class="mb-3">Spouse Information</h4>
+    <!-- Spouse Information Fields -->
+    <div class="form-group">
+        <label for="modifiedPartnerFirstName">New Partner First Name:</label>
+        <input type="text" id="modifiedPartnerFirstName" name="updatedProfile.modifiedPartnerFirstName" class="form-control">
+    </div>
+
+    <div class="form-group">
+        <label for="modifiedPartnerLastName">New Partner Last Name:</label>
+        <input type="text" id="modifiedPartnerLastName" name="updatedProfile.modifiedPartnerLastName" class="form-control">
+    </div>
+
+    <div class="form-group">
+        <label for="modifiedPartnerPhoneNumber">New Partner Phone Number:</label>
+        <input type="text" id="modifiedPartnerPhoneNumber" name="updatedProfile.modifiedPartnerPhoneNumber" class="form-control">
+    </div>
+
+    <button type="submit" class="btn btn-primary">Save Changes</button>
+    <button type="button" class="btn btn-secondary cancel" asp-page-handler="Cancel">Cancel</button>
+</form>
+
+<!-- Display User Profile -->
+@if (Model.userProfile != null)
+{
+    <div class="details-container">
+        <!-- Personal Data Card -->
+        <div class="card" id="personalCard">
+            <!-- Display User Profile Details -->
+            <p class="FirstName">FirstName: @Model.userProfile.firstName</p>
+            <p class="LastName">LastName: @Model.userProfile.lastName</p>
+            <p class="PhoneNumber">Phone number: @Model.userProfile.phoneNumber</p>
+            <p class="DateOfBirth">Date of birth: @Model.userProfile.dateOfBirth</p>
+            <p class="Username">Username: @Model.userProfile.username</p>
+            <p class="Email">Email: @Model.userProfile.email</p>
+            
+        </div>
+
+        <!-- Address Card -->
+        <div class="card" id="addressCard">
+            <!-- Display Address Details -->
+            <p class="Address">Address: @Model.userProfile.street</p>
+            <p class="ZipCode">Zip code: @Model.userProfile.zipcode</p>
+            <p class="City">City: @Model.userProfile.city</p>
+            <p class="Country">Country: @Model.userProfile.country</p>
+           
+        </div>
+
+        <!-- Spouse Information Card -->
+        <div class="card" id="spouseCard">
+            <!-- Display Spouse Information -->
+            <p class="PartnerFirstName">Partner FirstName: @Model.userProfile.partnerFirstName</p>
+            <p class="PartnerLastName">Partner LastName: @Model.userProfile.partnerLastName</p>
+            <p class="PartnerEmail">Partner Phone number: @Model.userProfile.partnerPhoneNumber</p>
+        
+        </div>
+    </div>
 }

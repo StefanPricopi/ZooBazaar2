@@ -20,5 +20,7 @@ namespace Logic.Managers
         {
             return  empProfile.GetActualProfileByID(id);
         }
+        public EmpProfileDTO UpdateProfile(EmpProfileDTO updatedProfile)
+        {  return empProfile.UpdateProfile(updatedProfile);}
     }
 }
