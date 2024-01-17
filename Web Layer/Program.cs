@@ -30,6 +30,8 @@ builder.Services.AddAuthorization(options =>
 {
     options.AddPolicy("MustBeEmployee",
         policy => policy.RequireClaim("Employee", "Caretaker"));
+    options.AddPolicy("MustBeVisitor",
+       policy => policy.RequireClaim("Visitor", "Visitor"));
 });
 
 var app = builder.Build();

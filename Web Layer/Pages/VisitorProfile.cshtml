@@ -1,0 +1,64 @@
+﻿@page
+@model Web_Layer.Pages.VisitorProfile
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8sh+WyEdQVXGrnbcz0lf4aPpRv34u6fwFQK5" crossorigin="anonymous">
+<script>
+    function toggleForm(formId) {
+        // Hide all forms
+        document.querySelectorAll('.profile-form').forEach(form => {
+            form.style.display = 'none';
+        });
+
+        // Show the selected form
+        document.getElementById(formId).style.display = 'block';
+    }
+</script>
+<!-- Personal Information Form -->
+<button type="button" class="btn btn-primary" onclick="toggleForm('personalForm')">Modify Account Information</button>
+<form id="personalForm" method="post" asp-page-handler="UpdateProfile" class="my-4 profile-form" style="display: none;">
+    <h4 class="mb-3">Account Information</h4>
+    <!-- Personal Information Fields -->
+    <div class="form-group">
+        <label for="modifiedUsername">New Username:</label>
+        <input type="text" id="modifiedUsername" name="updatedProfile.modifiedUsername" class="form-control">
+    </div>
+
+    <div class="form-group">
+        <label for="modifiedEmail">New Email:</label>
+        <input type="text" id="modifiedEmail" name="updatedProfile.modifiedEmail" class="form-control">
+    </div>
+    <button type="submit" class="btn btn-primary">Save Changes</button>
+    <button type="button" class="btn btn-secondary cancel" asp-page-handler="Cancel">Cancel</button>
+</form>
+<!-- Password Form -->
+<button type="button" class="btn btn-primary" onclick="toggleForm('PasswordForm')">Modify your password</button>
+<form id="PasswordForm" method="post" asp-page-handler="UpdatePassword" class="my-4 profile-form" style="display: none;">
+    <h4 class="mb-3">Password Information</h4>
+    <!-- Personal Information Fields -->
+    <div class="form-group">
+        <label for="currentPassword">Old Password:</label>
+        <input type="text" id="currentPassword" name="updatedProfile.currentPassword" class="form-control">
+    </div>
+
+    <div class="form-group">
+        <label for="newPassword">New Password:</label>
+        <input type="text" id="newPassword" name="updatedProfile.newPassword" class="form-control">
+    </div>
+    <div class="form-group">
+        <label for="confirmNewPassword">Confirm Password:</label>
+        <input type="text" id="confirmNewPassword" name="updatedProfile.confirmNewPassword" class="form-control">
+    </div>
+    <button type="submit" class="btn btn-primary">Save Changes</button>
+    <button type="button" class="btn btn-secondary cancel" asp-page-handler="Cancel">Cancel</button>
+</form>
+@if (Model.userProfile != null)
+{
+    <div class="details-container">
+        <!-- Visitor Data Card -->
+        <div class="card" id="visitorCard">
+            <!-- Display Visitor Profile Details -->
+            <p class="Username">Username: @Model.userProfile.Username</p>
+            <p class="Email">Email: @Model.userProfile.Email</p>
+            <p class="TotalTicketPurchased">Total Tickets Purchased: @Model.userProfile.TotalTicketsPurchased</p>
+        </div>
+    </div>
+}

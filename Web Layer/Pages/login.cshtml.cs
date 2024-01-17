@@ -73,8 +73,10 @@ namespace Web_Layer.Pages
                         var claims = new List<Claim>
                 {
                     new Claim(ClaimTypes.Name, "user"),
-                    new Claim(ClaimTypes.NameIdentifier, userModel.VisitorID.ToString()),
-                    new Claim(ClaimTypes.Email, userModel.Email)
+                    new Claim("UserID", userModel.UserID.ToString()),
+                    new Claim(ClaimTypes.Email, userModel.Email),
+                    new Claim("Visitor", "Visitor"),
+                     new Claim(ClaimTypes.Role, "Visitor")
                 };
                         var identity = new ClaimsIdentity(claims, "LoginCookieAuth");
                         ClaimsPrincipal claimsPrincipal = new ClaimsPrincipal(identity);

@@ -46,15 +46,18 @@
                                 <a class="dropdown-item" href="/map"><b>Map</b></a>
                                 <a class="dropdown-item" href="/ticket_info"><b>Admission prices</b></a>
                                 <a class="dropdown-item" href="/opening hours"><b>Opening Hours</b></a>
+                               
                                 @if (User.IsInRole("Caretaker"))
                                 {
                                     <a class="dropdown-item" href="/schedule"><b>Schedule</b></a>
                                     <a class="dropdown-item" href="/Profile"><b>Profile</b></a>
                                 }
-                                
-                           
-                                    
-                                </div>
+                                else if (User.IsInRole("Visitor"))
+                                {
+                                    <a class="dropdown-item" href="/VisitorProfile"><b>Profile</b></a>
+                                }
+
+                            </div>
                             </div>
                         <div class="btn-group" style="padding-left: 5px;">
                             <button type="button" class="btn btn-primary"><b>Animals</b></button>
