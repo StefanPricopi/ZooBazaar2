@@ -225,9 +225,9 @@ namespace DataAccess
         private void UpdatePartnerInformation(SqlConnection connection, int employeeID, string partnerFirstName, string partnerLastName, string partnerPhoneNumber)
         {
             string updatePartnerQuery = @"
-    UPDATE dbo.EmployeePartner
-    SET FirstName = @PartnerFirstName, LastName = @PartnerLastName, PhoneNumber = @PartnerPhoneNumber
-    WHERE EmployeeID = @EmployeeID";
+                UPDATE dbo.EmployeePartner
+                SET FirstName = @PartnerFirstName, LastName = @PartnerLastName, PhoneNumber = @PartnerPhoneNumber
+                WHERE EmployeeID = @EmployeeID";
 
             using (SqlCommand updateCommand = new SqlCommand(updatePartnerQuery, connection))
             {
@@ -243,9 +243,9 @@ namespace DataAccess
         private void UpdateAddressInformation(SqlConnection connection, int employeeID, string street, string zipcode, string city, string country)
         {
             string updateAddressQuery = @"
-UPDATE dbo.EmployeeAddress
-SET StreetName = @Street, ZipCode = @Zipcode, City = @City, Country = @Country
-WHERE EmployeeID = @EmployeeID";
+            UPDATE dbo.EmployeeAddress
+            SET StreetName = @Street, ZipCode = @Zipcode, City = @City, Country = @Country
+            WHERE EmployeeID = @EmployeeID";
 
             using (SqlCommand updateCommand = new SqlCommand(updateAddressQuery, connection))
             {

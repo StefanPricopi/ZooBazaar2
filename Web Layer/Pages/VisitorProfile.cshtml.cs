@@ -67,16 +67,43 @@ namespace Web_Layer.Pages
                         VisitorDTO currentVisitor = userProfileManager.GetActualProfileByID(userID);
 
                         // Retrieve the updated visitor data from the form submission
+                        string modifiedUsername = Request.Form["updatedProfile.modifiedUsername"];
+                        string modifiedEmail = Request.Form["updatedProfile.modifiedEmail"];
+
+                        // Check if the new username already exists
+                        if (!string.IsNullOrEmpty(modifiedUsername) && modifiedUsername != currentVisitor.Username)
+                        {
+                            bool isUsernameUnique = userProfileManager.IsUsernameUnique(modifiedUsername);
+
+                            if (!isUsernameUnique)
+                            {
+                                ModelState.AddModelError("updatedProfile.modifiedUsername", "Username already exists. Please choose a different one.");
+                                return Page(); // Return to the page with the error message
+                            }
+                        }
+
+                        // Check if the new email already exists
+                        if (!string.IsNullOrEmpty(modifiedEmail) && modifiedEmail != currentVisitor.Email)
+                        {
+                            bool isEmailUnique = userProfileManager.IsEmailUnique(modifiedEmail);
+
+                            if (!isEmailUnique)
+                            {
+                                ModelState.AddModelError("updatedProfile.modifiedEmail", "Email already exists. Please choose a different one.");
+                                return Page(); // Return to the page with the error message
+                            }
+                        }
+
+                        // Continue with updating the visitor profile
                         VisitorDTO updatedVisitor = new VisitorDTO
                         {
                             // Visitor Information
                             UserID = userID,
-                            Username = string.IsNullOrEmpty(Request.Form["updatedProfile.modifiedUsername"]) ? currentVisitor.Username : Request.Form["updatedProfile.modifiedUsername"],
-                            Email = string.IsNullOrEmpty(Request.Form["updatedProfile.modifiedEmail"]) ? currentVisitor.Email : Request.Form["updatedProfile.modifiedEmail"],
+                            Username = string.IsNullOrEmpty(modifiedUsername) ? currentVisitor.Username : modifiedUsername,
+                            Email = string.IsNullOrEmpty(modifiedEmail) ? currentVisitor.Email : modifiedEmail,
 
                             // Add other visitor information fields as needed
                         };
-
 
                         // Call the method to update the visitor profile
                         VisitorDTO updatedVisitorResult = userProfileManager.UpdateVisitorInformation(updatedVisitor);
@@ -90,7 +117,8 @@ namespace Web_Layer.Pages
                 return Redirect("Index");
             }
         }
-        
+
+
         public IActionResult OnPostCancelVisitorProfile()
         {
             // Add logic to handle cancellation for visitor profile, e.g., redirect to the index page

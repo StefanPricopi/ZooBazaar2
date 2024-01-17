@@ -106,9 +106,9 @@ namespace Logic.Managers
             }
             else { return null; }
         }
-        public void CreateVisitor(UserDTO userDtO)
+        public bool CreateVisitor(UserDTO userDtO)
         {
-            user.CreateVisitor(userDtO);
+            return user.CreateVisitor(userDtO);
         }
         public User GetCurrentUserByUsername(string username)
         {

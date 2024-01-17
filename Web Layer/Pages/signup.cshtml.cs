@@ -25,15 +25,25 @@ namespace Web_Layer.Pages
         {
             if (User != null)
             {
+                bool createdSuccessfully = userManager.CreateVisitor(User);
 
-                userManager.CreateVisitor(User);
-                return RedirectToPage("/login");
+                if (createdSuccessfully)
+                {
+                    return RedirectToPage("/login");
+                }
+                else
+                {
+                    // Username or email is not unique, show an error message
+                    ModelState.AddModelError(string.Empty, "Username or email already exists. Please choose a different one.");
+                    return Page();
+                }
             }
             else
             {
-                //  User is null error 
+                // User is null error
                 return Page();
             }
         }
+
     }
 }
