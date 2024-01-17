@@ -21,5 +21,8 @@ namespace Logic.Interfaces
         UserDTO FindUserByProvidedUsername(string userEmail);
         public string RetrievePositionInformation(string username);
         public int GetEmpIDbyUserId(int id);
+        public void ChangePassword(int userId, string oldPassword, string newPassword, string confirmNewPassword);
+        public string GetHashedPassword(int userId, string password);
+        public string GetUserPassword(int userId);
     }
 }

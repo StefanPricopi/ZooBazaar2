@@ -13,6 +13,27 @@
         document.getElementById(formId).style.display = 'block';
     }
 </script>
+<!-- Password Form -->
+<button type="button" class="btn btn-primary" onclick="toggleForm('PasswordForm')">Modify your password</button>
+<form id="PasswordForm" method="post" asp-page-handler="UpdatePassword" class="my-4 profile-form" style="display: none;">
+    <h4 class="mb-3">Password Information</h4>
+
+    <div class="form-group">
+        <label for="currentPassword">Old Password:</label>
+        <input type="password" id="currentPassword" name="currentPassword" class="form-control">
+    </div>
+
+    <div class="form-group">
+        <label for="newPassword">New Password:</label>
+        <input type="password" id="newPassword" name="newPassword" class="form-control">
+    </div>
+    <div class="form-group">
+        <label for="confirmNewPassword">Confirm Password:</label>
+        <input type="password" id="confirmNewPassword" name="confirmNewPassword" class="form-control">
+    </div>
+    <button type="submit" class="btn btn-primary">Save Changes</button>
+    <button type="button" class="btn btn-secondary cancel" asp-page-handler="Cancel">Cancel</button>
+</form>
 
 <!-- Personal Information Form -->
 <button type="button" class="btn btn-primary" onclick="toggleForm('personalForm')">Modify Personal Information</button>

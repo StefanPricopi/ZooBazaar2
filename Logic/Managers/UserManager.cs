@@ -118,5 +118,17 @@ namespace Logic.Managers
         {
             return user.GetEmpIDbyUserId(id);
         }
+        public void ChangePassword(int userId, string oldPassword, string newPassword, string confirmNewPassword)
+        {
+            this.user.ChangePassword(userId, oldPassword, newPassword, confirmNewPassword);
+        }
+        public string GetHashedPassword(int userId, string password)
+        {
+            return user.GetHashedPassword(userId, password);
+        }
+        public string GetUserPassword(int userId)
+        {
+            return this.user.GetUserPassword(userId);
+        }
     }
 }

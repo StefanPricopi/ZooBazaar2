@@ -401,5 +401,107 @@ namespace DataAccess
             }
 
         }
+        public void ChangePassword(int userId, string oldPassword, string newPassword, string confirmNewPassword)
+        {
+            try
+            {
+                using (SqlConnection connection = InitializeConection())
+                {
+                    connection.Open();
+
+                    // Validate old password before proceeding
+                    string hashedOldPassword = GetHashedPassword(userId, oldPassword);
+
+                    if (hashedOldPassword != GetUserPassword(userId))
+                    {
+                        // Old password does not match, handle accordingly (throw exception, show error message, etc.)
+                    }
+
+                    // Validate new password and confirm new password
+                    if (newPassword != confirmNewPassword)
+                    {
+                        // New password and confirm password do not match, handle accordingly (throw exception, show error message, etc.)
+                    }
+
+                    // Update the password
+                    string salt = DateTime.Now.ToString();
+                    string hashedNewPassword = UserManager.HashedPassword($"{newPassword}{salt.Trim()}");
+
+                    using (SqlCommand cmd = new SqlCommand("UPDATE [Users] SET Password = @Password, Salt = @Salt WHERE UserID = @UserID", connection))
+                    {
+                        cmd.Parameters.AddWithValue("@UserID", userId);
+                        cmd.Parameters.AddWithValue("@Password", hashedNewPassword);
+                        cmd.Parameters.AddWithValue("@Salt", salt);
+
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                // Handle the exception
+            }
+        }
+
+        public string GetHashedPassword(int userId, string password)
+        {
+            try
+            {
+                using (SqlConnection connection = InitializeConection())
+                {
+                    connection.Open();
+
+                    using (SqlCommand cmd = new SqlCommand("SELECT Password, Salt FROM [users] WHERE UserID = @UserID", connection))
+                    {
+                        cmd.Parameters.AddWithValue("@UserID", userId);
+
+                        using (SqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            if (reader.Read())
+                            {
+                                string storedPassword = reader["Password"].ToString();
+                                string salt = reader["Salt"].ToString();
+
+                                // Hash the provided password with the stored salt
+                                return UserManager.HashedPassword($"{password}{salt}");
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                // Handle the exception, log, or throw accordingly
+                throw new Exception("Failed to get hashed password", ex);
+            }
+
+            return null;
+        }
+
+        public string GetUserPassword(int userId)
+        {
+            try
+            {
+                using (SqlConnection connection = InitializeConection())
+                
+                {
+                    connection.Open();
+
+                    using (SqlCommand cmd = new SqlCommand("SELECT Password FROM [users] WHERE UserID = @UserID", connection))
+                    {
+                        cmd.Parameters.AddWithValue("@UserID", userId);
+
+                        object result = cmd.ExecuteScalar();
+
+                        return result != null ? result.ToString() : null;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                // Handle the exception, log, or throw accordingly
+                throw new Exception("Failed to get user password", ex);
+            }
+        }
     }
 }
