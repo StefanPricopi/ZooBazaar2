@@ -46,6 +46,7 @@
                                 <a class="dropdown-item" href="/map"><b>Map</b></a>
                                 <a class="dropdown-item" href="/ticket_info"><b>Admission prices</b></a>
                                 <a class="dropdown-item" href="/opening hours"><b>Opening Hours</b></a>
+                                <a class="dropdown-item" href="/VisitorAnnouncements"><b>Announcements</b></a>
                                
                                 @if (User.IsInRole("Caretaker"))
                                 {
@@ -55,6 +56,7 @@
                                 else if (User.IsInRole("Visitor"))
                                 {
                                     <a class="dropdown-item" href="/VisitorProfile"><b>Profile</b></a>
+                                    
                                 }
 
                             </div>

@@ -1,0 +1,25 @@
+﻿@page
+@model Web_Layer.Pages.VisitorAnnouncementsModel
+@{
+    ViewData["Title"] = "Visitor Announcements";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<div class="announcement-container">
+    @if (Model.Announcements != null && Model.Announcements.Any())
+    {
+        foreach (var announcement in Model.Announcements)
+        {
+            <div class="announcement-card">
+                <h3>@announcement.Title</h3>
+                <p>@announcement.Text</p>
+            </div>
+        }
+    }
+    else
+    {
+        <p>No announcements available for your role.</p>
+    }
+</div>
+

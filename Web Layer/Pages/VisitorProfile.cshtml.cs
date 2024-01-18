@@ -69,32 +69,6 @@ namespace Web_Layer.Pages
                         // Retrieve the updated visitor data from the form submission
                         string modifiedUsername = Request.Form["updatedProfile.modifiedUsername"];
                         string modifiedEmail = Request.Form["updatedProfile.modifiedEmail"];
-
-                        // Check if the new username already exists
-                        if (!string.IsNullOrEmpty(modifiedUsername) && modifiedUsername != currentVisitor.Username)
-                        {
-                            bool isUsernameUnique = userProfileManager.IsUsernameUnique(modifiedUsername);
-
-                            if (!isUsernameUnique)
-                            {
-                                ModelState.AddModelError("updatedProfile.modifiedUsername", "Username already exists. Please choose a different one.");
-                                return Page(); // Return to the page with the error message
-                            }
-                        }
-
-                        // Check if the new email already exists
-                        if (!string.IsNullOrEmpty(modifiedEmail) && modifiedEmail != currentVisitor.Email)
-                        {
-                            bool isEmailUnique = userProfileManager.IsEmailUnique(modifiedEmail);
-
-                            if (!isEmailUnique)
-                            {
-                                ModelState.AddModelError("updatedProfile.modifiedEmail", "Email already exists. Please choose a different one.");
-                                return Page(); // Return to the page with the error message
-                            }
-                        }
-
-                        // Continue with updating the visitor profile
                         VisitorDTO updatedVisitor = new VisitorDTO
                         {
                             // Visitor Information

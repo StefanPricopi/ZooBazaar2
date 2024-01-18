@@ -484,3 +484,17 @@ p{
     #modificationForm button.cancel {
         background-color: #bbb;
     }
+
+.announcement-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.announcement-card {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+    width: 300px;
+    padding: 10px;
+}
