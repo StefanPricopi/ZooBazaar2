@@ -1,5 +1,4 @@
 using DataAccess;
-using Logic.DTO;
 using Logic.Entities;
 using Logic.Managers;
 using Microsoft.AspNetCore.Mvc;
@@ -7,9 +6,9 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace Web_Layer.Pages
 {
-    public class VisitorAnnouncementsModel : PageModel
-    {
     
+    public class AnnoucementsVisitorModel : PageModel
+    {
         public List<Announcement> Announcements { get; set; }
 
         public void OnGet()
@@ -24,6 +23,7 @@ namespace Web_Layer.Pages
 
                     if (int.TryParse(userIdValue, out int roleID))
                     {
+                        
                         AnnouncementManager announcementManager = new AnnouncementManager(new AnnouncementsRepository());
 
                         // Assign the result of GetAnnouncementsByRole to the Announcements property
@@ -32,7 +32,8 @@ namespace Web_Layer.Pages
                 }
             }
             catch (Exception ex) { }
-            
+
         }
     }
 }
+

@@ -8,10 +8,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Remove="Pages\VisitorAnnouncements.cshtml" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="SixLabors.ImageSharp" Version="3.1.1" />
     <PackageReference Include="SixLabors.ImageSharp.Drawing" Version="2.1.0" />
@@ -27,18 +23,6 @@
   <ItemGroup>
     <ProjectReference Include="..\DataAccess\DataAccess.csproj" />
     <ProjectReference Include="..\Logic\Logic.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <UpToDateCheckInput Remove="Pages\VisitorAnnouncements.cshtml" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <_ContentIncludedByDefault Remove="Pages\VisitorAnnouncements.cshtml" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Include="Pages\VisitorAnnouncements.cshtml" />
   </ItemGroup>
 
 </Project>
