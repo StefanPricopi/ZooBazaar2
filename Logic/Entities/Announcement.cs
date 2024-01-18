@@ -53,7 +53,7 @@ namespace Logic.Entities
                 Text = this.Text,
                 Title = this.Title
             };
-        }
+        }//
 
         public override string ToString()
         {
