@@ -54,5 +54,10 @@ namespace Desktop
             EditEmployee editEmployeeForm = new EditEmployee();
             editEmployeeForm.ShowDialog();
         }
+
+        private void btnAnnouncement_Click(object sender, EventArgs e)
+        {
+             OpenChildForm(new Announcements(), sender);
+        }
     }
 }
