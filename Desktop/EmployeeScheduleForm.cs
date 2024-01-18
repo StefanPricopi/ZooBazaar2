@@ -66,12 +66,12 @@ namespace Desktop
 
             // Find the Sunday of last week
             DateTime currentDay = startDate.AddDays(-(int)startDate.DayOfWeek);
-
+            
             // Morning Shifts
             for (int i = 0; i < 7; i++)
             {
                 // Create morning shift panel
-                MorningShiftPanel morningShiftPanel = new MorningShiftPanel(currentDay.Date, flowLayoutPanel1);
+                MorningShiftPanel morningShiftPanel = new MorningShiftPanel(currentDay.Date, flowLayoutPanel1,5, 0);
                 flowLayoutPanel1.Controls.Add(morningShiftPanel);
                 ShiftPanelManager.MorningShiftPanels[currentDay.Date] = morningShiftPanel;
 
@@ -86,7 +86,7 @@ namespace Desktop
             for (int i = 0; i < 7; i++)
             {
                 // Create afternoon shift panel
-                AfternoonShiftPanel afternoonShiftPanel = new AfternoonShiftPanel(currentDay.Date, flowLayoutPanel1);
+                AfternoonShiftPanel afternoonShiftPanel = new AfternoonShiftPanel(currentDay.Date, flowLayoutPanel1, 5, 0);
                 flowLayoutPanel1.Controls.Add(afternoonShiftPanel);
                 ShiftPanelManager.AfternoonShiftPanels[currentDay.Date] = afternoonShiftPanel;
 
@@ -101,7 +101,7 @@ namespace Desktop
             for (int i = 0; i < 7; i++)
             {
                 // Create evening shift panel
-                EveningShiftPanel eveningShiftPanel = new EveningShiftPanel(currentDay.Date, flowLayoutPanel1);
+                EveningShiftPanel eveningShiftPanel = new EveningShiftPanel(currentDay.Date, flowLayoutPanel1, 5, 0);
                 flowLayoutPanel1.Controls.Add(eveningShiftPanel);
                 ShiftPanelManager.EveningShiftPanels[currentDay.Date] = eveningShiftPanel;
 

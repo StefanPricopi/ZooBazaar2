@@ -39,6 +39,8 @@
             btnUpdateShift = new Button();
             tabControl1 = new TabControl();
             tabPage1 = new TabPage();
+            label9 = new Label();
+            cmbEmployeeType = new ComboBox();
             label5 = new Label();
             tabPage2 = new TabPage();
             btnDeleteShift = new Button();
@@ -59,34 +61,35 @@
             // 
             // tbxDate
             // 
-            tbxDate.Location = new Point(47, 87);
+            tbxDate.Location = new Point(23, 49);
             tbxDate.Name = "tbxDate";
-            tbxDate.Size = new Size(184, 27);
+            tbxDate.Size = new Size(361, 27);
             tbxDate.TabIndex = 0;
             // 
             // cmbEmployee
             // 
             cmbEmployee.FormattingEnabled = true;
-            cmbEmployee.Location = new Point(47, 159);
+            cmbEmployee.Location = new Point(23, 195);
             cmbEmployee.Name = "cmbEmployee";
-            cmbEmployee.Size = new Size(184, 29);
+            cmbEmployee.Size = new Size(361, 29);
             cmbEmployee.TabIndex = 2;
+            cmbEmployee.SelectedIndexChanged += cmbEmployee_SelectedIndexChanged;
             // 
             // label2
             // 
             label2.AutoSize = true;
             label2.Font = new Font("Century Gothic", 15.75F, FontStyle.Regular, GraphicsUnit.Point);
-            label2.Location = new Point(47, 132);
+            label2.Location = new Point(23, 94);
             label2.Name = "label2";
-            label2.Size = new Size(184, 24);
+            label2.Size = new Size(375, 24);
             label2.TabIndex = 3;
-            label2.Text = "Select Employee";
+            label2.Text = "Select type of employee availablity";
             // 
             // label1
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Century Gothic", 15.75F, FontStyle.Regular, GraphicsUnit.Point);
-            label1.Location = new Point(47, 202);
+            label1.Location = new Point(23, 227);
             label1.Name = "label1";
             label1.Size = new Size(120, 24);
             label1.TabIndex = 4;
@@ -95,16 +98,17 @@
             // cmbShift
             // 
             cmbShift.FormattingEnabled = true;
-            cmbShift.Location = new Point(47, 229);
+            cmbShift.Location = new Point(23, 254);
             cmbShift.Name = "cmbShift";
-            cmbShift.Size = new Size(184, 29);
+            cmbShift.Size = new Size(361, 29);
             cmbShift.TabIndex = 5;
+            cmbShift.SelectedIndexChanged += cmbShift_SelectedIndexChanged;
             // 
             // label3
             // 
             label3.AutoSize = true;
             label3.Font = new Font("Century Gothic", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            label3.Location = new Point(47, 261);
+            label3.Location = new Point(23, 286);
             label3.Name = "label3";
             label3.Size = new Size(176, 21);
             label3.TabIndex = 6;
@@ -113,18 +117,18 @@
             // cmbArea
             // 
             cmbArea.FormattingEnabled = true;
-            cmbArea.Location = new Point(47, 288);
+            cmbArea.Location = new Point(23, 313);
             cmbArea.Name = "cmbArea";
-            cmbArea.Size = new Size(184, 29);
+            cmbArea.Size = new Size(361, 29);
             cmbArea.TabIndex = 7;
             cmbArea.SelectedIndexChanged += cmbArea_SelectedIndexChanged;
             // 
             // btnCreate
             // 
             btnCreate.Font = new Font("Century Gothic", 15.75F, FontStyle.Regular, GraphicsUnit.Point);
-            btnCreate.Location = new Point(47, 348);
+            btnCreate.Location = new Point(23, 348);
             btnCreate.Name = "btnCreate";
-            btnCreate.Size = new Size(184, 53);
+            btnCreate.Size = new Size(361, 53);
             btnCreate.TabIndex = 8;
             btnCreate.Text = "Create Shift";
             btnCreate.UseVisualStyleBackColor = true;
@@ -154,6 +158,8 @@
             // 
             // tabPage1
             // 
+            tabPage1.Controls.Add(label9);
+            tabPage1.Controls.Add(cmbEmployeeType);
             tabPage1.Controls.Add(tbxDate);
             tabPage1.Controls.Add(cmbArea);
             tabPage1.Controls.Add(btnCreate);
@@ -171,11 +177,30 @@
             tabPage1.Text = "Create";
             tabPage1.UseVisualStyleBackColor = true;
             // 
+            // label9
+            // 
+            label9.AutoSize = true;
+            label9.Font = new Font("Century Gothic", 15.75F, FontStyle.Regular, GraphicsUnit.Point);
+            label9.Location = new Point(23, 168);
+            label9.Name = "label9";
+            label9.Size = new Size(184, 24);
+            label9.TabIndex = 10;
+            label9.Text = "Select Employee";
+            // 
+            // cmbEmployeeType
+            // 
+            cmbEmployeeType.FormattingEnabled = true;
+            cmbEmployeeType.Location = new Point(23, 121);
+            cmbEmployeeType.Name = "cmbEmployeeType";
+            cmbEmployeeType.Size = new Size(361, 29);
+            cmbEmployeeType.TabIndex = 9;
+            cmbEmployeeType.SelectedIndexChanged += cmbEmployeeType_SelectedIndexChanged;
+            // 
             // label5
             // 
             label5.AutoSize = true;
             label5.Font = new Font("Century Gothic", 15.75F, FontStyle.Regular, GraphicsUnit.Point);
-            label5.Location = new Point(47, 60);
+            label5.Location = new Point(23, 22);
             label5.Name = "label5";
             label5.Size = new Size(159, 24);
             label5.TabIndex = 3;
@@ -342,5 +367,7 @@
         private ComboBox cmbUpdateShift;
         private Label label8;
         private Button btnDeleteShift;
+        private Label label9;
+        private ComboBox cmbEmployeeType;
     }
 }

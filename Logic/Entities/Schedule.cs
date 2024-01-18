@@ -14,5 +14,8 @@ namespace Logic.Entities
         public string Shift { get; set; }
         public string AreaName { get; set; }
         public int AreaID { get; set; }
+        public int NeededCapacity { get; set; }
+        public int FilledCapacity { get; set; }
+        public int AvailableEmployee {  get; set; }
     }
 }

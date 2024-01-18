@@ -50,15 +50,15 @@ namespace Desktop
                 if (selectedRow.Cells["EmployeeID"].Value != null)
                 {
 
-                
+
                     employeeIDValue = selectedRow.Cells["EmployeeID"].Value.ToString();
 
-                int index = int.Parse(employeeIDValue) - 2;
-                
-                if (index != -1)
-                {
-                    cmbUpdateEmployee.SelectedIndex = index;
-                }
+                    int index = int.Parse(employeeIDValue) - 2;
+
+                    if (index != -1)
+                    {
+                        cmbUpdateEmployee.SelectedIndex = index;
+                    }
                 }
 
                 if (selectedRow.Cells["Date"].Value != null)
@@ -95,14 +95,61 @@ namespace Desktop
             LoadEmployees();
             PopulateAreas(cmbArea);
             PopulateAreas(cmbUpdateArea);
+            PopulateEmployeeTypeComboBox();
+        }
+        private void PopulateEmployeeTypeComboBox()
+        {
+            // Clear existing items
+            cmbEmployeeType.Items.Clear();
+
+            // Add enum values to the combo box
+            foreach (EmployeeType employeeType in Enum.GetValues(typeof(EmployeeType)))
+            {
+                cmbEmployeeType.Items.Add(employeeType);
+            }
+
+            // Set default selection if needed
+            cmbEmployeeType.SelectedIndex = 0; // Assuming you want to select the first item by default
         }
         private void PopulateComboBox()
         {
-            List<KeyValuePair<int, string>> employeeList = manager.GetEmployeeList();
-            cmbEmployee.Items.Clear();
-            foreach (var employee in employeeList)
+            List<KeyValuePair<int, string>> employeeList;
+            string shift = cmbShift.Text;
+            // Determine which employee list to use based on cmbEmployeeType selection
+            if (cmbEmployeeType.SelectedItem != null)
             {
-                cmbEmployee.Items.Add(employee);
+                EmployeeType selectedEmployeeType = (EmployeeType)cmbEmployeeType.SelectedItem;
+
+                switch (selectedEmployeeType)
+                {
+                    case EmployeeType.Available:
+                        employeeList = manager.GetEmployeeList();
+                        break;
+                    case EmployeeType.Not:
+                        // Retrieve the date from tbxDate
+                        DateTime date;
+                        if (DateTime.TryParse(tbxDate.Text, out date))
+                        {
+                            employeeList = manager.GetEmployeeListByDateAndShift(date, shift);
+                        }
+                        else
+                        {
+                            // Handle invalid date input
+                            // You may want to display an error message or take appropriate action
+                            return;
+                        }
+                        break;
+                    default:
+                        // Handle other employee types if needed
+                        return;
+                }
+
+                // Populate the ComboBox
+                cmbEmployee.Items.Clear();
+                foreach (var employee in employeeList)
+                {
+                    cmbEmployee.Items.Add(employee);
+                }
             }
         }
         private void PopulateUpdatedComboBox()
@@ -155,8 +202,9 @@ namespace Desktop
             int employeeID = int.Parse(manager.GetEmployeeID(cmbEmployee.SelectedItem.ToString()));
             DateTime Date = DateTime.TryParse(tbxDate.Text, out DateTime parsedShift) ? parsedShift : DateTime.MinValue;
             string shift = cmbShift.Text;
-
-            manager.CreateShift(employeeID, Date, shift, areaID);
+            int NeededCapacity = 5;
+            int FilledCapacty = 1;
+            manager.CreateShift(employeeID, Date, shift, areaID, NeededCapacity, FilledCapacty);
             // Find the appropriate shift panel based on selectedShift and selectedDate
             DateTime selectedDate = DateTime.Parse(tbxDate.Text);
             DateTime newDate = currentStartday(selectedDate);
@@ -179,7 +227,7 @@ namespace Desktop
             for (int i = 0; i < 7; i++)
             {
                 // Create morning shift panel
-                MorningShiftPanel morningShiftPanel = new MorningShiftPanel(currentDay.Date, flowLayoutPanel1);
+                MorningShiftPanel morningShiftPanel = new MorningShiftPanel(currentDay.Date, flowLayoutPanel1, 5, 0);
                 flowLayoutPanel1.Controls.Add(morningShiftPanel);
                 ShiftPanelManager.MorningShiftPanels[currentDay.Date] = morningShiftPanel;
 
@@ -194,7 +242,7 @@ namespace Desktop
             for (int i = 0; i < 7; i++)
             {
                 // Create afternoon shift panel
-                AfternoonShiftPanel afternoonShiftPanel = new AfternoonShiftPanel(currentDay.Date, flowLayoutPanel1);
+                AfternoonShiftPanel afternoonShiftPanel = new AfternoonShiftPanel(currentDay.Date, flowLayoutPanel1, 5, 0);
                 flowLayoutPanel1.Controls.Add(afternoonShiftPanel);
                 ShiftPanelManager.AfternoonShiftPanels[currentDay.Date] = afternoonShiftPanel;
 
@@ -209,7 +257,7 @@ namespace Desktop
             for (int i = 0; i < 7; i++)
             {
                 // Create evening shift panel
-                EveningShiftPanel eveningShiftPanel = new EveningShiftPanel(currentDay.Date, flowLayoutPanel1);
+                EveningShiftPanel eveningShiftPanel = new EveningShiftPanel(currentDay.Date, flowLayoutPanel1, 5, 0);
                 flowLayoutPanel1.Controls.Add(eveningShiftPanel);
                 ShiftPanelManager.EveningShiftPanels[currentDay.Date] = eveningShiftPanel;
 
@@ -297,6 +345,26 @@ namespace Desktop
             }
         }
 
+        private void cmbEmployee_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void cmbEmployeeType_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            PopulateComboBox();
+        }
+
+        private void cmbShift_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            PopulateComboBox();
+        }
+
+        public enum EmployeeType
+        {
+            Available,
+            Not
+        }
         public enum ShiftType
         {
             MorningShift,

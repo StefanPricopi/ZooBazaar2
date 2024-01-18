@@ -4,19 +4,75 @@
     var schedulesByDate = Model.schedules.GroupBy(s => s.Date.Date).OrderBy(g => g.Key);
 }
 
+<head>
+    @section Scripts {
+    <script>
+
+        const selectedPanels = [];
+        function getDateFromPanelId(panelId) {
+            // Assuming the panelId format is "YYYY-MM-DD-ShiftType"
+            const parts = panelId.split('-');
+            const dateString = parts.slice(0, 3).join('-');
+            return new Date(dateString);
+        }
+
+        function getShiftTypeFromPanelId(panelId) {
+            // Assuming the panelId format is "YYYY-MM-DD-ShiftType"
+            const parts = panelId.split('-');
+            return parts[3];
+        }
+
+            function selectPanel(panelId) {
+                const index = selectedPanels.findIndex(panel => panel.panelId === panelId);
+
+                if (index === -1) {
+                    selectedPanels.push({
+                        PanelId: panelId,
+                        Date: getDateFromPanelId(panelId),
+                        ShiftType: getShiftTypeFromPanelId(panelId)
+                    });
+                } else {
+                    selectedPanels.splice(index, 1);
+                }
+
+                const panel = document.querySelector(`div[panel-id="${panelId}"]`);
+                panel.style.backgroundColor = index === -1 ? 'yellow' : 'white';
+            }
+
+            function saveSelectedPanels() {
+                const saveForm = document.getElementById('saveForm');
+                const selectedPanelsInput = saveForm.querySelector('input[name="selectedPanels"]');
+
+                // Update the value of the hidden input field
+                selectedPanelsInput.value = JSON.stringify(selectedPanels);
+
+                // Submit the form
+                saveForm.submit();
+            }
+
+    </script>
+    }
+</head>
+
+
 <body>
-    <div class="container mt-2" style=" justify-content: center; align-items: center;">
+    <div class="container mt-2" style="justify-content: center; align-items: center;">
         <div class="row" style="justify-content: center; align-items: center;">
             @Html.Raw(Model.GenerateShifts(Model.currentDay))
         </div>
     </div>
-    <form method='post'>
-        <div class='form-group row gap-5' style='margin-top:-40px;padding-top:0px;display:flex;justify-content: center; align-items: center; text-align:center;flex-direction:row;'>
+    <form method='post' id='saveForm'>
+        <div class='form-group row gap-5'
+             style='margin-top:-40px;padding-top:0px;display:flex;justify-content: center; align-items: center; text-align:center;flex-direction:row;'>
             <div class='col-1'>
                 <input type='submit' class='btn btn-primary btn-lg' value='Previous' asp-page-handler='Previous' />
             </div>
             <div class='col-1'>
                 <input type='submit' class='btn btn-primary btn-lg' value='Next' asp-page-handler='Next' />
+            </div>
+            <div class='col-1'>
+                <button type='button' class='btn btn-success btn-lg' onclick='saveSelectedPanels()'>Save</button>
+                <input type='hidden' name='selectedPanels' />
             </div>
         </div>
     </form>

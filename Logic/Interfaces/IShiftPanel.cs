@@ -9,5 +9,6 @@ namespace Logic.Interfaces
     public interface IShiftPanel
     {
         void AddShiftLabel(string employeeName);
+        void UpdateShiftCapacity(int needed, int filled);
     }
 }

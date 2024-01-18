@@ -17,6 +17,10 @@ namespace Logic.Managers
         {
             this.schedule = location ?? throw new ArgumentNullException(nameof(location));
         }
+        public List<KeyValuePair<int, string>> GetEmployeeListByDateAndShift(DateTime date, string shift)
+        {
+            return schedule.GetEmployeeListByDateAndShift(date, shift);
+        }
         public List<KeyValuePair<int, string>> GetEmployeeList()
         {
             return schedule.GetEmployeeList();
@@ -25,9 +29,25 @@ namespace Logic.Managers
         {
            return schedule.DeleteShift(id);
         }
-        public void CreateShift(int employeeID, DateTime Date, string Shift, int areaID)
+        public List<SelectedPanelData> GetSavedPanelsFromDatabase(int employeeID)
         {
-            schedule.CreateShift(employeeID, Date, Shift, areaID);
+            return schedule.GetSavedPanelsFromDatabase(employeeID);
+        }
+       public void AddAvailableEmployees(DateTime Date, string shift, int employeeID)
+        {
+            schedule.AddAvailableEmployees(Date, shift, employeeID);
+        }
+        public bool UpdateShiftCapacity(DateTime Date,string shift,int NeededCapacity)
+        {
+            return schedule.UpdateShiftCapacity(Date, shift, NeededCapacity);
+        }
+        public void CreateShift(int employeeID, DateTime Date, string Shift, int areaID, int Needed, int Filled)
+        {
+            schedule.CreateShift(employeeID, Date, Shift, areaID, Needed, Filled);
+        }
+        public bool CreateShiftCapacity(DateTime date, string shift, int Needed, int Filled)
+        {
+            return schedule.CreateShiftCapacity( date, shift,  Needed,  Filled);
         }
         public bool UpdateShift(Schedule selected)
         {
