@@ -14,7 +14,7 @@ namespace Logic.DTO
         public string PhoneNumber {  get; set; }
         public DateTime DateOfBirth { get; set; }
         public int BSN { get; set; }
-        public string Position { get; set; }
+        public int RoleID { get; set; }
 
         public EmployeeDTO() { }
         public EmployeeDTO(EmployeeDTO employeeDTO)

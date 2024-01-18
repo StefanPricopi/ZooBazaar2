@@ -89,5 +89,9 @@ namespace Logic.Managers
         {
             return employee.LoadEmployees();
         }
+        public EmployeeDTO GetEmployeeById(int employeeID)
+        {
+            return employee.GetEmployeeById(employeeID);
+        }
     }
 }

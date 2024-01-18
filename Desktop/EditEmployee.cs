@@ -237,7 +237,7 @@ namespace Employees
                 employeeDTO.PhoneNumber = tbxPhone.Text;
                 employeeDTO.DateOfBirth = dtpBirthDate.Value;
                 employeeDTO.BSN = int.Parse(tbxBSN.Text);
-                employeeDTO.Position = tbxPosition.Text;
+                employeeDTO.RoleID = int.Parse(tbxPosition.Text);
                 if (employeeManager.UpdateEmployee(employeeDTO))
                 {
                     MessageBox.Show("Success");

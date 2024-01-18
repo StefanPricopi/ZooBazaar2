@@ -74,7 +74,7 @@ namespace Web_Layer.Pages
                 {
                     new Claim(ClaimTypes.Name, "user"),
                     new Claim("UserID", userModel.UserID.ToString()),
-                    new Claim("RoleID", "3"),
+                    new Claim("RoleID", "4"),
                     new Claim(ClaimTypes.Email, userModel.Email),
                     new Claim("Visitor", "Visitor"),
                      new Claim(ClaimTypes.Role, "Visitor")

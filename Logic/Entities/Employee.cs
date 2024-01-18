@@ -15,7 +15,7 @@ namespace Logic.Entities
         private string phoneNumber;
         private DateTime dateOfBirth;
         private int bSN;
-        private string position;
+        public int RoleID { get; set; }
 
         public int EmployeeID
         {
@@ -47,20 +47,16 @@ namespace Logic.Entities
             get { return bSN; }
             set { bSN = value; }
         }
-        public string Position
-        {
-            get { return position; }
-            set { position = value; }
-        }
+       
 
-        Employee(string firstName, string lastName, string phoneNumber, DateTime dateOfBirth, int bSN, string position) 
+        Employee(string firstName, string lastName, string phoneNumber, DateTime dateOfBirth, int bSN, int roleID) 
         {
             this.firstName = firstName;
             this.lastName = lastName;
             this.phoneNumber = phoneNumber;
             this.dateOfBirth = dateOfBirth;
             this.bSN = bSN;
-            this.position = position;
+            this.RoleID = roleID;
             
         }
         public EmployeeDTO EmployeeToEmployeeDTO()
@@ -72,7 +68,7 @@ namespace Logic.Entities
                 PhoneNumber = this.phoneNumber,
                 DateOfBirth = this.dateOfBirth,
                 BSN = this.bSN,
-                Position = this.position
+                RoleID = this.RoleID
             };
 
         }
