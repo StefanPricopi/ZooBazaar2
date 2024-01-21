@@ -13,5 +13,7 @@ namespace Logic.Interfaces
         List<AnnouncementDTO> GetAllAnnouncements();
         List<AnnouncementDTO> GetAnnouncementsByRole(int id);
         AnnouncementDTO GetAnnouncementByID(int id);
+        public bool UpdateAnnouncement(AnnouncementDTO announcementDTO);
+        public bool DeleteAnnouncement(AnnouncementDTO announcementDTO);
     }
 }

@@ -36,11 +36,13 @@
             label2 = new Label();
             label3 = new Label();
             lbAnnouncements = new ListBox();
+            btnEdit = new Button();
+            btnDelete = new Button();
             SuspendLayout();
             // 
             // button1
             // 
-            button1.Location = new Point(113, 367);
+            button1.Location = new Point(24, 367);
             button1.Name = "button1";
             button1.Size = new Size(75, 23);
             button1.TabIndex = 0;
@@ -109,11 +111,33 @@
             lbAnnouncements.TabIndex = 7;
             lbAnnouncements.SelectedIndexChanged += lbAnnouncements_SelectedIndexChanged;
             // 
+            // btnEdit
+            // 
+            btnEdit.Location = new Point(222, 367);
+            btnEdit.Name = "btnEdit";
+            btnEdit.Size = new Size(75, 23);
+            btnEdit.TabIndex = 9;
+            btnEdit.Text = "Edit";
+            btnEdit.UseVisualStyleBackColor = true;
+            btnEdit.Click += btnEdit_Click;
+            // 
+            // btnDelete
+            // 
+            btnDelete.Location = new Point(493, 367);
+            btnDelete.Name = "btnDelete";
+            btnDelete.Size = new Size(146, 23);
+            btnDelete.TabIndex = 10;
+            btnDelete.Text = "Delete Announcement";
+            btnDelete.UseVisualStyleBackColor = true;
+            btnDelete.Click += btnDelete_Click;
+            // 
             // Announcements
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(btnDelete);
+            Controls.Add(btnEdit);
             Controls.Add(lbAnnouncements);
             Controls.Add(label3);
             Controls.Add(label2);
@@ -138,5 +162,7 @@
         private Label label2;
         private Label label3;
         private ListBox lbAnnouncements;
+        private Button btnEdit;
+        private Button btnDelete;
     }
 }

@@ -22,6 +22,14 @@ namespace Logic.Managers
         {
             return announcementRepository.AddAnnouncement(announcementDTO);
         }
+        public bool UpdateAnnouncement(AnnouncementDTO announcementDTO)
+        {
+            return announcementRepository.UpdateAnnouncement(announcementDTO);
+        }
+        public bool DeleteAnnouncement(AnnouncementDTO announcementDTO)
+        {
+            return announcementRepository.DeleteAnnouncement(announcementDTO);
+        }
 
         public List<Announcement> GetAllAnnouncements()
         {

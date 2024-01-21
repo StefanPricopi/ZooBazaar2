@@ -201,7 +201,7 @@ namespace DataAccess
                 {
                     connection.Open();
 
-                    string updateQuery = "UPDATE Employees SET FirstName = @FirstName, LastName = @LastName, PhoneNumber = @PhoneNumber, DateOfBirth = @DateOfBirth, BSN = @BSN, Position = @Position WHERE EmployeeID = @EmployeeID";
+                    string updateQuery = "UPDATE Employees SET FirstName = @FirstName, LastName = @LastName, PhoneNumber = @PhoneNumber, DateOfBirth = @DateOfBirth, BSN = @BSN, RoleID = @RoleID WHERE EmployeeID = @EmployeeID";
 
                     using (SqlCommand command = new SqlCommand(updateQuery, connection))
                     {

@@ -26,7 +26,7 @@ namespace Desktop
             {
                 cbDepartment.Items.Add(item);
             }
-            foreach(Announcement announcement  in announcements)
+            foreach (Announcement announcement in announcements)
             {
                 lbAnnouncements.Items.Add(announcement);
             }
@@ -52,6 +52,26 @@ namespace Desktop
                 ClearBoxes();
             }
         }
+        private void UpdateAnnouncement()
+        {
+            Announcement announcement1 = lbAnnouncements.SelectedItem as Announcement;
+            Role selectedRole = (Role)cbDepartment.SelectedItem;
+            if (cbDepartment.SelectedItem != null && rtbText.Text != string.Empty && tbTitle.Text != string.Empty)
+            {
+                Announcement announcement = new Announcement(announcement1.AnnouncementId, selectedRole, rtbText.Text, tbTitle.Text);
+                announcementManager.UpdateAnnouncement(announcement.AnnouncementToAnnouncementDTO());
+                ClearBoxes();
+            }
+        }
+        private void DeleteAnnouncement()
+        {
+            if (lbAnnouncements.SelectedItem != null)
+            {
+                Announcement announcement1 = lbAnnouncements.SelectedItem as Announcement;
+                announcementManager.DeleteAnnouncement(announcement1.AnnouncementToAnnouncementDTO());
+                ClearBoxes();
+            }
+        }
 
         private void ClearBoxes()
         {
@@ -72,7 +92,32 @@ namespace Desktop
 
         private void lbAnnouncements_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if (lbAnnouncements.SelectedItem != null)
+            {
+                Announcement announcement = lbAnnouncements.SelectedItem as Announcement;
+                tbTitle.Text = announcement.Title;
+                rtbText.Text = announcement.Text;
+                cbDepartment.SelectedItem = (Role)announcement.Role;
+            }
+        }
 
+        private void btnEdit_Click(object sender, EventArgs e)
+        {
+            UpdateAnnouncement();
+            RefreshList();
+        }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            if(lbAnnouncements.SelectedItem != null)
+            {
+                DeleteAnnouncement();
+                RefreshList();
+            }
+            else
+            {
+                MessageBox.Show("You have to select an announcement first in order to delete it");
+            }
         }
     }
 }

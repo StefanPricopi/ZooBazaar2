@@ -1,4 +1,5 @@
 ﻿using Logic.DTO;
+using Logic.Entities;
 using Logic.Interfaces;
 using Microsoft.Data.SqlClient;
 using System;
@@ -21,10 +22,10 @@ namespace DataAccess
                     const string sql = "INSERT INTO Announcements ([roleID], [text], [title])" +
                         "VALUES (@roleID, @text, @title);";
                     SqlCommand cmd = new SqlCommand(sql, conn);
-                    cmd.Parameters.AddWithValue("roleID", announcementDTO.RoleDTO1);
+                    cmd.Parameters.AddWithValue("roleID", announcementDTO.RoleDTO1 + 1);
                     cmd.Parameters.AddWithValue("text", announcementDTO.Text);
                     cmd.Parameters.AddWithValue("title", announcementDTO.Title);
-                    
+
                     conn.Open();
                     cmd.ExecuteNonQuery();
 
@@ -55,7 +56,7 @@ namespace DataAccess
                         var announcementDTO = new AnnouncementDTO
                         {
                             AnnouncementId = Convert.ToInt32(dr["announcementID"]),
-                            RoleDTO1 = Convert.ToInt32(dr["roleID"]),
+                            RoleDTO1 = Convert.ToInt32(dr["roleID"]) - 1,
                             Text = dr["text"].ToString(),
                             Title = dr["title"].ToString()
                         };
@@ -80,7 +81,7 @@ namespace DataAccess
                 {
                     string sql = "SELECT * FROM Announcements WHERE roleID = @roleID";
                     SqlCommand cmd = new SqlCommand(sql, conn);
-                    cmd.Parameters.AddWithValue("@roleID", id);
+                    cmd.Parameters.AddWithValue("@roleID", id - 1);
 
                     conn.Open();
                     SqlDataReader dr = cmd.ExecuteReader();
@@ -90,7 +91,7 @@ namespace DataAccess
                         var announcementDTO = new AnnouncementDTO
                         {
                             AnnouncementId = Convert.ToInt32(dr["announcementID"]),
-                            RoleDTO1 = Convert.ToInt32(dr["roleID"]),
+                            RoleDTO1 = Convert.ToInt32(dr["roleID"]) - 1,
                             Text = dr["text"].ToString(),
                             Title = dr["title"].ToString()
                         };
@@ -121,7 +122,7 @@ namespace DataAccess
                         var announcementDTO = new AnnouncementDTO()
                         {
                             AnnouncementId = Convert.ToInt32(dr["announcementID"]),
-                            RoleDTO1 = Convert.ToInt32(dr["roleID"]),
+                            RoleDTO1 = Convert.ToInt32(dr["roleID"]) - 1,
                             Text = dr["text"].ToString(),
                             Title = dr["title"].ToString()
                         };
@@ -137,8 +138,51 @@ namespace DataAccess
             }
             throw new NotImplementedException();
         }
-        
 
+        public bool UpdateAnnouncement(AnnouncementDTO announcementDTO)
+        {
+            try
+            {
+                using (SqlConnection conn = InitializeConection())
+                {
+                    string sql = "UPDATE Announcements SET roleID = @roleID, text = @text, title= @title WHERE announcementID= @announcementID";
+                    SqlCommand cmd = new SqlCommand(sql, conn);
+                    cmd.Parameters.AddWithValue("announcementID", announcementDTO.AnnouncementId);
+                    cmd.Parameters.AddWithValue("roleID", announcementDTO.RoleDTO1 + 1);
+                    cmd.Parameters.AddWithValue("text", announcementDTO.Text);
+                    cmd.Parameters.AddWithValue("title", announcementDTO.Title);
+
+                    conn.Open();
+                    cmd.ExecuteNonQuery();
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        public bool DeleteAnnouncement(AnnouncementDTO announcementDTO)
+        {
+            try
+            {
+                using (SqlConnection conn = InitializeConection())
+                {
+                    string sql = "DELETE FROM Announcements WHERE announcementID= @announcementID";
+                    SqlCommand cmd = new SqlCommand(sql, conn);
+                    cmd.Parameters.AddWithValue("announcementID", announcementDTO.AnnouncementId);
+
+                    conn.Open();
+                    cmd.ExecuteNonQuery();
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new NotImplementedException();
+            }
         }
     }
+}
 
