@@ -53,12 +53,9 @@ namespace Desktop
 
                     employeeIDValue = selectedRow.Cells["EmployeeID"].Value.ToString();
 
-                    int index = int.Parse(employeeIDValue) - 2;
+                    int index = int.Parse(employeeIDValue);
 
-                    if (index != -1)
-                    {
-                        cmbUpdateEmployee.SelectedIndex = index;
-                    }
+                    
                 }
 
                 if (selectedRow.Cells["Date"].Value != null)

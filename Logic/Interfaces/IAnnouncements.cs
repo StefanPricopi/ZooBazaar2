@@ -1,4 +1,5 @@
 ﻿using Logic.DTO;
+using Logic.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,5 +16,6 @@ namespace Logic.Interfaces
         AnnouncementDTO GetAnnouncementByID(int id);
         public bool UpdateAnnouncement(AnnouncementDTO announcementDTO);
         public bool DeleteAnnouncement(AnnouncementDTO announcementDTO);
+        public AnnouncementDTO GetTheLastAnnouncementForAll(int id);
     }
 }

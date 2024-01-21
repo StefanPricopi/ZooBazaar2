@@ -15,6 +15,7 @@ builder.Services.AddRazorPages();
 builder.Services.AddScoped<ITicket, TicketRepository>();
 builder.Services.AddScoped<IUser, UserRepository>();
 builder.Services.AddScoped<UserManager>();
+builder.Services.AddScoped<IAnnouncements, AnnouncementsRepository>();
 builder.Services.AddAuthentication(options =>
 {
     options.DefaultAuthenticateScheme = "LoginCookieAuth";

@@ -40,7 +40,11 @@ namespace Logic.Managers
             }
             return announcements;
         }
-
+        public AnnouncementDTO GetTheLastAnnouncementForAll()
+        {
+            int roleid = 5;
+            return announcementRepository.GetTheLastAnnouncementForAll(roleid); 
+        }
         public List<Announcement> GetAnnouncementsByRole(int id)
         {
             List<Announcement> announcements = new List<Announcement>();

@@ -6,21 +6,21 @@
 
 <head>
     @section Scripts {
-    <script>
+        <script>
 
-        const selectedPanels = [];
-        function getDateFromPanelId(panelId) {
-            // Assuming the panelId format is "YYYY-MM-DD-ShiftType"
-            const parts = panelId.split('-');
-            const dateString = parts.slice(0, 3).join('-');
-            return new Date(dateString);
-        }
+            const selectedPanels = [];
+            function getDateFromPanelId(panelId) {
+                // Assuming the panelId format is "YYYY-MM-DD-ShiftType"
+                const parts = panelId.split('-');
+                const dateString = parts.slice(0, 3).join('-');
+                return new Date(dateString);
+            }
 
-        function getShiftTypeFromPanelId(panelId) {
-            // Assuming the panelId format is "YYYY-MM-DD-ShiftType"
-            const parts = panelId.split('-');
-            return parts[3];
-        }
+            function getShiftTypeFromPanelId(panelId) {
+                // Assuming the panelId format is "YYYY-MM-DD-ShiftType"
+                const parts = panelId.split('-');
+                return parts[3];
+            }
 
             function selectPanel(panelId) {
                 const index = selectedPanels.findIndex(panel => panel.PanelId === panelId);
@@ -62,7 +62,7 @@
                 // Submit the form
                 saveForm.submit();
             }
-    </script>
+        </script>
     }
 </head>
 
@@ -76,25 +76,25 @@
 
     <div class='form-group row gap-5' style='margin-top: -40px; padding-top: 0px; display: flex; justify-content: center; align-items: center; text-align: center; flex-direction: row;'>
         <form method='post' id='saveForm'>
-            
-                <input type='submit' class='btn btn-primary btn-lg' value='Previous' asp-page-handler='Previous' />
-            
-            
-                <input type='submit' class='btn btn-primary btn-lg' value='Next' asp-page-handler='Next' />
-            
-            
-                <button type='button' class='btn btn-success btn-lg' onclick='saveSelectedPanels()'>Save</button>
-                <input type='hidden' name='selectedPanels' />
-            
+
+            <input type='submit' class='btn btn-primary btn-lg' value='Previous' asp-page-handler='Previous' />
+
+
+            <input type='submit' class='btn btn-primary btn-lg' value='Next' asp-page-handler='Next' />
+
+
+            <button type='button' class='btn btn-success btn-lg' onclick='saveSelectedPanels()'>Save</button>
+            <input type='hidden' name='selectedPanels' />
+
         </form>
 
         <form method='post' id='saveForm2' asp-page-handler="form">
-          
-                <button type='button' class='btn btn-success btn-lg' onclick='saveSelectedPanels2()'>Remove</button>
-                <input type='hidden' name='selectedPanels' />
-           
+
+            <button type='button' class='btn btn-success btn-lg' onclick='saveSelectedPanels2()'>Remove</button>
+            <input type='hidden' name='selectedPanels' />
+
         </form>
     </div>
 
-   
+
 </body>

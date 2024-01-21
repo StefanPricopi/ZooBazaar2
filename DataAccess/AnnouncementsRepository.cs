@@ -183,6 +183,40 @@ namespace DataAccess
                 throw new NotImplementedException();
             }
         }
+
+        public AnnouncementDTO GetTheLastAnnouncementForAll(int id)
+        {
+            try
+            {
+                using (SqlConnection conn = InitializeConection())
+                {
+                    string sql = "SELECT TOP 1 * FROM Announcements WHERE roleID = @roleID ORDER BY AnnouncementID DESC";
+                    SqlCommand cmd = new SqlCommand(sql, conn);
+                    cmd.Parameters.AddWithValue("@roleID", id - 1);
+
+                    conn.Open();
+                    SqlDataReader dr = cmd.ExecuteReader();
+
+                    while (dr.Read())
+                    {
+                        var announcementDTO = new AnnouncementDTO
+                        {
+                            AnnouncementId = Convert.ToInt32(dr["announcementID"]),
+                            RoleDTO1 = Convert.ToInt32(dr["roleID"]) - 1,
+                            Text = dr["text"].ToString(),
+                            Title = dr["title"].ToString()
+                        };
+                        return announcementDTO;
+                    }
+                    return null;   
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new NotImplementedException();
+                return null;
+            }
+        }
     }
 }
 

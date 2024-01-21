@@ -7,7 +7,7 @@ namespace Desktop
     public partial class AfternoonShiftPanel : UserControl, IShiftPanel
     {
         // for comments see morningShiftPanel code is 99% the same
-        private const int labelHeight = 50;
+        private const int labelHeight = 15;
         private int initialPanelHeight;
         private int NeededCapacity;
         private int FilledCapacity;

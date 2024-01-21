@@ -12,7 +12,7 @@ namespace Desktop
     {
 
         // const height for labels, acts as margin between labels
-        private const int labelHeight = 50;
+        private const int labelHeight = 15;
         // this is the margin within panels
         private int initialPanelHeight;
         private Label capacityLabel;

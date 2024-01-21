@@ -153,7 +153,7 @@ namespace Web_Layer.Pages
         DateTime currentDay = startDate.AddDays(i);
 
         result.Append("<div class='col mb-5 gap-0' style='margin-bottom:-20px; padding-botton:-20px;justify-content: center; align-items: center;'>");
-
+result.Append($"<div class=''><div class=''><p class='card-title'>{DaysOfWeek[i]}</p></div></div>");
         // Create morning shift card
         CreateShiftCard(result, currentDay, "MorningShift", i);
 
@@ -199,7 +199,7 @@ namespace Web_Layer.Pages
             // Determine the background color
             var backgroundColor = panelExists ? "red" : "white";
 
-            result.Append($"<div class=''><div class=''><p class='card-title'>{DaysOfWeek[i]}</p></div></div>");
+            
             result.Append($"<div class='card' style='height:200px; background-color: {backgroundColor}'>");
             result.Append($"<button type='button' onclick='selectPanel(\"{currentDay.Date}-{shiftType}\")'>Select</button>");
             result.Append($"<div panel-id='{currentDay.Date}-{shiftType}' class='card-body'><h5 class='card-title'>{shiftType}</h5>");
