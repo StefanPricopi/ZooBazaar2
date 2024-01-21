@@ -15,11 +15,22 @@ namespace Logic.Managers
 
         public ScheduleManager(ISchedule location)
         {
+        
             this.schedule = location ?? throw new ArgumentNullException(nameof(location));
+          
         }
+        public void RemoveAvailableEmployee(DateTime date, string shift, int employeeID)
+        {
+            schedule.RemoveAvailableEmployee(date, shift, employeeID);
+        }
+
         public List<KeyValuePair<int, string>> GetEmployeeListByDateAndShift(DateTime date, string shift)
         {
             return schedule.GetEmployeeListByDateAndShift(date, shift);
+        }
+        public List<KeyValuePair<int, string>> GetEmployeeListExcludingDateAndShift(DateTime date, string shift)
+        {
+            return schedule.GetEmployeeListExcludingDateAndShift(date, shift);
         }
         public List<KeyValuePair<int, string>> GetEmployeeList()
         {
@@ -73,7 +84,72 @@ namespace Logic.Managers
 
             return employeeID;
         }
-        public List<Schedule> GetScheduleByID(int id)
+        public List<Schedule> GetScheduleByID(int id) 
         { return schedule.GetScheduleByID(id); }
+        public void PerformScheduling()
+        {
+            try
+            {
+                // Step 1: Retrieve Available Employees
+                //  List<Employee> availableEmployees = schedule.RetrieveAvailableEmployees();
+
+                // Step 2: Count Submissions and Identify the Day with the Least Employees
+                Dictionary<Tuple<DateTime, string>, List<int>> dayWithLeastEmployees = schedule.IdentifyDayWithLeastEmployees();
+                List<Tuple<DateTime, string>> dateShiftUserCounts = dayWithLeastEmployees.Keys.ToList();
+             //   foreach (List<int> employeeList in dayWithLeastEmployees.Values)
+             //   {
+                    // Now you can work with each employeeList
+                //    foreach (int employeeId in employeeList)
+               //     {
+               //         Console.WriteLine(employeeId);
+               //     }
+
+                    // If you only want the first list, you can break out of the loop
+              //      break;
+               // }
+                // Step 3: Retrieve Managers
+                List<Employee> managers = schedule.RetrieveManagers();
+                List<Employee> employees = schedule.RetrieveEmployeeFulltime();
+                // Step 4: Assign Managers to Shifts
+                schedule.AssignManagersToShifts(managers, dateShiftUserCounts);
+                schedule.AssignFullTimeEmployeesToShifts(employees, dateShiftUserCounts);
+                List<Employee> availableEmployees = schedule.RetrieveParttimers();
+                DateTime currentDate = DateTime.Today;
+                int daysUntilSunday = ((int)DayOfWeek.Sunday - (int)currentDate.DayOfWeek + 7) % 7;
+                DateTime nextSunday = currentDate.AddDays(daysUntilSunday);
+
+                // Calculate the end date (Saturday of the same week)
+                DateTime endDate = nextSunday.AddDays(6);
+                bool allShiftsFull = schedule.AreAllShiftsFilled(nextSunday, endDate);
+                if (!allShiftsFull)
+                {
+                    // Assign part-time employees to shifts
+                    schedule.AssignPartTimeEmployeesToShifts(availableEmployees, dateShiftUserCounts);
+                }
+                // Step 5: Retrieve Full-Time Employees
+                //   List<Employee> fullTimeEmployees = schedule.RetrieveFullTimeEmployees();
+
+                // Step 6: Assign Full-Time Employees to Shifts
+                /// schedule.AssignEmployeesToShifts(fullTimeEmployees, dayWithLeastEmployees);
+
+                // Step 7: Check and Assign Part-Time Employees
+                //    List<Employee> partTimeEmployees = schedule.RetrievePartTimeEmployees();
+                // schedule.AssignEmployeesToShifts(partTimeEmployees, dayWithLeastEmployees);
+
+                // Step 8: Check and Assign Zero Hour Employees
+                //    List<Employee> zeroHourEmployees = schedule.RetrieveZeroHourEmployees();
+                // schedule.AssignEmployeesToShifts(zeroHourEmployees, dayWithLeastEmployees);
+
+                // Final steps for shift assignment (if any)
+                // ...
+
+                Console.WriteLine("Scheduling completed successfully.");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"An error occurred: {ex.Message}");
+            }
+        }
     }
 }
+    

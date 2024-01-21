@@ -52,8 +52,12 @@ namespace Logic.Entities
             get { return position; }
             set { position = value; }
         }
+        public Employee()
+        {
 
-        Employee(string firstName, string lastName, string phoneNumber, DateTime dateOfBirth, int bSN, string position) 
+
+        }
+        public Employee(string firstName, string lastName, string phoneNumber, DateTime dateOfBirth, int bSN, string position) 
         {
             this.firstName = firstName;
             this.lastName = lastName;
@@ -63,6 +67,7 @@ namespace Logic.Entities
             this.position = position;
             
         }
+        
         public EmployeeDTO EmployeeToEmployeeDTO()
         {
             return new EmployeeDTO()

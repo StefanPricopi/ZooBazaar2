@@ -43,6 +43,19 @@ namespace DataAccess
 
             return employeeList;
         }
+        public List<KeyValuePair<int, string>> GetEmployeeListExcludingDateAndShift(DateTime date, string shift)
+        {
+            List<KeyValuePair<int, string>> allEmployees = GetEmployeeList();
+            List<KeyValuePair<int, string>> availableEmployees = GetEmployeeListByDateAndShift(date, shift);
+
+            // Use LINQ to filter out employees who are available on the specified date and shift
+            List<KeyValuePair<int, string>> excludedEmployees = allEmployees
+                .Where(employee => !availableEmployees.Any(availableEmployee => availableEmployee.Key == employee.Key))
+                .ToList();
+
+            return excludedEmployees;
+        }
+
         public void CreateShift(int employeeID, DateTime Date, string Shift, int areaID, int Needed, int Filled)
         {
             using (SqlConnection connection = InitializeConection())
@@ -508,6 +521,7 @@ WHERE
                 throw ex;
             }
         }
+        
         public List<KeyValuePair<int, string>> GetEmployeeListByDateAndShift(DateTime date, string shift)
         {
             List<KeyValuePair<int, string>> employeeList = new List<KeyValuePair<int, string>>();
@@ -555,8 +569,746 @@ WHERE
             }
         }
 
+        public List<Employee> RetrieveAvailableEmployees()
+        {
+            List<Employee> employees = new List<Employee>();
+            string sql = "SELECT * FROM AvailableEmployee;";
+
+            using (SqlConnection connection = InitializeConection())
+            using (SqlCommand command = new SqlCommand(sql, connection))
+            {
+                connection.Open();
+
+                using (SqlDataReader reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        // Map database columns to Employee object properties
+                        Employee employee = new Employee
+                        {
+                            EmployeeID = (int)reader["EmployeeID"],
+                            // Map other properties
+                        };
+
+                        employees.Add(employee);
+                    }
+                }
+            }
+
+            return employees;
+        }
+
+        public Dictionary<Tuple<DateTime, string>, List<int>> IdentifyDayWithLeastEmployees()
+        {
+            Dictionary<Tuple<DateTime, string>, List<int>> dateShiftUserCounts = new Dictionary<Tuple<DateTime, string>, List<int>>();
+
+            // Get the start date (Sunday before the start of next week)
+            DateTime currentDate = DateTime.Today;
+            int daysUntilSunday = ((int)DayOfWeek.Sunday - (int)currentDate.DayOfWeek + 7) % 7;
+            DateTime startOfWeek = currentDate.AddDays(daysUntilSunday);
+
+            // Get the end date (Saturday of next week)
+            DateTime endOfWeek = startOfWeek.AddDays(6);
+
+            string sql = "SELECT Date, Shift, UserID " +
+                         "FROM AvailableEmployee " +
+                         "WHERE Date BETWEEN @StartDate AND @EndDate;";
+
+            using (SqlConnection connection = InitializeConection())
+            using (SqlCommand command = new SqlCommand(sql, connection))
+            {
+                command.Parameters.AddWithValue("@StartDate", startOfWeek);
+                command.Parameters.AddWithValue("@EndDate", endOfWeek);
+
+                connection.Open();
+
+                using (SqlDataReader reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        DateTime date = (DateTime)reader["Date"];
+                        string shift = (string)reader["Shift"];
+                        int userID = (int)reader["UserID"];
+
+                        // Create a composite key of date and shift
+                        var key = Tuple.Create(date, shift);
+
+                        // Add user ID to the list associated with the composite key
+                        if (!dateShiftUserCounts.ContainsKey(key))
+                        {
+                            dateShiftUserCounts[key] = new List<int>();
+                        }
+
+                        dateShiftUserCounts[key].Add(userID);
+                    }
+                }
+            }
+
+            // Order the dictionary by the count of user IDs in descending order
+            var sortedDictionary = dateShiftUserCounts.OrderByDescending(kv => kv.Value.Count)
+                                                      .ToDictionary(kv => kv.Key, kv => kv.Value);
+
+            // Pick the first date and shift from the sorted dictionary
+            var selectedKey = sortedDictionary.Keys.FirstOrDefault();
+
+            if (selectedKey == null)
+            {
+                throw new InvalidOperationException("Unable to identify the day with the least employees.");
+            }
+
+            return sortedDictionary;
+        }
 
 
+        public List<Employee> RetrieveEmployeeFulltime()
+        {
+            try
+            {
+
+
+                List<Employee> managers = new List<Employee>();
+                string sql = "SELECT Employees.EmployeeID " +
+                    "FROM Employees " +
+                    "LEFT JOIN EmployeeContracts ON Employees.EmployeeID = EmployeeContracts.EmployeeID " +
+                    " WHERE Employees.RoleID = 3 AND EmployeeContracts.ContractType = 'Fulltime';";
+
+                using (SqlConnection connection = InitializeConection())
+                using (SqlCommand command = new SqlCommand(sql, connection))
+                {
+                    connection.Open();
+
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            // Map database columns to Employee object properties
+                            Employee manager = new Employee
+                            {
+                                EmployeeID = (int)reader["EmployeeID"],
+                                // Map other properties
+                            };
+
+                            managers.Add(manager);
+                        }
+                    }
+                }
+
+
+
+                return managers;
+            }
+            catch (Exception ex) { return null; }
+
+        }
+        public List<Employee> RetrieveManagers()
+        {
+            try
+            {
+
+            
+            List<Employee> managers = new List<Employee>();
+            string sql = "SELECT Employees.EmployeeID " +
+                    "FROM Employees " +
+                    "LEFT JOIN EmployeeContracts ON Employees.EmployeeID = EmployeeContracts.EmployeeID " +
+                    " WHERE Employees.RoleID = 2 AND EmployeeContracts.ContractType = 'fulltime';";
+
+                using (SqlConnection connection = InitializeConection())
+            using (SqlCommand command = new SqlCommand(sql, connection))
+            {
+                connection.Open();
+
+                using (SqlDataReader reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        // Map database columns to Employee object properties
+                        Employee manager = new Employee
+                        {
+                            EmployeeID = (int)reader["EmployeeID"],
+                            // Map other properties
+                        };
+
+                        managers.Add(manager);
+                    }
+                }
+            }
+            
+            
+
+            return managers;
+            }
+            catch (Exception ex) { return null; }
+
+        }
+        public List<Employee> RetrieveParttimers()
+        {
+            try
+            {
+
+
+                List<Employee> managers = new List<Employee>();
+                string sql = "SELECT Employees.EmployeeID " +
+                        "FROM Employees " +
+                        "LEFT JOIN EmployeeContracts ON Employees.EmployeeID = EmployeeContracts.EmployeeID " +
+                        " WHERE Employees.RoleID = 3 AND EmployeeContracts.ContractType = 'Parttime';";
+
+                using (SqlConnection connection = InitializeConection())
+                using (SqlCommand command = new SqlCommand(sql, connection))
+                {
+                    connection.Open();
+
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            // Map database columns to Employee object properties
+                            Employee manager = new Employee
+                            {
+                                EmployeeID = (int)reader["EmployeeID"],
+                                // Map other properties
+                            };
+
+                            managers.Add(manager);
+                        }
+                    }
+                }
+
+
+
+                return managers;
+            }
+            catch (Exception ex) { return null; }
+
+        }
+        private bool IsManagerUnavailableOnShift(int managerID, DateTime date, string shift, SqlConnection connection)
+        {
+            try
+            {
+                // Implement logic to check if the manager is unavailable for the specified shift on the given date
+                // You may need to query the database or use existing data structures to determine this
+
+                // Sample SQL query (replace with your actual query)
+                string sql = "SELECT COUNT(*) FROM AvailableEmployee WHERE UserID = @UserID AND Date = @Date AND Shift = @Shift;";
+
+                using (SqlCommand command = new SqlCommand(sql, connection))
+                {
+                    command.Parameters.AddWithValue("@UserID", managerID);
+                    command.Parameters.AddWithValue("@Date", date);
+                    command.Parameters.AddWithValue("@Shift", shift);
+
+                    int count = (int)command.ExecuteScalar();
+                    return count > 0; // Return true if manager is unavailable, false otherwise
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"An error occurred: {ex.Message}");
+                return false;
+            }
+        }
+
+        private int GetShiftsAssignedToday(int managerID, DateTime date, SqlConnection connection)
+        {
+            try
+            {
+                // Implement logic to get the number of shifts assigned to the manager on the specified date
+                // You may need to query the database or use existing data structures to determine this
+
+                // Sample SQL query (replace with your actual query)
+                string sql = "SELECT COUNT(*) FROM Schedules WHERE EmployeeID = @ManagerID AND Date = @Date;";
+
+                using (SqlCommand command = new SqlCommand(sql, connection))
+                {
+                    command.Parameters.AddWithValue("@ManagerID", managerID);
+                    command.Parameters.AddWithValue("@Date", date);
+
+                    int count = (int)command.ExecuteScalar();
+                    return count; // Return the count of shifts assigned today
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"An error occurred: {ex.Message}");
+                return 0;
+            }
+        }
+
+        private int GetShiftsAssignedThisWeek(int managerID, DateTime date, SqlConnection connection)
+        {
+            try
+            {
+                // Implement logic to get the number of shifts assigned to the manager in the current week
+                // You may need to query the database or use existing data structures to determine this
+
+                // Sample SQL query (replace with your actual query)
+                string sql = "SELECT COUNT(*) FROM Schedules WHERE EmployeeID = @ManagerID AND Date >= @StartDate AND Date <= @EndDate;";
+
+                DateTime startOfWeek = date.AddDays(-(int)date.DayOfWeek + (int)DayOfWeek.Sunday);
+                DateTime endOfWeek = startOfWeek.AddDays(6);
+
+                using (SqlCommand command = new SqlCommand(sql, connection))
+                {
+                    command.Parameters.AddWithValue("@ManagerID", managerID);
+                    command.Parameters.AddWithValue("@StartDate", startOfWeek);
+                    command.Parameters.AddWithValue("@EndDate", endOfWeek);
+
+                    int count = (int)command.ExecuteScalar();
+                    return count; // Return the count of shifts assigned this week
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"An error occurred: {ex.Message}");
+                return 0;
+            }
+        }
+        public void AssignFullTimeEmployeesToShifts(List<Employee> fullTimeEmployees, List<Tuple<DateTime, string>> dateShiftUserCounts)
+        {
+            try
+            {
+                using (SqlConnection connection = InitializeConection())
+                {
+                    connection.Open();
+
+                    // Get the current date and move to the next Sunday
+                    DateTime currentDate = DateTime.Today;
+                    int daysUntilSunday = ((int)DayOfWeek.Sunday - (int)currentDate.DayOfWeek + 7) % 7;
+                    DateTime nextSunday = currentDate.AddDays(daysUntilSunday);
+
+                    // Iterate through each day of the week (next Sunday to Saturday)
+                    for (int i = 0; i < 7; i++)
+                    {
+                        DateTime date = nextSunday.AddDays(i);
+
+                        // Check if the date is within dateShiftUserCounts
+                        if (dateShiftUserCounts.Any(pair => pair.Item1 == date))
+                        {
+                            // Iterate through each shift on the current date
+                            // Iterate through each shift on the current date
+                            foreach (var shift in new[] { "MorningShift", "AfternoonShift", "EveningShift" })
+                            {
+                                // Check if the shift already has the required number of employees assigned
+                                if (!IsShiftFilled(date, shift, connection, neededCapacity: 5))
+                                {
+                                    // Iterate through full-time employees for this shift
+                                    foreach (var employee in fullTimeEmployees)
+                                    {
+                                        // Check if the shift is already filled
+                                        if (IsShiftFilled(date, shift, connection, neededCapacity: 5))
+                                        {
+                                            // Move to the next shift if the current shift is already filled
+                                            break;
+                                        }
+
+                                        // Check if the employee is available for this shift
+                                        if (!IsEmployeeUnavailableOnShift(employee.EmployeeID, date, shift, connection))
+                                        {
+                                            // Check if the employee has not exceeded the limit of 2 shifts per day and 10 shifts per week
+                                            if (GetShiftsAssignedToday(employee.EmployeeID, date, connection) < 2 &&
+                                                GetShiftsAssignedThisWeek(employee.EmployeeID, date, connection) < 10)
+                                            {
+                                                // Run the CreateShift query
+                                                CreateShift(employee.EmployeeID, date, shift, areaID: 1, Needed: 5, Filled: 1);
+
+                                               
+
+                                                // Check if the employee has reached the weekly limit
+                                                if (GetShiftsAssignedThisWeek(employee.EmployeeID, date, connection) >= 10)
+                                                {
+                                                    // Break if the weekly limit is reached for this employee
+                                                    break;
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                                else
+                                {
+                                    // The shift is already filled, move to the next shift
+                                    continue;
+                                }
+                            }
+
+                        }
+                    
+                        else
+                        {
+                            // The date is not within dateShiftUserCounts, you can handle it as needed
+                            // For example, run default logic or log a message
+                            Console.WriteLine($"No preferences found for {date}. Running default logic.");
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"An error occurred: {ex.Message}");
+            }
+        }
+
+
+
+        private bool IsShiftFilled(DateTime date, string shift, SqlConnection connection, int neededCapacity)
+        {
+            try
+            {
+                // Implement logic to check if the shift has the required number of employees assigned
+                // You may need to query the database or use existing data structures to determine this
+
+                // Sample SQL query (replace with your actual query)
+                string sql = "SELECT COUNT(*) FROM ScheduleCapacity WHERE Date = @Date AND Shift = @Shift AND FilledCapacity >= @NeededCapacity;";
+
+                using (SqlCommand command = new SqlCommand(sql, connection))
+                {
+                    command.Parameters.AddWithValue("@Date", date);
+                    command.Parameters.AddWithValue("@Shift", shift);
+                    command.Parameters.AddWithValue("@NeededCapacity", neededCapacity);
+
+                    int count = (int)command.ExecuteScalar();
+                    return count > 0; // Return true if the shift is filled, false otherwise
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"An error occurred: {ex.Message}");
+                return false;
+            }
+        }
+
+       
+
+        private bool IsEmployeeUnavailableOnShift(int employeeID, DateTime date, string shift, SqlConnection connection)
+        {
+            try
+            {
+                // Implement logic to check if the employee is unavailable for the specified shift on the given date
+                // You may need to query the database or use existing data structures to determine this
+
+                // Sample SQL query (replace with your actual query)
+                string sql = "SELECT COUNT(*) FROM AvailableEmployee WHERE UserID = @UserID AND Date = @Date AND Shift = @Shift;";
+
+                using (SqlCommand command = new SqlCommand(sql, connection))
+                {
+                    command.Parameters.AddWithValue("@UserID", employeeID);
+                    command.Parameters.AddWithValue("@Date", date);
+                    command.Parameters.AddWithValue("@Shift", shift);
+
+                    int count = (int)command.ExecuteScalar();
+                    return count > 0; // Return true if employee is unavailable, false otherwise
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"An error occurred: {ex.Message}");
+                return false;
+            }
+        }
+        private List<Tuple<DateTime, string>> GetShiftsWithAvailableCapacity(List<Tuple<DateTime, string>> dateShiftUserCounts, SqlConnection connection)
+        {
+            try
+            {
+                List<Tuple<DateTime, string>> shiftsWithAvailableCapacity = new List<Tuple<DateTime, string>>();
+
+                foreach (var dateShiftPair in dateShiftUserCounts)
+                {
+                    string shift = dateShiftPair.Item2;
+                    DateTime date = dateShiftPair.Item1;
+
+                    // Check if the shift has available capacity
+                    if (!IsShiftFilled(date, shift, connection))
+                    {
+                        shiftsWithAvailableCapacity.Add(new Tuple<DateTime, string>(date, shift));
+                    }
+                }
+
+                return shiftsWithAvailableCapacity;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"An error occurred: {ex.Message}");
+                return new List<Tuple<DateTime, string>>();
+            }
+        }
+        public bool AreAllShiftsFilled(DateTime startDate, DateTime endDate)
+        {
+            try
+            {
+                using (SqlConnection connection = InitializeConection())
+                {
+                    connection.Open();
+
+                    // Iterate through each date and shift between the start and end date
+                    for (DateTime date = startDate; date <= endDate; date = date.AddDays(1))
+                    {
+                        foreach (var shift in new[] { "MorningShift", "AfternoonShift", "EveningShift" })
+                        {
+                            // Check if the shift is filled
+                            if (!IsShiftFilled(date, shift, connection))
+                            {
+                                return false;
+                            }
+                        }
+                    }
+
+                    // All shifts are filled
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"An error occurred: {ex.Message}");
+                return false; // Handle the error as appropriate for your application
+            }
+        }
+        // Method to assign part-time employees to shifts
+        public void AssignPartTimeEmployeesToShifts(List<Employee> partTimeEmployees, List<Tuple<DateTime, string>> dateShiftUserCounts)
+        {
+            try
+            {
+                using (SqlConnection connection = InitializeConection())
+                {
+                    connection.Open();
+
+                    // Get the current date and move to the next Sunday
+                    DateTime currentDate = DateTime.Today;
+                    int daysUntilSunday = ((int)DayOfWeek.Sunday - (int)currentDate.DayOfWeek + 7) % 7;
+                    DateTime nextSunday = currentDate.AddDays(daysUntilSunday);
+
+                    // Iterate through each day of the week (next Sunday to Saturday)
+                    for (int i = 0; i < 7; i++)
+                    {
+                        DateTime date = nextSunday.AddDays(i);
+
+                        // Check if the date is within dateShiftUserCounts
+                        if (dateShiftUserCounts.Any(pair => pair.Item1 == date))
+                        {
+                            // Iterate through each shift on the current date
+                            // Iterate through each shift on the current date
+                            foreach (var shift in new[] { "MorningShift", "AfternoonShift", "EveningShift" })
+                            {
+                                // Check if the shift already has the required number of employees assigned
+                                if (!IsShiftFilled(date, shift, connection, neededCapacity: 5))
+                                {
+                                    // Iterate through full-time employees for this shift
+                                    foreach (var employee in partTimeEmployees)
+                                    {
+                                        // Check if the shift is already filled
+                                        if (IsShiftFilled(date, shift, connection, neededCapacity: 5))
+                                        {
+                                            // Move to the next shift if the current shift is already filled
+                                            break;
+                                        }
+
+                                        // Check if the employee is available for this shift
+                                        if (!IsEmployeeUnavailableOnShift(employee.EmployeeID, date, shift, connection))
+                                        {
+                                            // Check if the employee has not exceeded the limit of 2 shifts per day and 10 shifts per week
+                                            if (GetShiftsAssignedToday(employee.EmployeeID, date, connection) < 2 &&
+                                                GetShiftsAssignedThisWeek(employee.EmployeeID, date, connection) < 10)
+                                            {
+                                                // Run the CreateShift query
+                                                CreateShift(employee.EmployeeID, date, shift, areaID: 1, Needed: 5, Filled: 1);
+
+                                                // Update the needed capacity for the shift
+                                               
+
+                                                // Check if the employee has reached the weekly limit
+                                                if (GetShiftsAssignedThisWeek(employee.EmployeeID, date, connection) >= 10)
+                                                {
+                                                    // Break if the weekly limit is reached for this employee
+                                                    break;
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                                else
+                                {
+                                    // The shift is already filled, move to the next shift
+                                    continue;
+                                }
+                            }
+
+                        }
+                        else
+                        {
+                            // The date is not within dateShiftUserCounts, you can handle it as needed
+                            // For example, run default logic or log a message
+                            Console.WriteLine($"No preferences found for {date}. Running default logic.");
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"An error occurred: {ex.Message}");
+            }
+        }
+        public void AssignManagersToShifts(List<Employee> managers, List<Tuple<DateTime, string>> dateShiftUserCounts)
+        {
+            try
+            {
+                using (SqlConnection connection = InitializeConection())
+                {
+                    connection.Open();
+
+                    // Get the current date and move to the next Sunday
+                    DateTime currentDate = DateTime.Today;
+                    int daysUntilSunday = ((int)DayOfWeek.Sunday - (int)currentDate.DayOfWeek + 7) % 7;
+                    DateTime nextSunday = currentDate.AddDays(daysUntilSunday);
+
+                    // Iterate through each day of the week (next Sunday to Saturday)
+                    for (int i = 0; i < 7; i++)
+                    {
+                        DateTime date = nextSunday.AddDays(i);
+
+                        // Check if the date is within dateShiftUserCounts
+                        if (dateShiftUserCounts.Any(pair => pair.Item1 == date))
+                        {
+                            // Iterate through each shift on the current date
+                            foreach (var shift in new[] { "MorningShift", "AfternoonShift", "EveningShift" })
+                            {
+                                // Check if the shift already has a manager assigned
+                                if (!IsShiftFilledManager(date, shift, connection))
+                                {
+                                    // Iterate through managers for this shift
+                                    foreach (var manager in managers)
+                                    {
+                                        // Check if the manager is available for this shift
+                                        if (!IsManagerUnavailableOnShift(manager.EmployeeID, date, shift, connection))
+                                        {
+                                            // Check if the manager has not exceeded the limit of 2 shifts per day and 10 shifts per week
+                                            if (GetShiftsAssignedToday(manager.EmployeeID, date, connection) < 2 &&
+                                                GetShiftsAssignedThisWeek(manager.EmployeeID, date, connection) < 10)
+                                            {
+                                                // Run the CreateShift query
+                                                CreateShift(manager.EmployeeID, date, shift, areaID: 1, Needed: 5, Filled: 1);
+                                                break;  // Stop assigning to this shift after successfully assigning one manager
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        else
+                        {
+                            // The date is not within dateShiftUserCounts, you can handle it as needed
+                            // For example, run default logic or log a message
+                            Console.WriteLine($"No preferences found for {date}. Running default logic.");
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"An error occurred: {ex.Message}");
+            }
+        }
+
+        private bool IsShiftFilledManager(DateTime date, string shift, SqlConnection connection)
+        {
+            string sql = "SELECT COUNT(*) FROM ScheduleCapacity WHERE Date = @Date AND Shift = @Shift AND FilledCapacity >= 1;";
+            using (SqlCommand command = new SqlCommand(sql, connection))
+            {
+                command.Parameters.AddWithValue("@Date", date);
+                command.Parameters.AddWithValue("@Shift", shift);
+
+                int count = (int)command.ExecuteScalar();
+                return count > 0;
+            }
+        }
+        private bool IsShiftFilled(DateTime date, string shift, SqlConnection connection)
+        {
+            string sql = "SELECT COUNT(*) FROM ScheduleCapacity WHERE Date = @Date AND Shift = @Shift AND FilledCapacity >= 5;";
+            using (SqlCommand command = new SqlCommand(sql, connection))
+            {
+                command.Parameters.AddWithValue("@Date", date);
+                command.Parameters.AddWithValue("@Shift", shift);
+
+                int count = (int)command.ExecuteScalar();
+                return count > 0;
+            }
+        }
+
+
+
+        private List<int> GetManagersUnavailableOnDate(DateTime date, SqlConnection connection, string shift)
+        {
+            List<int> unavailableManagerIDs = new List<int>();
+
+            string sql = "SELECT DISTINCT UserID FROM AvailableEmployee WHERE Date = @Date AND Shift = @Shift;";
+            using (SqlCommand command = new SqlCommand(sql, connection))
+            {
+                command.Parameters.AddWithValue("@Date", date);
+                command.Parameters.AddWithValue("@Shift", shift);
+
+                using (SqlDataReader reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        int userID = (int)reader["UserID"];
+                        unavailableManagerIDs.Add(userID);
+                    }
+                }
+            }
+
+            return unavailableManagerIDs;
+        }
+
+
+        public void AssignManagersToShifts(List<Employee> managers, DateTime targetDate)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<Employee> RetrieveFullTimeEmployees()
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<Employee> RetrievePartTimeEmployees()
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<Employee> RetrieveZeroHourEmployees()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void AssignEmployeesToShifts(List<Employee> employees, DateTime targetDate)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void RemoveAvailableEmployee(DateTime date, string shift, int employeeID)
+        {
+            try
+            {
+                using (SqlConnection connection = InitializeConection())
+                {
+                    connection.Open();
+
+                    string updateQuery = "DELETE FROM AvailableEmployee " +
+                                         "WHERE Date = @Date AND UserID = @UserID AND Shift = @Shift";
+
+                    using (SqlCommand command = new SqlCommand(updateQuery, connection))
+                    {
+                        command.Parameters.AddWithValue("@Shift", shift);
+                        command.Parameters.AddWithValue("@UserID", employeeID);
+                        command.Parameters.AddWithValue("@Date", date);
+
+                        int rowsAffected = command.ExecuteNonQuery();
+
+
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 }
 

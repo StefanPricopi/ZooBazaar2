@@ -45,6 +45,7 @@
             Morning = new Label();
             label1 = new Label();
             label2 = new Label();
+            btnAutomate = new Button();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
@@ -229,11 +230,25 @@
             label2.TabIndex = 35;
             label2.Text = "Evening";
             // 
+            // btnAutomate
+            // 
+            btnAutomate.BackColor = Color.Transparent;
+            btnAutomate.FlatStyle = FlatStyle.Flat;
+            btnAutomate.Font = new Font("Century Gothic", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
+            btnAutomate.Location = new Point(608, 745);
+            btnAutomate.Name = "btnAutomate";
+            btnAutomate.Size = new Size(276, 43);
+            btnAutomate.TabIndex = 36;
+            btnAutomate.Text = "Create Schedule for next week";
+            btnAutomate.UseVisualStyleBackColor = false;
+            btnAutomate.Click += btnAutomate_Click;
+            // 
             // EmployeeSchedulingForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1512, 811);
+            Controls.Add(btnAutomate);
             Controls.Add(label2);
             Controls.Add(label1);
             Controls.Add(Morning);
@@ -281,5 +296,6 @@
         private Label Morning;
         private Label label1;
         private Label label2;
+        private Button btnAutomate;
     }
 }

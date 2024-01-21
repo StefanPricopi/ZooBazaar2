@@ -23,18 +23,21 @@
         }
 
             function selectPanel(panelId) {
-                const index = selectedPanels.findIndex(panel => panel.panelId === panelId);
+                const index = selectedPanels.findIndex(panel => panel.PanelId === panelId);
 
                 if (index === -1) {
+                    // Panel is not selected, add it to the selectedPanels array
                     selectedPanels.push({
                         PanelId: panelId,
                         Date: getDateFromPanelId(panelId),
                         ShiftType: getShiftTypeFromPanelId(panelId)
                     });
                 } else {
+                    // Panel is already selected, remove it from the selectedPanels array
                     selectedPanels.splice(index, 1);
                 }
 
+                // Toggle the background color based on selection status
                 const panel = document.querySelector(`div[panel-id="${panelId}"]`);
                 panel.style.backgroundColor = index === -1 ? 'yellow' : 'white';
             }
@@ -49,7 +52,16 @@
                 // Submit the form
                 saveForm.submit();
             }
+            function saveSelectedPanels2() {
+                const saveForm = document.getElementById('saveForm2');
+                const selectedPanelsInput = saveForm.querySelector('input[name="selectedPanels"]');
 
+                // Update the value of the hidden input field
+                selectedPanelsInput.value = JSON.stringify(selectedPanels);
+
+                // Submit the form
+                saveForm.submit();
+            }
     </script>
     }
 </head>
@@ -61,19 +73,28 @@
             @Html.Raw(Model.GenerateShifts(Model.currentDay))
         </div>
     </div>
-    <form method='post' id='saveForm'>
-        <div class='form-group row gap-5'
-             style='margin-top:-40px;padding-top:0px;display:flex;justify-content: center; align-items: center; text-align:center;flex-direction:row;'>
-            <div class='col-1'>
+
+    <div class='form-group row gap-5' style='margin-top: -40px; padding-top: 0px; display: flex; justify-content: center; align-items: center; text-align: center; flex-direction: row;'>
+        <form method='post' id='saveForm'>
+            
                 <input type='submit' class='btn btn-primary btn-lg' value='Previous' asp-page-handler='Previous' />
-            </div>
-            <div class='col-1'>
+            
+            
                 <input type='submit' class='btn btn-primary btn-lg' value='Next' asp-page-handler='Next' />
-            </div>
-            <div class='col-1'>
+            
+            
                 <button type='button' class='btn btn-success btn-lg' onclick='saveSelectedPanels()'>Save</button>
                 <input type='hidden' name='selectedPanels' />
-            </div>
-        </div>
-    </form>
+            
+        </form>
+
+        <form method='post' id='saveForm2' asp-page-handler="form">
+          
+                <button type='button' class='btn btn-success btn-lg' onclick='saveSelectedPanels2()'>Remove</button>
+                <input type='hidden' name='selectedPanels' />
+           
+        </form>
+    </div>
+
+   
 </body>

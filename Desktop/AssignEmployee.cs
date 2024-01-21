@@ -122,15 +122,15 @@ namespace Desktop
 
                 switch (selectedEmployeeType)
                 {
-                    case EmployeeType.Available:
+                    case EmployeeType.Not:
                         employeeList = manager.GetEmployeeList();
                         break;
-                    case EmployeeType.Not:
+                    case EmployeeType.Available:
                         // Retrieve the date from tbxDate
                         DateTime date;
                         if (DateTime.TryParse(tbxDate.Text, out date))
                         {
-                            employeeList = manager.GetEmployeeListByDateAndShift(date, shift);
+                            employeeList = manager.GetEmployeeListExcludingDateAndShift(date, shift);
                         }
                         else
                         {

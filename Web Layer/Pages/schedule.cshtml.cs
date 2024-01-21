@@ -18,6 +18,38 @@ namespace Web_Layer.Pages
         public DateTime currentDay = CurrentWeek.AddDays(-(int)CurrentWeek.DayOfWeek);
         public static string[] DaysOfWeek = { "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday" };
         public List<Schedule> schedules = new List<Schedule>();
+        public IActionResult OnPostForm()
+        {
+            try
+            {
+                ScheduleManager scheduleManager = new ScheduleManager(new ScheduleRepository());
+                // Access the selected panels from the model binding
+                var selectedPanels = HttpContext.Request.Form["selectedPanels"];
+                var selectedPanelsList = JsonConvert.DeserializeObject<List<SelectedPanelData>>(selectedPanels);
+                var userIdClaim = User.FindFirst("EmployeeId");
+                var userIdValue = userIdClaim.Value;
+                int.TryParse(userIdValue, out int employeeID);
+                // Split the PanelId into Date and ShiftType
+                foreach (var panel in selectedPanelsList)
+                {
+                    var panelIdParts = panel.PanelId.Split('-');
+
+                    if (panelIdParts.Length == 2)
+                    {
+                        panel.Date = panelIdParts[0];
+                        panel.ShiftType = panelIdParts[1];
+                        scheduleManager.RemoveAvailableEmployee(Convert.ToDateTime(panel.Date), panel.ShiftType, employeeID);
+                    }
+                }
+
+
+                return RedirectToPage();
+            }
+            catch (Exception ex)
+            {
+                return Redirect($"/Index?message={ex.Message}");
+            }
+        }
         public IActionResult OnPost()
         {
             try
@@ -165,7 +197,7 @@ namespace Web_Layer.Pages
 
 
             // Determine the background color
-            var backgroundColor = panelExists ? "green" : "white";
+            var backgroundColor = panelExists ? "red" : "white";
 
             result.Append($"<div class=''><div class=''><p class='card-title'>{DaysOfWeek[i]}</p></div></div>");
             result.Append($"<div class='card' style='height:200px; background-color: {backgroundColor}'>");

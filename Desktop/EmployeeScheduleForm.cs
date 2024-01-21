@@ -41,7 +41,7 @@ namespace Desktop
             manager.PopulateSchedule(curr);
             lbWeekNum.Text = "Current week: " + CalculateTheCurrentWeekByYear(currentDate).ToString();
 
-                
+
         }
         private int CalculateTheCurrentWeekByYear(DateTime todayDate)
         {
@@ -66,12 +66,12 @@ namespace Desktop
 
             // Find the Sunday of last week
             DateTime currentDay = startDate.AddDays(-(int)startDate.DayOfWeek);
-            
+
             // Morning Shifts
             for (int i = 0; i < 7; i++)
             {
                 // Create morning shift panel
-                MorningShiftPanel morningShiftPanel = new MorningShiftPanel(currentDay.Date, flowLayoutPanel1,5, 0);
+                MorningShiftPanel morningShiftPanel = new MorningShiftPanel(currentDay.Date, flowLayoutPanel1, 5, 0);
                 flowLayoutPanel1.Controls.Add(morningShiftPanel);
                 ShiftPanelManager.MorningShiftPanels[currentDay.Date] = morningShiftPanel;
 
@@ -137,6 +137,11 @@ namespace Desktop
         private void btnGoBack_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void btnAutomate_Click(object sender, EventArgs e)
+        {
+            manager.PerformScheduling();
         }
     }
 }
