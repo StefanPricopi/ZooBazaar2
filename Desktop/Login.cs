@@ -35,9 +35,9 @@ namespace Desktop
 
             InitializeComponent();
 
-            serialPort = new SerialPort("COM8", 9600, Parity.None, 8, StopBits.One);
-            serialPort.Open();
-            timer1.Start();
+            //serialPort = new SerialPort("COM8", 9600, Parity.None, 8, StopBits.One);
+           // serialPort.Open();
+           // timer1.Start();
 
 
             userManager = new UserManager(new UserRepository());
@@ -132,69 +132,69 @@ namespace Desktop
             }
         }
 
-        private void timer1_Tick(object sender, EventArgs e)
-        {
-            if (serialPort.IsOpen == true)
-            {
-                if (serialPort.BytesToRead > 0)
-                {
-                    string input = serialPort.ReadLine();
-                    input = input.Trim();
+        //private void timer1_Tick(object sender, EventArgs e)
+        //{
+        //    if (serialPort.IsOpen == true)
+        //    {
+        //        if (serialPort.BytesToRead > 0)
+        //        {
+        //            string input = serialPort.ReadLine();
+        //            input = input.Trim();
 
-                    MessageBox.Show(input);
+        //            MessageBox.Show(input);
 
-                    try
-                    {
-                        User loggedin = userManager.GetUserByRfid(input);
+        //            try
+        //            {
+        //                User loggedin = userManager.GetUserByRfid(input);
 
-                        if (loggedin != null)
-                        {
-                            string position = userManager.RetrievePositionInformation(loggedin.Username);
+        //                if (loggedin != null)
+        //                {
+        //                    string position = userManager.RetrievePositionInformation(loggedin.Username);
 
-                            if (position == "Admin")
-                            {
-                                Form openfrom = new Form1();
-                                openfrom.ShowDialog();
-                            }
-                            if (position == "Caretaker")
-                            {
-                                Form addAnimalForm = new CaretakerForm(animalRepository, locationRepository);
-                                addAnimalForm.ShowDialog();
-                            }
-                            if (position == "1")
-                            {
+        //                    if (position == "Admin")
+        //                    {
+        //                        Form openfrom = new Form1();
+        //                        openfrom.ShowDialog();
+        //                    }
+        //                    if (position == "Caretaker")
+        //                    {
+        //                        Form addAnimalForm = new CaretakerForm(animalRepository, locationRepository);
+        //                        addAnimalForm.ShowDialog();
+        //                    }
+        //                    if (position == "1")
+        //                    {
 
-                                MainForm addEmployeeForm = new MainForm(1);
-                                this.Hide();
-                                addEmployeeForm.FormClosed += (e, args) => this.Close();
-                                addEmployeeForm.Show();
-                            }
-                            if (position == "2")
-                            {
-                                MainForm addEmployeeForm = new MainForm(2);
-                                this.Hide();
-                                addEmployeeForm.FormClosed += (e, args) => this.Close();
-                                addEmployeeForm.Show();
-                            }
-                            if (position == "3")
-                            {
-                                MainForm addAnimalForm = new MainForm(3);
-                                this.Hide();
-                                addAnimalForm.FormClosed += (e, args) => this.Close();
-                                addAnimalForm.Show();
+        //                        MainForm addEmployeeForm = new MainForm(1);
+        //                        this.Hide();
+        //                        addEmployeeForm.FormClosed += (e, args) => this.Close();
+        //                        addEmployeeForm.Show();
+        //                    }
+        //                    if (position == "2")
+        //                    {
+        //                        MainForm addEmployeeForm = new MainForm(2);
+        //                        this.Hide();
+        //                        addEmployeeForm.FormClosed += (e, args) => this.Close();
+        //                        addEmployeeForm.Show();
+        //                    }
+        //                    if (position == "3")
+        //                    {
+        //                        MainForm addAnimalForm = new MainForm(3);
+        //                        this.Hide();
+        //                        addAnimalForm.FormClosed += (e, args) => this.Close();
+        //                        addAnimalForm.Show();
 
 
 
-                            }
-                        }
-                    }
-                    catch (Exception)
-                    {
+        //                    }
+        //                }
+        //            }
+        //            catch (Exception)
+        //            {
 
-                        MessageBox.Show("Nu existi!");
-                    }
-                }
-            }
-        }
+        //                MessageBox.Show("Nu existi!");
+        //            }
+        //        }
+        //    }
+        //}
     }
 }
