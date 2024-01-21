@@ -10,6 +10,9 @@ namespace Logic.Interfaces
 {
     public interface IUser
     {
+        public void UpdateNewPassword(string password, string token);
+        public void AddResetToken(string token, int UserID);
+        public (string, bool) RetrieveResetTokenFromToken(string token);
         bool CreateAccount(UserDTO accountDTO);
         List<UserDTO> GetAllAccounts();
         bool UpdateAccount(UserDTO accountDTO);

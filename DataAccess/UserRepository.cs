@@ -28,7 +28,68 @@ namespace DataAccess
 
             return null;
         }
+        public (string, bool) RetrieveResetTokenFromToken(string token)
+        {
+            using (SqlConnection connection = new Connection().InitializeConection())
+            {
+                string sql = "SELECT ResetToken, SessionExpired " +
+                                "FROM [users] " +
+                                "WHERE ResetToken = @ResetToken";
 
+                SqlCommand cmd = new SqlCommand(sql, connection);
+                cmd.Parameters.AddWithValue("@ResetToken", token);
+                connection.Open();
+
+                // Use ExecuteScalar to get the value of the updated VerificationToken
+                SqlDataReader reader = cmd.ExecuteReader();
+
+                if (reader.Read())
+                {
+                    // Convert the retrievedToken to string
+                    string retrievedTokenString = reader["ResetToken"].ToString();
+                    bool isReset = Convert.ToBoolean(reader["SessionExpired"]);
+                    return (retrievedTokenString, isReset);
+                }
+                else
+                {
+                    return (null, false);
+                }
+            }
+        }
+        public void UpdateNewPassword(string password, string token)
+        {
+            using (SqlConnection connection = new Connection().InitializeConection())
+            {
+                var salt = DateTime.Now.ToString();
+                var hashedPW = UserManager.HashedPassword($"{password}{salt.Trim()}");
+                string sql = @"
+                            UPDATE C 
+                            SET SessionExpired = @SessionExpired, Password = @NewPassword, Salt = @Salt
+                            FROM [users] C
+                            WHERE C.ResetToken = @ResetToken;
+                        ";
+
+                SqlCommand cmd = new SqlCommand(sql, connection);
+                cmd.Parameters.AddWithValue("@ResetToken", token ?? (object)DBNull.Value);
+                cmd.Parameters.AddWithValue("@NewPassword", hashedPW);
+                cmd.Parameters.AddWithValue("@SessionExpired", 1);
+                cmd.Parameters.AddWithValue("@Salt", salt);
+
+                connection.Open();
+                int rowsAffected = cmd.ExecuteNonQuery();
+
+                if (rowsAffected > 0)
+                {
+                    // The update was successful
+                    Console.WriteLine("Client updated successfully");
+                }
+                else
+                {
+                    // No rows were affected, update failed
+                    Console.WriteLine("Failed to update client");
+                }
+            }
+        }
         public UserDTO LoginByRfid(string rfid)
         {
             try
@@ -110,7 +171,34 @@ namespace DataAccess
             // Return a default value or handle the case where no data is found
             return null;
         }
+        public void AddResetToken(string token, int UserID)
+        {
+            using (SqlConnection connection = new Connection().InitializeConection())
+            {
+                string sql = "UPDATE [users] " +
+                             "SET ResetToken = @ResetToken, " +
+                             "SessionExpired = @SessionExpired " +
+                             "WHERE UserID = @UserID";
 
+                SqlCommand cmd = new SqlCommand(sql, connection);
+                cmd.Parameters.AddWithValue("@ResetToken", token ?? (object)DBNull.Value);
+                cmd.Parameters.AddWithValue("@UserID", UserID);
+                cmd.Parameters.AddWithValue("@SessionExpired", 0);
+                connection.Open();
+                int rowsAffected = cmd.ExecuteNonQuery();
+
+                if (rowsAffected > 0)
+                {
+                    // The update was successful
+                    Console.WriteLine("Client updated successfully");
+                }
+                else
+                {
+                    // No rows were affected, update failed
+                    Console.WriteLine("Failed to update client");
+                }
+            }
+        }
         public User GetCurrentUserByUsername(string username)
 
         {
