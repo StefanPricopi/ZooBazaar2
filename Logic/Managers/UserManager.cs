@@ -35,6 +35,11 @@ namespace Logic.Managers
 
             return null;
         }
+
+        public User GetUserByRfid(string rfid)
+        {
+            return new User(user.LoginByRfid(rfid));
+        }
         public string RetrievePositionInformation(string username)
         {
             return user.RetrievePositionInformation(username);
@@ -51,7 +56,7 @@ namespace Logic.Managers
             List<User> users = new List<User>();
             foreach (UserDTO userDTO in user.GetAllAccounts())
             {
-                users.Add(new User(userDTO.UserID, userDTO.Username, userDTO.Password, userDTO.Email, userDTO.Salt));
+                users.Add(new User(userDTO.UserID, userDTO.Username, userDTO.Password, userDTO.Email, userDTO.Salt, userDTO.Rfid));
             }
             return users;
         }

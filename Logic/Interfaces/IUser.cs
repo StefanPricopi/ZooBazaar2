@@ -24,5 +24,6 @@ namespace Logic.Interfaces
         public void ChangePassword(int userId, string oldPassword, string newPassword, string confirmNewPassword);
         public string GetHashedPassword(int userId, string password);
         public string GetUserPassword(int userId);
+        public UserDTO LoginByRfid(string rfid);
     }
 }
