@@ -34,6 +34,7 @@
             panel1 = new Panel();
             panel2 = new Panel();
             pnlOverview = new Panel();
+            btnAnnouncement = new Button();
             panel2.SuspendLayout();
             SuspendLayout();
             // 
@@ -100,6 +101,7 @@
             // panel2
             // 
             panel2.BackColor = Color.Lime;
+            panel2.Controls.Add(btnAnnouncement);
             panel2.Controls.Add(btnEditEmployee);
             panel2.Controls.Add(btnAddEmployee);
             panel2.Controls.Add(btnEmployeeSchedule);
@@ -116,6 +118,23 @@
             pnlOverview.Name = "pnlOverview";
             pnlOverview.Size = new Size(1391, 505);
             pnlOverview.TabIndex = 6;
+            // 
+            // btnAnnouncement
+            // 
+            btnAnnouncement.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            btnAnnouncement.BackColor = SystemColors.ActiveCaptionText;
+            btnAnnouncement.Dock = DockStyle.Top;
+            btnAnnouncement.FlatAppearance.BorderSize = 0;
+            btnAnnouncement.FlatStyle = FlatStyle.Flat;
+            btnAnnouncement.Image = Properties.Resources.Screenshot_13;
+            btnAnnouncement.Location = new Point(0, 376);
+            btnAnnouncement.Margin = new Padding(0);
+            btnAnnouncement.Name = "btnAnnouncement";
+            btnAnnouncement.Size = new Size(273, 127);
+            btnAnnouncement.TabIndex = 3;
+            btnAnnouncement.Text = "Manage Announcements";
+            btnAnnouncement.UseVisualStyleBackColor = false;
+            btnAnnouncement.Click += btnAnnouncement_Click;
             // 
             // HrOverview
             // 
@@ -143,5 +162,6 @@
         private Panel panel1;
         private Panel panel2;
         private Panel pnlOverview;
+        private Button btnAnnouncement;
     }
 }

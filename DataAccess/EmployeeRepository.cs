@@ -201,7 +201,7 @@ namespace DataAccess
                 {
                     connection.Open();
 
-                    string updateQuery = "UPDATE Employees SET FirstName = @FirstName, LastName = @LastName, PhoneNumber = @PhoneNumber, DateOfBirth = @DateOfBirth, BSN = @BSN, Position = @Position WHERE EmployeeID = @EmployeeID";
+                    string updateQuery = "UPDATE Employees SET FirstName = @FirstName, LastName = @LastName, PhoneNumber = @PhoneNumber, DateOfBirth = @DateOfBirth, BSN = @BSN, RoleID = @RoleID WHERE EmployeeID = @EmployeeID";
 
                     using (SqlCommand command = new SqlCommand(updateQuery, connection))
                     {
@@ -210,7 +210,7 @@ namespace DataAccess
                         command.Parameters.AddWithValue("@PhoneNumber", employeeDTO.PhoneNumber);
                         command.Parameters.AddWithValue("@DateOfBirth", employeeDTO.DateOfBirth);
                         command.Parameters.AddWithValue("@BSN", employeeDTO.BSN);
-                        command.Parameters.AddWithValue("@Position", employeeDTO.Position);
+                        command.Parameters.AddWithValue("@RoleID", employeeDTO.RoleID);
                         command.Parameters.AddWithValue("@EmployeeID", employeeDTO.EmployeeID);
 
                         int rowsAffected = command.ExecuteNonQuery();
@@ -457,7 +457,7 @@ namespace DataAccess
                             Password = dr["Password"].ToString(),
                             Email = dr["Email"].ToString(),
                             Salt = dr["Salt"].ToString(),
-
+                            
 
                         };
                         return new User(userDTO); // Create a User object from the UserDTO
@@ -470,6 +470,44 @@ namespace DataAccess
             }
 
             return null; // Return null if no user with the specified email is found
+        }
+        public EmployeeDTO GetEmployeeById(int employeeID)
+        {
+            try
+            {
+                using (SqlConnection conn = InitializeConection())
+                {
+                    conn.Open();
+                    string sql = "SELECT * FROM Employees WHERE EmployeeID = @EmployeeID";
+                    SqlCommand cmd = new SqlCommand(sql, conn);
+                    cmd.Parameters.AddWithValue("@EmployeeID", employeeID);
+
+                    SqlDataReader dr = cmd.ExecuteReader();
+
+                    if (dr.Read())
+                    {
+                        var employeeDTO = new EmployeeDTO
+                        {
+                            EmployeeID = Convert.ToInt32(dr["EmployeeID"]),
+                            FirstName = dr["FirstName"].ToString(),
+                            LastName = dr["LastName"].ToString(),
+                            PhoneNumber = dr["PhoneNumber"].ToString(),
+                            DateOfBirth = Convert.ToDateTime(dr["DateOfBirth"]),
+                            BSN = Convert.ToInt32( dr["BSN"]),
+                            RoleID = Convert.ToInt32(dr["RoleID"]) // Adjust based on your actual column names
+                        };
+
+                        return employeeDTO; // Create an Employee object from the EmployeeDTO
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                // Handle the exception (e.g., log the error)
+                Console.WriteLine($"An error occurred: {ex.Message}");
+            }
+
+            return null; // Return null if no employee with the specified ID is found
         }
 
 

@@ -18,7 +18,7 @@ namespace Desktop
 {
     public partial class MainForm : Form
     {
-        private string[] EmplNavFeatures = { "Employee Creation", "Scheduling", "Update Existing Employees" };
+        private string[] EmplNavFeatures = { "Employee Creation", "Scheduling", "Update Existing Employees", "Annoucements" };
         private string[] AnimNavFeatures = { "Adding Animal", "Update Existing Animal", "View Details" };
         private string[] AreaNavFeatures = { "Area Management" };
         IAnimal animalRepository = new AnimalRepository();
@@ -184,6 +184,10 @@ namespace Desktop
                 case "Area Management":
                     ClearCanvas();
                     SetCanvas(new Area_LocationManagement());
+                    break;
+                case "Annoucements":
+                    ClearCanvas();
+                    SetCanvas(new Announcements());
                     break;
             }
         }

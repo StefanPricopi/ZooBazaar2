@@ -15,11 +15,14 @@ namespace Logic.Interfaces
         bool UpdateAccount(UserDTO accountDTO);
         User GetCurrentUserByUsername(string userEmail);
         bool InsertDummyUser(UserDTO userDTO);
-        public void CreateVisitor(UserDTO userDTO);
+        public bool CreateVisitor(UserDTO userDTO);
         User Login(string email, string password);
       
         UserDTO FindUserByProvidedUsername(string userEmail);
         public string RetrievePositionInformation(string username);
         public int GetEmpIDbyUserId(int id);
+        public void ChangePassword(int userId, string oldPassword, string newPassword, string confirmNewPassword);
+        public string GetHashedPassword(int userId, string password);
+        public string GetUserPassword(int userId);
     }
 }

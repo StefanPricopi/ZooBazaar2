@@ -248,13 +248,38 @@ namespace DataAccess
                 var hashedPW = UserManager.HashedPassword($"{userDTO.Password}{salt.Trim()}");
                 using (SqlConnection conn = InitializeConection())
                 {
-                    string sql = "INSERT INTO users (Username, Password, Email, Salt) VALUES (@Username, @Password, @Email, @Salt)";
-                    SqlCommand cmd = new SqlCommand(sql, conn);
+                    conn.Open();
+
+                    // Check if the username already exists
+                    string checkUsernameQuery = "SELECT COUNT(*) FROM users WHERE Username = @Username";
+                    SqlCommand checkUsernameCmd = new SqlCommand(checkUsernameQuery, conn);
+                    checkUsernameCmd.Parameters.AddWithValue("@Username", userDTO.Username);
+                    int existingUserCount = (int)checkUsernameCmd.ExecuteScalar();
+
+                    if (existingUserCount > 0)
+                    {
+                        throw new Exception("Username already exists");
+                    }
+
+                    // Check if the email already exists
+                    string checkEmailQuery = "SELECT COUNT(*) FROM users WHERE Email = @Email";
+                    SqlCommand checkEmailCmd = new SqlCommand(checkEmailQuery, conn);
+                    checkEmailCmd.Parameters.AddWithValue("@Email", userDTO.Email);
+                    int existingEmailCount = (int)checkEmailCmd.ExecuteScalar();
+
+                    if (existingEmailCount > 0)
+                    {
+                        throw new Exception("Email already exists");
+                    }
+
+                    // If both username and email are unique, proceed with the insertion
+                    string insertQuery = "INSERT INTO users (Username, Password, Email, Salt) VALUES (@Username, @Password, @Email, @Salt)";
+                    SqlCommand cmd = new SqlCommand(insertQuery, conn);
                     cmd.Parameters.AddWithValue("@Username", userDTO.Username);
                     cmd.Parameters.AddWithValue("@Password", hashedPW);
                     cmd.Parameters.AddWithValue("@Email", userDTO.Email);
                     cmd.Parameters.AddWithValue("@Salt", salt);
-                    conn.Open();
+
                     cmd.ExecuteNonQuery();
                     return true;
                 }
@@ -265,6 +290,7 @@ namespace DataAccess
                 return false;
             }
         }
+
 
         public List<UserDTO> GetAllAccounts()
         {
@@ -317,35 +343,96 @@ namespace DataAccess
             {
                 using (SqlConnection conn = InitializeConection())
                 {
-                    string sql = "UPDATE users SET Username = @Username, Password = @Password, Email = @Email, Salt = @Salt WHERE Username = @Username";
-                    SqlCommand cmd = new SqlCommand(sql, conn);
-                    cmd.Parameters.AddWithValue("@Username", userDTO.Username);
-                    cmd.Parameters.AddWithValue("@Password", userDTO.Password);
-                    cmd.Parameters.AddWithValue("@Email", userDTO.Email);
-                    cmd.Parameters.AddWithValue("@Salt", userDTO.Salt);
                     conn.Open();
-                    cmd.ExecuteNonQuery();
-                    return true;
+
+                    // Check if the new username already exists
+                    string checkUsernameQuery = "SELECT COUNT(*) FROM users WHERE Username = @NewUsername AND UserID <> @UserID";
+                    using (SqlCommand checkUsernameCmd = new SqlCommand(checkUsernameQuery, conn))
+                    {
+                        checkUsernameCmd.Parameters.AddWithValue("@NewUsername", userDTO.Username);
+                        checkUsernameCmd.Parameters.AddWithValue("@UserID", userDTO.UserID);
+                        int existingUserCount = (int)checkUsernameCmd.ExecuteScalar();
+
+                        if (existingUserCount > 0)
+                        {
+                            throw new Exception("Username already exists");
+                        }
+                    }
+
+                    // Check if the new email already exists
+                    string checkEmailQuery = "SELECT COUNT(*) FROM users WHERE Email = @NewEmail AND UserID <> @UserID";
+                    using (SqlCommand checkEmailCmd = new SqlCommand(checkEmailQuery, conn))
+                    {
+                        checkEmailCmd.Parameters.AddWithValue("@NewEmail", userDTO.Email);
+                        checkEmailCmd.Parameters.AddWithValue("@UserID", userDTO.UserID);
+                        int existingEmailCount = (int)checkEmailCmd.ExecuteScalar();
+
+                        if (existingEmailCount > 0)
+                        {
+                            throw new Exception("Email already exists");
+                        }
+                    }
+
+                    // If both new username and email are unique, proceed with the update
+                    string sql = "UPDATE users SET Username = @NewUsername, Password = @Password, Email = @NewEmail, Salt = @Salt WHERE UserID = @UserID";
+                    using (SqlCommand cmd = new SqlCommand(sql, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@NewUsername", userDTO.Username);
+                        cmd.Parameters.AddWithValue("@Password", userDTO.Password);
+                        cmd.Parameters.AddWithValue("@NewEmail", userDTO.Email);
+                        cmd.Parameters.AddWithValue("@Salt", userDTO.Salt);
+                        cmd.Parameters.AddWithValue("@UserID", userDTO.UserID);
+                        cmd.ExecuteNonQuery();
+                        return true;
+                    }
                 }
             }
             catch (Exception ex)
             {
-                // Handle the exception (e.g, log the error)
+                // Handle the exception (e.g., log the error)
                 return false;
             }
         }
-        public void CreateVisitor(UserDTO userDTO)
+
+
+
+        public bool CreateVisitor(UserDTO userDTO)
         {
             try
             {
-
-
                 using (SqlConnection connection = InitializeConection())
                 {
                     connection.Open();
 
-                    // Insert into User tablestring updateQuery = "UPDATE Employees SET FirstName = @FirstName, LastName = @LastName, PhoneNumber = @PhoneNumber, DateOfBirth = @DateOfBirth, BSN = @BSN, Position = @Position WHERE EmployeeID = @EmployeeID";
-                    using (SqlCommand cmdUser = new SqlCommand("INSERT INTO [users] (Username, Password, Salt,Email) VALUES (@Username, @Password, @Salt,@Email); SELECT SCOPE_IDENTITY();", connection))
+                    // Check if the username already exists
+                    string checkUsernameQuery = "SELECT COUNT(*) FROM [users] WHERE Username = @Username";
+                    using (SqlCommand checkUsernameCmd = new SqlCommand(checkUsernameQuery, connection))
+                    {
+                        checkUsernameCmd.Parameters.AddWithValue("@Username", userDTO.Username);
+                        int existingUserCount = (int)checkUsernameCmd.ExecuteScalar();
+
+                        if (existingUserCount > 0)
+                        {
+                            throw new Exception("Username already exists");
+                            
+                        }
+                    }
+
+                    // Check if the email already exists
+                    string checkEmailQuery = "SELECT COUNT(*) FROM [users] WHERE Email = @Email";
+                    using (SqlCommand checkEmailCmd = new SqlCommand(checkEmailQuery, connection))
+                    {
+                        checkEmailCmd.Parameters.AddWithValue("@Email", userDTO.Email);
+                        int existingEmailCount = (int)checkEmailCmd.ExecuteScalar();
+
+                        if (existingEmailCount > 0)
+                        {
+                            throw new Exception("Email already exists");
+                        }
+                    }
+
+                    // If both username and email are unique, proceed with the insertion
+                    using (SqlCommand cmdUser = new SqlCommand("INSERT INTO [users] (Username, Password, Salt, Email) VALUES (@Username, @Password, @Salt, @Email); SELECT SCOPE_IDENTITY();", connection))
                     {
                         var salt = DateTime.Now.ToString();
                         var hashedPW = UserManager.HashedPassword($"{userDTO.Password}{salt.Trim()}");
@@ -357,25 +444,22 @@ namespace DataAccess
 
                         int userID = Convert.ToInt32(cmdUser.ExecuteScalar()); // Get the auto-generated UserID
 
-                        // Insert into Employee table with the obtained UserID
-                        using (SqlCommand cmdEmployee = new SqlCommand("INSERT INTO Visitors (UserID) VALUES (@UserID);", connection))
+                        // Insert into Visitors table with the obtained UserID
+                        using (SqlCommand cmdVisitor = new SqlCommand("INSERT INTO Visitors (UserID) VALUES (@UserID);", connection))
                         {
-
-                            cmdEmployee.Parameters.AddWithValue("@UserID", userID); // Use the obtained UserID
-
-
-                            cmdEmployee.ExecuteNonQuery(); // Insert employee record
-
+                            cmdVisitor.Parameters.AddWithValue("@UserID", userID); // Use the obtained UserID
+                            cmdVisitor.ExecuteNonQuery(); // Insert visitor record
+                            return true;
                         }
                     }
                 }
             }
             catch (Exception ex)
             {
-
+                return false;
             }
-
         }
+
         public int GetEmpIDbyUserId(int id)
         {
             try
@@ -400,6 +484,108 @@ namespace DataAccess
                 return -1;
             }
 
+        }
+        public void ChangePassword(int userId, string oldPassword, string newPassword, string confirmNewPassword)
+        {
+            try
+            {
+                using (SqlConnection connection = InitializeConection())
+                {
+                    connection.Open();
+
+                    // Validate old password before proceeding
+                    string hashedOldPassword = GetHashedPassword(userId, oldPassword);
+
+                    if (hashedOldPassword != GetUserPassword(userId))
+                    {
+                        // Old password does not match, handle accordingly (throw exception, show error message, etc.)
+                    }
+
+                    // Validate new password and confirm new password
+                    if (newPassword != confirmNewPassword)
+                    {
+                        // New password and confirm password do not match, handle accordingly (throw exception, show error message, etc.)
+                    }
+
+                    // Update the password
+                    string salt = DateTime.Now.ToString();
+                    string hashedNewPassword = UserManager.HashedPassword($"{newPassword}{salt.Trim()}");
+
+                    using (SqlCommand cmd = new SqlCommand("UPDATE [Users] SET Password = @Password, Salt = @Salt WHERE UserID = @UserID", connection))
+                    {
+                        cmd.Parameters.AddWithValue("@UserID", userId);
+                        cmd.Parameters.AddWithValue("@Password", hashedNewPassword);
+                        cmd.Parameters.AddWithValue("@Salt", salt);
+
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                // Handle the exception
+            }
+        }
+
+        public string GetHashedPassword(int userId, string password)
+        {
+            try
+            {
+                using (SqlConnection connection = InitializeConection())
+                {
+                    connection.Open();
+
+                    using (SqlCommand cmd = new SqlCommand("SELECT Password, Salt FROM [users] WHERE UserID = @UserID", connection))
+                    {
+                        cmd.Parameters.AddWithValue("@UserID", userId);
+
+                        using (SqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            if (reader.Read())
+                            {
+                                string storedPassword = reader["Password"].ToString();
+                                string salt = reader["Salt"].ToString();
+
+                                // Hash the provided password with the stored salt
+                                return UserManager.HashedPassword($"{password}{salt}");
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                // Handle the exception, log, or throw accordingly
+                throw new Exception("Failed to get hashed password", ex);
+            }
+
+            return null;
+        }
+
+        public string GetUserPassword(int userId)
+        {
+            try
+            {
+                using (SqlConnection connection = InitializeConection())
+                
+                {
+                    connection.Open();
+
+                    using (SqlCommand cmd = new SqlCommand("SELECT Password FROM [users] WHERE UserID = @UserID", connection))
+                    {
+                        cmd.Parameters.AddWithValue("@UserID", userId);
+
+                        object result = cmd.ExecuteScalar();
+
+                        return result != null ? result.ToString() : null;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                // Handle the exception, log, or throw accordingly
+                throw new Exception("Failed to get user password", ex);
+            }
         }
     }
 }

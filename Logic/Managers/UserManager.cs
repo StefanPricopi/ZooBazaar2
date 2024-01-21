@@ -106,9 +106,9 @@ namespace Logic.Managers
             }
             else { return null; }
         }
-        public void CreateVisitor(UserDTO userDtO)
+        public bool CreateVisitor(UserDTO userDtO)
         {
-            user.CreateVisitor(userDtO);
+            return user.CreateVisitor(userDtO);
         }
         public User GetCurrentUserByUsername(string username)
         {
@@ -117,6 +117,18 @@ namespace Logic.Managers
         public int GetEmpIDbyUserId(int id)
         {
             return user.GetEmpIDbyUserId(id);
+        }
+        public void ChangePassword(int userId, string oldPassword, string newPassword, string confirmNewPassword)
+        {
+            this.user.ChangePassword(userId, oldPassword, newPassword, confirmNewPassword);
+        }
+        public string GetHashedPassword(int userId, string password)
+        {
+            return user.GetHashedPassword(userId, password);
+        }
+        public string GetUserPassword(int userId)
+        {
+            return this.user.GetUserPassword(userId);
         }
     }
 }

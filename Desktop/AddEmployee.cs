@@ -90,7 +90,7 @@ namespace Employees
             employeeDTO.PhoneNumber = tbxPhone.Text;
             employeeDTO.DateOfBirth = dtpBirthDate.Value;
             employeeDTO.BSN = int.Parse(tbxBSN.Text);
-            employeeDTO.Position = cmbPosition.Text;
+            employeeDTO.RoleID = int.Parse(cmbPosition.Text);
 
             // UserDTO info
             userDTO.Username = tbxUsername.Text;

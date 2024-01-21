@@ -21,6 +21,7 @@ namespace Logic.Interfaces
         bool DeleteEmployee(EmployeeDTO employeeDTO);
         public bool UpdateAllTables(EmployeeDTO employeeDTO, UserDTO userDTO, ContractDTO contractDTO, PartnerDTO partnerDTO, AddressDTO addressDTO);
         public DataTable LoadEmployees();
+        public EmployeeDTO GetEmployeeById(int employeeID);
 
 
     }

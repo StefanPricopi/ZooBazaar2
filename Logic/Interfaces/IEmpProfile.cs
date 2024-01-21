@@ -10,6 +10,7 @@ namespace Logic.Interfaces
     public interface IEmpProfile
     {
         public EmpProfileDTO GetActualProfileByID(int id);
+        public EmpProfileDTO UpdateProfile(EmpProfileDTO updatedProfile);
 
     }
 }
