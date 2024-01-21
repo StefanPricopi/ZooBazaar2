@@ -1,106 +1,77 @@
-﻿
-<!DOCTYPE html>
-
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - Web_Layer</title>
+    <title>@ViewData["Title"] - AnimalDesignWeb</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/Web_Layer.styles.css" asp-append-version="true" />
-    <style>
-        
-
-    </style>
+    <link rel="stylesheet" href="~/Web Layer.styles.css" asp-append-version="true" />
 </head>
-
 <body>
-    <header>
-        <nav class="navbar navbar-expand-lg bg-primary border-bottom box-shadow mb-3">
+    <header class="custom-header">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light custom-header border-bottom box-shadow mb-3">
             <div class="container">
-                <a class="navbar-brand" href="/">
-                    <div style="display: flex; flex-direction: row; align-items: center;">
-                        <img src="img/logo3.png" width="150" height="100" style="padding-top:-20px; margin-top:-45px;" class="mr-2" />
-                        <div class="Bazaar" style="display: flex; flex-direction: column;">
-                            <b>Zoo</b>
-                            <b>Bazaar</b>
-                        </div>
-                    </div>
+                <a class="navbar-brand" asp-area="" asp-page="/Index">
+                    <img src="img/logo3.png" class="logo">Zoo Bazaar
                 </a>
-
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <div class="btn-group" style="padding-top: 20px;">
-                        <div class="btn-group" style="padding-right: 5px;">
-                           <a href="/">
-                            <button type="button" class="btn btn-primary"><b>Home</b></button>
+                    <ul class="navbar-nav flex-grow-1">
+                        <li class="nav-item">
+                            <a class="nav-link dropdown-toggle" href="#" id="homeDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Home
                             </a>
-                            <button type="button" class="btn btn-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <span class="sr-only"></span>
-                                </button>
-                                <div class="dropdown-menu bg-primary">
-                                <a class="dropdown-item" href="/about"><b>About</b></a>
-                                <a class="dropdown-item" href="/map"><b>Map</b></a>
-                                <a class="dropdown-item" href="/ticket_info"><b>Admission prices</b></a>
-                                <a class="dropdown-item" href="/opening hours"><b>Opening Hours</b></a>
-                               
-                               
+                            <div class="dropdown-menu" aria-labelledby="homeDropdown">
+                                <a class="dropdown-item" href="/About">About</a>
+                                <a class="dropdown-item" href="/Map">Map</a>
+                                <a class="dropdown-item" href="/ticket_info">Admission Prices</a>
+                                <a class="dropdown-item" href="/opening hours">Opening Hours</a>
                                 @if (User.IsInRole("Caretaker"))
                                 {
-                                    
-                                    <a class="dropdown-item" href="/schedule"><b>Schedule</b></a>
+                                    <a class="dropdown-item" href="/schedule">Schedule</a>
                                     <a class="dropdown-item" href="/Profile"><b>Profile</b></a>
                                     <a class="dropdown-item" href="/AnnouncementsEmp"><b>Announcements</b></a>
                                 }
                                 else if (User.IsInRole("Visitor"))
-                                {
-                                    <a class="dropdown-item" href="/VisitorProfile"><b>Profile</b></a>
-                                    <a class="dropdown-item" href="/AnnoucementsVisitor"><b>Announcements</b></a>
-                                }
+     {
+         <a class="dropdown-item" href="/VisitorProfile"><b>Profile</b></a>
+         <a class="dropdown-item" href="/AnnoucementsVisitor"><b>Announcements</b></a>
+     }
+                            </div>
+                        </li>
+                        <li class="nav-item" style="display:flex;flex-direction:row;">
+                            <a class="nav-link" asp-area="" asp-page="/Animals">Animals</a>
+                            @if (User.Identity.IsAuthenticated)
+                            {
+                                <a class="nav-link" asp-area="" asp-page="/Logout">Logout</a>
+                            }
+                            else
+                            {
+                                <a class="nav-link" asp-area="" asp-page="/login">Login</a>
+                            }
 
-                            </div>
-                            </div>
-                        <div class="btn-group" style="padding-left: 5px;">
-                            <button type="button" class="btn btn-primary"><b>Animals</b></button>
-                                <button type="button" class="btn btn-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <span class="sr-only"></span>
-                                </button>
-                                <div class="dropdown-menu bg-primary">
-                                <a class="dropdown-item" href="#"><b>Mammals</b></a>
-                                    <a class="dropdown-item" href="#"><b>Reptiles</b></a>
-                                    <a class="dropdown-item" href="#"><b>Aliens</b></a>
-                                </div>
-                            </div>
-                            
-                      </div>
-                    
+                        </li>
+                    </ul>
                 </div>
-
             </div>
-            <div class="custom-top">
-                @if (User.Identity.IsAuthenticated)
-                {
-                    <form method="post" class="form-inline" asp-page="/Logout">
-                        <button type="submit" class="btn btn-primary"><b>Logout</b></button>
-                    </form>
-                }
-                else
-                {
-                    <a href="/login">
-                        <button type="button" class="btn btn-primary"><b>Login</b></button>
-                    </a>
-                }
-            </div>
-            
         </nav>
     </header>
-    <!-- Render of a page -->
-
+    <div class="container">
+        <main role="main" class="pb-3">
             @RenderBody()
-    <!-- all of the needed scripts -->
+        </main>
+    </div>
+
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            Zoo Bazaar - <a asp-area="" asp-page="/Privacy">Privacy</a>
+        </div>
+    </footer>
+
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
@@ -110,8 +81,5 @@
     <script src="~/js/parallax.min.js"></script>
 
     @await RenderSectionAsync("Scripts", required: false)
-
-    
 </body>
-
 </html>

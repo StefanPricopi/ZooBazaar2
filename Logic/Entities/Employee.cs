@@ -49,7 +49,7 @@ namespace Logic.Entities
         }
        
 
-        Employee(string firstName, string lastName, string phoneNumber, DateTime dateOfBirth, int bSN, int roleID) 
+        public Employee(string firstName, string lastName, string phoneNumber, DateTime dateOfBirth, int bSN, int roleID) 
         {
             this.firstName = firstName;
             this.lastName = lastName;
@@ -58,6 +58,11 @@ namespace Logic.Entities
             this.bSN = bSN;
             this.RoleID = roleID;
             
+        }
+        public Employee()
+        {
+
+
         }
         public EmployeeDTO EmployeeToEmployeeDTO()
         {
